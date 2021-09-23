@@ -1,3 +1,9 @@
+# configs
+conf.json
+
+# Ignore temp directories used for things like qr scans
+**/tmp/
+
 # Logs
 logs
 *.log
