@@ -1,0 +1,6 @@
+{
+  "SMTP_SERVER" : "smtp.gmail.com",
+  "SMTP_PORT" : 465,
+  "SMTP_USERNAME" : "something@gmail.com",
+  "SMTP_PASSWORD" : "app-password"
+}
