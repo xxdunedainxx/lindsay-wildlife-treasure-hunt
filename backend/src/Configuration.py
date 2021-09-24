@@ -8,7 +8,7 @@ class Configuration:
   }
 
   def __init__(self):
-    self.CONF_FILE_LOCATION = './conf.json' if 'SYNCER_CONF' not in os.environ.keys() else os.environ['SYNCER_CONF']
+    self.CONF_FILE_LOCATION: str  = './conf.json' if 'SYNCER_CONF' not in os.environ.keys() else os.environ['SYNCER_CONF']
     self.CONF: dict = json.load(open(self.CONF_FILE_LOCATION,"r"))
 
     # SMTP CONFIGS
