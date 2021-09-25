@@ -4,7 +4,10 @@ import json
 class Configuration:
   DEFAULT_VALUES : dict = {
     "SMTP_SERVER" : "smtp.gmail.com",
-    "SMTP_PORT"   : 465
+    "SMTP_PORT"   : 465,
+
+    # Enable to turn on the mailer cron job
+    "MAILER_TOGGLE" : False
   }
 
   def __init__(self):
@@ -16,6 +19,9 @@ class Configuration:
     self.SMTP_PORT: int = self.__get_value("SMTP_PORT")
     self.SMTP_USERNAME: str = self.__get_value("SMTP_USERNAME")
     self.SMTP_PASSWORD: str = self.__get_value("SMTP_PASSWORD")
+    self.REDIS_HOST: str = self.__get_value("REDIS_HOST")
+    self.REDIS_PORT: int = self.__get_value("REDIS_PORT")
+    self.MAILER_TOGGLE: bool = self.__get_value("MAILER_TOGGLE")
 
   def __get_value(self, key: str):
     # environment variables have highest prio
