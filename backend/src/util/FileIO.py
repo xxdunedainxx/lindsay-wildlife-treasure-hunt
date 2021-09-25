@@ -16,6 +16,8 @@ class FileIO:
 
   @staticmethod
   def create_file_if_does_not_exist(path):
+    FileIO.create_directory_if_does_not_exist(os.path.dirname(path))
+
     if FileIO.file_exists(path) is False:
       FileIO.touch_file(path)
 
@@ -48,3 +50,9 @@ class FileIO:
   def write_string_to_file(path, content):
     with open(path, 'w+') as file:
       file.write(content)
+
+  @staticmethod
+  def create_directory_if_does_not_exist(directory):
+    print(directory)
+    if os.path.exists(directory) == False:
+      os.mkdir(directory)
