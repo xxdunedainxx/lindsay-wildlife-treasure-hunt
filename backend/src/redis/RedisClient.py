@@ -18,7 +18,8 @@ class RedisClient:
         self.clientType = clientType
         self.__init_logger()
         self._logger.info(f"Establishing redis connection {config.host}:{config.port}")
-        self.redis_connection: redis.Redis = redis.Redis(host=config.host, port=config.port, db=RedisClient.REDIS_DBS[config.db_name], charset='utf-8', decode_responses=True)
+        self.redis_connection: redis.Redis = redis.Redis(host=config.host, port=config.port, db=RedisClient.REDIS_DBS[config.db_name], charset='utf-8', decode_responses=True, socket_connect_timeout=1)
+        self.redis_connection.ping()
         self._logger.info('connection established!')
 
     def put_item(self, key, value):

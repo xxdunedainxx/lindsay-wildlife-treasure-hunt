@@ -10,7 +10,7 @@ function log() {
 
 function runPythonBackendTesting(){
 	cd backend
-	python test.py
+	python3 test.py
 
 	if [[ $? != 0 ]];
 	then
@@ -21,6 +21,11 @@ function runPythonBackendTesting(){
 	fi
 }
 
+
+function startRedis(){
+  ./infrastructure/redis/start_local_redis.sh
+}
 log "Executing Lindsay Wildlife Full Stack Testing"
 
+startRedis
 runPythonBackendTesting
