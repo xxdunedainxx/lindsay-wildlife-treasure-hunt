@@ -25,6 +25,7 @@ class App:
 
   def init_app_health(self):
     self.app_info_worker: WorkerPool = WorkerPool(
+      poolName="app_info",
       size=1,
       poolType='default',
       targetMethod=APIFactory.run_app_health_thread

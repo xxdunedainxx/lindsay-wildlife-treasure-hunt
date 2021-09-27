@@ -1,5 +1,8 @@
 from multiprocessing import Process
 from src.util.LogFactory import LogFactory
+from src.util.FileIO import FileIO
+
+import json
 
 class Worker:
 
@@ -15,6 +18,8 @@ class Worker:
     except Exception as e:
       self._process.terminate()
 
+  def get_pid(self):
+    return self._process.pid
 
 class WorkerPool:
 
@@ -24,8 +29,15 @@ class WorkerPool:
     'default' : Worker,
   }
 
-  def __init__(self,targetMethod, size: int = 10, poolType: str = 'default', targetMethodArgs = None):
 
+  def __init__(self,poolName: str, targetMethod, size: int = 10, poolType: str = 'default', targetMethodArgs = None):
+    self.name = poolName
+    self.info: dict = {
+      "workerPids" : [],
+      "type" : poolType,
+      "name" : poolName,
+      "active" : True
+    }
     if targetMethodArgs == None:
       targetMethodArgs = {}
 
@@ -45,7 +57,14 @@ class WorkerPool:
   def run(self):
     for worker in self.pool:
       worker.run()
+      self.info["workerPids"].append(worker.get_pid())
+    self.write_pool_info()
 
   def destroy_pool(self):
     for worker in self.pool:
       worker.kill()
+    self.info["active"] = False
+    self.write_pool_info()
+
+  def write_pool_info(self):
+    FileIO.replace_file_content(path=f"worker-pool-{self.name}-info.json", content=json.dumps(self.info))

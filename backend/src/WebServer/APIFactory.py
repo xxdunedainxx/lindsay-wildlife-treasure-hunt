@@ -11,12 +11,13 @@ class APIFactory:
     instance = None
 
     def __init__(self, appHealthOnly : bool = True):
-        AppHealthStatusUtil.write_status(ServiceNames.apiServer, AppHealthStatus.BUSY)
-        WebServerInit.init_flask()
 
+        WebServerInit.init_flask()
+        self.app_health_only = appHealthOnly
         if appHealthOnly == True:
             self.app_health_controller()
         else:
+            AppHealthStatusUtil.write_status(ServiceNames.apiServer, AppHealthStatus.BUSY)
             self.prep_controllers()
 
     def app_health_controller(self):
@@ -26,7 +27,9 @@ class APIFactory:
         pass
 
     def run(self, port: int = CONF_INSTANCE.FLASK_PORT_BIND):
-        AppHealthStatusUtil.write_status(ServiceNames.apiServer, AppHealthStatus.HEALTHY)
+        if self.app_health_only == False:
+            AppHealthStatusUtil.write_status(ServiceNames.apiServer, AppHealthStatus.HEALTHY)
+
         WebServerInit.flask.run (
             host=CONF_INSTANCE.FLASK_HOST_BIND,
             port=port
