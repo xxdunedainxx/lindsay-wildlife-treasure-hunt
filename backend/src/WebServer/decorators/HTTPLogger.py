@@ -11,9 +11,11 @@ from flask import request
 # Logging
 from src.util.LogFactory import LogFactory
 
+LOGGER = LogFactory.get_logger('http')
+
 def http_logger(api):
     @wraps(api)
     def logger_wrapper(*args, **kwargs):
-        LogFactory.MAIN_LOG.info(f"Method - {request.method} // Endpoint - {request.base_url} // User")
+        LOGGER.info(f"Method - {request.method} // Endpoint - {request.base_url} // User")
         return api(*args,**kwargs)
     return logger_wrapper

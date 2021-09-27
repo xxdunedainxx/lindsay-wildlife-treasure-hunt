@@ -1,10 +1,21 @@
 import os
 import json
+from src.Services import ServiceNames
 
 class Configuration:
+
   DEFAULT_VALUES : dict = {
     "SMTP_SERVER" : "smtp.gmail.com",
-    "SMTP_PORT"   : 465
+    "SMTP_PORT"   : 465,
+    "FLASK_HOST_BIND" : "0.0.0.0",
+    "FLASK_PORT_BIND" : 80,
+    "APP_HEALTH_PORT" : 9090,
+    "APP_HEALTH_ONLY_API_TOGGLE" : True,
+    "SERVICE_TOGGLES" : {
+      ServiceNames.mail : False,
+      ServiceNames.jsLogs : False,
+      ServiceNames.apiServer : True
+    }
   }
 
   def __init__(self):
@@ -16,6 +27,13 @@ class Configuration:
     self.SMTP_PORT: int = self.__get_value("SMTP_PORT")
     self.SMTP_USERNAME: str = self.__get_value("SMTP_USERNAME")
     self.SMTP_PASSWORD: str = self.__get_value("SMTP_PASSWORD")
+
+    # Flask configurations
+    self.FLASK_HOST_BIND: str = self.__get_value("FLASK_HOST_BIND")
+    self.FLASK_PORT_BIND: int = self.__get_value("FLASK_PORT_BIND")
+    self.APP_HEALTH_PORT: bool = self.__get_value("APP_HEALTH_PORT")
+
+    self.SERVICE_TOGGLES: dict = self.__get_value("SERVICE_TOGGLES")
 
   def __get_value(self, key: str):
     # environment variables have highest prio

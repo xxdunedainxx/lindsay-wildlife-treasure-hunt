@@ -4,6 +4,11 @@ conf.json
 # Ignore temp directories used for things like qr scans
 **/tmp/
 
+# Ignore service status files
+*.status
+
+__pycache__
+
 # Logs
 logs
 *.log
