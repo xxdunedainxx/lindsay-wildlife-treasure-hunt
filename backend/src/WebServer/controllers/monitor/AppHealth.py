@@ -36,9 +36,9 @@ class AppHealthController:
   @http_logger
   def dependencies():
     try:
-      LogFactory.MAIN_LOG.info("Fetching app health")
+      LogFactory.MAIN_LOG.info("Fetching app dependencies")
       return {
-        "status": AppHealthStatus.FATAL
+        "dependencies": AppHealthStatusUtil.get_enabled_services()
       }
     except Exception as e:
       LogFactory.MAIN_LOG.error(f"Failed fetching db {errorStackTrace(e)}")
