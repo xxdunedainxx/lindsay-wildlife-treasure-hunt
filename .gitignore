@@ -6,6 +6,7 @@ conf.json
 
 # Ignore service status files
 *.status
+worker-pool*-info.json
 
 __pycache__
 

@@ -1,7 +1,6 @@
 from src.util.LogFactory import LogFactory
 from src.util.ErrorFactory import errorStackTrace
 from src.App import App
-from src.Singletons import Singletons
 
 def main():
   try:
