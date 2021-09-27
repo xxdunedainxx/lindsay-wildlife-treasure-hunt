@@ -1,16 +1,47 @@
 from src.WebServer.WebServerInit import WebServerInit
-
+from src.WebServer.controllers.monitor.AppHealth import AppHealthController
+from src.WebServer.controllers.monitor.AppHealth import AppHealthStatus
+from src.WebServer.controllers.monitor.AppHealthUtil import AppHealthStatusUtil
+from src.Services import ServiceNames
 from src.Configuration import CONF_INSTANCE
-
+from src.Setup import Setup
 
 class APIFactory:
 
-    def __init__(self):
+    instance = None
+
+    def __init__(self, appHealthOnly : bool = True):
+        AppHealthStatusUtil.write_status(ServiceNames.apiServer, AppHealthStatus.BUSY)
         WebServerInit.init_flask()
-        self.prep_controllers()
+
+        if appHealthOnly == True:
+            self.app_health_controller()
+        else:
+            self.prep_controllers()
+
+    def app_health_controller(self):
+        self.app_health: AppHealthController = AppHealthController()
 
     def prep_controllers(self):
         pass
 
-    def run(self):
-        WebServerInit.flask.run(host='localhost')
+    def run(self, port: int = CONF_INSTANCE.FLASK_PORT_BIND):
+        AppHealthStatusUtil.write_status(ServiceNames.apiServer, AppHealthStatus.HEALTHY)
+        WebServerInit.flask.run (
+            host=CONF_INSTANCE.FLASK_HOST_BIND,
+            port=port
+        )
+
+    @staticmethod
+    def run_api_in_thread():
+        Setup.init_main_app_resources()
+        APIFactory.instance = APIFactory(appHealthOnly=False)
+        APIFactory.instance.run()
+
+    @staticmethod
+    def run_app_health_thread():
+        Setup.init_main_app_resources()
+        APIFactory.instance = APIFactory(appHealthOnly=True)
+        APIFactory.instance.run(
+            port=CONF_INSTANCE.APP_HEALTH_PORT
+        )

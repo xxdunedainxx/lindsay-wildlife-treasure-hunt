@@ -3,8 +3,8 @@ from src.util.LogFactory import LogFactory
 
 class Worker:
 
-  def __init__(self, args):
-    self._process: Process = Process(target=args['targetMethod'], args=args['targetMethodArgs'])
+  def __init__(self, targetMethod, targetMethodArgs):
+    self._process: Process = Process(target=targetMethod, args=targetMethodArgs)
 
   def run(self):
     self._process.start()
@@ -24,8 +24,12 @@ class WorkerPool:
     'default' : Worker,
   }
 
-  def __init__(self, size: int = 10, poolType: str = 'default', **kwargs):
-    LogFactory.MAIN_LOG.info(f"Starting WorkerPool of size {size}, of type {poolType}, with args {kwargs}")
+  def __init__(self,targetMethod, size: int = 10, poolType: str = 'default', targetMethodArgs = None):
+
+    if targetMethodArgs == None:
+      targetMethodArgs = {}
+
+    LogFactory.MAIN_LOG.info(f"Starting WorkerPool of size {size}, of type {poolType}, with args {targetMethodArgs} for method {targetMethod}")
     self.pool_size: int = size
     self.pool = []
     self.worker_type: Worker = None
@@ -35,10 +39,12 @@ class WorkerPool:
       self.worker_type = WorkerPool.WORKERS[poolType]
 
     for i in range(self.pool_size):
-      worker=self.worker_type(kwargs)
-      worker.run()
+      worker=self.worker_type(targetMethod, targetMethodArgs)
       self.pool.append(worker)
 
+  def run(self):
+    for worker in self.pool:
+      worker.run()
 
   def destroy_pool(self):
     for worker in self.pool:
