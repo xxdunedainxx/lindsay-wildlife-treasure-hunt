@@ -15,6 +15,9 @@ class App:
     self.conf: Configuration = CONF_INSTANCE
     Setup.init_main_app_resources()
     self.init_app_health()
+    if CONF_INSTANCE.SERVICE_TOGGLES[ServiceNames.apiServer] == True:
+      self.init_api_thread()
+
 
   def run(self):
     self.init_cron_jobs()
@@ -22,6 +25,16 @@ class App:
   def init_cron_jobs(self):
     LogFactory.MAIN_LOG.info('init cron manager')
     Cron.execute_jobs()
+
+  def init_api_thread(self):
+    self.api_worker: WorkerPool = WorkerPool(
+      poolName=ServiceNames.apiServer,
+      size=1,
+      poolType='default',
+      targetMethod=APIFactory.run_api_in_thread
+    )
+
+    self.api_worker.run()
 
   def init_app_health(self):
     self.app_info_worker: WorkerPool = WorkerPool(

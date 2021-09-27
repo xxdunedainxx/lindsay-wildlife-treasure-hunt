@@ -37,8 +37,14 @@ class AppHealthController:
   def dependencies():
     try:
       LogFactory.MAIN_LOG.info("Fetching app dependencies")
+      services = AppHealthStatusUtil.get_enabled_services()
+      serviceStatuses = {}
+      for service in services:
+        serviceStatuses[service]=(AppHealthStatusUtil.get_status(service))
+
       return {
-        "dependencies": AppHealthStatusUtil.get_enabled_services()
+        "dependencies": AppHealthStatusUtil.get_enabled_services(),
+        "statuses" : serviceStatuses
       }
     except Exception as e:
       LogFactory.MAIN_LOG.error(f"Failed fetching db {errorStackTrace(e)}")

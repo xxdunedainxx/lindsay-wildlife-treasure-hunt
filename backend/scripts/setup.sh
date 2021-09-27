@@ -16,3 +16,4 @@
 python3 -m pip install pillow
 python3 -m pip install qrcode
 python3 -m pip install schedule
+python3 -m pip install psutil
