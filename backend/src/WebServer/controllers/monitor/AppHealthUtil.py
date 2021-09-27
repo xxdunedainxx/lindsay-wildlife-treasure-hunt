@@ -6,8 +6,8 @@ class AppHealthStatusUtil:
 
   @staticmethod
   def determine_health_status() -> str:
-    for service in CONF_INSTANCE.SERVICE_TOGGLES.keys():
-        if CONF_INSTANCE.SERVICE_TOGGLES[service] == True and AppHealthStatusUtil.is_healthy(service) == False:
+    for service in AppHealthStatusUtil.get_enabled_services():
+        if AppHealthStatusUtil.is_healthy(service) == False:
           return AppHealthStatusUtil.get_status(service)
     return AppHealthStatus.HEALTHY
 
@@ -29,6 +29,13 @@ class AppHealthStatusUtil:
 
   @staticmethod
   def lay_down_status_files():
+    for service in AppHealthStatusUtil.get_enabled_services():
+        AppHealthStatusUtil.write_status(service, AppHealthStatus.UNKNOWN)
+
+  @staticmethod
+  def get_enabled_services() -> [str]:
+    rServices = []
     for service in CONF_INSTANCE.SERVICE_TOGGLES.keys():
       if CONF_INSTANCE.SERVICE_TOGGLES[service] == True:
-        AppHealthStatusUtil.write_status(service, AppHealthStatus.UNKNOWN)
+        rServices.append(service)
+    return rServices
