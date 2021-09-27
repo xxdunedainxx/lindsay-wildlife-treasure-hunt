@@ -5,3 +5,4 @@ class AppHealthStatus:
   BUSY: str      = 'SPINNING_UP'
   UNKNOWN: str   = 'UNKNOWN'
   FATAL: str = 'FATAL'
+  MISSING: str = 'MISSING'

@@ -1,8 +1,13 @@
 from multiprocessing import Process
+import psutil
+
 from src.util.LogFactory import LogFactory
 from src.util.FileIO import FileIO
 
 import json
+
+def process_is_alive(pid: int):
+  return psutil.pid_exists(pid)
 
 class Worker:
 
@@ -22,6 +27,10 @@ class Worker:
     return self._process.pid
 
 class WorkerPool:
+
+  @staticmethod
+  def generate_info_filename(service: str):
+    return f"worker-pool-{service}-info.json"
 
   POOL_MIN: int = 1
   POOL_MAX: int = 30
@@ -67,4 +76,4 @@ class WorkerPool:
     self.write_pool_info()
 
   def write_pool_info(self):
-    FileIO.replace_file_content(path=f"worker-pool-{self.name}-info.json", content=json.dumps(self.info))
+    FileIO.replace_file_content(path=WorkerPool.generate_info_filename(self.name), content=json.dumps(self.info))
