@@ -9,13 +9,15 @@ class Configuration:
     "SMTP_PORT"   : 465,
     "FLASK_HOST_BIND" : "0.0.0.0",
     "FLASK_PORT_BIND" : 80,
+    "FLASK_CORS_ORIGIN": "*",
     "APP_HEALTH_PORT" : 9090,
     "APP_HEALTH_ONLY_API_TOGGLE" : True,
     "SERVICE_TOGGLES" : {
       ServiceNames.mail : False,
       ServiceNames.jsLogs : False,
       ServiceNames.apiServer : True
-    }
+    },
+    "PRODUCTION_ENVIRONMENT" : False,
   }
 
   def __init__(self):
@@ -27,6 +29,8 @@ class Configuration:
     self.SMTP_PORT: int = self.__get_value("SMTP_PORT")
     self.SMTP_USERNAME: str = self.__get_value("SMTP_USERNAME")
     self.SMTP_PASSWORD: str = self.__get_value("SMTP_PASSWORD")
+    
+    # Redis Configs
     self.REDIS_HOST: str = self.__get_value("REDIS_HOST")
     self.REDIS_PORT: int = self.__get_value("REDIS_PORT")
     self.MAILER_TOGGLE: bool = self.__get_value("MAILER_TOGGLE")
@@ -34,9 +38,12 @@ class Configuration:
     # Flask configurations
     self.FLASK_HOST_BIND: str = self.__get_value("FLASK_HOST_BIND")
     self.FLASK_PORT_BIND: int = self.__get_value("FLASK_PORT_BIND")
+    self.FLASK_CORS_ORIGIN: str = self.__get_value("FLASK_CORS_ORIGIN")
     self.APP_HEALTH_PORT: bool = self.__get_value("APP_HEALTH_PORT")
 
+    # General Configs
     self.SERVICE_TOGGLES: dict = self.__get_value("SERVICE_TOGGLES")
+    self.PRODUCTION_ENVIRONMENT: bool = self.__get_value("PRODUCTION_ENVIRONMENT")
 
   def __get_value(self, key: str):
     # environment variables have highest prio
