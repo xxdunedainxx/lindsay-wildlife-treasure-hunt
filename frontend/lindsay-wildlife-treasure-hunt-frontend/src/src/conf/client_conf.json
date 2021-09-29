@@ -1,0 +1,7 @@
+{
+  "headers" : ["test"],
+  "logging" : {
+    "level" : "DEBUG",
+    "remoteLoggingEnabled": false
+  }
+}
