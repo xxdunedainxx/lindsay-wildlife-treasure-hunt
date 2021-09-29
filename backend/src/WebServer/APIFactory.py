@@ -1,5 +1,4 @@
 from src.WebServer.WebServerInit import WebServerInit
-from src.WebServer.controllers.monitor.AppHealth import AppHealthController
 from src.WebServer.controllers.monitor.AppHealth import AppHealthStatus
 from src.WebServer.controllers.monitor.AppHealthUtil import AppHealthStatusUtil
 from src.Services import ServiceNames
@@ -21,10 +20,12 @@ class APIFactory:
             self.prep_controllers()
 
     def app_health_controller(self):
+        from src.WebServer.controllers.monitor.AppHealth import AppHealthController
         self.app_health: AppHealthController = AppHealthController()
 
     def prep_controllers(self):
-        pass
+        from src.WebServer.controllers.test.TestController import TestController
+        self.test_controller: TestController = TestController()
 
     def run(self, port: int = CONF_INSTANCE.FLASK_PORT_BIND):
         if self.app_health_only == False:
