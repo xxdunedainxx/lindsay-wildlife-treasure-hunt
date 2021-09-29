@@ -8,13 +8,18 @@ import {PageBody} from './Components/PageBody/PageBody';
 import Setup from './src/util/Setup';
 import Configuration from './src/conf/Configuration';
 import Logger from './src/util/Logger';
-import HttpClient from './src/http/HttpClient';
+import TestClient from './src/http/clients/TestClient';
+import AppHealthClient from './src/http/clients/AppHealthClient';
 
 function App() {
   Setup.Run()
   Logger.info("START REACT APP")
   Logger.info(Configuration)
   var headers = Configuration.headers
+  var appHealthClient = new AppHealthClient(Configuration.healthEndpoint)
+  appHealthClient.health()
+  appHealthClient.dependencies()
+  
   return (
 
     <div className="App">

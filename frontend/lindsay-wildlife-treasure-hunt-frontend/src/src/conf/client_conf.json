@@ -3,5 +3,11 @@
   "logging" : {
     "level" : "DEBUG",
     "remoteLoggingEnabled": false
+  },
+  "backend" : {
+    "ssl"  : false,
+    "host" : "0.0.0.0",
+    "appHealthPort" : 9090,
+    "port" : 80
   }
 }
