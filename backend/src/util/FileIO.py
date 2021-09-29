@@ -22,10 +22,17 @@ class FileIO:
       FileIO.touch_file(path)
 
   @staticmethod
-  def read_file_content(path):
-    content = ''
+  def read_file_content_to_string(path, seperator: str = ''):
+    content = []
     with open(path, 'r') as file:
-      content=file.readlines()
+      content.extend(file.readlines())
+    return seperator.join(content)
+
+  @staticmethod
+  def read_file_content(path):
+    content = []
+    with open(path, 'r') as file:
+      content.extend(file.readlines())
     return content
 
   @staticmethod
@@ -49,6 +56,11 @@ class FileIO:
   @staticmethod
   def write_string_to_file(path, content):
     with open(path, 'w+') as file:
+      file.write(content)
+
+  @staticmethod
+  def replace_file_content(path, content):
+    with open(path, 'w') as file:
       file.write(content)
 
   @staticmethod

@@ -17,3 +17,4 @@ python -m pip install pillow
 python -m pip install qrcode
 python -m pip install schedule
 python -m pip install redis
+python -m pip install psutil
