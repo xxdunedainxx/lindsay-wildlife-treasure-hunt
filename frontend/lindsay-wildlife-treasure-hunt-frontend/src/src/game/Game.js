@@ -2,7 +2,7 @@
   GameController
 */
 
-class GameController{
+class GameController {
 
   loadSessionData() {
 

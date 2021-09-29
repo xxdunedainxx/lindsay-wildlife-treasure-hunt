@@ -3,8 +3,6 @@ import BarcodeScannerComponent from "react-webcam-barcode-scanner";
 
 import './QRCodeScanner.css';
 
-
-
 export class QRCodeScanner extends React.Component {
   static openBarCodeString ="+ Open Barcode Scanner"
   static closeBarCodeString="- Close barcode Scanner"
