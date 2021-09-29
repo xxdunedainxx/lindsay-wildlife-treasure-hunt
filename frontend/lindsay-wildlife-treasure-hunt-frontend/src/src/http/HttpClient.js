@@ -23,7 +23,7 @@ class HttpClient {
   //   );
   // }
 
-  get(endpoint, resultMethod = console.log, errorMethod = alert){
+  get(endpoint, resultMethod = console.log, errorMethod = console.log){
     fetch(`${this.url}/${endpoint}`)
       .then(res => res.json())
       .then(
