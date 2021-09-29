@@ -7,10 +7,14 @@ class App:
 
   conf: Configuration = None
 
-  def __init__(self):
-    self.conf: Configuration = CONF_INSTANCE
+  @staticmethod
+  def init_main_app_resources():
     LogFactory.main_log()
     Singletons.generate_singletons()
+
+  def __init__(self):
+    self.conf: Configuration = CONF_INSTANCE
+    App.init_main_app_resources()
 
   def run(self):
     self.init_cron_jobs()
