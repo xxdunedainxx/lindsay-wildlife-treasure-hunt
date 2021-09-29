@@ -17,11 +17,6 @@ class App:
     if CONF_INSTANCE.SERVICE_TOGGLES[ServiceNames.apiServer] == True:
       self.init_api_thread()
 
-
-  def __init__(self):
-    self.conf: Configuration = CONF_INSTANCE
-    App.init_main_app_resources()
-
   def run(self):
     self.init_cron_jobs()
 
