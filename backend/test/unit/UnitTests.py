@@ -1,5 +1,6 @@
 from src.util.LogFactory import LogFactory
 from test.unit.qr.QRCodeTests import qr_code_tests
+from test.unit.queues.MailerQUnitTests import mail_q_unit_tests
 
 class UnitTests:
 
@@ -7,3 +8,4 @@ class UnitTests:
   def run_unit_tests():
     LogFactory.MAIN_LOG.info('Running Unit tests!')
     qr_code_tests()
+    mail_q_unit_tests()

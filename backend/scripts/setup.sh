@@ -13,6 +13,7 @@
 #
 #fi
 
-python3 -m pip install pillow
-python3 -m pip install qrcode
-python3 -m pip install schedule
+python -m pip install pillow
+python -m pip install qrcode
+python -m pip install schedule
+python -m pip install redis
