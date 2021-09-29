@@ -4,7 +4,7 @@ from src.util.FileIO import FileIO
 import os
 
 class QRCodeGenerator:
-  QRCODE_DIRECTORY: str = './tmp'
+  QRCODE_DIRECTORY: str = f"{os.getcwd()}{os.sep}tmp"
 
   @staticmethod
   def generate_qr_code_file(qrString: str, outFile: str):

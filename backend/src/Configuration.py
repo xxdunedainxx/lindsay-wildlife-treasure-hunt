@@ -27,6 +27,9 @@ class Configuration:
     self.SMTP_PORT: int = self.__get_value("SMTP_PORT")
     self.SMTP_USERNAME: str = self.__get_value("SMTP_USERNAME")
     self.SMTP_PASSWORD: str = self.__get_value("SMTP_PASSWORD")
+    self.REDIS_HOST: str = self.__get_value("REDIS_HOST")
+    self.REDIS_PORT: int = self.__get_value("REDIS_PORT")
+    self.MAILER_TOGGLE: bool = self.__get_value("MAILER_TOGGLE")
 
     # Flask configurations
     self.FLASK_HOST_BIND: str = self.__get_value("FLASK_HOST_BIND")
