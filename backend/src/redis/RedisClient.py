@@ -2,6 +2,7 @@ import redis
 from src.redis.RedisConfig import RedisClientConfig
 from src.util.LogFactory import LogFactory
 from src.util.ErrorFactory import errorStackTrace
+import json
 
 
 class RedisClient:
@@ -43,10 +44,10 @@ class RedisClient:
         return get
 
     # returns the key of the item in the queue
-    def add_to_q(self, json):
+    def add_to_q(self, json_object):
         try:
             redis_key = RedisClient.q_size() + 1
-            RedisClient.put_item(redis_key, json)
+            RedisClient.put_item(redis_key, json.dumps(json_object))
             return redis_key
         except Exception as e:
             LogFactory.MAIN_LOG.error(f"Failed adding item to q {errorStackTrace(e)}")

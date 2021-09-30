@@ -4,7 +4,6 @@ from src.WebServer.WebServerInit import WebServerInit
 from src.util.ErrorFactory import errorStackTrace
 from src.Singletons import Singletons
 from src.util.validators.EmailValidator import EmailValidator
-import json
 
 from flask import Flask, request
 
@@ -31,7 +30,8 @@ class MailController:
         email_json = {
                 "email" : email
             }
-        key = mail_q.add_to_q(json.dumps(email_json))
+        # pass the key in the response
+        key = mail_q.add_to_q(email_json)
         return {
           "response" : "valid email",
           "key" : key
