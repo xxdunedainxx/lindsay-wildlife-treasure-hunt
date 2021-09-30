@@ -2,10 +2,11 @@ from src.util.LogFactory import LogFactory
 from src.WebServer.decorators.HTTPLogger import http_logger
 from src.WebServer.WebServerInit import WebServerInit
 from src.util.ErrorFactory import errorStackTrace
-from src.Mail.MailQ import MailQ
-import re
+from src.Singletons import Singletons
+from src.util.validators.EmailValidator import EmailValidator
+import json
 
-from flask import Flask, jsonify, request
+from flask import Flask, request
 
 flask_ref: Flask = WebServerInit.flask
 
@@ -20,13 +21,20 @@ class MailController:
   def mail_api():
     try:
       LogFactory.MAIN_LOG.info("mail api")
-      email = request.args['email']
-      if emailIsValid(email):
-        mailQ = MailQ()
-        redisKey = mailQ.q_size() + 1
-        mailQ.put_item(redisKey, email)
+      if "email" not in request.args:
         return {
-          "response" : "valid email"
+          "response": "no email provided"
+        }, 400
+      email = request.args['email']
+      if EmailValidator.is_valid(email):
+        mail_q = Singletons.mailQ
+        email_json = {
+                "email" : email
+            }
+        key = mail_q.add_to_q(json.dumps(email_json))
+        return {
+          "response" : "valid email",
+          "key" : key
         }
       else:
         return {
@@ -37,11 +45,3 @@ class MailController:
       return {
         "response" : "email api failure"
       }, 500
-
-def emailIsValid(email):
-  # https://www.w3resource.com/javascript/form/email-validation.php
-  regex = "(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
-  if(re.search(regex,email)):
-    return True
-  else:
-    return False
