@@ -1,6 +1,6 @@
-#! /bin/sh
+#! /bin/bash
 
-YOUR_IP="10.0.0.240"
+YOUR_IP="172.19.0.1"
 
 function runRedisServer(){
 	# Runs the GUI alongside the redis cluster
