@@ -12,20 +12,17 @@ import 'regenerator-runtime'
 setupFetchMock()
 Setup.Run()
 
-async function testRequest(){
-  var testClient = new TestClient(Configuration.remoteEndpoint)
-  await testClient.testRequest().catch(error => { throw error})
-}
 
-test('Execute a valid test HTTP request', () => {
+test('Execute a valid test HTTP request', async () => {
   console.log('Execute a valid test HTTP request')
   fetch.mockResponseOnce(JSON.stringify(goodTestClientData()));
-  expect(testRequest()).resolves.toBe(null)
+  var testClient = new TestClient(Configuration.remoteEndpoint)
+  await expect(testClient.testRequest()).resolves.toBe(undefined)
 });
 
-test('Execute a bad test HTTP request', () => {
+test('Execute a bad test HTTP request', async () => {
   console.log('Execute a bad test HTTP request')
   fetch.mockResponseOnce(JSON.stringify(badData()));
-  // const res = await testRequest()
-  expect(testRequest()).rejects.toThrow()
+  var testClient = new TestClient(Configuration.remoteEndpoint)
+  await expect(testClient.testRequest()).rejects.toThrow()
 });

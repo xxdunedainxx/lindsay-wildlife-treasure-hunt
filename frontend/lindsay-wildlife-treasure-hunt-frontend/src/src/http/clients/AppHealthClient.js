@@ -21,17 +21,18 @@ class AppHealthClient extends HttpClient {
 
   appUnhealthy(result) {
     Logger.error("failed test request")
+    throw new Error('????')
   }
 
-  health(){
-    this.get(
+  async health(){
+    return this.get(
       "health",
       this.appHealthy,
       this.appUnhealthy
     )
   }
 
-  dependencies(){
+  async dependencies(){
     this.get(
       "dependencies"
     )
