@@ -21,6 +21,17 @@ function runPythonBackendTesting(){
 	fi
 }
 
+function runReactTests(){
+  cd $HOME
+  cd frontend/lindsay-wildlife-treasure-hunt-frontend
+
+  log "Executing react Unit testing"
+  npm run-script unit-testing
+  # log "Executing react integration tests"
+  # npm run-script integration-testing
+  cd $HOME
+}
+
 
 function startRedis(){
   ./infrastructure/redis/start_local_redis.sh
@@ -29,3 +40,4 @@ log "Executing Lindsay Wildlife Full Stack Testing"
 
 startRedis
 runPythonBackendTesting
+runReactTests
