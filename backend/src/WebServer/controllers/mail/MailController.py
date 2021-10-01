@@ -19,12 +19,14 @@ class MailController:
   @http_logger
   def mail_api():
     try:
+      LogFactory.MAIN_LOG.info(f"args {request.json}")
       LogFactory.MAIN_LOG.info("mail api")
-      if "email" not in request.args:
+      if "email" not in request.json:
         return {
           "response": "no email provided"
         }, 400
-      email = request.args['email']
+      email = request.json['email']
+      
       if EmailValidator.is_valid(email):
         mail_q = Singletons.mailQ
         email_json = {

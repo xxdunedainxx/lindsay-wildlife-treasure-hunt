@@ -11,24 +11,25 @@ import unittest
 @enabled
 def mail_controller_tests():
 
-    if CONF_INSTANCE.MAILER_TOGGLE:
-        LogFactory.MAIN_LOG.info(f"RUNNING ALL MAIL CONTROLLER TESTS")
-        unittest.main(module=__name__, exit=False)
-    else:
-        LogFactory.MAIN_LOG.warn("Skipping mail controller tests since it is not toggled on...")
+    LogFactory.MAIN_LOG.info(f"RUNNING ALL MAIL CONTROLLER TESTS")
+    unittest.main(module=__name__, exit=False)
 
 class MailControllerTests(unittest.TestCase):
 
     @enabled
-    def test_sending_email_request():
+    def test_sending_email_request(self):
       MailQ = Singletons.mailQ
       # get size before adding email
-      q_size = MailQ.q_size
-      r = requests.post("localhost/mail",
-          data=json.dumps({"email": "test@google.com"}),
+      q_size = MailQ.q_size()
+      dictionary_object = {"email": "test@google.com"}
+      r = requests.post("http://localhost/mail",
+          data=json.dumps(dictionary_object),
+          headers={ "content-type": "application/json" }
       )
-      assert r["response"] == "valid email"
-      redis_key = r["key"]
+      response_data = r.json()
+      print (response_data["response"])
+      assert response_data["response"] == "valid email"
+      redis_key = response_data["key"]
       # delete test email from q, assert size is same as before
       MailQ.delete_item(redis_key)
       assert(MailQ.q_size() == q_size)
