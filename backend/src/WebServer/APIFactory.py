@@ -26,6 +26,8 @@ class APIFactory:
     def prep_controllers(self):
         from src.WebServer.controllers.test.TestController import TestController
         self.test_controller: TestController = TestController()
+        from src.WebServer.controllers.mail.MailController import MailController
+        self.mail_controller: MailController = MailController()
 
     def run(self, port: int = CONF_INSTANCE.FLASK_PORT_BIND):
         if self.app_health_only == False:

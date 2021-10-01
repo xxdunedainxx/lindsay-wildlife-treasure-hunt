@@ -1,6 +1,9 @@
 import redis
 from src.redis.RedisConfig import RedisClientConfig
 from src.util.LogFactory import LogFactory
+from src.util.ErrorFactory import errorStackTrace
+import json
+
 
 class RedisClient:
 
@@ -40,6 +43,16 @@ class RedisClient:
 
         return get
 
+    # returns the key of the item in the queue
+    def add_to_q(self, json_object):
+        try:
+            redis_key = self.q_size() + 1
+            self.put_item(redis_key, json.dumps(json_object))
+            return redis_key
+        except Exception as e:
+            LogFactory.MAIN_LOG.error(f"Failed adding item to q {errorStackTrace(e)}")
+            return -1
+
     def q_size(self) -> int:
         qsize = len(self.redis_connection.keys())
         self._logger.info(f"Current Q Size {qsize}")
@@ -47,3 +60,8 @@ class RedisClient:
 
     def __init_logger(self):
         self._logger = LogFactory.get_logger(f"redis-{self.clientType}")
+
+
+
+
+    #TODO: add email from json object

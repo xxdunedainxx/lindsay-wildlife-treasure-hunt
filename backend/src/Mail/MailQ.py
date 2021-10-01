@@ -21,3 +21,5 @@ class MailQ(RedisClient):
         if MailQ.INSTANCE == None:
             MailQ.INSTANCE = MailQ()
         return MailQ.INSTANCE
+
+    
