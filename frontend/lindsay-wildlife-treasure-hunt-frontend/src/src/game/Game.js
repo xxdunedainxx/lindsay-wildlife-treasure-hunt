@@ -39,7 +39,7 @@ export class GameController {
 
   correctAnswer() {
     // increment level
-    this.currentLevel += 1
+    gameState.currentLevel += 1
     // check if game is over
     if(currentLevel > lastLevel) {
       this.completeGame()
