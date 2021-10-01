@@ -1,3 +1,5 @@
+// https://jestjs.io/docs/asynchronous
+
 import Setup from '../../../src/src/util/Setup';
 import Configuration from '../../../src/src/conf/Configuration';
 import Logger from '../../../src/src/util/Logger';
@@ -11,19 +13,17 @@ import 'regenerator-runtime'
 setupFetchMock()
 Setup.Run()
 
-async function testHealthRequest(){
-  var appHealthClient = new AppHealthClient(Configuration.healthEndpoint)
-  await appHealthClient.health().catch(error => { throw error})
-}
 
-test('Execute a valid HTTP app health request', () => {
+test('Execute a valid HTTP app health request', async () => {
   console.log('Execute a valid HTTP app health request')
   fetch.mockResponseOnce(JSON.stringify(goodAppHealthData()));
-  expect(testHealthRequest()).resolves.toBe(null)
+  var appHealthClient = new AppHealthClient(Configuration.healthEndpoint)
+  await expect(appHealthClient.health()).resolves.toBe(undefined)
 });
 
-test('Execute a bad HTTP app health request', () => {
+test('Execute a bad HTTP app health request', async () => {
   console.log('Execute a bad HTTP app health request')
   fetch.mockResponseOnce(JSON.stringify(badData()));
-  expect(testHealthRequest()).rejects.toThrow()
+  var appHealthClient = new AppHealthClient(Configuration.healthEndpoint)
+  await expect(appHealthClient.health()).rejects.toThrow()
 });

@@ -3,9 +3,27 @@
 ### THIS SCRIPT RUNS ALL COMPREHENSIVE TESTING FOR THE LINDSAY APP ###
 
 HOME=$(pwd)
+PYTHON_BACKGROUND_PID=-1
 
 function log() {
 	echo "$(date) :: ${1}"
+}
+
+function killPythonApp(){
+  log "tearing down python app"
+  kill -s SIGTERM $PYTHON_BACKGROUND_PID
+}
+
+function runPythonAppInBackground(){
+  log "running python app in backgorund"
+  cd ./backend
+  nohup ./scripts/run.sh >/dev/null 2>&1 &
+  sleep 3
+  curl http://localhost:9090/health -v 
+  PYTHON_BACKGROUND_PID=$(cat PRIMARY.PID)
+  log "Python background process is running as PID ${PYTHON_BACKGROUND_PID}"
+  log "app status above ^"
+  cd $HOME
 }
 
 function runPythonBackendTesting(){
@@ -38,6 +56,8 @@ function startRedis(){
 }
 log "Executing Lindsay Wildlife Full Stack Testing"
 
-startRedis
+# startRedis
+runPythonAppInBackground
 runPythonBackendTesting
 runReactTests
+killPythonApp

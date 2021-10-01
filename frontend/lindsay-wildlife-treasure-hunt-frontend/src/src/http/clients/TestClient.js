@@ -20,8 +20,8 @@ class TestClient extends HttpClient {
     Logger.error("failed test request")
   }
 
-  testRequest(){
-    this.get(
+  async testRequest(){
+    return this.get(
       "test",
       this.successfulTest,
       this.failedTest
