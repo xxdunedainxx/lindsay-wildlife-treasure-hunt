@@ -46,8 +46,8 @@ class RedisClient:
     # returns the key of the item in the queue
     def add_to_q(self, json_object):
         try:
-            redis_key = RedisClient.q_size() + 1
-            RedisClient.put_item(redis_key, json.dumps(json_object))
+            redis_key = self.q_size() + 1
+            self.put_item(redis_key, json.dumps(json_object))
             return redis_key
         except Exception as e:
             LogFactory.MAIN_LOG.error(f"Failed adding item to q {errorStackTrace(e)}")

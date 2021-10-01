@@ -12,7 +12,7 @@ class Configuration:
     "APP_HEALTH_PORT" : 9090,
     "APP_HEALTH_ONLY_API_TOGGLE" : True,
     "SERVICE_TOGGLES" : {
-      ServiceNames.mail : True,
+      ServiceNames.mail : False,
       ServiceNames.jsLogs : False,
       ServiceNames.apiServer : True
     }
