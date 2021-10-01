@@ -22,5 +22,6 @@ class Cron:
   @staticmethod
   def execute_jobs():
     while True:
+      LogFactory.MAIN_LOG.debug('checking scheduled jobs')
       schedule.run_pending()
       time.sleep(Cron.JOB_CHECK_SECONDS)
