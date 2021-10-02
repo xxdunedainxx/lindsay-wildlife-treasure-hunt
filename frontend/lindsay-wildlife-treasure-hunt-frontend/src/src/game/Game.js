@@ -20,6 +20,7 @@ export class GameController {
   startGame() {
     gameState.currentLevel = 0
     gameState.lastScannedBarcode = 0
+    this.getHint(0)
     Session.Init()
     Session.placeHolderData.gameStarted = true
   }
@@ -30,7 +31,7 @@ export class GameController {
 
   checkAnswer() {
     // correct barcode for level n has id n+1
-    if(lastScannedBarcode = currentLevel + 1) {
+    if(lastScannedBarcode === currentLevel + 1) {
       this.correctAnswer()
     } else {
       this.wrongAnswer()
@@ -40,27 +41,27 @@ export class GameController {
   correctAnswer() {
     // increment level
     gameState.currentLevel += 1
+    // reset attempt counter
+    gameState.attemptsOnCurrentLevel = 0
     // check if game is over
-    if(currentLevel > lastLevel) {
+    if(gameState.currentLevel > lastLevel) {
       this.completeGame()
       return
     }
-    // reset attempt counter
-    gameState.attemptsOnCurrentLevel = 0
     // show hint for next level
-    getHint(level)
+    this.getHint(gameState.currentLevel)
   }
 
   wrongAnswer() {
     // if this is the first wrong answer for this level,
     // give extra hint
     if(gameState.attemptsOnCurrentLevel > 0) {
-      getExtraHint(gameState.currentLevel)
+      this.getExtraHint(gameState.currentLevel)
     }
     // increment attempts, if too many attempts, give correct answer
     gameState.attemptsOnCurrentLevel++
     if(gameState.attemptsOnCurrentLevel > maxIncorrectAttempts) {
-      getCorrectAnswer()
+      this.getCorrectAnswer()
     }
   }
 
