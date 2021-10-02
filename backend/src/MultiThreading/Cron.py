@@ -16,7 +16,7 @@ class Cron:
 
   @staticmethod
   def run_every_x_minutes(job, minutes):
-    LogFactory.MAIN_LOG.info(f"schedule job {job} every {minutes} minutes")
+    LogFactory.MAIN_LOG.info(f"schedule job {job} every {minutes} minute(s)")
     schedule.every(minutes).minutes.do(job)
 
   @staticmethod
