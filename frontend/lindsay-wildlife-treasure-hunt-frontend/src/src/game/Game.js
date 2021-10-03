@@ -2,7 +2,7 @@
   GameController
 */
 
-import Logger from './Logger';
+import Logger from '../util/Logger';
 import Session from "../util/Session";
 
 // placeholder values
