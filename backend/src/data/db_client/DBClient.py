@@ -1,6 +1,7 @@
 from typing import Any
 
 class DBClient:
+  INSTANCE = None
 
   def __init__(self):
     pass
