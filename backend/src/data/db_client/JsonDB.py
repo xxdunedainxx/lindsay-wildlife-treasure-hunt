@@ -1,21 +1,37 @@
 from src.data.db_client.DBClient import DBClient
+import json
 
 class JsonDB(DBClient):
 
-  def __init__(self):
+  @staticmethod
+  def get_db_client(dbPath: str):
+    if DBClient.INSTANCE == None:
+      DBClient.INSTANCE = JsonDB(dbPath)
+    return DBClient.INSTANCE
+
+  def __init__(self, dbPath: str):
     super(DBClient, self).__init__()
+    self.__dbPath = dbPath
 
-    def get_item(self, key: str):
-      raise NotImplementedError('json_to_model not implemented')
 
-    def put_item(self, key: str, data: dict):
-      raise NotImplementedError('json_to_model not implemented')
+  def get_item(self, key: str):
+    db: dict = json.load(open(self.__dbPath, 'r'))
 
-    def delete_item(self, key: str):
-      raise NotImplementedError('json_to_model not implemented')
+    return db[key]
 
-    def get_items(self):
-      raise NotImplementedError('json_to_model not implemented')
 
-    def get_items_filter(self, filter: str):
-      raise NotImplementedError('json_to_model not implemented')
+  def put_item(self, key: str, data: dict):
+    db: dict = json.load(open(self.__dbPath, 'r'))
+    db[key] = data
+    json.dump(db, open(self.__dbPath, 'w+'))
+
+  def delete_item(self, key: str):
+    pass
+
+  def get_items(self):
+    db: dict = json.load(open(self.__dbPath, 'r'))
+    return db
+
+  def get_items_filter(self, filter: str):
+    pass
+

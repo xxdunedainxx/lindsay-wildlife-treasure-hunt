@@ -18,6 +18,8 @@ class Configuration:
       ServiceNames.apiServer : True
     },
     "PRODUCTION_ENVIRONMENT" : False,
+    "DATABASE_ENGINE" : "json",
+    "DATABASE" : "db.json"
   }
 
   def __init__(self):
@@ -44,6 +46,9 @@ class Configuration:
     # General Configs
     self.SERVICE_TOGGLES: dict = self.__get_value("SERVICE_TOGGLES")
     self.PRODUCTION_ENVIRONMENT: bool = self.__get_value("PRODUCTION_ENVIRONMENT")
+    self.DATABASE_ENGINE: str = self.__get_value("DATABASE_ENGINE")
+    self.DATABASE: str = self.__get_value("DATABASE")
+
 
   def __get_value(self, key: str):
     # environment variables have highest prio
