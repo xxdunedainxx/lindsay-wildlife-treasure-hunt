@@ -2,6 +2,7 @@
   GameController
 */
 
+import Logger from './Logger';
 import Session from "../util/Session";
 
 // placeholder values
@@ -10,25 +11,40 @@ const maxIncorrectAttempts = 5
 
 export class GameController {
 
+  // if session data exists, loads it
+  static Init(){
+    Logger.info('init game controller')
+    Session.Init()
+    loadSessionData()
+  }
+
   static gameState = {
     // -1: pre-startGame state
+    "gameStarted" : false,
     "currentLevel": -1,
     "lastScannedBarcode": -1,
     "attemptsOnCurrentLevel": 0
   }
 
   startGame() {
+    gameState.gameStarted = true
     gameState.currentLevel = 0
     gameState.lastScannedBarcode = 0
     this.getHint(0)
-    Session.Init()
-    Session.placeHolderData.gameStarted = true
   }
 
+  // if session data exists, loads it
+  // sets gameState to loaded session data
   loadSessionData() {
-    Session.FetchSessionData()
+    if(Session.CheckIfExists()) {
+      this.gameState = Session.FetchSessionData()
+    }
+    else {
+      Session.FetchSessionData()
+    }
   }
 
+  // checks answer and updates session with gameState
   checkAnswer() {
     // correct barcode for level n has id n+1
     if(lastScannedBarcode === currentLevel + 1) {
@@ -36,6 +52,8 @@ export class GameController {
     } else {
       this.wrongAnswer()
     }
+    // update session data after each barcode scanned
+    Session.SetSessionData(gameState)
   }
 
   correctAnswer() {
@@ -77,6 +95,7 @@ export class GameController {
   }
 
   getExtraHint(level) {
+    // button to opt in to show extra hint
     // Extra hint for each level
     // only given after incorrect answer
   }
@@ -86,3 +105,5 @@ export class GameController {
   }
 
 }
+
+export default GameController;
