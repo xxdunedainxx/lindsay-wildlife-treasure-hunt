@@ -1,5 +1,6 @@
 import React from 'react';
 import './Nav.css';
+import lindsayLogo from '../../assets/lwe-logo.png'
 
 export class Nav extends React.Component {
 
@@ -13,7 +14,7 @@ export class Nav extends React.Component {
     return (
       <div>
         <ul id="nav">
-          <li>Lindsay Logo here</li>
+          <li><img src={lindsayLogo}/></li>
           <li>Start!</li>
           <li>About</li>
           <li>Report a bug</li>
