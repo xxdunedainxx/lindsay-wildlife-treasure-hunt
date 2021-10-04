@@ -9,3 +9,8 @@ class Setup:
     LogFactory.main_log()
     AppHealthStatusUtil.lay_down_status_files()
     Singletons.generate_singletons()
+
+  @staticmethod
+  def init_thread_resources():
+    LogFactory.main_log()
+    Singletons.generate_singletons()
