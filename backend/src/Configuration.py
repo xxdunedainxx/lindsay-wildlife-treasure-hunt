@@ -13,11 +13,13 @@ class Configuration:
     "APP_HEALTH_PORT" : 9090,
     "APP_HEALTH_ONLY_API_TOGGLE" : True,
     "SERVICE_TOGGLES" : {
-      ServiceNames.mail : False,
+      ServiceNames.mail : True,
       ServiceNames.jsLogs : False,
       ServiceNames.apiServer : True
     },
     "PRODUCTION_ENVIRONMENT" : False,
+    "MAIL_JOB_INTERVAL_MINUTES" : 1,
+    "MAIL_JOB_EMAILS_PER_JOB"   : 50,
   }
 
   def __init__(self):
@@ -44,6 +46,8 @@ class Configuration:
     # General Configs
     self.SERVICE_TOGGLES: dict = self.__get_value("SERVICE_TOGGLES")
     self.PRODUCTION_ENVIRONMENT: bool = self.__get_value("PRODUCTION_ENVIRONMENT")
+    self.MAIL_JOB_INTERVAL_MINUTES: int = self.__get_value("MAIL_JOB_INTERVAL_MINUTES")
+    self.MAIL_JOB_EMAILS_PER_JOB: int = self.__get_value("MAIL_JOB_EMAILS_PER_JOB")
 
   def __get_value(self, key: str):
     # environment variables have highest prio

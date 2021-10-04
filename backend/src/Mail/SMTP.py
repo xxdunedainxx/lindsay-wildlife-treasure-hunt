@@ -43,6 +43,7 @@ class SMTP:
     return ", ".join(emails)
 
   def start_smtp_session(self):
+    self.smtp_client: SMTP_SSL = self._generate_smtp_client()
     LogFactory.MAIN_LOG.info('start smtp session')
     self.smtp_client.login(self.username, self.password)
 

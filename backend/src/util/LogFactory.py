@@ -45,5 +45,5 @@ class LogFactory():
     @staticmethod
     def main_log():
         if LogFactory.MAIN_LOG is None:
-          LogFactory.MAIN_LOG = LogFactory.get_logger(f"main", stdOutOnly=True)
+          LogFactory.MAIN_LOG = LogFactory.get_logger(f"main", stdOutOnly=False)
           LogFactory.MAIN_LOG .info('=====   MAIN LOGGER STARTED     =====')
