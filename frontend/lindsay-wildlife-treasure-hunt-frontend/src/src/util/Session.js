@@ -3,7 +3,6 @@ import GameController from '../game/Game';
 
 export class Session {
   static sessionKey = 'lindsaySessionData'
-  gameState = GameController.gameState
 
   static Init(){
     Logger.info('init session object')
@@ -19,7 +18,7 @@ export class Session {
     Logger.info('fetching session data')
     if(Session.CheckIfExists == false) {
       Logger.info('Session data does not exist, setting')
-      Session.SetSessionData(gameState)
+      Session.SetSessionData(GameController.gameState)
     }
     return JSON.parse(localStorage.getItem(Session.sessionKey))
   }
