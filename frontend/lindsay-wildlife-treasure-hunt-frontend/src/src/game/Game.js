@@ -2,7 +2,7 @@
   GameController
 */
 
-import Logger from './Logger';
+import Logger from '../util/Logger';
 import Session from "../util/Session";
 
 // placeholder values
@@ -14,8 +14,9 @@ export class GameController {
   // if session data exists, loads it
   static Init(){
     Logger.info('init game controller')
+    Logger.info(`Game controller gameState info ${JSON.stringify(GameController.gameState)}`)
     Session.Init()
-    loadSessionData()
+    GameController.loadSessionData()
   }
 
   static gameState = {
@@ -23,21 +24,24 @@ export class GameController {
     "gameStarted" : false,
     "currentLevel": -1,
     "lastScannedBarcode": -1,
-    "attemptsOnCurrentLevel": 0
+    "attemptsOnCurrentLevel": 0,
+    "gameInfo" : {
+
+    }
   }
 
-  startGame() {
-    gameState.gameStarted = true
-    gameState.currentLevel = 0
-    gameState.lastScannedBarcode = 0
-    this.getHint(0)
+  static startGame() {
+    GameController.gameState.gameStarted = true
+    GameController.gameState.currentLevel = 0
+    GameController.gameState.lastScannedBarcode = 0
+    GameController.getHint(0)
   }
 
   // if session data exists, loads it
   // sets gameState to loaded session data
-  loadSessionData() {
+  static loadSessionData() {
     if(Session.CheckIfExists()) {
-      this.gameState = Session.FetchSessionData()
+      GameController.gameState = Session.FetchSessionData()
     }
     else {
       Session.FetchSessionData()
@@ -45,56 +49,56 @@ export class GameController {
   }
 
   // checks answer and updates session with gameState
-  checkAnswer() {
+  static checkAnswer() {
     // correct barcode for level n has id n+1
-    if(lastScannedBarcode === currentLevel + 1) {
-      this.correctAnswer()
+    if(GameController.gameState.lastScannedBarcode === GameController.currentLevel + 1) {
+      GameController.correctAnswer()
     } else {
-      this.wrongAnswer()
+      GameController.wrongAnswer()
     }
     // update session data after each barcode scanned
-    Session.SetSessionData(gameState)
+    Session.SetSessionData(GameController.gameState)
   }
 
-  correctAnswer() {
+  static correctAnswer() {
     // increment level
-    gameState.currentLevel += 1
+    GameController.gameState.currentLevel += 1
     // reset attempt counter
-    gameState.attemptsOnCurrentLevel = 0
+    GameController.gameState.attemptsOnCurrentLevel = 0
     // check if game is over
-    if(gameState.currentLevel > lastLevel) {
-      this.completeGame()
+    if(GameController.gameState.currentLevel > lastLevel) {
+      GameController.completeGame()
       return
     }
     // show hint for next level
-    this.getHint(gameState.currentLevel)
+    GameController.getHint(GameController.gameState.currentLevel)
   }
 
-  wrongAnswer() {
+  static wrongAnswer() {
     // if this is the first wrong answer for this level,
     // give extra hint
-    if(gameState.attemptsOnCurrentLevel > 0) {
-      this.getExtraHint(gameState.currentLevel)
+    if(GameController.gameState.attemptsOnCurrentLevel > 0) {
+      GameController.getExtraHint(GameController.gameState.currentLevel)
     }
     // increment attempts, if too many attempts, give correct answer
-    gameState.attemptsOnCurrentLevel++
-    if(gameState.attemptsOnCurrentLevel > maxIncorrectAttempts) {
-      this.getCorrectAnswer()
+    GameController.gameState.attemptsOnCurrentLevel++
+    if(GameController.gameState.attemptsOnCurrentLevel > maxIncorrectAttempts) {
+      GameController.getCorrectAnswer()
     }
   }
 
-  completeGame() {
+  static completeGame() {
     // send to "you win" splash page
     // send email
     // maybe a button to restart the game?
   }
 
-  getHint(level) {
+  static getHint(level) {
     // base clue to find next animal
     // given after correct answer
   }
 
-  getExtraHint(level) {
+  static getExtraHint(level) {
     // button to opt in to show extra hint
     // Extra hint for each level
     // only given after incorrect answer

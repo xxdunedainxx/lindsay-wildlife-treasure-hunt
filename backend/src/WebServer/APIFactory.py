@@ -28,6 +28,8 @@ class APIFactory:
         self.test_controller: TestController = TestController()
         from src.WebServer.controllers.mail.MailController import MailController
         self.mail_controller: MailController = MailController()
+        from src.WebServer.controllers.scavengerhunt.ScavengerHuntController import ScavengerHuntController
+        self.scavenger_hunt_controller: ScavengerHuntController = ScavengerHuntController()
 
     def run(self, port: int = CONF_INSTANCE.FLASK_PORT_BIND):
         if self.app_health_only == False:
