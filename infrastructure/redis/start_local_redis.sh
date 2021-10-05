@@ -4,9 +4,9 @@ YOUR_IP="172.19.0.1"
 
 function runRedisServer(){
 	# Runs the GUI alongside the redis cluster
-	docker kill redis-server || echo "no redis server"
-	docker rm redis-server || echo "no redis server"
-	docker run --name redis-server -d -p 6379:6379 redis-server 
+	docker kill lindsay_redis_server || echo "no redis server"
+	docker rm lindsay_redis_server || echo "no redis server"
+	docker run --name redis-server -d -p 6379:6379 lindsay_redis_server
 }
 
 function runRedisCommander(){
