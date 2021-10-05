@@ -1,4 +1,6 @@
-#! /bin/sh
+#! /bin/bash
+
+PYTHON_INTERPRETER=($(which python || which python3))
 
 echo "running app"
 
@@ -7,6 +9,6 @@ if [[ "${CONF_FILE}" != "none" ]]; then
   echo $CONF_FILE >> ./conf.json
 fi
 
-ls
+cat ./conf.json
 
-python3 ./app.py
+${PYTHON_INTERPRETER} ./app.py

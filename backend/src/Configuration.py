@@ -24,7 +24,9 @@ class Configuration:
 
   def __init__(self):
     self.CONF_FILE_LOCATION: str  = './conf.json' if 'SYNCER_CONF' not in os.environ.keys() else os.environ['SYNCER_CONF']
-    self.CONF: dict = json.load(open(self.CONF_FILE_LOCATION,"r"))
+    self.RAW_CONF: str = open(self.CONF_FILE_LOCATION,"r").read().strip()
+    print(f"Raw configuration file {self.RAW_CONF}")
+    self.CONF: dict = json.loads(self.RAW_CONF)
 
     # SMTP CONFIGS
     self.SMTP_SERVER: str = self.__get_value("SMTP_SERVER")

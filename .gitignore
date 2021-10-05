@@ -1,5 +1,7 @@
 # configs
+prod.conf.json
 conf.json
+.DS_Store
 
 # Ignore temp directories used for things like qr scans
 **/tmp/
