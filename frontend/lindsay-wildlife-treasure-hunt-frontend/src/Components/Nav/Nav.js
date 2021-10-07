@@ -1,4 +1,10 @@
 import React from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import './Nav.css';
 
 export class Nav extends React.Component {
@@ -13,10 +19,10 @@ export class Nav extends React.Component {
     return (
       <div>
         <ul id="nav">
-          <li>Lindsay Logo here</li>
-          <li>Start!</li>
-          <li>About</li>
-          <li>Report a bug</li>
+          <li><Link to="/home">Lindsay Logo here</Link></li>
+          <li><Link to="/game">Start!</Link></li>
+          <li><Link to="/about">About</Link></li>
+          <li><Link to="/report">Report a bug</Link></li>
         </ul>
       </div>
     );
