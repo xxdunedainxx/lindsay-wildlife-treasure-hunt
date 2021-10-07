@@ -19,4 +19,7 @@ def test():
   except Exception as e:
     LogFactory.MAIN_LOG.error(f"TESTS FAILED {errorStackTrace(e)}")
 
-test()
+
+if __name__ == "__main__":
+  test()
+

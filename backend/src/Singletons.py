@@ -26,5 +26,4 @@ class Singletons:
   @staticmethod
   def generate_mail_q():
     LogFactory.MAIN_LOG.info('generating mail queue')
-    if CONF_INSTANCE.MAILER_TOGGLE == True:
-      Singletons.mailQ = MailQ.get_mail_q()
+    Singletons.mailQ = MailQ.get_mail_q()
