@@ -8,16 +8,17 @@ from test.util.decorators.Toggle import enabled, disabled
 
 import unittest
 
+
 @enabled
 def mail_controller_tests():
 
     LogFactory.MAIN_LOG.info(f"RUNNING ALL MAIL CONTROLLER TESTS")
     unittest.main(module=__name__, exit=False)
 
-class MailControllerTests(unittest.TestCase):
+class MailControllerIntegrationTests(unittest.TestCase):
 
     @enabled
-    def test_sending_email_request(self):
+    def test_integration_sending_email_request(self):
       MailQ = Singletons.mailQ
       # get size before adding email
       q_size = MailQ.q_size()
