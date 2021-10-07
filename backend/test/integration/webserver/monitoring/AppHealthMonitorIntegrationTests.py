@@ -1,39 +1,38 @@
-from src.Singletons import Singletons
 from src.util.LogFactory import LogFactory
-from src.Configuration import CONF_INSTANCE
 import requests
-import json
+from src.WebServer.controllers.monitor.AppHealthUtil import AppHealthStatusUtil, AppHealthStatus
 
 from test.util.decorators.Toggle import enabled, disabled
 
 import unittest
+from mock import patch, MagicMock, Mock
 
 
 @enabled
-def mail_controller_tests():
+def app_health_controller_integration_tests():
 
     LogFactory.MAIN_LOG.info(f"RUNNING ALL MAIL CONTROLLER TESTS")
     unittest.main(module=__name__, exit=False)
 
-class MailControllerIntegrationTests(unittest.TestCase):
+class AppHealthMonitoringControllerIntegrationTests(unittest.TestCase):
 
     @enabled
-    def test_integration_sending_email_request(self):
-      MailQ = Singletons.mailQ
-      # get size before adding email
-      q_size = MailQ.q_size()
-      dictionary_object = {"email": "test@google.com"}
-      r = requests.post("http://localhost/mail",
-          data=json.dumps(dictionary_object),
-          headers={ "content-type": "application/json" }
-      )
-      response_data = r.json()
-      print (response_data["response"])
-      assert response_data["response"] == "valid email"
-      redis_key = response_data["key"]
-      # delete test email from q, assert size is same as before
-      MailQ.delete_item(redis_key)
-      assert(MailQ.q_size() == q_size)
+    def test_integration_app_health_controller_test(self):
+      r = requests.get("http://localhost/health",
+                       headers={"content-type": "application/json"}
+                       )
+      LogFactory.MAIN_LOG.info(f"App Health controller response {r.json()}")
+      assert r.status_code == 200
 
+
+    @enabled
+    def test_integration_app_health_controller_dependency_test(self):
+      r = requests.get("http://localhost/dependencies",
+                       headers={"content-type": "application/json"}
+                       )
+      LogFactory.MAIN_LOG.info(f"App Health controller response {r.json()}")
+      assert r.status_code == 200
+
+AppHealthStatusUtil.get_enabled_services()
 if __name__ == "__main__":
     unittest.main()
