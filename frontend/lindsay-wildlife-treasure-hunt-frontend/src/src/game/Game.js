@@ -34,22 +34,18 @@ export class GameController {
     GameController.gameState.gameStarted = true
     GameController.gameState.currentLevel = 0
     GameController.gameState.lastScannedBarcode = 0
-    GameController.getHint(0)
   }
 
   // if session data exists, loads it
   // sets gameState to loaded session data
   static loadSessionData() {
-    if(Session.CheckIfExists()) {
-      GameController.gameState = Session.FetchSessionData()
-    }
-    else {
-      Session.FetchSessionData()
-    }
-  }
+    GameController.gameState = Session.FetchSessionData()
+   }
 
   // checks answer and updates session with gameState
-  static checkAnswer() {
+  // returns true if correct, false otherwise
+  static checkAnswer(barcodeId) {
+    GameController.gameState.lastScannedBarcode = barcodeId
     // correct barcode for level n has id n+1
     if(GameController.gameState.lastScannedBarcode === GameController.currentLevel + 1) {
       GameController.correctAnswer()
@@ -70,8 +66,6 @@ export class GameController {
       GameController.completeGame()
       return
     }
-    // show hint for next level
-    GameController.getHint(GameController.gameState.currentLevel)
   }
 
   static wrongAnswer() {
@@ -94,8 +88,8 @@ export class GameController {
   }
 
   static getHint(level) {
-    // base clue to find next animal
-    // given after correct answer
+    //return GameController.gameState.gameInfo.game.GameSequence[level].Clue
+    return null
   }
 
   static getExtraHint(level) {
