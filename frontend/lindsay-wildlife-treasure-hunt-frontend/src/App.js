@@ -3,6 +3,7 @@ import './assets/css/nav.css';
 import {Nav} from './Components/Nav/Nav';
 import {PageBody} from './Components/PageBody/PageBody';
 import {QRCodeScanner} from './Components/qrcodescanner/QRCodeScanner';
+import {GameDisplay} from './Components/GameDisplay/GameDisplay';
 
 import Setup from './src/util/Setup';
 import Configuration from './src/conf/Configuration';
@@ -10,6 +11,7 @@ import Logger from './src/util/Logger';
 import TestClient from './src/http/clients/TestClient';
 import AppHealthClient from './src/http/clients/AppHealthClient';
 import GameControllerClient from './src/http/clients/GameControllerClient';
+
 
 function App() {
   Setup.Run()
@@ -27,7 +29,7 @@ function App() {
       <header className="App-header" >
         <Nav headers={headers}/>
         <PageBody />
-        <QRCodeScanner />
+        <GameDisplay />
       </header>
     </div>
   );

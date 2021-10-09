@@ -23,8 +23,8 @@ class GameControllerClient extends HttpClient {
   async getDb(){
     // toggle mockData off to fetch data from a live API server
     if(Configuration.mockData == true){
-      GameController.gameState.gameInfo = MockData.exampleMockedDataOne
       GameController.Init()
+      GameController.gameState.gameInfo = MockData.exampleMockedDataOne
     } else {
     return this.get(
       "scavenger_hunt",
