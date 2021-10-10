@@ -4,8 +4,22 @@ class EmailValidator:
 
   @staticmethod
   def is_valid(email):
-    # https://www.w3resource.com/javascript/form/email-validation.php
-    regex = "(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
+    regex = "(\.+\.)"
+    if(re.search(regex,email)):
+      return False
+    regex = "(^\.)"
+    if(re.search(regex,email)):
+      return False
+    regex = "(\.+@)"
+    if(re.search(regex,email)):
+      return False
+    regex = "(@+[.!#$%&’*+/=?^_`{|}~-])"
+    if(re.search(regex,email)):
+      return False
+    regex = "(^[a-zA-Z0-9]+@+[a-zA-Z0-9]*$)"
+    if(re.search(regex,email)):
+      return False
+    regex = "(^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$)"
     if(re.search(regex,email)):
       return True
     else:

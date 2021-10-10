@@ -1,6 +1,6 @@
 #! /bin/sh
 
-PYTHON_INTERPRETER=($(which python3 || which python))
+PYTHON_INTERPRETER=$(which python3 || which python)
 
 if [[ $? != 0 ]];then
  echo "No python installation detected, trying to install.."
