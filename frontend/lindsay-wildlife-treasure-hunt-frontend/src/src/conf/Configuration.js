@@ -6,6 +6,7 @@ export class Configuration {
   static headers
   static remoteHost
   static remoteHostPort
+  static mockData = false
 
   static Init() {
     console.log(confData)
@@ -17,6 +18,7 @@ export class Configuration {
     Configuration.remoteHost = confData.backend.host
     Configuration.remoteHostPort = confData.backend.port
     Configuration.remoteHostHealthPort = confData.backend.appHealthPort
+    Configuration.mockData = confData.dev.mockData
     if(confData.backend.ssl) {
       Configuration.remoteHostProtocol = "https"
     }

@@ -1,5 +1,7 @@
 from src.Mail.SMTP import SMTP
 from src.Mail.MailQ import MailQ
+from src.data.db_client.DBClient import DBClient
+from src.data.db_client.JsonDB import JsonDB
 from src.Configuration import Configuration, CONF_INSTANCE
 from src.util.LogFactory import LogFactory
 
@@ -7,11 +9,13 @@ class Singletons:
 
   smtp: SMTP = None
   mailQ: MailQ = None
+  db: DBClient = None
 
   @staticmethod
   def generate_singletons():
     Singletons.generate_smtp_client()
     Singletons.generate_mail_q()
+    Singletons.generate_db_connection()
 
   @staticmethod
   def generate_smtp_client():
@@ -26,4 +30,11 @@ class Singletons:
   @staticmethod
   def generate_mail_q():
     LogFactory.MAIN_LOG.info('generating mail queue')
-    Singletons.mailQ = MailQ.get_mail_q()
+    if CONF_INSTANCE.MAILER_TOGGLE == True:
+      Singletons.mailQ = MailQ.get_mail_q()
+
+  @staticmethod
+  def generate_db_connection():
+    LogFactory.MAIN_LOG.info('generating DB client')
+    if CONF_INSTANCE.DATABASE_ENGINE == "json" :
+      Singletons.db = JsonDB.get_db_client(CONF_INSTANCE.DATABASE)
