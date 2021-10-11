@@ -1,6 +1,6 @@
 #! /bin/sh
 
-PYTHON_INTERPRETER=($(which python3 || which python))
+PYTHON_INTERPRETER=$(which python3 || which python)
 
 if [[ $? != 0 ]];then
  echo "No python installation detected, trying to install.."
@@ -21,3 +21,4 @@ ${PYTHON_INTERPRETER} -m pip install redis
 ${PYTHON_INTERPRETER} -m pip install psutil
 ${PYTHON_INTERPRETER} -m pip install flask
 ${PYTHON_INTERPRETER} -m pip install flask-cors
+${PYTHON_INTERPRETER} -m pip install mock

@@ -11,7 +11,8 @@ class RedisClient:
       # Redis DB for managing threads
       'thread_pool': 0,
       'client_logger' : 1,
-      RedisClientConfig.MailQDB  : 2
+      RedisClientConfig.MailQDB  : 2,
+      'testDB': 3
     }
     _logger = None
     clientType: str = 'base'
@@ -44,8 +45,11 @@ class RedisClient:
 
 
     def get_item(self, key) -> str:
-        self._logger.info(f"Redis GET {key}")
-        return self.redis_connection.get(key)
+        try:
+            self._logger.info(f"Redis GET {key}")
+            return self.redis_connection.get(key)
+        except Exception as e:
+            LogFactory.MAIN_LOG.error(f"get_item failed {errorStackTrace(e)}")
 
     def delete_item(self, key) -> None:
         self.redis_connection.delete(key)
@@ -74,3 +78,9 @@ class RedisClient:
 
     def __init_logger(self):
         self._logger = LogFactory.get_logger(f"redis-{self.clientType}")
+
+    def get_keys_sorted(self):
+        keys= self.get_keys()
+        transform = list(map(int, keys))
+        transform.sort()
+        return transform

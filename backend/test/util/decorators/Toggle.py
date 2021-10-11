@@ -3,6 +3,7 @@ import unittest
 import textwrap
 
 from src.util.LogFactory import LogFactory
+from src.util.ErrorFactory import errorStackTrace
 
 class TestMetrics:
     EXECUTED_METRICS = {
@@ -44,7 +45,7 @@ Total Tests Passed: {TestMetrics.EXECUTED_METRICS['passed']['total']}
 Tests that passed list:\n{ALL_TESTS_PASSED}\n
 ============================= TESTS FAILED =============================
 Total Tests FAILED: {TestMetrics.EXECUTED_METRICS['failed']['total']}
-Tests that were skipped list:\n{ALL_TESTS_FAILED}\n
+Tests that failed list:\n{ALL_TESTS_FAILED}\n
 """.strip())
         LogFactory.MAIN_LOG.info(report)
         if TestMetrics.EXECUTED_METRICS['failed']['total'] > 0:
@@ -67,7 +68,7 @@ def run_function(test, *args, **kwargs):
     except Exception as e:
         TestMetrics.EXECUTED_METRICS['failed']['total'] += 1
         TestMetrics.EXECUTED_METRICS['failed']['tests'].append(f"{derive_full_function_name(test)}")
-        raise e
+        LogFactory.MAIN_LOG.error(f"Test failed.... {errorStackTrace(e)}")
 
 def enabled(test):
     @wraps(test)
