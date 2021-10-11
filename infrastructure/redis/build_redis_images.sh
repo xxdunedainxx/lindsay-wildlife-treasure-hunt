@@ -2,7 +2,7 @@
 
 function buildRedisServer(){
 	cd server
-	docker build -f Dockerfile.RedisServer -t redis-server . 
+	docker build  -t lindsay_redis_server -f Dockerfile.RedisServer . 
 	cd ..
 }
 
