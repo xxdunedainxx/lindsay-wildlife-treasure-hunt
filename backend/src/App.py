@@ -5,6 +5,7 @@ from src.Services import ServiceNames
 from src.WebServer.APIFactory import APIFactory
 from src.Setup import Setup
 from src.MultiThreading.ThreadPool import WorkerPool
+from src.MultiThreading.jobs.MailerJob import MailerJob
 
 class App:
 
@@ -15,7 +16,9 @@ class App:
     Setup.init_main_app_resources()
     self.init_app_health()
     if CONF_INSTANCE.SERVICE_TOGGLES[ServiceNames.apiServer] == True:
-      self.init_api_thread()
+     self.init_api_thread()
+
+    self.init_smtp_mailer_job()
 
   def run(self):
     self.init_cron_jobs()
@@ -43,3 +46,13 @@ class App:
     )
 
     self.app_info_worker.run()
+
+  def init_smtp_mailer_job(self):
+    self.smtp_mailer_worker: WorkerPool = WorkerPool(
+      poolName="mailer",
+      size=1,
+      poolType="default",
+      targetMethod=MailerJob.mailer_job
+    )
+
+    self.smtp_mailer_worker.run()

@@ -16,11 +16,12 @@ class Cron:
 
   @staticmethod
   def run_every_x_minutes(job, minutes):
-    LogFactory.MAIN_LOG.info(f"schedule job {job} every {minutes} minutes")
+    LogFactory.MAIN_LOG.info(f"schedule job {job} every {minutes} minute(s)")
     schedule.every(minutes).minutes.do(job)
 
   @staticmethod
   def execute_jobs():
     while True:
+      LogFactory.MAIN_LOG.debug('checking scheduled jobs')
       schedule.run_pending()
       time.sleep(Cron.JOB_CHECK_SECONDS)

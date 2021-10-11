@@ -43,7 +43,10 @@ class ExitHandlers:
   @staticmethod
   def catch_all_signals():
     ExitHandlers.write_primary_pid_to_file()
-    catchable_sigs = set(signal.Signals) - {signal.SIGKILL, signal.SIGSTOP}
+    catchable_sigs = set(signal.Signals)
     for sig in catchable_sigs:
-      LogFactory.MAIN_LOG.info(f"Detecting signal {sig}")
-      signal.signal(sig,  ExitHandlers.sigterm_handler)
+      try:
+        LogFactory.MAIN_LOG.info(f"Detecting signal {sig}")
+        signal.signal(sig,  ExitHandlers.sigterm_handler)
+      except Exception as e:
+        LogFactory.MAIN_LOG.error(f"Failed to add signal with stack trace {errorStackTrace(e)}")
