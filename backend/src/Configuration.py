@@ -19,7 +19,7 @@ class Configuration:
     },
     "PRODUCTION_ENVIRONMENT" : False,
     "DATABASE_ENGINE" : "json",
-    "DATABASE" : "db.json"
+    "DATABASE" : "db.json",
     "MAIL_JOB_INTERVAL_MINUTES" : 1,
     "MAIL_JOB_EMAILS_PER_JOB"   : 50,
   }
