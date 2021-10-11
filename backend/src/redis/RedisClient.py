@@ -29,6 +29,20 @@ class RedisClient:
         self._logger.info(f"Redis put {key} = {value}")
         self.redis_connection.set(key, value)
 
+    def get_keys(self):
+        return self.redis_connection.keys('*')
+
+    def get_json_item(self, key, delete = False) -> dict:
+        item = None
+        if delete:
+            item = self.get_and_delete(key)
+        else:
+            item = self.get_item(key)
+
+        return json.loads(item)
+
+
+
     def get_item(self, key) -> str:
         self._logger.info(f"Redis GET {key}")
         return self.redis_connection.get(key)
@@ -60,8 +74,3 @@ class RedisClient:
 
     def __init_logger(self):
         self._logger = LogFactory.get_logger(f"redis-{self.clientType}")
-
-
-
-
-    #TODO: add email from json object

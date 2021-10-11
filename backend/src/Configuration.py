@@ -13,13 +13,15 @@ class Configuration:
     "APP_HEALTH_PORT" : 9090,
     "APP_HEALTH_ONLY_API_TOGGLE" : True,
     "SERVICE_TOGGLES" : {
-      ServiceNames.mail : False,
+      ServiceNames.mail : True,
       ServiceNames.jsLogs : False,
       ServiceNames.apiServer : True
     },
     "PRODUCTION_ENVIRONMENT" : False,
     "DATABASE_ENGINE" : "json",
     "DATABASE" : "db.json"
+    "MAIL_JOB_INTERVAL_MINUTES" : 1,
+    "MAIL_JOB_EMAILS_PER_JOB"   : 50,
   }
 
   def __init__(self):
@@ -48,7 +50,8 @@ class Configuration:
     self.PRODUCTION_ENVIRONMENT: bool = self.__get_value("PRODUCTION_ENVIRONMENT")
     self.DATABASE_ENGINE: str = self.__get_value("DATABASE_ENGINE")
     self.DATABASE: str = self.__get_value("DATABASE")
-
+    self.MAIL_JOB_INTERVAL_MINUTES: int = self.__get_value("MAIL_JOB_INTERVAL_MINUTES")
+    self.MAIL_JOB_EMAILS_PER_JOB: int = self.__get_value("MAIL_JOB_EMAILS_PER_JOB")
 
   def __get_value(self, key: str):
     # environment variables have highest prio
