@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import './assets/css/nav.css';
 import {
@@ -10,11 +9,14 @@ import {
 
 import {Nav} from './Components/Nav/Nav';
 
+
 import Setup from './src/util/Setup';
 import Configuration from './src/conf/Configuration';
 import Logger from './src/util/Logger';
 import TestClient from './src/http/clients/TestClient';
 import AppHealthClient from './src/http/clients/AppHealthClient';
+import GameControllerClient from './src/http/clients/GameControllerClient';
+
 
 import {ApplicationRouter} from './Components/ApplicationRouter';
 
@@ -31,7 +33,8 @@ function App() {
   // var appHealthClient = new AppHealthClient(Configuration.healthEndpoint)
   // appHealthClient.health()
   // appHealthClient.dependencies()
-  
+  var gameControllerClient = new GameControllerClient(Configuration.remoteEndpoint)
+  gameControllerClient.getDb()
   return (
 
     <div className="App">
@@ -40,7 +43,6 @@ function App() {
           <Nav headers={headers}/>
           <ApplicationRouter />
         </Router>
-
       </header>
     </div>
   );

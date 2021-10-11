@@ -21,9 +21,3 @@ class MailQ(RedisClient):
         if MailQ.INSTANCE == None:
             MailQ.INSTANCE = MailQ()
         return MailQ.INSTANCE
-
-    def get_keys_sorted(self):
-        keys= self.get_keys()
-        transform = list(map(int, keys))
-        transform.sort()
-        return transform

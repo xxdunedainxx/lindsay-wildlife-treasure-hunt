@@ -6,6 +6,7 @@ import {
   Link
 } from "react-router-dom";
 import './Nav.css';
+import lindsayLogo from '../../assets/lwe-logo.png'
 
 export class Nav extends React.Component {
 
