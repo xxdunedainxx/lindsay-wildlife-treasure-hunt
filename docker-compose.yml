@@ -1,0 +1,32 @@
+# docker-compose --env-file .docker-compose.env up
+version: "3.2"
+services:
+  ingress:
+    image: lindsay-ingress 
+    container_name: lindsay-ingress 
+    ports: 
+      - "0.0.0.0:80:80"
+  backend: 
+    image: lindsay_app_backend
+    container_name: lindsay_app_backend
+    # Ports and routes should be handled via ingress
+    # ports:
+    #   - "0.0.0.0:80:80"
+    #   - "0.0.0.0:9090:9090"
+    # environment: 
+    #   # Located in the .env file 
+    #   CONF_FILE: REPLACE_ME
+    volumes:
+      - ./prod.conf.json:/conf.json
+  redis:
+    image: lindsay_redis_server
+    container_name: lindsay_redis_server
+    # ports:
+    #   - "0.0.0.0:6379:6379"
+  redis_gui:
+    image: rediscommander/redis-commander:latest
+    container_name: redis_gui
+    # ports:
+    #   - "0.0.0.0:8081:8081"
+    environment: 
+      REDIS_HOSTS: lindsay_redis_server
