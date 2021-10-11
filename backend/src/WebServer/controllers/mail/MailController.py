@@ -19,6 +19,11 @@ class MailController:
   @http_logger
   def mail_api():
     try:
+      if request.json == None:
+        return {
+          "response" : "no payload provided"
+        }, 400
+
       LogFactory.MAIN_LOG.info(f"args {request.json}")
       LogFactory.MAIN_LOG.info("mail api")
       if "email" not in request.json:
