@@ -68,3 +68,8 @@ class FileIO:
     print(directory)
     if os.path.exists(directory) == False:
       os.mkdir(directory)
+
+  @staticmethod
+  def delete_file(path):
+    if FileIO.file_exists(path):
+      os.remove(path)
