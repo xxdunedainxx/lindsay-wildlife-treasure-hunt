@@ -18,12 +18,14 @@ class Configuration:
       ServiceNames.apiServer : True
     },
     "PRODUCTION_ENVIRONMENT" : False,
+    "DATABASE_ENGINE" : "json",
+    "DATABASE" : "db.json"
     "MAIL_JOB_INTERVAL_MINUTES" : 1,
     "MAIL_JOB_EMAILS_PER_JOB"   : 50,
   }
 
   def __init__(self):
-    self.CONF_FILE_LOCATION: str  = './conf.json' if 'SYNCER_CONF' not in os.environ.keys() else os.environ['SYNCER_CONF']
+    self.CONF_FILE_LOCATION: str  = './conf.json'
     self.CONF: dict = json.load(open(self.CONF_FILE_LOCATION,"r"))
 
     # SMTP CONFIGS
@@ -46,6 +48,8 @@ class Configuration:
     # General Configs
     self.SERVICE_TOGGLES: dict = self.__get_value("SERVICE_TOGGLES")
     self.PRODUCTION_ENVIRONMENT: bool = self.__get_value("PRODUCTION_ENVIRONMENT")
+    self.DATABASE_ENGINE: str = self.__get_value("DATABASE_ENGINE")
+    self.DATABASE: str = self.__get_value("DATABASE")
     self.MAIL_JOB_INTERVAL_MINUTES: int = self.__get_value("MAIL_JOB_INTERVAL_MINUTES")
     self.MAIL_JOB_EMAILS_PER_JOB: int = self.__get_value("MAIL_JOB_EMAILS_PER_JOB")
 

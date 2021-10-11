@@ -1,0 +1,4 @@
+class ExitCodes:
+  NON_FATAL=0
+  FATAL_KNOWN=1
+  FATAL_UNKNOWN=2

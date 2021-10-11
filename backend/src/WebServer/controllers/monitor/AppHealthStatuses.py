@@ -1,4 +1,3 @@
-
 class AppHealthStatus:
   HEALTHY: str   = 'HEALTHY'
   UNHEALTHY: str = 'UNHEALTHY'
