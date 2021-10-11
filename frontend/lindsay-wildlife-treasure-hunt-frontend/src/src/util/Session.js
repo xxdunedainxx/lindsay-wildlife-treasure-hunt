@@ -1,27 +1,24 @@
 import Logger from './Logger';
+import GameController from '../game/Game';
 
 export class Session {
   static sessionKey = 'lindsaySessionData'
-  static placeHolderData = {
-    "gameStarted" : false
-  }
 
   static Init(){
     Logger.info('init session object')
-    if(Session.CheckIfExists() == false){
-      Logger.info('Session data does not exist, setting')
-      Session.SetSessionData(Session.placeHolderData)
-    }
+    Session.FetchSessionData()
   }
 
   static CheckIfExists(){
     return localStorage.getItem(Session.sessionKey) != null
   }
 
+  // loads session data if it exists, otherwise, creates it
   static FetchSessionData(){
     Logger.info('fetching session data')
     if(Session.CheckIfExists == false) {
-      Session.Init()
+      Logger.info('Session data does not exist, setting')
+      Session.SetSessionData(GameController.gameState)
     }
     return JSON.parse(localStorage.getItem(Session.sessionKey))
   }
