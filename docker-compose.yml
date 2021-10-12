@@ -18,6 +18,9 @@ services:
     #   CONF_FILE: REPLACE_ME
     volumes:
       - ./prod.conf.json:/conf.json
+  frontend:
+    image: lindsay-react-app
+    container_name: lindsay-react-app
   redis:
     image: lindsay_redis_server
     container_name: lindsay_redis_server

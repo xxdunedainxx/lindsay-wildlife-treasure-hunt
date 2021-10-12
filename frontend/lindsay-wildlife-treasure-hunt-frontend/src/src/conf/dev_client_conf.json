@@ -8,9 +8,10 @@
     "ssl"  : false,
     "host" : "0.0.0.0",
     "appHealthPort" : 9090,
+    "hostRoute" : "",
     "port" : 80
   },
   "dev" : {
-    "mockData" : true
+    "mockData" : false
   }
 }

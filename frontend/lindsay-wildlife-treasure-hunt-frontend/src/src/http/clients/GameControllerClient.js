@@ -13,6 +13,7 @@ class GameControllerClient extends HttpClient {
 
   successfulGetDB(result){
     GameController.Init()
+    Logger.info(`Got DB :${JSON.stringify(result)}`)
     GameController.gameState.gameInfo = result
   }
 

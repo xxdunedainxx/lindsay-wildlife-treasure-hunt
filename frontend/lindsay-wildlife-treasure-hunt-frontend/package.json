@@ -48,6 +48,7 @@
       "last 1 safari version"
     ]
   },
+  "homepage" : "http://localhost/ui",
   "devDependencies": {
     "@babel/preset-env": "^7.15.6",
     "babel-jest": "^27.2.3",

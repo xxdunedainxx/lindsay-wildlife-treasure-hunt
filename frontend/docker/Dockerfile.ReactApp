@@ -1,0 +1,16 @@
+# docker run -p 80:80 lindsay-react-app
+# docker build . -f Dockerfile.ReactApp -t lindsay-react-app
+
+FROM nginx
+
+RUN adduser --system --no-create-home --shell /bin/false --group --disabled-login www
+
+RUN mkdir /etc/nginx/logs
+RUN chown -P www /etc/nginx/logs 
+
+RUN touch /etc/nginx/logs/error.log
+RUN touch /etc/nginx/logs/nginx.pid
+
+COPY ./tmp/ /usr/share/nginx/react/
+COPY ./nginx.conf /etc/nginx/nginx.conf
+RUN chown -P www /usr/share/nginx/react

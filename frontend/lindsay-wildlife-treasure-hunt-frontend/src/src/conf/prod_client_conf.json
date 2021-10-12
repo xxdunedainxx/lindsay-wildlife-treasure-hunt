@@ -1,0 +1,17 @@
+{
+  "headers" : ["test"],
+  "logging" : {
+    "level" : "DEBUG",
+    "remoteLoggingEnabled": false
+  },
+  "backend" : {
+    "ssl"  : false,
+    "host" : "0.0.0.0",
+    "hostRoute" : "/backend",
+    "appHealthPort" : 9090,
+    "port" : 80
+  },
+  "dev" : {
+    "mockData" : false
+  }
+}
