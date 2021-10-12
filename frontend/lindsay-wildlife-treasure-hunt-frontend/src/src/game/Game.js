@@ -22,9 +22,9 @@ export class GameController {
   static gameState = {
     // -1: pre-startGame state
     "gameStarted" : false,
-    "currentLevel": -1,
+    "currentLevel": null,
     "lastScannedBarcode": -1,
-    "attemptsOnCurrentLevel": 0,
+    "attemptsOnCurrentLevel": Number(0),
     "gameInfo" : {
 
     }
@@ -32,8 +32,9 @@ export class GameController {
 
   static startGame() {
     GameController.gameState.gameStarted = true
-    GameController.gameState.currentLevel = 0
     GameController.gameState.lastScannedBarcode = 0
+    GameController.gameState.currentLevel = 1
+    GameController.gameState.attemptsOnCurrentLevel = 0
   }
 
   // if session data exists, loads it
@@ -56,29 +57,19 @@ export class GameController {
     Session.SetSessionData(GameController.gameState)
   }
 
-  static correctAnswer() {
+  static nextLevel() {
     // increment level
     GameController.gameState.currentLevel += 1
     // reset attempt counter
     GameController.gameState.attemptsOnCurrentLevel = 0
     // check if game is over
-    if(GameController.gameState.currentLevel > lastLevel) {
-      GameController.completeGame()
-      return
-    }
+    // if(GameController.gameState.currentLevel > lastLevel) {
+    //   GameController.completeGame()
+    // }
   }
 
   static wrongAnswer() {
-    // if this is the first wrong answer for this level,
-    // give extra hint
-    if(GameController.gameState.attemptsOnCurrentLevel > 0) {
-      GameController.getExtraHint(GameController.gameState.currentLevel)
-    }
-    // increment attempts, if too many attempts, give correct answer
     GameController.gameState.attemptsOnCurrentLevel++
-    if(GameController.gameState.attemptsOnCurrentLevel > maxIncorrectAttempts) {
-      GameController.getCorrectAnswer()
-    }
   }
 
   static completeGame() {
@@ -87,19 +78,25 @@ export class GameController {
     // maybe a button to restart the game?
   }
 
-  static getHint(level) {
-    //return GameController.gameState.gameInfo.game.GameSequence[level].Clue
-    return null
+  static getClue(level) {
+    console.log(GameController.gameState.gameInfo)
+    return GameController.gameState.gameInfo.game.GameSequence[level - 1].Clue
   }
 
   static getExtraHint(level) {
-    // button to opt in to show extra hint
-    // Extra hint for each level
-    // only given after incorrect answer
+    return GameController.gameState.gameInfo.game.GameSequence[level - 1].AdditionalHint
   }
 
-  getCorrectAnswer(level) {
-    // give answer if too many incorrect attempts
+  static getArtifactName(level) {
+    return GameController.gameState.gameInfo.game.GameSequence[level - 1].ArtifactName
+  }
+
+  static getArticaftText(level) {
+    return GameController.gameState.gameInfo.game.GameSequence[level - 1].CorrectMessage
+  }
+
+  static getArtifactMediaUrl(level) {
+    return GameController.gameState.gameInfo.game.GameSequence[level - 1].MediaLink
   }
 
 }
