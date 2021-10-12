@@ -1,8 +1,7 @@
 import React from 'react';
 import './GamePageComponent.css';
 
-import {PageBody} from '../../PageBody/PageBody';
-import {QRCodeScanner} from '../../qrcodescanner/QRCodeScanner';
+import {GameDisplay} from '../../GameDisplay/GameDisplay';
 
 export class GamePage extends React.Component {
 
@@ -13,8 +12,7 @@ export class GamePage extends React.Component {
   render(){
     return (
       <div>
-         <PageBody />
-        <QRCodeScanner />
+         <GameDisplay />
       </div>
     );
   }
