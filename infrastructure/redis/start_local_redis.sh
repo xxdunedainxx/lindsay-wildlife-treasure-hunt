@@ -6,7 +6,7 @@ function runRedisServer(){
 	# Runs the GUI alongside the redis cluster
 	docker kill lindsay_redis_server || echo "no redis server"
 	docker rm lindsay_redis_server || echo "no redis server"
-	docker run --name redis-server -d -p 6379:6379 lindsay_redis_server
+	docker run --name lindsay_redis_server -d -p 6379:6379 lindsay_redis_server
 }
 
 function runRedisCommander(){
