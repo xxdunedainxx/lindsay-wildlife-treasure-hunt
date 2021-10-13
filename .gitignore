@@ -2,7 +2,7 @@
 prod.conf.json
 conf.json
 .DS_Store
-
+backend/PRIMARY.PID
 # Ignore temp directories used for things like qr scans
 **/tmp/
 __pycache__

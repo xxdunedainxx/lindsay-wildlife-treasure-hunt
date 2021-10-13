@@ -6,6 +6,8 @@ from src.WebServer.APIFactory import APIFactory
 from src.Setup import Setup
 from src.MultiThreading.ThreadPool import WorkerPool
 from src.MultiThreading.jobs.MailerJob import MailerJob
+from src.Singletons import Singletons
+from src.Mail.SMTP import SMTP
 
 class App:
 
@@ -16,7 +18,7 @@ class App:
     Setup.init_main_app_resources()
     self.init_app_health()
     if CONF_INSTANCE.SERVICE_TOGGLES[ServiceNames.apiServer] == True:
-     self.init_api_thread()
+      self.init_api_thread()
 
     self.init_smtp_mailer_job()
 
