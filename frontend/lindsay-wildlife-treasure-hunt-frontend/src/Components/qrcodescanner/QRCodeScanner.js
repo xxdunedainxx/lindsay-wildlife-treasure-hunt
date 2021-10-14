@@ -17,6 +17,9 @@ export class QRCodeScanner extends React.Component {
       currentChoiceDisplayState: QRCodeScanner.displayStateClosed,
       currentChoice: ''
     }
+    var videoList = document.getElementsByTagName("video");
+    alert(videoList)
+    console.log(videoList)
   }
 
   toggleDisplayState(){

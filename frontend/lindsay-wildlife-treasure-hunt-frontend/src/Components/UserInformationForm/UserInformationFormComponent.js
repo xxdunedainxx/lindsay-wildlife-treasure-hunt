@@ -1,7 +1,13 @@
+//// Import Example: import {UserInformationFormComponent} from './Components/UserInformationForm/UserInformationFormComponent';
+//// Embed in UI : <UserInformationFormComponent/>
+
 import React from 'react';
-import Logger from '../../src/util/Logger';
 
 import './UserInformationFormComponent.css';
+
+import Logger from '../../src/util/Logger';
+import UserInformationSubmitClient from '../../src/http/clients/UserInformationSubmitClient';
+import Configuration from '../../src/conf/Configuration';
 
 export class UserInformationFormComponent extends React.Component {
   constructor(props) {
@@ -33,7 +39,12 @@ export class UserInformationFormComponent extends React.Component {
   }
 
   handleSubmit(event) {
-    alert(`State: ${this.state.emailValue}, username: ${this.state.usernameValue}`);
+    var userSubmitClient = new UserInformationSubmitClient(
+      `${Configuration.remoteEndpoint}`
+    );
+    userSubmitClient.submitUserRequest(this.state.emailValue, this.state.usernameValue);
+    Logger.info(`State: ${this.state.emailValue}, username: ${this.state.usernameValue}`);
+    
     event.preventDefault();
   }
 
@@ -41,17 +52,17 @@ export class UserInformationFormComponent extends React.Component {
     return (
       <div class="userFormWrapper">
       <form onSubmit={this.handleSubmit}>
-        <label for="emailInput">
+        <label for="emailInput" class="userInfoInputLabel">
           Email:
         </label>
-        <textarea id="emailInput" value={this.state.emailValue} onChange={this.handleEmailChange} />
+        <textarea class="userInfoInput" id="emailInput" value={this.state.emailValue} onChange={this.handleEmailChange} />
         <br />
-        <label for="usernameInput">
+        <label for="usernameInput" class="userInfoInputLabel">
           Username:
         </label>
-        <textarea id="usernameInput" value={this.state.usernameValue} onChange={this.handleUsernameChange} />
+        <textarea class="userInfoInput" id="usernameInput" value={this.state.usernameValue} onChange={this.handleUsernameChange} />
         <br />
-        <input type="submit" value="Submit" />
+        <input class="userInfoSubmitButton" type="submit" value="Submit" />
       </form>
       </div>
     );
