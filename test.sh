@@ -14,6 +14,15 @@ function killPythonApp(){
   kill -s SIGTERM $PYTHON_BACKGROUND_PID
 }
 
+function lintPythonApp(){
+  echo "Linting python app..."
+  pylint backend \
+  --indent-string='  ' \
+  --class-naming-style='PascalCase' \
+   --module-naming-style='PascalCase' > pylint.log
+  echo "see linting score in 'pylint.log'"
+}
+
 function runPythonAppInBackground(){
   log "running python app in backgorund"
   cd ./backend
@@ -57,6 +66,7 @@ function startRedis(){
 log "Executing Lindsay Wildlife Full Stack Testing"
 
 # startRedis
+lintPythonApp
 runPythonAppInBackground
 runPythonBackendTesting
 runReactTests
