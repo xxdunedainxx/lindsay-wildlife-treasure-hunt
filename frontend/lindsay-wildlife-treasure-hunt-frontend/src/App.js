@@ -24,8 +24,6 @@ import {AboutPage} from './Components/pages/about/AboutPageComponent';
 import {GamePage} from './Components/pages/game/GamePageComponent';
 import {HomePage} from './Components/pages/home/HomePageComponent';
 import {ReportBugPage} from './Components/pages/report/ReportBugPageComponent';
-import {UserInformationFormComponent} from './Components/UserInformationForm/UserInformationFormComponent';
-
 
 function App() {
   Setup.Run()
@@ -41,7 +39,6 @@ function App() {
 
     <div className="App">
       <header className="App-header" >
-      <UserInformationFormComponent/>
         <Router>
           <Nav headers={headers}/>
           <ApplicationRouter />
