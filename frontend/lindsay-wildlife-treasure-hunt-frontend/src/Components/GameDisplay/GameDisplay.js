@@ -5,6 +5,7 @@ import TopMessage from './TopMessage';
 import ScanDisplay from './ScanDisplay';
 import HintDisplay from './HintDisplay';
 import AnswerDisplay from './AnswerDisplay';
+import ManualEntryDisplay from './ManualEntryDisplay';
 
 import './GameDisplay.css';
 
@@ -17,16 +18,18 @@ export class GameDisplay extends React.Component {
       gameStarted: GameController.gameState.gameStarted,
       currentLevel: GameController.gameState.currentLevel,
       displayAnswer: (GameController.gameState.gameStarted ? GameController.getCorrectAnswerOnCurrentLevel() : false),
-      lastGuessWrong: false,
+      lastGuessWrong: ((GameController.gameState.attemptsOnCurrentLevel > 0) ? true : false),
       currentGuess: '',
-      currentClue: (GameController.gameState.gameStarted ? GameController.getClue(GameController.gameState.currentLevel) : ''),
-      extraHint: (GameController.gameState.gameStarted ? GameController.getExtraHint(GameController.gameState.currentLevel) : ''),
+      currentClue: (GameController.gameState.gameStarted ? GameController.getClue(GameController.gameState.currentArtifactIdInSequence) : ''),
+      extraHint: (GameController.gameState.gameStarted ? GameController.getExtraHint(GameController.gameState.currentArtifactIdInSequence) : ''),
       displayExtraHint: false,
-      artifactName: (GameController.gameState.gameStarted ? GameController.getArtifactName(GameController.gameState.currentLevel) : ''),
-      artifactText: (GameController.gameState.gameStarted ? GameController.getArtifactText(GameController.gameState.currentLevel) : ''),
-      artifactMediaUrl: (GameController.gameState.gameStarted ? GameController.getArtifactMediaUrl(GameController.gameState.currentLevel) : ''),
+      artifactName: (GameController.gameState.gameStarted ? GameController.getArtifactName(GameController.gameState.currentArtifactIdInSequence) : ''),
+      artifactText: (GameController.gameState.gameStarted ? GameController.getArtifactText(GameController.gameState.currentArtifactIdInSequence) : ''),
+      artifactMediaUrl: (GameController.gameState.gameStarted ? GameController.getArtifactMediaUrl(GameController.gameState.currentArtifactIdInSequence) : ''),
       readyForBarcode: GameController.gameState.gameStarted,
+      numberOfArtifacts: GameController.getNumberOfArtifacts(),
       scannerOpen: false,
+      manualEntryMode: false,
     }
   }
 
@@ -36,13 +39,15 @@ export class GameDisplay extends React.Component {
         gameStarted: GameController.gameState.gameStarted,
         currentLevel: GameController.gameState.currentLevel,
         displayAnswer: (GameController.gameState.gameStarted ? GameController.getCorrectAnswerOnCurrentLevel() : false),
+        lastGuessWrong: ((GameController.gameState.attemptsOnCurrentLevel > 0) ? true : false),
         currentGuess: '',
-        currentClue: (GameController.gameState.gameStarted ? GameController.getClue(GameController.gameState.currentLevel) : ''),
-        extraHint: (GameController.gameState.gameStarted ? GameController.getExtraHint(GameController.gameState.currentLevel) : ''),
-        artifactName: (GameController.gameState.gameStarted ? GameController.getArtifactName(GameController.gameState.currentLevel) : ''),
-        artifactText: (GameController.gameState.gameStarted ? GameController.getArtifactText(GameController.gameState.currentLevel) : ''),
-        artifactMediaUrl: (GameController.gameState.gameStarted ? GameController.getArtifactMediaUrl(GameController.gameState.currentLevel) : ''),
+        currentClue: (GameController.gameState.gameStarted ? GameController.getClue(GameController.gameState.currentArtifactIdInSequence) : ''),
+        extraHint: (GameController.gameState.gameStarted ? GameController.getExtraHint(GameController.gameState.currentArtifactIdInSequence) : ''),
+        artifactName: (GameController.gameState.gameStarted ? GameController.getArtifactName(GameController.gameState.currentArtifactIdInSequence) : ''),
+        artifactText: (GameController.gameState.gameStarted ? GameController.getArtifactText(GameController.gameState.currentArtifactIdInSequence) : ''),
+        artifactMediaUrl: (GameController.gameState.gameStarted ? GameController.getArtifactMediaUrl(GameController.gameState.currentArtifactIdInSequence) : ''),
         readyForBarcode: GameController.gameState.gameStarted,
+        numberOfArtifacts: GameController.getNumberOfArtifacts(),
       }
     )
   }
@@ -59,7 +64,8 @@ export class GameDisplay extends React.Component {
     GameController.resetGame();
     this.updateGameState();
     this.setState({
-      readyForBarcode: false,        
+      readyForBarcode: false,
+      manualEntryMode: false,     
     })
   }
 
@@ -102,6 +108,24 @@ export class GameDisplay extends React.Component {
   extraHintButton() {
     this.setState({
       displayExtraHint: true,
+    })
+  }
+
+  checkAnswer() {
+    GameController.checkAnswer(this.state.currentGuess);
+    this.updateGameState();
+  }
+
+  manualEntryTextSubmitButton() {
+    const textField = document.getElementById("manual-entry-text-field");
+    this.state.currentGuess = textField.value.toLowerCase();
+    textField.value = '';
+    this.checkAnswer();
+  }
+
+  manualEntryModeButton() {
+    this.setState({
+      manualEntryMode: !this.state.manualEntryMode,
     })
   }
 
@@ -159,7 +183,16 @@ export class GameDisplay extends React.Component {
           readyToScanButton={this.readyToScanButton.bind(this)}
           debugCorrectAnswerButton={this.debugCorrectAnswerButton.bind(this)}
           debugWrongAnswerButton={this.debugWrongAnswerButton.bind(this)}
-        /><br/><br/>
+          manualEntryMode={this.state.manualEntryMode}
+        />
+        <ManualEntryDisplay
+          gameStarted={this.state.gameStarted}
+          displayAnswer={this.state.displayAnswer}
+          manualEntryMode={this.state.manualEntryMode}
+          manualEntryTextSubmitButton={this.manualEntryTextSubmitButton.bind(this)}
+          manualEntryModeButton={this.manualEntryModeButton.bind(this)}
+        />
+        <br/><br/>
         <ResetGameButton
           onClick={this.resetGame.bind(this)}
         />

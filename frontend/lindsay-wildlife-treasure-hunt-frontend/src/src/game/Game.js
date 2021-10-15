@@ -7,7 +7,7 @@ import Session from "../util/Session";
 
 // placeholder values
 const lastLevel = 10
-const maxIncorrectAttempts = 5
+const maxIncorrectAttempts = 3
 
 export class GameController {
 
@@ -22,9 +22,11 @@ export class GameController {
   static gameState = {
     "gameStarted" : false,
     "currentLevel": null,
-    "lastScannedBarcode": -1,
+    "currentArtifactIdInSequence" : null,
+    "lastGuess" : null,
     "attemptsOnCurrentLevel": 0,
     "correctAnswerOnCurrentLevel": false,
+    "gameSequence": null,
     "gameInfo" : {
 
     }
@@ -32,17 +34,19 @@ export class GameController {
 
   static startGame() {
     GameController.gameState.gameStarted = true;
-    GameController.gameState.lastScannedBarcode = 0;
+    GameController.gameState.lastGuess = null;
     GameController.gameState.currentLevel = 1;
     GameController.gameState.attemptsOnCurrentLevel = 0;
     GameController.gameState.correctAnswerOnCurrentLevel = false;
+    GameController.generateGameSequence();
+    GameController.gameState.currentArtifactIdInSequence = GameController.gameState.gameSequence[GameController.gameState.currentLevel - 1];
     GameController.saveState();
   }
 
   static resetGame() {
     GameController.gameState.gameStarted = false;
     GameController.gameState.currentLevel = null;
-    GameController.gameState.lastScannedBarcode = null;
+    GameController.gameState.lastGuess = null;
     GameController.gameState.attemptsOnCurrentLevel = 0;
     GameController.gameState.correctAnswerOnCurrentLevel = false;
     GameController.saveState();
@@ -60,12 +64,14 @@ export class GameController {
 
   // checks answer and updates session with gameState
   // returns true if correct, false otherwise
-  static checkAnswer(barcodeId) {
-    GameController.gameState.lastScannedBarcode = barcodeId;
+  static checkAnswer(answer) {
+    const correctAnswer = GameController.getArtifactName(GameController.gameState.currentArtifactIdInSequence).toLowerCase();
     // correct barcode for level n has id n+1
-    if(GameController.gameState.lastScannedBarcode === GameController.currentLevel + 1) {
+    if(answer == correctAnswer) {
       GameController.correctAnswer();
-    } else {
+    }
+    else {
+      console.log("wrong")
       GameController.wrongAnswer();
     }
     // update session data after each barcode scanned
@@ -73,16 +79,19 @@ export class GameController {
   }
 
   static nextLevel() {
-    // increment level
-    GameController.gameState.currentLevel += 1;
-    // reset attempt counter
-    GameController.gameState.attemptsOnCurrentLevel = 0;
-    GameController.gameState.correctAnswerOnCurrentLevel = false;
-    GameController.saveState();
-    // check if game is over
-    // if(GameController.gameState.currentLevel > lastLevel) {
-    //   GameController.completeGame()
-    // }
+    // if game is not over
+    if(GameController.gameState.currentLevel < GameController.getNumberOfArtifacts()) {
+      GameController.gameState.currentLevel += 1;
+      GameController.gameState.currentArtifactIdInSequence = GameController.gameState.gameSequence[GameController.gameState.currentLevel - 1];
+      // reset attempt counter
+      GameController.gameState.attemptsOnCurrentLevel = 0;
+      GameController.gameState.correctAnswerOnCurrentLevel = false;
+      GameController.saveState();
+    }
+    // else complete game
+    else {
+
+    }
   }
 
   static correctAnswer() {
@@ -93,30 +102,58 @@ export class GameController {
     GameController.gameState.attemptsOnCurrentLevel++;
   }
 
+  static getNumberOfArtifacts() {
+    return GameController.gameState.gameInfo.game.GameSequence.length;
+  }
+
+  static generateGameSequence() {
+    const n = GameController.getNumberOfArtifacts();
+    let seq = Array(n).fill().map((x,i)=>i);
+    GameController.gameState.gameSequence = GameController.shuffle(seq);
+  }
+
+  static shuffle(array) {
+    let currentIndex = array.length,  randomIndex;
+  
+    // While there remain elements to shuffle...
+    while (currentIndex != 0) {
+  
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+  
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+  
+    return array;
+  }
+
   static completeGame() {
     // send to "you win" splash page
     // send email
     // maybe a button to restart the game?
   }
 
-  static getClue(level) {
-    return GameController.gameState.gameInfo.game.GameSequence[level - 1].Clue;
+  static getClue(artifactId) {
+    return GameController.gameState.gameInfo.game.GameSequence[artifactId].Clue;
   }
 
-  static getExtraHint(level) {
-    return GameController.gameState.gameInfo.game.GameSequence[level - 1].AdditionalHint;
+  static getExtraHint(artifactId) {
+    return GameController.gameState.gameInfo.game.GameSequence[artifactId].AdditionalHint;
   }
 
-  static getArtifactName(level) {
-    return GameController.gameState.gameInfo.game.GameSequence[level - 1].ArtifactName;
+  static getArtifactName(artifactId) {
+    return GameController.gameState.gameInfo.game.GameSequence[artifactId].ArtifactName;
   }
 
-  static getArtifactText(level) {
-    return GameController.gameState.gameInfo.game.GameSequence[level - 1].CorrectMessage;
+  static getArtifactText(artifactId) {
+    return GameController.gameState.gameInfo.game.GameSequence[artifactId].CorrectMessage;
   }
 
-  static getArtifactMediaUrl(level) {
-    return GameController.gameState.gameInfo.game.GameSequence[level - 1].MediaLink;
+  static getArtifactMediaUrl(artifactId) {
+    return GameController.gameState.gameInfo.game.GameSequence[artifactId].MediaLink;
   }
 
   static getCorrectAnswerOnCurrentLevel() {

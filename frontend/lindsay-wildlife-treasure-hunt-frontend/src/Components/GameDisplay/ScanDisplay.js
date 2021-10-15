@@ -9,7 +9,7 @@ class ScanDisplay extends React.Component {
     }
   
     render() {
-      if(!this.props.displayAnswer && this.props.readyForBarcode) {
+      if(!this.props.displayAnswer && this.props.readyForBarcode && !this.props.manualEntryMode) {
         if(this.props.scannerOpen === false) {
           return(
             <div className="scanner-container">
@@ -49,46 +49,46 @@ class ScanDisplay extends React.Component {
   
 // Scan Display Components
 function ReadyToScanButton(props) {
-const buttonDisplay = props.scannerOpen ? "Close scanner" : "Open scanner";
-return(
-    <button
-    onClick={props.onClick}
-    >
-    {buttonDisplay}
-    </button>
-);
+  const buttonDisplay = props.scannerOpen ? "Close scanner" : "Open scanner";
+  return(
+      <button
+      onClick={props.onClick}
+      >
+      {buttonDisplay}
+      </button>
+  );
 }
 
 function BarcodeScanner(props) {
-return(
-    <BarcodeScannerComponent
-    width={500}
-    height={500}
-    onUpdate={(err, result) => {
-        props.qrScannerUpdate.qrScannerUpdate(result)
-    }}
-    />
-);
+  return(
+      <BarcodeScannerComponent
+        width={500}
+        height={500}
+        onUpdate={(err, result) => {
+            props.qrScannerUpdate.qrScannerUpdate(result)
+        }}
+      />
+  );
 }
 
 function DebugCorrectAnswerButton(props) {
-return(
-    <button
-    onClick={props.onClick}
-    >
-    Correct Answer
-    </button>
-);
+  return(
+      <button
+      onClick={props.onClick}
+      >
+      Correct Answer
+      </button>
+  );
 }
 
 function DebugWrongAnswerButton(props) {
-return(
-    <button
-    onClick={props.onClick}
-    >
-    Wrong Answer
-    </button>
-);
+  return(
+      <button
+      onClick={props.onClick}
+      >
+      Wrong Answer
+      </button>
+  );
 }
 
 export default ScanDisplay;
