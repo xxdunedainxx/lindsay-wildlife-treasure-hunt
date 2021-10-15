@@ -6,9 +6,11 @@ if [[ $? != 0 ]];then
  echo "No python installation detected, trying to install.."
  if [[ $(uname -s) == 'Darwin' ]]; then
    brew install python3
+   brew install imagemagick
  else
    # Assume ubuntu container
    apt-get install python3
+   apt-get install imagemagick
  fi
 fi
 
