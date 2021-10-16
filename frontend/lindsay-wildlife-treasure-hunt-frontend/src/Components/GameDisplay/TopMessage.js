@@ -22,7 +22,7 @@ function TopMessage(props) {
                          "Another one in the bag!"]
       return(
         <div className="top-message">
-          <h3>{correctMessages[props.currentLevel % 4]}</h3>
+          <h3>{correctMessages[props.currentLevel %correctMessages.length]}</h3>
         </div>
       );
     } else if(props.lastGuessWrong === true) {
@@ -34,7 +34,7 @@ function TopMessage(props) {
           <DisplayCurrentLevel
             currentLevel={props.currentLevel}
           /><br/>
-          <h3>{incorrectMessages[(props.attempts - 1)%3]}</h3><br/>
+          <h3>{incorrectMessages[(props.attempts - 1)%incorrectMessages.length]}</h3><br/>
         </div>
       );
     } else {
