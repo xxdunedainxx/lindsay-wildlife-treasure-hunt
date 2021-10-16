@@ -16,18 +16,25 @@ function TopMessage(props) {
         </div>
       );
     } else if(props.displayAnswer) {
+      const correctMessages = ["Nailed it!",
+                         "Nice job!",
+                         "You got it!",
+                         "Another one in the bag!"]
       return(
         <div className="top-message">
-          <h3>Nailed it!</h3>
+          <h3>{correctMessages[props.currentLevel % 4]}</h3>
         </div>
       );
     } else if(props.lastGuessWrong === true) {
+      const incorrectMessages = ["Not quite, let's try again.",
+                                 "Hmm, let's give it another try.",
+                                 "That wasn't it, but I know you can do this!"];
       return(
         <div className="top-message">
           <DisplayCurrentLevel
             currentLevel={props.currentLevel}
           /><br/>
-          <h3>Not quite, let's try again. </h3><br/>
+          <h3>{incorrectMessages[(props.attempts - 1)%3]}</h3><br/>
         </div>
       );
     } else {

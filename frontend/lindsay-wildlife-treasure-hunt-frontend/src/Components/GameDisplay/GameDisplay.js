@@ -19,6 +19,7 @@ export class GameDisplay extends React.Component {
       currentLevel: GameController.gameState.currentLevel,
       displayAnswer: (GameController.gameState.gameStarted ? GameController.getCorrectAnswerOnCurrentLevel() : false),
       lastGuessWrong: ((GameController.gameState.attemptsOnCurrentLevel > 0) ? true : false),
+      attempts: (GameController.gameState.gameStarted ? GameController.gameState.attemptsOnCurrentLevel : 0),
       currentGuess: '',
       currentClue: (GameController.gameState.gameStarted ? GameController.getClue(GameController.gameState.currentArtifactIdInSequence) : ''),
       extraHint: (GameController.gameState.gameStarted ? GameController.getExtraHint(GameController.gameState.currentArtifactIdInSequence) : ''),
@@ -40,6 +41,7 @@ export class GameDisplay extends React.Component {
         currentLevel: GameController.gameState.currentLevel,
         displayAnswer: (GameController.gameState.gameStarted ? GameController.getCorrectAnswerOnCurrentLevel() : false),
         lastGuessWrong: ((GameController.gameState.attemptsOnCurrentLevel > 0) ? true : false),
+        attempts: (GameController.gameState.gameStarted ? GameController.gameState.attemptsOnCurrentLevel : 0),
         currentGuess: '',
         currentClue: (GameController.gameState.gameStarted ? GameController.getClue(GameController.gameState.currentArtifactIdInSequence) : ''),
         extraHint: (GameController.gameState.gameStarted ? GameController.getExtraHint(GameController.gameState.currentArtifactIdInSequence) : ''),
@@ -129,6 +131,17 @@ export class GameDisplay extends React.Component {
     })
   }
 
+  getAnswerButton() {
+    GameController.correctAnswer();
+    GameController.saveState();
+    this.updateGameState();
+    this.setState({
+      scannerOpen: false,
+      displayAnswer: true,
+      displayExtraHint: false,
+    })
+  }
+
   debugCorrectAnswerButton() {
     GameController.correctAnswer();
     GameController.saveState();
@@ -156,6 +169,7 @@ export class GameDisplay extends React.Component {
           currentLevel={this.state.currentLevel}
           displayAnswer={this.state.displayAnswer}
           lastGuessWrong={this.state.lastGuessWrong}
+          attempts={this.state.attempts}
           startGameButton={this.startGameButton.bind(this)}
         />
         <HintDisplay
@@ -167,6 +181,8 @@ export class GameDisplay extends React.Component {
           extraHint={this.state.extraHint}
           extraHintButton={this.extraHintButton.bind(this)}
           displayExtraHint={this.state.displayExtraHint}
+          attempts={this.state.attempts}
+          getAnswerButton={this.getAnswerButton.bind(this)}
         />
         <AnswerDisplay
           displayAnswer={this.state.displayAnswer}

@@ -20,6 +20,10 @@ class HintDisplay extends React.Component {
               onClick={this.props.extraHintButton}
               extraHint={this.props.extraHint}
             />
+            <GetAnswerButton
+              attempts={this.props.attempts}
+              onClick={this.props.getAnswerButton}
+            />
           </div>
         );
       }
@@ -39,23 +43,36 @@ function DisplayCurrentClue(props) {
 }
 
 function DisplayExtraHint(props) {
-    if(props.lastGuessWrong) {
-        if(!props.displayExtraHint) {
-        return(
-            <button
-            onClick={props.onClick}
-            >Need a hint?</button>
-        );
-        }
-        else{
-        return(
-            <div className="extra-hint-text">
-            {props.extraHint}
-            </div>
-        );
-        }
-    }
+  if(props.lastGuessWrong) {
+      if(!props.displayExtraHint) {
+      return(
+          <button
+          onClick={props.onClick}
+          >Need a hint?</button>
+      );
+      }
+      else{
+      return(
+          <div className="extra-hint-text">
+          {props.extraHint}
+          </div>
+      );
+      }
+  }
+  return null;
+}
+
+function GetAnswerButton(props) {
+  if(props.attempts >= 3) {
+    return(
+      <button
+        onClick={props.onClick}
+      >Ready for the answer?</button>
+    );
+  }
+  else{
     return null;
+  }
 }
 
 export default HintDisplay;
