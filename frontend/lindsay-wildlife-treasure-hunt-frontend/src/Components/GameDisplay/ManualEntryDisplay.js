@@ -46,22 +46,47 @@ export class ManualEntryDisplay extends React.Component {
 
 // Manual Entry Display Components
 
-function ManualEntryField(props) {
+class ManualEntryField extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.formPreventDefault = this.formPreventDefault.bind(this);
+    this.onClickPreventDefault = this.onClickPreventDefault.bind(this);
+  }
+
+  formPreventDefault(e) {
+    e.preventDefault();
+    this.props.onClick();
+  }
+
+  onClickPreventDefault(e) {
+    e.preventDefault();
+    this.props.onClick();
+  }
+
+  render() {
     return(
-      <div className="manual-entry-input-container">
+      <div className="manual-entry-form">
+        <form
+          onSubmit={this.formPreventDefault}
+        >
           <input 
             type="text"
             id="manual-entry-text-field"
           >
           </input>
           <br/>
-          <button
-            onClick={props.onClick}
+          <input
+            className="manual-entry-submit"
+            type="submit"
+            value="Submit"
+            onSubmit={this.onClickPreventDefault}
           >
-              Submit
-          </button>
+          </input>
+        </form>
       </div>
     );
+  }
 }
 
 function ManualEntryModeButton(props) {

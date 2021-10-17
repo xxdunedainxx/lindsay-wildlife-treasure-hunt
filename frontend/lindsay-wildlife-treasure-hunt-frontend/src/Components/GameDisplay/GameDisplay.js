@@ -118,7 +118,7 @@ export class GameDisplay extends React.Component {
     this.updateGameState();
   }
 
-  manualEntryTextSubmitButton() {
+  manualEntryTextSubmitButton(e) {
     const textField = document.getElementById("manual-entry-text-field");
     this.state.currentGuess = textField.value.toLowerCase();
     textField.value = '';

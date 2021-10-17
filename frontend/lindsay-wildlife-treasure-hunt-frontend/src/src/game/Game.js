@@ -62,19 +62,20 @@ export class GameController {
     Session.SetSessionData(GameController.gameState);
   }
 
+  // takes a lower case arg
   // checks answer and updates session with gameState
   // returns true if correct, false otherwise
   static checkAnswer(answer) {
-    const correctAnswer = GameController.getArtifactName(GameController.gameState.currentArtifactIdInSequence).toLowerCase();
-    // correct barcode for level n has id n+1
-    if(answer == correctAnswer) {
-      GameController.correctAnswer();
+    const correctAnswers = GameController.getAllArtifactNames(GameController.gameState.currentArtifactIdInSequence);
+    for(let i = 0; i < correctAnswers.length; i++) {
+      if(answer == correctAnswers[i].toLowerCase()) {
+        GameController.correctAnswer();
+        GameController.saveState();
+        return
+      }
     }
-    else {
-      console.log("wrong")
-      GameController.wrongAnswer();
-    }
-    // update session data after each barcode scanned
+    // if not in correctAnswers, the answer is wrong
+    GameController.wrongAnswer();
     GameController.saveState();
   }
 
@@ -145,6 +146,10 @@ export class GameController {
   }
 
   static getArtifactName(artifactId) {
+    return GameController.gameState.gameInfo.game.GameSequence[artifactId].ArtifactName[0];
+  }
+
+  static getAllArtifactNames(artifactId) {
     return GameController.gameState.gameInfo.game.GameSequence[artifactId].ArtifactName;
   }
 
