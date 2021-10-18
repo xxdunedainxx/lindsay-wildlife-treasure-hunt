@@ -17,7 +17,7 @@ class App:
     Setup.init_main_app_resources()
     self.init_app_health()
     if CONF_INSTANCE.SERVICE_TOGGLES[ServiceNames.apiServer] == True:
-     self.init_api_thread()
+      self.init_api_thread()
 
     self.init_smtp_mailer_job()
     self.init_log_rotation_job()
@@ -68,3 +68,4 @@ class App:
     )
 
     self.smtp_mailer_worker.run()
+    

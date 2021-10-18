@@ -15,6 +15,10 @@ class MailController:
     LogFactory.MAIN_LOG.info('Start MailController')
 
   @staticmethod
+  def __valid_post_payload(request) -> bool:
+    return "email" not in request.json or "username" not in request.json
+
+  @staticmethod
   @flask_ref.route('/mail', methods=['POST'])
   @http_logger
   def mail_api():
@@ -26,26 +30,28 @@ class MailController:
 
       LogFactory.MAIN_LOG.info(f"args {request.json}")
       LogFactory.MAIN_LOG.info("mail api")
-      if "email" not in request.json:
+      if MailController.__valid_post_payload(request=request):
         return {
-          "response": "no email provided"
+          "response": "no email provided, or no username provided"
         }, 400
       email = request.json['email']
+      username = request.json['username']
       
       if EmailValidator.is_valid(email):
         mail_q = Singletons.mailQ
         email_json = {
-                "email" : email
-            }
+          "email" : email,
+          "username" : username
+        }
         # pass the key in the response
         key = mail_q.add_to_q(email_json)
         return {
-          "response" : "valid email",
+          "response" : "Valid Request",
           "key" : key
         }
       else:
         return {
-          "response" : "invalid email"
+          "response" : "Invalid Request"
         }, 400
     except Exception as e:
       LogFactory.MAIN_LOG.error(f"Failed Fetching mail api {errorStackTrace(e)}")

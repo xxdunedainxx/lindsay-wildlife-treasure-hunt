@@ -4,7 +4,8 @@ from src.Mail.MailQ import MailQ
 
 TESTDATA = [
     {
-        "email": "zrmmaster92@gmail.com"
+        "email": "zrmmaster92@gmail.com",
+        "username" : "Zach"
     }
 ]
 
