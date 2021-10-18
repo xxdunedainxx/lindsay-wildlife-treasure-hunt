@@ -18,6 +18,9 @@ function buildBackend(){
 function buildFrontend(){
   # TODO
   log "Build front end"
+  cd frontend
+  ./build.sh
+  cd $HOME
 }
 
 function buildRedis(){

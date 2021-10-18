@@ -20,10 +20,10 @@ export class Nav extends React.Component {
     return (
       <div>
         <ul id="nav">
-          <li><Link to="/home">Lindsay Logo here</Link></li>
-          <li><Link to="/game">Start!</Link></li>
-          <li><Link to="/about">About</Link></li>
-          <li><Link to="/report">Report a bug</Link></li>
+          <li><Link to="/ui/home">Lindsay Logo here</Link></li>
+          <li><Link to="/ui/game">Start!</Link></li>
+          <li><Link to="/ui/about">About</Link></li>
+          <li><Link to="/ui/report">Report a bug</Link></li>
         </ul>
       </div>
     );
