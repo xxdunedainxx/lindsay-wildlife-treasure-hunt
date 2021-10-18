@@ -17,6 +17,7 @@ class Configuration:
       ServiceNames.jsLogs : False,
       ServiceNames.apiServer : True,
       ServiceNames.logRotation: True
+      ServiceNames.redis: True
     },
     "PRODUCTION_ENVIRONMENT" : False,
     "DATABASE_ENGINE" : "json",

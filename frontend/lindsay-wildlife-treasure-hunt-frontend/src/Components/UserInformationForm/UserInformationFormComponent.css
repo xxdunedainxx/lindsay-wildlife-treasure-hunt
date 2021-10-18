@@ -1,0 +1,33 @@
+.userFormWrapper{
+  background-color: #d08c60;
+  color: black;
+  border-color: #62a8e5;
+  border-width: medium;
+  border-radius: 5px;
+  color: #7a726f;
+  padding-top: 5px;
+}
+
+.userInfoInput {
+  resize: none;
+  max-width: 50%;
+  padding-left: 5px;
+  padding-top: 5px;
+  border-width: medium;
+  border-radius: 10px;
+}
+
+.userInfoInput:focus { 
+  background:#62a8e5; 
+  color:#000000; 
+}
+
+.userInfoSubmitButton {
+  background:#62a8e5; 
+  border-radius: 10px;
+}
+
+.userInfoInputLabel {
+  font-weight: bold;
+  padding-left: 5px;
+}
