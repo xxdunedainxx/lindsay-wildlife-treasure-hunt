@@ -79,16 +79,9 @@ export class GameDisplay extends React.Component {
           scannerOpen: false,
         }
       );
+      this.checkAnswer(this.state.currentGuess)
+      this.updateGameState();
     }
-    else {
-      this.setState(
-        {
-          currentGuess: '',
-        }
-      );
-    }
-    let isCorrect = GameController.checkAnswer(this.state.currentGuess)
-    this.updateGameState();
   }
 
   readyToScanButton() {
