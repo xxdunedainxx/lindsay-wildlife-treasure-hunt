@@ -16,7 +16,7 @@ class Configuration:
       ServiceNames.mail : True,
       ServiceNames.jsLogs : False,
       ServiceNames.apiServer : True,
-      ServiceNames.logRotation: True
+      ServiceNames.logRotation: True,
       ServiceNames.redis: True
     },
     "PRODUCTION_ENVIRONMENT" : False,
