@@ -23,7 +23,7 @@ class RedisClient:
         self.__init_logger()
         self._logger.info(f"Establishing redis connection {config.host}:{config.port}")
         self.redis_connection: redis.Redis = redis.Redis(host=config.host, port=config.port, db=RedisClient.REDIS_DBS[config.db_name], charset='utf-8', decode_responses=True, socket_connect_timeout=1)
-        self.redis_connection.ping()
+        self.health_check()
         self._logger.info('connection established!')
 
     def put_item(self, key, value):
@@ -84,3 +84,14 @@ class RedisClient:
         transform = list(map(int, keys))
         transform.sort()
         return transform
+
+    def health_check(self) -> bool:
+        try:
+            self.redis_connection.ping()
+            return True
+        except ConnectionError as e:
+            LogFactory.MAIN_LOG.error(f"Redis Health check failed with a connection error.. {errorStackTrace(e)}")
+            return False
+        except Exception as e:
+            LogFactory.MAIN_LOG.error(f"Redis Health check failed {errorStackTrace(e)}")
+            return False

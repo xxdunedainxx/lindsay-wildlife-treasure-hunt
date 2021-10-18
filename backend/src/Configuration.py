@@ -15,7 +15,8 @@ class Configuration:
     "SERVICE_TOGGLES" : {
       ServiceNames.mail : True,
       ServiceNames.jsLogs : False,
-      ServiceNames.apiServer : True
+      ServiceNames.apiServer : True,
+      ServiceNames.redis: True
     },
     "PRODUCTION_ENVIRONMENT" : False,
     "DATABASE_ENGINE" : "json",
