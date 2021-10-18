@@ -6,6 +6,9 @@ services:
     container_name: lindsay-ingress 
     ports: 
       - "0.0.0.0:80:80"
+  frontend:
+    image: lindsay-react-app
+    container_name: lindsay-react-app
   backend: 
     image: lindsay_app_backend
     container_name: lindsay_app_backend

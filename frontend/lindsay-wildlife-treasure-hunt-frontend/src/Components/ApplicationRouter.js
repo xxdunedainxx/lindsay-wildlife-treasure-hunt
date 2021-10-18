@@ -21,10 +21,10 @@ export class ApplicationRouter extends React.Component {
   render(){
     return (
       <div>
-        <Route path='/home' component={HomePage} />
-        <Route path='/about' component={AboutPage} />
-        <Route path='/game' component={GamePage} />
-        <Route path='/report' component={ReportBugPage} />
+        <Route path='/ui/home' component={HomePage} />
+        <Route path='/ui/about' component={AboutPage} />
+        <Route path='/ui/game' component={GamePage} />
+        <Route path='/ui/report' component={ReportBugPage} />
       </div>
     );
   }

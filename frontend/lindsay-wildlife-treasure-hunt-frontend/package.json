@@ -22,6 +22,7 @@
     "integration-testing": "jest --verbose --rootDir=test/integration",
     "eject": "react-scripts eject"
   },
+  "homepage" : "http://localhost/ui",
   "jest": {
     "moduleDirectories": [
       "node_modules",

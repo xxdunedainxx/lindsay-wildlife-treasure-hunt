@@ -1,4 +1,4 @@
-import * as confData from './client_conf.json';
+import * as confData from './prod_client_conf.json';
 
 export class Configuration {
   static conf
@@ -18,12 +18,13 @@ export class Configuration {
     Configuration.remoteHost = confData.backend.host
     Configuration.remoteHostPort = confData.backend.port
     Configuration.remoteHostHealthPort = confData.backend.appHealthPort
+    Configuration.remoteHostPath = confData.backend.hostRoute
     Configuration.mockData = confData.dev.mockData
     if(confData.backend.ssl) {
       Configuration.remoteHostProtocol = "https"
     }
-    Configuration.remoteEndpoint = `${Configuration.remoteHostProtocol}://${Configuration.remoteHost}:${Configuration.remoteHostPort}`
-    Configuration.healthEndpoint = `${Configuration.remoteHostProtocol}://${Configuration.remoteHost}:${Configuration.remoteHostHealthPort}`
+    Configuration.remoteEndpoint = `${Configuration.remoteHostProtocol}://${Configuration.remoteHost}:${Configuration.remoteHostPort}${Configuration.remoteHostPath}`
+    Configuration.healthEndpoint = `${Configuration.remoteHostProtocol}://${Configuration.remoteHost}:${Configuration.remoteHostHealthPort}${Configuration.remoteHostPath}`
   }
 }
 

@@ -22,6 +22,7 @@ ENV CONF_FILE="none"
 COPY ./scripts/setup.sh ./setup.sh
 COPY ./scripts/run.sh ./run.sh
 COPY app.py ./app.py
+COPY db.json ./db.json
 COPY src/ src/
 
 RUN ./setup.sh
