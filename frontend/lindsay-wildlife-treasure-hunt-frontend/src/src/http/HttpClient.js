@@ -23,19 +23,45 @@ class HttpClient {
   //   );
   // }
 
+  async post(endpoint, data, resultMethod = console.log, errorMethod = console.log) {
+    console.log("post data:")
+    console.log(data)
+    var requestData = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    };
+
+    return fetch(`${this.url}/${endpoint}`, requestData)
+    .then(res => res.json())
+    .then(
+      (result) => {
+        Logger.debug(`HTTP POST request succeeded to endpoint ${this.url}/${endpoint}, with response ${JSON.stringify(result)}`)
+        resultMethod(result)
+      },
+      // Note: it's important to handle errors here
+      // instead of a catch() block so that we don't swallow
+      // exceptions from actual bugs in components.
+      (error) => {
+        Logger.error(`HTTP POST request failed to endpoint ${this.url}/${endpoint}, with error ${JSON.stringify(error)}`)
+        errorMethod(error)
+      }
+    )
+  }
+
   async get(endpoint, resultMethod = console.log, errorMethod = console.log){
    return fetch(`${this.url}/${endpoint}`)
       .then(res => res.json())
       .then(
         (result) => {
-          Logger.debug(`HTTP request succeeded to endpoint ${this.url}/${endpoint}, with response ${JSON.stringify(result)}`)
+          Logger.debug(`HTTP GET request succeeded to endpoint ${this.url}/${endpoint}, with response ${JSON.stringify(result)}`)
           resultMethod(result)
         },
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
         // exceptions from actual bugs in components.
         (error) => {
-          Logger.error(`HTTP request failed to endpoint ${this.url}/${endpoint}, with error ${JSON.stringify(error)}`)
+          Logger.error(`HTTP GET request failed to endpoint ${this.url}/${endpoint}, with error ${JSON.stringify(error)}`)
           errorMethod(error)
         }
       )
