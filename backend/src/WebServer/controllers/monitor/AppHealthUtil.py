@@ -2,6 +2,8 @@ from src.WebServer.controllers.monitor.AppHealthStatuses import AppHealthStatus
 from src.util.FileIO import FileIO
 from src.Configuration import CONF_INSTANCE
 from src.MultiThreading.ThreadPool import process_is_alive, WorkerPool
+from src.Singletons import Singletons
+from src.Services import ServiceNames
 
 import json
 
@@ -9,6 +11,9 @@ class AppHealthStatusUtil:
 
   @staticmethod
   def check_service_pids(service: str) -> bool:
+    if ServiceNames.redis == service:
+      return True
+
     if FileIO.file_exists(WorkerPool.generate_info_filename(service)):
       processInfo = json.loads(FileIO.read_file_content_to_string(WorkerPool.generate_info_filename(service)))
       for workerPid in processInfo['workerPids']:
@@ -32,6 +37,9 @@ class AppHealthStatusUtil:
 
   @staticmethod
   def get_status(service: str) -> str:
+    if service == ServiceNames.redis:
+      return AppHealthStatusUtil.check_redis_health()
+
     if AppHealthStatusUtil.check_service_pids(service) == False:
        return AppHealthStatus.MISSING
     else:
@@ -57,3 +65,10 @@ class AppHealthStatusUtil:
       if CONF_INSTANCE.SERVICE_TOGGLES[service] == True:
         rServices.append(service)
     return rServices
+
+  @staticmethod
+  def check_redis_health():
+    if Singletons.mailQ.health_check() == True:
+      return AppHealthStatus.HEALTHY
+    else:
+      return AppHealthStatus.UNHEALTHY
