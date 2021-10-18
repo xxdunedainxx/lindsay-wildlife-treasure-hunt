@@ -16,7 +16,7 @@ export class Session {
   // loads session data if it exists, otherwise, creates it
   static FetchSessionData(){
     Logger.info('fetching session data')
-    if(Session.CheckIfExists == false) {
+    if(Session.CheckIfExists() == false) {
       Logger.info('Session data does not exist, setting')
       Session.SetSessionData(GameController.gameState)
     }

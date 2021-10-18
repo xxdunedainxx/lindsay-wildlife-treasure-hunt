@@ -7,7 +7,7 @@ import Session from "../util/Session";
 
 // placeholder values
 const lastLevel = 10
-const maxIncorrectAttempts = 5
+const maxIncorrectAttempts = 3
 
 export class GameController {
 
@@ -20,20 +20,36 @@ export class GameController {
   }
 
   static gameState = {
-    // -1: pre-startGame state
     "gameStarted" : false,
-    "currentLevel": -1,
-    "lastScannedBarcode": -1,
+    "currentLevel": null,
+    "currentArtifactIdInSequence" : null,
+    "lastGuess" : null,
     "attemptsOnCurrentLevel": 0,
+    "correctAnswerOnCurrentLevel": false,
+    "gameSequence": null,
     "gameInfo" : {
 
     }
   }
 
   static startGame() {
-    GameController.gameState.gameStarted = true
-    GameController.gameState.currentLevel = 0
-    GameController.gameState.lastScannedBarcode = 0
+    GameController.gameState.gameStarted = true;
+    GameController.gameState.lastGuess = null;
+    GameController.gameState.currentLevel = 1;
+    GameController.gameState.attemptsOnCurrentLevel = 0;
+    GameController.gameState.correctAnswerOnCurrentLevel = false;
+    GameController.generateGameSequence();
+    GameController.gameState.currentArtifactIdInSequence = GameController.gameState.gameSequence[GameController.gameState.currentLevel - 1];
+    GameController.saveState();
+  }
+
+  static resetGame() {
+    GameController.gameState.gameStarted = false;
+    GameController.gameState.currentLevel = null;
+    GameController.gameState.lastGuess = null;
+    GameController.gameState.attemptsOnCurrentLevel = 0;
+    GameController.gameState.correctAnswerOnCurrentLevel = false;
+    GameController.saveState();
   }
 
   // if session data exists, loads it
@@ -42,43 +58,77 @@ export class GameController {
     GameController.gameState = Session.FetchSessionData()
    }
 
+  static saveState() {
+    Session.SetSessionData(GameController.gameState);
+  }
+
+  // takes a lower case arg
   // checks answer and updates session with gameState
   // returns true if correct, false otherwise
-  static checkAnswer(barcodeId) {
-    GameController.gameState.lastScannedBarcode = barcodeId
-    // correct barcode for level n has id n+1
-    if(GameController.gameState.lastScannedBarcode === GameController.currentLevel + 1) {
-      GameController.correctAnswer()
-    } else {
-      GameController.wrongAnswer()
+  static checkAnswer(answer) {
+    const correctAnswers = GameController.getAllArtifactNames(GameController.gameState.currentArtifactIdInSequence);
+    for(let i = 0; i < correctAnswers.length; i++) {
+      if(answer == correctAnswers[i].toLowerCase()) {
+        GameController.correctAnswer();
+        GameController.saveState();
+        return
+      }
     }
-    // update session data after each barcode scanned
-    Session.SetSessionData(GameController.gameState)
+    // if not in correctAnswers, the answer is wrong
+    GameController.wrongAnswer();
+    GameController.saveState();
+  }
+
+  static nextLevel() {
+    // if game is not over
+    if(GameController.gameState.currentLevel < GameController.getNumberOfArtifacts()) {
+      GameController.gameState.currentLevel += 1;
+      GameController.gameState.currentArtifactIdInSequence = GameController.gameState.gameSequence[GameController.gameState.currentLevel - 1];
+      // reset attempt counter
+      GameController.gameState.attemptsOnCurrentLevel = 0;
+      GameController.gameState.correctAnswerOnCurrentLevel = false;
+      GameController.saveState();
+    }
+    // else complete game
+    else {
+
+    }
   }
 
   static correctAnswer() {
-    // increment level
-    GameController.gameState.currentLevel += 1
-    // reset attempt counter
-    GameController.gameState.attemptsOnCurrentLevel = 0
-    // check if game is over
-    if(GameController.gameState.currentLevel > lastLevel) {
-      GameController.completeGame()
-      return
-    }
+    GameController.gameState.correctAnswerOnCurrentLevel = true;
   }
 
   static wrongAnswer() {
-    // if this is the first wrong answer for this level,
-    // give extra hint
-    if(GameController.gameState.attemptsOnCurrentLevel > 0) {
-      GameController.getExtraHint(GameController.gameState.currentLevel)
+    GameController.gameState.attemptsOnCurrentLevel++;
+  }
+
+  static getNumberOfArtifacts() {
+    return GameController.gameState.gameInfo.game.GameSequence.length;
+  }
+
+  static generateGameSequence() {
+    const n = GameController.getNumberOfArtifacts();
+    let seq = Array(n).fill().map((x,i)=>i);
+    GameController.gameState.gameSequence = GameController.shuffle(seq);
+  }
+
+  static shuffle(array) {
+    let currentIndex = array.length,  randomIndex;
+  
+    // While there remain elements to shuffle...
+    while (currentIndex != 0) {
+  
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+  
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
     }
-    // increment attempts, if too many attempts, give correct answer
-    GameController.gameState.attemptsOnCurrentLevel++
-    if(GameController.gameState.attemptsOnCurrentLevel > maxIncorrectAttempts) {
-      GameController.getCorrectAnswer()
-    }
+  
+    return array;
   }
 
   static completeGame() {
@@ -87,19 +137,32 @@ export class GameController {
     // maybe a button to restart the game?
   }
 
-  static getHint(level) {
-    //return GameController.gameState.gameInfo.game.GameSequence[level].Clue
-    return null
+  static getClue(artifactId) {
+    return GameController.gameState.gameInfo.game.GameSequence[artifactId].Clue;
   }
 
-  static getExtraHint(level) {
-    // button to opt in to show extra hint
-    // Extra hint for each level
-    // only given after incorrect answer
+  static getExtraHint(artifactId) {
+    return GameController.gameState.gameInfo.game.GameSequence[artifactId].AdditionalHint;
   }
 
-  getCorrectAnswer(level) {
-    // give answer if too many incorrect attempts
+  static getArtifactName(artifactId) {
+    return GameController.gameState.gameInfo.game.GameSequence[artifactId].ArtifactName[0];
+  }
+
+  static getAllArtifactNames(artifactId) {
+    return GameController.gameState.gameInfo.game.GameSequence[artifactId].ArtifactName;
+  }
+
+  static getArtifactText(artifactId) {
+    return GameController.gameState.gameInfo.game.GameSequence[artifactId].CorrectMessage;
+  }
+
+  static getArtifactMediaUrl(artifactId) {
+    return GameController.gameState.gameInfo.game.GameSequence[artifactId].MediaLink;
+  }
+
+  static getCorrectAnswerOnCurrentLevel() {
+    return GameController.gameState.correctAnswerOnCurrentLevel;
   }
 
 }
