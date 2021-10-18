@@ -6,6 +6,7 @@ from src.WebServer.APIFactory import APIFactory
 from src.Setup import Setup
 from src.MultiThreading.ThreadPool import WorkerPool
 from src.MultiThreading.jobs.MailerJob import MailerJob
+from src.MultiThreading.jobs.LogRotationJob import LogRotationJob
 
 class App:
 
@@ -19,6 +20,7 @@ class App:
      self.init_api_thread()
 
     self.init_smtp_mailer_job()
+    self.init_log_rotation_job()
 
   def run(self):
     self.init_cron_jobs()
@@ -47,9 +49,19 @@ class App:
 
     self.app_info_worker.run()
 
+  def init_log_rotation_job(self):
+    self.log_rotation_job: WorkerPool = WorkerPool(
+      poolName=ServiceNames.logRotation,
+      size=1,
+      poolType="default",
+      targetMethod=LogRotationJob.log_rotation_job
+    )
+
+    self.log_rotation_job.run()
+
   def init_smtp_mailer_job(self):
     self.smtp_mailer_worker: WorkerPool = WorkerPool(
-      poolName="mailer",
+      poolName=ServiceNames.mail,
       size=1,
       poolType="default",
       targetMethod=MailerJob.mailer_job
