@@ -52,11 +52,13 @@ class MailerJob:
     LogFactory.MAIN_LOG.info(f"attempting to send email data {emailData}")
 
 
-    toEmail = []
-    toEmail.append(emailData["email"])
-    MailerJob.mailer.send_email(
-      toEmails=toEmail,
-      subject="Test Email",
+    toEmail = emailData["email"]
+    toUsername = emailData["username"]
+
+    MailerJob.mailer.send_html_email(
+      username=toUsername,
+      toEmail=toEmail,
+      subject="Congrats from Lindsay Wildlife!",
       emailBody="Some Email body"
     )
     LogFactory.MAIN_LOG.info(f"Email sent!")
