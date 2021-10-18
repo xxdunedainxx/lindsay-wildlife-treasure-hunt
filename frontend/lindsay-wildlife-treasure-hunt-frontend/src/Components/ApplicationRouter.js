@@ -11,6 +11,7 @@ import {AboutPage} from './pages/about/AboutPageComponent';
 import {GamePage} from './pages/game/GamePageComponent';
 import {HomePage} from './pages/home/HomePageComponent';
 import {ReportBugPage} from './pages/report/ReportBugPageComponent';
+import {WinPage} from './pages/win/WinPageComponent';
 
 export class ApplicationRouter extends React.Component {
 
@@ -25,6 +26,7 @@ export class ApplicationRouter extends React.Component {
         <Route path='/about' component={AboutPage} />
         <Route path='/game' component={GamePage} />
         <Route path='/report' component={ReportBugPage} />
+        <Route path='/win' component={WinPage} />
       </div>
     );
   }

@@ -51,15 +51,9 @@ class ManualEntryField extends React.Component {
     super(props);
 
     this.formPreventDefault = this.formPreventDefault.bind(this);
-    this.onClickPreventDefault = this.onClickPreventDefault.bind(this);
   }
 
   formPreventDefault(e) {
-    e.preventDefault();
-    this.props.onClick();
-  }
-
-  onClickPreventDefault(e) {
     e.preventDefault();
     this.props.onClick();
   }
@@ -80,7 +74,7 @@ class ManualEntryField extends React.Component {
             className="manual-entry-submit"
             type="submit"
             value="Submit"
-            onSubmit={this.onClickPreventDefault}
+            onSubmit={this.formPreventDefault}
           >
           </input>
         </form>
