@@ -16,6 +16,7 @@ class Configuration:
       ServiceNames.mail : True,
       ServiceNames.jsLogs : False,
       ServiceNames.apiServer : True,
+      ServiceNames.logRotation: True
       ServiceNames.redis: True
     },
     "PRODUCTION_ENVIRONMENT" : False,
@@ -23,6 +24,11 @@ class Configuration:
     "DATABASE" : "db.json",
     "MAIL_JOB_INTERVAL_MINUTES" : 1,
     "MAIL_JOB_EMAILS_PER_JOB"   : 50,
+
+    # Default once a day
+    "LOG_ROTATION_JOB_INTERVAL_MINUTES" : 1440,
+    "LOG_ROTATION_JOB_EXPIRATION_DAYS"  : 1,
+    "LOG_ROTATION_JOB_ARCHIVE_DIR"      : f"archive{os.sep}"
   }
 
   def __init__(self):
@@ -55,6 +61,12 @@ class Configuration:
     self.DATABASE: str = self.__get_value("DATABASE")
     self.MAIL_JOB_INTERVAL_MINUTES: int = self.__get_value("MAIL_JOB_INTERVAL_MINUTES")
     self.MAIL_JOB_EMAILS_PER_JOB: int = self.__get_value("MAIL_JOB_EMAILS_PER_JOB")
+
+    # Log rotation job configuration
+    self.LOG_ROTATION_JOB_INTERVAL_MINUTES: int = self.__get_value("LOG_ROTATION_JOB_INTERVAL_MINUTES")
+    self.LOG_ROTATION_JOB_EXPIRATION_DAYS: int = self.__get_value("LOG_ROTATION_JOB_EXPIRATION_DAYS")
+    self.LOG_ROTATION_JOB_ARCHIVE_DIR: str = self.__get_value("LOG_ROTATION_JOB_ARCHIVE_DIR")
+
 
   def __get_value(self, key: str):
     # environment variables have highest prio

@@ -1,4 +1,6 @@
 import os
+from datetime import datetime
+import shutil
 
 class FileIO:
 
@@ -73,3 +75,15 @@ class FileIO:
   def delete_file(path):
     if FileIO.file_exists(path):
       os.remove(path)
+
+  @staticmethod
+  def whipe_file_contents(path):
+    open(path, 'w').close()
+
+  @staticmethod
+  def copy_file(source: str, destintation: str):
+    shutil.copyfile(source, destintation)
+
+  @staticmethod
+  def get_last_modification_time(path: str):
+    return datetime.utcfromtimestamp(os.path.getmtime(path))
