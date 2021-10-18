@@ -1,5 +1,9 @@
 from smtplib import SMTP_SSL
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
 from src.util.LogFactory import LogFactory
+from src.Mail.MailFormatter import MailFormatter
 
 class SMTP:
 
@@ -79,3 +83,29 @@ Subject: %s
     self.smtp_client.sendmail(self.from_user, toEmails, email_text)
     self.end_smtp_session()
 
+  def send_html_email(self,username: str , toEmail: str, subject: str, emailBody: str, formatter: str = 'default'):
+    # Create message container - the correct MIME type is multipart/alternative.
+    msg = MIMEMultipart('alternative')
+    msg['Subject'] = subject
+    msg['From'] = self.from_user
+    msg['To'] = toEmail
+
+    # Create the body of the message (a plain-text and an HTML version).
+    text = "Hi!\nHow are you?\nHere is the link you wanted:\nhttp://www.python.org"
+    mailFormatter: MailFormatter = MailFormatter(username)
+    html = mailFormatter.formatted_html()
+
+    # Record the MIME types of both parts - text/plain and text/html.
+    part1 = MIMEText(text, 'plain')
+    part2 = MIMEText(html, 'html')
+
+    # Attach parts into message container.
+    # According to RFC 2046, the last part of a multipart message, in this case
+    # the HTML message, is best and preferred.
+    msg.attach(part1)
+    msg.attach(part2)
+
+    LogFactory.MAIN_LOG.info(f"Sending email to {toEmail}, with subject {subject}")
+    self.start_smtp_session()
+    self.smtp_client.sendmail(self.from_user, toEmail, msg.as_string())
+    self.end_smtp_session()
