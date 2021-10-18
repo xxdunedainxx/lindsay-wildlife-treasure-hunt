@@ -1,151 +1,15 @@
 import React from 'react';
 import GameController from '../../src/game/Game';
-import BarcodeScannerComponent from "react-webcam-barcode-scanner";
+
+import TopMessage from './TopMessage';
+import ScanDisplay from './ScanDisplay';
+import HintDisplay from './HintDisplay';
+import AnswerDisplay from './AnswerDisplay';
+import ManualEntryDisplay from './ManualEntryDisplay';
 
 import './GameDisplay.css';
 
-function TopMessage(props) {
-  if(props.gameStarted === false) {
-    return(
-      <div className="top-message">Let's get started!<br/>
-        <button
-          className="game-start-button"
-          onClick = {() => props.startGameButton()}
-        >
-          Start Game
-        </button>
-      </div>
-    );
-  } else if(props.currentLevel >= 0 && props.lastGuessIncorrect === false) {
-    return(
-      <div className="top-message">
-        <DisplayCurrentLevel
-          currentLevel={props.currentLevel}
-        /><br/>
-        Not quite, let's try again.
-      </div>
-    );
-  } else if(props.currentLevel > 1 && props.lastGuessIncorrect === true) {
-    return(
-      <div className="top-message">
-        <DisplayCurrentLevel
-          currentLevel={props.currentLevel}
-        /><br/>
-        Nailed it!<br/>
-      </div>
-    );
-  } else {
-    return(
-      <div className="top-message">
-        <DisplayCurrentLevel
-          currentLevel={props.currentLevel}
-        /><br/>
-      </div>
-    );
-  }
-}
-
-function DisplayCurrentLevel(props) {
-  return(
-    <div className="current-level-text">
-      Current level: {props.currentLevel}
-    </div>
-  );
-}
-
-function ReadyToScanButton(props) {
-  const buttonDisplay = props.scannerOpen ? "Close scanner" : "Open scanner";
-  return(
-    <button
-      onClick={props.onClick}
-    >
-      {buttonDisplay}
-    </button>
-  );
-}
-
-function BarcodeScanner(props) {
-  return(
-    <BarcodeScannerComponent
-      width={500}
-      height={500}
-      onUpdate={(err, result) => {
-        props.qrScannerUpdate(result)
-      }}
-    />
-  )
-}
-
-function DisplayCurrentHint(props) {
-  return(
-    <div className="hint-text">
-      What's brown and lives in the woods?
-    </div>
-  )
-}
-
-class ScanDisplay extends React.Component {
-
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    if(this.props.readyForBarcode) {
-      if(this.props.scannerOpen === false) {
-        return(
-          <div className="scanner-container">
-            <ReadyToScanButton
-              onClick={this.props.readyToScanButtonClick}
-              scannerOpen={this.props.scannerOpen}
-            />
-          </div>
-        );
-      } else {
-        return(
-          <div className="scanner-container">
-            <ReadyToScanButton
-              onClick={this.props.readyToScanButtonClick}
-              scannerOpen={this.props.scannerOpen}
-            />
-            <BarcodeScanner
-              qrScannerUpdate={this.props.qrScannerUpdate}
-            />
-          </div>
-        );
-      }
-      
-    }
-    return(
-        null
-    );
-  }
-}
-
-class HintDisplay extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-
-    }
-  }
-
-  render() {
-    if(this.props.gameStarted) {
-      return(
-        <DisplayCurrentHint
-          currentLevel={this.props.currentLevel}
-        />
-      );
-    }
-    else {
-      return(null);
-    }
-  }
-
-}
-
+// Display Daddy
 export class GameDisplay extends React.Component {
 
   constructor(props) {
@@ -153,12 +17,20 @@ export class GameDisplay extends React.Component {
     this.state = {
       gameStarted: GameController.gameState.gameStarted,
       currentLevel: GameController.gameState.currentLevel,
-      lastGuessIncorrect: (GameController.gameState.attemptsOnCurrentLevel > 0)
-                        ? true : false,
-      currentChoice: '',
-      currentHint: GameController.getHint(GameController.gameState.currentLevel),
-      readyForBarcode: false,
+      displayAnswer: (GameController.gameState.gameStarted ? GameController.getCorrectAnswerOnCurrentLevel() : false),
+      lastGuessWrong: ((GameController.gameState.attemptsOnCurrentLevel > 0) ? true : false),
+      attempts: (GameController.gameState.gameStarted ? GameController.gameState.attemptsOnCurrentLevel : 0),
+      currentGuess: '',
+      currentClue: (GameController.gameState.gameStarted ? GameController.getClue(GameController.gameState.currentArtifactIdInSequence) : ''),
+      extraHint: (GameController.gameState.gameStarted ? GameController.getExtraHint(GameController.gameState.currentArtifactIdInSequence) : ''),
+      displayExtraHint: false,
+      artifactName: (GameController.gameState.gameStarted ? GameController.getArtifactName(GameController.gameState.currentArtifactIdInSequence) : ''),
+      artifactText: (GameController.gameState.gameStarted ? GameController.getArtifactText(GameController.gameState.currentArtifactIdInSequence) : ''),
+      artifactMediaUrl: (GameController.gameState.gameStarted ? GameController.getArtifactMediaUrl(GameController.gameState.currentArtifactIdInSequence) : ''),
+      readyForBarcode: GameController.gameState.gameStarted,
+      numberOfArtifacts: GameController.getNumberOfArtifacts(),
       scannerOpen: false,
+      manualEntryMode: false,
     }
   }
 
@@ -167,19 +39,35 @@ export class GameDisplay extends React.Component {
       {
         gameStarted: GameController.gameState.gameStarted,
         currentLevel: GameController.gameState.currentLevel,
-        lastGuessCorrect: (GameController.gameState.attemptsOnCurrentLevel === 0)
-                          ? true : false,
-        currentHint: GameController.getHint(GameController.gameState.currentLevel),
+        displayAnswer: (GameController.gameState.gameStarted ? GameController.getCorrectAnswerOnCurrentLevel() : false),
+        lastGuessWrong: ((GameController.gameState.attemptsOnCurrentLevel > 0) ? true : false),
+        attempts: (GameController.gameState.gameStarted ? GameController.gameState.attemptsOnCurrentLevel : 0),
+        currentGuess: '',
+        currentClue: (GameController.gameState.gameStarted ? GameController.getClue(GameController.gameState.currentArtifactIdInSequence) : ''),
+        extraHint: (GameController.gameState.gameStarted ? GameController.getExtraHint(GameController.gameState.currentArtifactIdInSequence) : ''),
+        artifactName: (GameController.gameState.gameStarted ? GameController.getArtifactName(GameController.gameState.currentArtifactIdInSequence) : ''),
+        artifactText: (GameController.gameState.gameStarted ? GameController.getArtifactText(GameController.gameState.currentArtifactIdInSequence) : ''),
+        artifactMediaUrl: (GameController.gameState.gameStarted ? GameController.getArtifactMediaUrl(GameController.gameState.currentArtifactIdInSequence) : ''),
+        readyForBarcode: GameController.gameState.gameStarted,
+        numberOfArtifacts: GameController.getNumberOfArtifacts(),
       }
     )
   }
 
   startGameButton() {
     GameController.startGame();
+    this.updateGameState();
     this.setState({
-      gameStarted: GameController.gameState.gameStarted,
-      currentLevel: GameController.gameState.currentLevel,
       readyForBarcode: true,        
+    })
+  }
+
+  resetGame() {
+    GameController.resetGame();
+    this.updateGameState();
+    this.setState({
+      readyForBarcode: false,
+      manualEntryMode: false,     
     })
   }
 
@@ -187,26 +75,83 @@ export class GameDisplay extends React.Component {
     if (result) {
       this.setState(
         {
-          currentChoice: result.text,
+          currentGuess: result.text,
           scannerOpen: false,
         }
       );
+      this.checkAnswer(this.state.currentGuess)
+      this.updateGameState();
     }
-    else {
-      this.setState(
-        {
-          currentChoice: '',
-        }
-      );
-    }
-    let isCorrect = GameController.checkAnswer(this.state.currentChoice)
-    this.updateGameState();
   }
 
-  readyToScanButtonClick() {
+  readyToScanButton() {
     this.setState({
       scannerOpen: !this.state.scannerOpen
     })
+  }
+
+  nextLevelButton() {
+    GameController.nextLevel();
+    GameController.saveState();
+    this.setState({
+      displayAnswer: false,
+      displayExtraHint: false,
+    });
+    this.updateGameState();
+  }
+
+  extraHintButton() {
+    this.setState({
+      displayExtraHint: true,
+    })
+  }
+
+  checkAnswer() {
+    GameController.checkAnswer(this.state.currentGuess);
+    this.updateGameState();
+  }
+
+  manualEntryTextSubmitButton(e) {
+    const textField = document.getElementById("manual-entry-text-field");
+    this.state.currentGuess = textField.value.toLowerCase();
+    textField.value = '';
+    this.checkAnswer();
+  }
+
+  manualEntryModeButton() {
+    this.setState({
+      manualEntryMode: !this.state.manualEntryMode,
+    })
+  }
+
+  getAnswerButton() {
+    GameController.correctAnswer();
+    GameController.saveState();
+    this.updateGameState();
+    this.setState({
+      scannerOpen: false,
+      displayAnswer: true,
+      displayExtraHint: false,
+    })
+  }
+
+  debugCorrectAnswerButton() {
+    GameController.correctAnswer();
+    GameController.saveState();
+    this.updateGameState();
+    this.setState({
+      scannerOpen: false,
+      displayAnswer: true,
+      displayExtraHint: false,
+    })
+  }
+
+  debugWrongAnswerButton() {
+    this.setState({
+      scannerOpen: false,
+    })
+    GameController.wrongAnswer();
+    this.updateGameState();
   }
 
   render(){
@@ -215,22 +160,65 @@ export class GameDisplay extends React.Component {
         <TopMessage
           gameStarted={this.state.gameStarted}
           currentLevel={this.state.currentLevel}
-          lastGuessIncorrect={this.state.lastGuessCorrect}
+          displayAnswer={this.state.displayAnswer}
+          lastGuessWrong={this.state.lastGuessWrong}
+          attempts={this.state.attempts}
           startGameButton={this.startGameButton.bind(this)}
-          qrScannerUpdate={this.qrScannerUpdate.bind(this)}
         />
         <HintDisplay
           gameStarted={this.state.gameStarted}
+          displayAnswer={this.state.displayAnswer}
           currentLevel={this.state.currentLevel}
+          currentClue={this.state.currentClue}
+          lastGuessWrong={this.state.lastGuessWrong}
+          extraHint={this.state.extraHint}
+          extraHintButton={this.extraHintButton.bind(this)}
+          displayExtraHint={this.state.displayExtraHint}
+          attempts={this.state.attempts}
+          getAnswerButton={this.getAnswerButton.bind(this)}
+        />
+        <AnswerDisplay
+          displayAnswer={this.state.displayAnswer}
+          nextLevelButton={this.nextLevelButton.bind(this)}
+          artifactName={this.state.artifactName}
+          artifactText={this.state.artifactText}
+          artifactMediaUrl={this.state.artifactMediaUrl}
         />
         <ScanDisplay
+          qrScannerUpdate={this}
           readyForBarcode={this.state.readyForBarcode}
+          displayAnswer={this.state.displayAnswer}
           scannerOpen={this.state.scannerOpen}
-          readyToScanButtonClick={this.readyToScanButtonClick.bind(this)}
+          readyToScanButton={this.readyToScanButton.bind(this)}
+          debugCorrectAnswerButton={this.debugCorrectAnswerButton.bind(this)}
+          debugWrongAnswerButton={this.debugWrongAnswerButton.bind(this)}
+          manualEntryMode={this.state.manualEntryMode}
+        />
+        <ManualEntryDisplay
+          gameStarted={this.state.gameStarted}
+          displayAnswer={this.state.displayAnswer}
+          manualEntryMode={this.state.manualEntryMode}
+          manualEntryTextSubmitButton={this.manualEntryTextSubmitButton.bind(this)}
+          manualEntryModeButton={this.manualEntryModeButton.bind(this)}
+        />
+        <br/><br/>
+        <ResetGameButton
+          onClick={this.resetGame.bind(this)}
         />
       </div>
     );
   }
+}
+
+// Misc Components
+function ResetGameButton(props) {
+  return(
+    <button
+      onClick={props.onClick}
+    >
+      Reset Game
+    </button>
+  )
 }
 
 export default GameDisplay;
