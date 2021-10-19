@@ -39,3 +39,4 @@ echo "Publishing util scripts"
 scp -v -i "${SSH_KEY_PATH}" "deployment/setup/install_new_images.sh" "ec2-user@${AWS_EC2_INSTANCE}":~/
 scp -v -i "${SSH_KEY_PATH}" "deployment/setup/docker_setup.sh" "ec2-user@${AWS_EC2_INSTANCE}":~/
 scp -v -i "${SSH_KEY_PATH}" "run.sh" "ec2-user@${AWS_EC2_INSTANCE}":~/
+scp -v -i "${SSH_KEY_PATH}" "prod.conf.json" "ec2-user@${AWS_EC2_INSTANCE}":~/

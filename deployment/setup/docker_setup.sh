@@ -15,5 +15,5 @@ function setupDockerCompose(){
   docker-compose version
 }
 
-setupDocker
-setupDockerCompose
+which docker || setupDocker
+which docker-compose || setupDockerCompose

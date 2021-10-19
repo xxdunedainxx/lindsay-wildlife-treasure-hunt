@@ -4,6 +4,3 @@
 * Domain for ALB
 * SSL cert requested by CA - request ACM cert
   ** approve ACM cert via dns
-
-
-deploy script gets stuck on .configure npm cache file (possibly due to locking??)
