@@ -5,13 +5,13 @@
     "remoteLoggingEnabled": false
   },
   "backend" : {
-    "ssl"  : false,
-    "host" : "0.0.0.0",
+    "ssl"  : true,
+    "host" : "lindsay-wildlife-apps.zee-aws.net",
     "hostRoute" : "/backend",
     "appHealthPort" : 9090,
-    "port" : 80
+    "port" : 443
   },
   "dev" : {
-    "mockData" : true
+    "mockData" : false
   }
 }

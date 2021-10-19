@@ -33,7 +33,7 @@ function buildRedis(){
 function buildNginxIngress(){
   log "build ingress"
   cd infrastructure/nginx-ingress
-  docker build . -f Dockerfile.NginxIngress -t lindsay-ingress
+  docker build -o type=local,dest=./test.tar . -f Dockerfile.NginxIngress -t lindsay-ingress
   cd $HOME
 }
 
