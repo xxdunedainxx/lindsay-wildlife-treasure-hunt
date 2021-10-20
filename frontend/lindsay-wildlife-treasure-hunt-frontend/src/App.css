@@ -1,6 +1,7 @@
 .App {
   text-align: center;
-  font-family: 'Courier New';
+  /* Stag for headers? */
+  font-family: 'Avenir';
 }
 
 .App-logo {
@@ -14,15 +15,18 @@
   }
 }
 
+#appRouter {
+    display: inline-block;
+}
+
 .App-header {
-  background-color: #282c34;
   min-height: 100vh;
-  display: flex;
+  /*display: flex;*/
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #7a726f;
 }
 
 .App-link {

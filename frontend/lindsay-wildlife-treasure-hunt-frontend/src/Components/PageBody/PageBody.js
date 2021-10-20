@@ -11,7 +11,7 @@ export class PageBody extends React.Component {
     return (
       <div>
         <h1>
-        Lindsay Wildlife Experience
+        Lindsay Wildlife Treasure Hunt :)
         </h1>
         </div>
     );
