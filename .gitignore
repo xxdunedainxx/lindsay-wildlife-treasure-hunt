@@ -1,8 +1,14 @@
+# Deploy tmp files
+deployment/INSTANCE.txt
+deployment/SSH_KEY_PATH.txt
+deployment/images
+
 # configs
 prod.conf.json
 conf.json
 .DS_Store
 backend/PRIMARY.PID
+
 # Ignore temp directories used for things like qr scans
 **/tmp/
 __pycache__
