@@ -8,7 +8,7 @@ import {
 import './Nav.css';
 import lindsayLogo from '../../assets/lwe-logo.png'
 
-export class Nav extends React.Component {
+export class MobileNav extends React.Component {
 
   constructor(props) {
     super(props)
@@ -18,32 +18,20 @@ export class Nav extends React.Component {
 
   render(){
     return (
-      <div id="navContainer">
-        <ul id="nav">
-          <li>
-            <Link to="/ui/home">
-              <div id="lindsayLogoNav">
-                <img src={lindsayLogo} alt="Logo" />
-              </div>
-            </Link>
-          </li>
+      <div>
+        <ul>
           <li>
               <Link to="/ui/about">
-                <div className="divText">
+                <div className="mobileItemText">
                   About
                 </div>
               </Link>
           </li>
           <li>
             <Link to="/ui/report">
-              <div className="divText">
+              <div className="mobileItemText">
                 Report a bug
               </div>
-            </Link>
-          </li>
-          <li id="navHamburger">
-            <Link to="/ui/mobileNav">
-              ☰
             </Link>
           </li>
         </ul>
@@ -52,4 +40,4 @@ export class Nav extends React.Component {
   }
 }
 
-export default Nav;
+export default MobileNav;
