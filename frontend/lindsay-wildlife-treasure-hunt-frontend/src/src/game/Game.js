@@ -5,8 +5,7 @@
 import Logger from '../util/Logger';
 import Session from "../util/Session";
 
-// placeholder values
-const lastLevel = 10
+// Const values
 const maxIncorrectAttempts = 3
 
 export class GameController {
@@ -27,6 +26,7 @@ export class GameController {
     "attemptsOnCurrentLevel": 0,
     "correctAnswerOnCurrentLevel": false,
     "gameSequence": null,
+    "gameComplete": false,
     "gameInfo" : {
 
     }
@@ -91,7 +91,7 @@ export class GameController {
     }
     // else complete game
     else {
-
+      GameController.gameState.gameComplete = true;
     }
   }
 
