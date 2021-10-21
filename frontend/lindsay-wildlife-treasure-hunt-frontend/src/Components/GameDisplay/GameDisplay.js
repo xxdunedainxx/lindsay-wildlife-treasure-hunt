@@ -12,8 +12,10 @@ import './GameDisplay.css';
 // Display Daddy
 export class GameDisplay extends React.Component {
 
+
   constructor(props) {
     super(props)
+    GameController.loadSessionData();
     this.state = {
       gameStarted: GameController.gameState.gameStarted,
       currentLevel: GameController.gameState.currentLevel,
