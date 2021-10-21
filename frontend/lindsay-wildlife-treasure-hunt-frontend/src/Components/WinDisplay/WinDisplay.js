@@ -5,6 +5,7 @@ export class WinDisplay extends React.Component {
 
     constructor(props) {
         super(props)
+        GameController.loadSessionData()
 
         this.state = {
             gameComplete: GameController.gameState.gameComplete,
@@ -30,7 +31,7 @@ export class WinDisplay extends React.Component {
                     <h3>Oops!</h3><br/>
                     <p>Something went wrong.</p><br/>
                     <h6>Did you get here by mistake?</h6><br/>
-                    <link to='/ui/game'></link>
+                    <a href='/ui/game'>Back to the game</a>
                 </div>
             )
         }
