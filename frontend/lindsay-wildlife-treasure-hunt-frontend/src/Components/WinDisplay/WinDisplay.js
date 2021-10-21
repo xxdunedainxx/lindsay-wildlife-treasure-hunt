@@ -30,7 +30,7 @@ export class WinDisplay extends React.Component {
                     <h3>Oops!</h3><br/>
                     <p>Something went wrong.</p><br/>
                     <h6>Did you get here by mistake?</h6><br/>
-                    <link to='/game'>Return to Game</link>
+                    <link to='/ui/game'></link>
                 </div>
             )
         }
@@ -179,7 +179,7 @@ class RestartGameDisplay extends React.Component {
         GameController.resetGame();
         GameController.gameState.gameComplete = false;
         GameController.saveState();
-        window.location.href = '/game';
+        window.location.href = '/ui/game';
     }
 
     render() {

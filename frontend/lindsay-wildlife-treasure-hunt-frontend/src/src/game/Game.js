@@ -6,7 +6,6 @@ import Logger from '../util/Logger';
 import Session from "../util/Session";
 
 // placeholder values
-const lastLevel = 10
 const maxIncorrectAttempts = 3
 
 export class GameController {
