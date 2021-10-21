@@ -24,7 +24,14 @@ export class Session {
   }
 
   static SetSessionData(data) {
+    data['sessionID'] = Session.GenerateSessionID()
     localStorage.setItem(Session.sessionKey, JSON.stringify(data))
+  }
+
+  static GenerateSessionID(){
+    var sessionsID=(Math.random() + 1).toString(36).replace('.','');
+    Logger.info(`Session ID for this session: ${sessionsID}`);
+    return sessionsID;
   }
 }
 

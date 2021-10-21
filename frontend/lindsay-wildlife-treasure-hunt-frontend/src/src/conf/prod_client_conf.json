@@ -1,7 +1,7 @@
 {
   "headers" : ["test"],
   "logging" : {
-    "level" : "DEBUG",
+    "level" : "INFO",
     "remoteLoggingEnabled": false
   },
   "backend" : {
