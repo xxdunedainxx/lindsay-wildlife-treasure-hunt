@@ -19,6 +19,7 @@ class LogRotationJob:
     AppHealthStatusUtil.write_status(ServiceNames.logRotation, AppHealthStatus.BUSY)
     Setup.init_thread_resources()
     LogFactory.MAIN_LOG.info(f"scheduling log rotation job for every {CONF_INSTANCE.LOG_ROTATION_JOB_INTERVAL_MINUTES} minute(s)")
+    LogRotationJob.create_archive_dir()
     Cron.run_every_x_minutes(LogRotationJob.rotate_logs, CONF_INSTANCE.LOG_ROTATION_JOB_INTERVAL_MINUTES)
     AppHealthStatusUtil.write_status(ServiceNames.logRotation, AppHealthStatus.HEALTHY)
     Cron.execute_jobs()
@@ -54,4 +55,8 @@ class LogRotationJob:
       if diff >= CONF_INSTANCE.LOG_ROTATION_JOB_EXPIRATION_DAYS:
         LogFactory.MAIN_LOG.info(f"Deleting log file {fullPath}")
         FileIO.delete_file(fullPath)
+
+  @staticmethod
+  def create_archive_dir():
+    FileIO.create_directory_if_does_not_exist(CONF_INSTANCE.LOG_ROTATION_JOB_ARCHIVE_DIR)
 
