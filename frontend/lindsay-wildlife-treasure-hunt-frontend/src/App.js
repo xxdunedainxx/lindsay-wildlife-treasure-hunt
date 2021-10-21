@@ -1,5 +1,4 @@
 import './App.css';
-import './assets/css/nav.css';
 import {
   BrowserRouter as Router,
   Switch,
@@ -27,7 +26,7 @@ import {ReportBugPage} from './Components/pages/report/ReportBugPageComponent';
 
 function App() {
   Setup.Run()
-  Logger.info("START REACT APP")
+  Logger.info("START REACT APP", true)
   Logger.info(Configuration)
   var headers = Configuration.headers
   // var appHealthClient = new AppHealthClient(Configuration.healthEndpoint)

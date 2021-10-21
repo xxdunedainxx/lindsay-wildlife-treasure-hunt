@@ -1,0 +1,3 @@
+curl -X POST http://localhost/quilogs \
+   -H 'Content-Type: application/json' \
+   -d '{"logData":"INFO: some data","sessionID":"someID", "deviceInfo": "mac", "version": "1337"}'
