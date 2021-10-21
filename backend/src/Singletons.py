@@ -1,5 +1,6 @@
 from src.Mail.SMTP import SMTP
 from src.Mail.MailQ import MailQ
+from src.UILogging.UILogQueue import UILogQueue
 from src.data.db_client.DBClient import DBClient
 from src.data.db_client.JsonDB import JsonDB
 from src.Configuration import Configuration, CONF_INSTANCE
@@ -10,12 +11,19 @@ class Singletons:
   smtp: SMTP = None
   mailQ: MailQ = None
   db: DBClient = None
+  uiLogQ: UILogQueue = None
 
   @staticmethod
   def generate_singletons():
     Singletons.generate_smtp_client()
     Singletons.generate_mail_q()
     Singletons.generate_db_connection()
+    Singletons.generate_ui_log_queue()
+
+  @staticmethod
+  def generate_ui_log_queue():
+    LogFactory.MAIN_LOG.info('generating smtp client queue')
+    Singletons.uiLogQ = UILogQueue.get_ui_log_queue()
 
   @staticmethod
   def generate_smtp_client():
@@ -26,6 +34,8 @@ class Singletons:
       server=CONF_INSTANCE.SMTP_SERVER,
       port=CONF_INSTANCE.SMTP_PORT
     )
+
+
 
   @staticmethod
   def generate_mail_q():

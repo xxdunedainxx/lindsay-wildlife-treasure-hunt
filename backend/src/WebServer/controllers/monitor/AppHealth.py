@@ -23,12 +23,14 @@ class AppHealthController:
     try:
       LogFactory.MAIN_LOG.info("Fetching app health")
       return {
-        "status" : AppHealthStatusUtil.determine_health_status()
+        "status" : AppHealthStatusUtil.determine_health_status(),
+        "version": CONF_INSTANCE.VERSION
       }
     except Exception as e:
       LogFactory.MAIN_LOG.error(f"Failed Fetching app health {errorStackTrace(e)}")
       return {
-        "status" : AppHealthStatus.FATAL
+        "status" : AppHealthStatus.FATAL,
+        "version": CONF_INSTANCE.VERSION
       }, 500
 
   @staticmethod
@@ -44,10 +46,12 @@ class AppHealthController:
 
       return {
         "dependencies": AppHealthStatusUtil.get_enabled_services(),
-        "statuses" : serviceStatuses
+        "statuses" : serviceStatuses,
+        "version"  : CONF_INSTANCE.VERSION
       }
     except Exception as e:
       LogFactory.MAIN_LOG.error(f"Failed fetching db {errorStackTrace(e)}")
       return {
-               "status": AppHealthStatus.UNKNOWN
-             }, 500
+         "status": AppHealthStatus.UNKNOWN,
+         "version": CONF_INSTANCE.VERSION
+       }, 500

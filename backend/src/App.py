@@ -7,6 +7,7 @@ from src.Setup import Setup
 from src.MultiThreading.ThreadPool import WorkerPool
 from src.MultiThreading.jobs.MailerJob import MailerJob
 from src.MultiThreading.jobs.LogRotationJob import LogRotationJob
+from src.MultiThreading.jobs.UILoggerJob import UILoggerJob
 
 class App:
 
@@ -21,6 +22,7 @@ class App:
 
     self.init_smtp_mailer_job()
     self.init_log_rotation_job()
+    self.init_ui_logger_job()
 
   def run(self):
     self.init_cron_jobs()
@@ -68,4 +70,13 @@ class App:
     )
 
     self.smtp_mailer_worker.run()
-    
+
+  def init_ui_logger_job(self):
+    self.ui_logger_queue: WorkerPool = WorkerPool(
+      poolName=ServiceNames.uiLogger,
+      size=1,
+      poolType="default",
+      targetMethod=UILoggerJob.ui_logger_job
+    )
+
+    self.ui_logger_queue.run()

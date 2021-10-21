@@ -12,7 +12,8 @@ class RedisClient:
       'thread_pool': 0,
       'client_logger' : 1,
       RedisClientConfig.MailQDB  : 2,
-      'testDB': 3
+      'testDB': 3,
+      RedisClientConfig.UILogQueue: 4,
     }
     _logger = None
     clientType: str = 'base'
@@ -21,7 +22,7 @@ class RedisClient:
     def __init__(self, config: RedisClientConfig, clientType: str = 'base'):
         self.clientType = clientType
         self.__init_logger()
-        self._logger.info(f"Establishing redis connection {config.host}:{config.port}")
+        self._logger.info(f"Establishing redis connection {config.host}:{config.port}, with client config {config}")
         self.redis_connection: redis.Redis = redis.Redis(host=config.host, port=config.port, db=RedisClient.REDIS_DBS[config.db_name], charset='utf-8', decode_responses=True, socket_connect_timeout=1)
         self.health_check()
         self._logger.info('connection established!')

@@ -17,7 +17,8 @@ class Configuration:
       ServiceNames.jsLogs : False,
       ServiceNames.apiServer : True,
       ServiceNames.logRotation: True,
-      ServiceNames.redis: True
+      ServiceNames.redis: True,
+      ServiceNames.uiLogger: True
     },
     "PRODUCTION_ENVIRONMENT" : False,
     "DATABASE_ENGINE" : "json",
@@ -28,7 +29,9 @@ class Configuration:
     # Default once a day
     "LOG_ROTATION_JOB_INTERVAL_MINUTES" : 1440,
     "LOG_ROTATION_JOB_EXPIRATION_DAYS"  : 1,
-    "LOG_ROTATION_JOB_ARCHIVE_DIR"      : f"archive{os.sep}"
+    "LOG_ROTATION_JOB_ARCHIVE_DIR"      : f"archive{os.sep}",
+    "UI_LOGGING_JOB_INTERVAL_MINUTES" : 1,
+    "UI_LOGGING_JOB_LOGS_PER_JOB"     : 50,
   }
 
   def __init__(self):
@@ -67,6 +70,12 @@ class Configuration:
     self.LOG_ROTATION_JOB_INTERVAL_MINUTES: int = self.__get_value("LOG_ROTATION_JOB_INTERVAL_MINUTES")
     self.LOG_ROTATION_JOB_EXPIRATION_DAYS: int = self.__get_value("LOG_ROTATION_JOB_EXPIRATION_DAYS")
     self.LOG_ROTATION_JOB_ARCHIVE_DIR: str = self.__get_value("LOG_ROTATION_JOB_ARCHIVE_DIR")
+
+    # UI Logger Job configs
+    self.UI_LOGGING_JOB_INTERVAL_MINUTES: int = self.__get_value("UI_LOGGING_JOB_INTERVAL_MINUTES")
+    self.UI_LOGGING_JOB_LOGS_PER_JOB: int = self.__get_value("UI_LOGGING_JOB_LOGS_PER_JOB")
+
+
 
 
   def __get_value(self, key: str):

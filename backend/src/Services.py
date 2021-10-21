@@ -4,3 +4,5 @@ class ServiceNames:
   apiServer: str = "api_server"
   logRotation: str = "log_rotator"
   redis: str = 'redis'
+  uiLogger: str = 'ui_logger'
+

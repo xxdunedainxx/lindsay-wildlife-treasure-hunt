@@ -6,7 +6,8 @@ import {
   Link
 } from "react-router-dom";
 import './Nav.css';
-import lindsayLogo from '../../assets/lwe-logo.png'
+import {Version} from './Version';
+import lindsayLogo from '../../assets/lwe-logo-background-white.png'
 
 export class Nav extends React.Component {
 
@@ -20,7 +21,7 @@ export class Nav extends React.Component {
     return (
       <div id="navContainer">
         <ul id="nav">
-          <li>
+          <li id="navLogo">
             <Link to="/ui/home">
               <div id="lindsayLogoNav">
                 <img src={lindsayLogo} alt="Logo" />
@@ -29,22 +30,29 @@ export class Nav extends React.Component {
           </li>
           <li>
               <Link to="/ui/about">
-                <div className="divText">
+                <div className="navText">
                   About
                 </div>
               </Link>
           </li>
           <li>
             <Link to="/ui/report">
-              <div className="divText">
+              <div className="navText">
                 Report a bug
               </div>
             </Link>
           </li>
           <li id="navHamburger">
             <Link to="/ui/mobileNav">
+            <div className="hamburgerText">
               ☰
+            </div>
             </Link>
+          </li>
+          <li id="navVersion">
+            <div className="versionText">
+              <Version />
+            </div>
           </li>
         </ul>
       </div>

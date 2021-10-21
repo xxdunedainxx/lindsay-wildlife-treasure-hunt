@@ -12,8 +12,8 @@ export class GameController {
 
   // if session data exists, loads it
   static Init(){
-    Logger.info('init game controller')
-    Logger.info(`Game controller gameState info ${JSON.stringify(GameController.gameState)}`)
+    Logger.info('init game controller', true)
+    Logger.info(`Game controller gameState info ${JSON.stringify(GameController.gameState)}`, true)
     Session.Init()
     GameController.loadSessionData()
   }
