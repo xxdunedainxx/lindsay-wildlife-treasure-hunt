@@ -31,7 +31,9 @@ export class GameDisplay extends React.Component {
       numberOfArtifacts: GameController.getNumberOfArtifacts(),
       scannerOpen: false,
       manualEntryMode: false,
+      gameComplete: GameController.gameState.gameComplete,
     }
+
   }
 
   updateGameState() {
@@ -50,6 +52,7 @@ export class GameDisplay extends React.Component {
         artifactMediaUrl: (GameController.gameState.gameStarted ? GameController.getArtifactMediaUrl(GameController.gameState.currentArtifactIdInSequence) : ''),
         readyForBarcode: GameController.gameState.gameStarted,
         numberOfArtifacts: GameController.getNumberOfArtifacts(),
+        gameComplete: GameController.gameState.gameComplete,
       }
     )
   }
@@ -60,6 +63,9 @@ export class GameDisplay extends React.Component {
     this.setState({
       readyForBarcode: true,        
     })
+    if(this.state.gameComplete) {
+      window.location.href = '/win';
+    }
   }
 
   resetGame() {
@@ -98,6 +104,9 @@ export class GameDisplay extends React.Component {
       displayExtraHint: false,
     });
     this.updateGameState();
+    if(GameController.gameState.gameComplete) {
+      window.location.href = '/win';
+    }
   }
 
   extraHintButton() {
