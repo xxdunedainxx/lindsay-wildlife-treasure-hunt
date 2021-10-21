@@ -28,7 +28,7 @@ export class ApplicationRouter extends React.Component {
         <Route path='/ui/game' component={GamePage} />
         <Route path='/ui/report' component={ReportBugPage} />
         <Route path='/ui/mobileNav' component={MobileNav} />
-        <Route path='/win' component={WinPage} />
+        <Route path='/ui/win' component={WinPage} />
       </div>
     );
   }

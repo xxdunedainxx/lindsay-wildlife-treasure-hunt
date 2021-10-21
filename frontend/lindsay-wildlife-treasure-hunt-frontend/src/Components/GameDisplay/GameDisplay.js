@@ -64,7 +64,7 @@ export class GameDisplay extends React.Component {
       readyForBarcode: true,        
     })
     if(this.state.gameComplete) {
-      window.location.href = '/win';
+      window.location.href = '/ui/win';
     }
   }
 
@@ -104,8 +104,9 @@ export class GameDisplay extends React.Component {
       displayExtraHint: false,
     });
     this.updateGameState();
+    console.log(GameController.gameState.gameComplete)
     if(GameController.gameState.gameComplete) {
-      window.location.href = '/win';
+      window.location.href = '/ui/win';
     }
   }
 
