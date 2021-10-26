@@ -52,7 +52,8 @@ function ReadyToScanButton(props) {
   const buttonDisplay = props.scannerOpen ? "Close scanner" : "Open scanner";
   return(
       <button
-      onClick={props.onClick}
+        className="game-button open-scanner-button"
+        onClick={props.onClick}
       >
       {buttonDisplay}
       </button>

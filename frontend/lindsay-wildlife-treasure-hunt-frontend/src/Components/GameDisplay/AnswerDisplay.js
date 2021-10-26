@@ -11,14 +11,14 @@ export class AnswerDisplay extends React.Component {
         if(this.props.displayAnswer) {
         return(
             <div className="display-answer-container">
-            <h1 className="artifact-name">
+            <h1 className="game-text artifact-name">
                 {this.props.artifactName}
             </h1>
             <img
                 className="artifact-image"
                 src={this.props.artifactMediaUrl}
             /><br/>
-            <p className="artifact-text">
+            <p className="game-text artifact-text">
                 {this.props.artifactText}
             </p><br/>
             <NextLevelButton

@@ -1,4 +1,50 @@
+/* All components */
+
+.game-text {
+    color: #3a3a31;
+}
+
+.game-button {
+    background-color: rgb(185, 108, 56);
+    border: none;
+    border-radius: 5%;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+/* Top Message */
+
+.welcome-top-msg {
+    text-shadow: 3px 3px 5px gray;
+}
+
+.welcome-sub-msg {
+    font-style: italic;
+}
+
+.game-start-button {
+    padding: 15px 32px;
+}
+
+/* Answer Display */
+
+
 .artifact-image {
     max-width: 50vw;
-    height: auto
+    height: auto;
+    border-radius: 5%;
+    border-style: solid;
+    border-width: 3px;
+    border-color: #3a3a31;
+}
+
+/* Scan Display */
+
+.open-scanner-button {
+    padding: 10px 22px;
+    font-size: 24px;
 }

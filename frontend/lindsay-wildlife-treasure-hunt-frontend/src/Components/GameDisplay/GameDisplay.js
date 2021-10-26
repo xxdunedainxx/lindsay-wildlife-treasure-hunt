@@ -195,6 +195,7 @@ export class GameDisplay extends React.Component {
           artifactText={this.state.artifactText}
           artifactMediaUrl={this.state.artifactMediaUrl}
         />
+        <br/>
         <ScanDisplay
           qrScannerUpdate={this}
           readyForBarcode={this.state.readyForBarcode}
@@ -214,6 +215,7 @@ export class GameDisplay extends React.Component {
         />
         <br/><br/>
         <ResetGameButton
+          gameStarted={this.state.gameStarted}
           onClick={this.resetGame.bind(this)}
         />
       </div>
@@ -223,13 +225,17 @@ export class GameDisplay extends React.Component {
 
 // Misc Components
 function ResetGameButton(props) {
-  return(
-    <button
-      onClick={props.onClick}
-    >
-      Reset Game
-    </button>
-  )
+  if(props.gameStarted === true) {
+    return(
+      <button
+        className="game-button"
+        onClick={props.onClick}
+      >
+        Reset Game
+      </button>
+    )
+  }
+  else return null;
 }
 
 export default GameDisplay;

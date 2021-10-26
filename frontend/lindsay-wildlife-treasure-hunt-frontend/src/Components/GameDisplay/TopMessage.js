@@ -4,11 +4,11 @@ import React from 'react';
 function TopMessage(props) {
     if(props.gameStarted === false) {
       return(
-        <div className="top-message">
-          Welcome to the treasure hunt!<br/>
-          Let's get started.<br/>
+        <div className="game-text top-message">
+          <h1 className="welcome-top-msg">Welcome to the treasure hunt!</h1>
+          <h5 className="welcome-sub-msg">Let's get started.</h5>
           <button
-            className="game-start-button"
+            className="game-button game-start-button"
             onClick = {() => props.startGameButton()}
           >
             Start Game
@@ -22,7 +22,7 @@ function TopMessage(props) {
                          "Another one in the bag!"]
       return(
         <div className="top-message">
-          <h3>{correctMessages[props.currentLevel %correctMessages.length]}</h3>
+          <h3 className="game-text">{correctMessages[props.currentLevel %correctMessages.length]}</h3>
         </div>
       );
     } else if(props.lastGuessWrong === true) {
@@ -32,15 +32,17 @@ function TopMessage(props) {
       return(
         <div className="top-message">
           <DisplayCurrentLevel
+            className="game-text"
             currentLevel={props.currentLevel}
           /><br/>
-          <h3>{incorrectMessages[(props.attempts - 1)%incorrectMessages.length]}</h3><br/>
+          <h3 className="game-text">{incorrectMessages[(props.attempts - 1)%incorrectMessages.length]}</h3><br/>
         </div>
       );
     } else {
       return(
         <div className="top-message">
           <DisplayCurrentLevel
+            className="game-text"
             currentLevel={props.currentLevel}
           /><br/>
         </div>

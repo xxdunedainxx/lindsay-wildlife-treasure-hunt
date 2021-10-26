@@ -100,6 +100,7 @@ function ManualEntryModeButton(props) {
     return(
       <div>
         <button
+          className="game-button"
           onClick={props.onClick}
         >
           {buttonMessage}
