@@ -30,12 +30,11 @@ export class GameDisplay extends React.Component {
       artifactText: (GameController.gameState.gameStarted ? GameController.getArtifactText(GameController.gameState.currentArtifactIdInSequence) : ''),
       artifactMediaUrl: (GameController.gameState.gameStarted ? GameController.getArtifactMediaUrl(GameController.gameState.currentArtifactIdInSequence) : ''),
       readyForBarcode: GameController.gameState.gameStarted,
-      numberOfArtifacts: GameController.getNumberOfArtifacts(),
+      numberOfArtifacts: GameController.gameState.gameStarted ? GameController.getNumberOfArtifacts() : 0,
       scannerOpen: false,
       manualEntryMode: false,
       gameComplete: GameController.gameState.gameComplete,
     }
-
   }
 
   updateGameState() {

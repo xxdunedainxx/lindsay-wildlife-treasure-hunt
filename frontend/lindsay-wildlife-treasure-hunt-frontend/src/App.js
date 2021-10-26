@@ -32,8 +32,7 @@ function App() {
   // var appHealthClient = new AppHealthClient(Configuration.healthEndpoint)
   // appHealthClient.health()
   // appHealthClient.dependencies()
-  var gameControllerClient = new GameControllerClient(Configuration.remoteEndpoint)
-  gameControllerClient.getDb()
+
   return (
 
     <div className="App">
