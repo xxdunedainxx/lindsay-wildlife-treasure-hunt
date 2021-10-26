@@ -13,12 +13,16 @@ export class Session {
     return localStorage.getItem(Session.sessionKey) != null
   }
 
+  static OverrideGameStateSessionData(){
+    Session.SetSessionData(GameController.gameState)
+  }
+
   // loads session data if it exists, otherwise, creates it
   static FetchSessionData(){
     Logger.info('fetching session data')
     if(Session.CheckIfExists() == false) {
       Logger.info('Session data does not exist, setting')
-      Session.SetSessionData(GameController.gameState)
+      Session.OverrideGameStateSessionData()
     }
     return JSON.parse(localStorage.getItem(Session.sessionKey))
   }

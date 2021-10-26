@@ -1,19 +1,26 @@
 import HttpClient from '../HttpClient' 
 
 import Logger from '../../util/Logger';
+import Session from '../../util/Session';
 import Configuration from '../../conf/Configuration';
 import MockData from '../../data/MockData';
 import GameController from '../../game/Game';
 
 class GameControllerClient extends HttpClient {
 
+  static dependentPage = null
+
   constructor(url) {
     super(url)
   }
 
   successfulGetDB(result){
-    GameController.Init()
     GameController.gameState.gameInfo = result
+    Session.OverrideGameStateSessionData()
+    GameController.Init()
+    if(GameControllerClient.dependentPage != null){
+      GameControllerClient.dependentPage.enablePage()
+    }
   }
 
   couldNotGetDB(error){
@@ -25,6 +32,7 @@ class GameControllerClient extends HttpClient {
     if(Configuration.mockData == true){
       GameController.Init()
       GameController.gameState.gameInfo = MockData.exampleMockedDataOne
+      Session.OverrideGameStateSessionData()
     } else {
     return this.get(
       "scavenger_hunt",

@@ -33,6 +33,7 @@ export class GameController {
   }
 
   static startGame() {
+    GameController.loadSessionData()
     GameController.gameState.gameStarted = true;
     GameController.gameState.lastGuess = null;
     GameController.gameState.currentLevel = 1;
