@@ -6,14 +6,16 @@
 
 .game-button {
     background-color: rgb(185, 108, 56);
-    border: none;
-    border-radius: 5%;
+    border: 1px solid #3a3a31;
+    border-radius: 30px;
     color: white;
-    padding: 5px 10px;
+    padding: 10px 15px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    font-weight: bold;
+    box-shadow: 2px 3px dimgray;
 }
 
 /* Top Message */
@@ -26,12 +28,20 @@
     font-style: italic;
 }
 
+.correct-msg {
+    font-style: italic;
+}
+
 .game-start-button {
     padding: 15px 32px;
 }
 
-/* Answer Display */
+.current-level-text {
+    font-family:monospace;
+    text-shadow: 1px 1px 2px gray; 
+}
 
+/* Answer Display */
 
 .artifact-image {
     max-width: 50vw;
@@ -42,9 +52,57 @@
     border-color: #3a3a31;
 }
 
+.artifact-name {
+    border-bottom: 1px;
+}
+
+
+.artifact-text-container {
+    box-sizing: border-box;
+    border-radius: 20px;
+    padding: 10px 20px 15px;
+    margin-left: 6vh;
+    margin-right: 6vh;
+    background: rgba(199, 190, 186, 0.5);
+    font-weight: 600;
+}
+
 /* Scan Display */
 
 .open-scanner-button {
     padding: 10px 22px;
     font-size: 24px;
+}
+
+/* Hint Display */
+
+.clue-text {
+    box-sizing: border-box;
+    border-radius: 20px;
+    padding: 10px 20px 15px;
+    margin-left: 6vh;
+    margin-right: 6vh;
+    margin-bottom: 2vh;
+    background: rgba(199, 190, 186, 0.5);
+    font-weight: 600;
+}
+
+/* Manual Entry Display */
+
+.manual-entry-text {
+    font-style: italic;
+}
+
+.manual-entry-submit{
+    background-color: rgb(185, 108, 56);
+    border: 1px solid #3a3a31;
+    border-radius: 10px;
+    color: white;
+    padding: 3px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 5px;
 }

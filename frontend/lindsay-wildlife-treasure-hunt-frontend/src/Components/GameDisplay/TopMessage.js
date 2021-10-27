@@ -22,7 +22,7 @@ function TopMessage(props) {
                          "Another one in the bag!"]
       return(
         <div className="top-message">
-          <h3 className="game-text">{correctMessages[props.currentLevel %correctMessages.length]}</h3>
+          <h3 className="game-text correct-msg">{correctMessages[props.currentLevel %correctMessages.length]}</h3>
         </div>
       );
     } else if(props.lastGuessWrong === true) {
@@ -34,7 +34,7 @@ function TopMessage(props) {
           <DisplayCurrentLevel
             className="game-text"
             currentLevel={props.currentLevel}
-          /><br/>
+          />
           <h3 className="game-text">{incorrectMessages[(props.attempts - 1)%incorrectMessages.length]}</h3><br/>
         </div>
       );
@@ -44,7 +44,7 @@ function TopMessage(props) {
           <DisplayCurrentLevel
             className="game-text"
             currentLevel={props.currentLevel}
-          /><br/>
+          />
         </div>
       );
     }
@@ -53,8 +53,8 @@ function TopMessage(props) {
   // Top Message Components
   function DisplayCurrentLevel(props) {
     return(
-      <div className="current-level-text">
-        Current level: {props.currentLevel}
+      <div className="current-level-text game-text">
+        <h3>Current Level: {props.currentLevel}</h3>
       </div>
     );
   }

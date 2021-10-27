@@ -6,6 +6,34 @@ class ScanDisplay extends React.Component {
 
     constructor(props) {
       super(props);
+
+      let scannerWidth, scannerHeight;
+
+      this.state = {
+        availWidth: window.innerWidth,
+        availHeight: window.innerHeight,
+        scannerWidth: 500,
+        scannerHeight: 500,
+      }
+    }
+
+    componentDidMount() {
+      window.addEventListener('resize', this.updateWindowSize.bind(this));
+    }
+
+    componentWillUnmount() {
+      window.removeEventListener('resize', this.updateWindowSize.bind(this));
+    }
+
+    updateWindowSize() {
+      console.log("WINDOW: " + window.innerWidth + ", " + window.innerHeight)
+      this.setState({
+        availWidth: window.innerWidth,
+        availHeight: window.innerHeight
+      })
+      if(this.state.availWidth < 640) {
+
+      }
     }
   
     render() {
@@ -21,11 +49,12 @@ class ScanDisplay extends React.Component {
           );
         } else {
           return(
-            <div className="scanner-container">
+            <div className="scanner-display-container">
+              <div className="scanner-container">
               <BarcodeScanner
                 qrScannerUpdate={this.props.qrScannerUpdate}
               />
-              <br/>
+              </div>
               <ReadyToScanButton
                 onClick={this.props.readyToScanButton}
                 scannerOpen={this.props.scannerOpen}

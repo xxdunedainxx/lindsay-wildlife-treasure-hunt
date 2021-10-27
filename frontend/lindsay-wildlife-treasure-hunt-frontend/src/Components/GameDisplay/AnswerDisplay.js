@@ -18,9 +18,12 @@ export class AnswerDisplay extends React.Component {
                 className="artifact-image"
                 src={this.props.artifactMediaUrl}
             /><br/>
-            <p className="game-text artifact-text">
+            <div
+                className="artifact-text-container game-text"
+            >
                 {this.props.artifactText}
-            </p><br/>
+            </div>
+            <br/>
             <NextLevelButton
                 onClick={this.props.nextLevelButton}
             />
@@ -35,6 +38,7 @@ export class AnswerDisplay extends React.Component {
 function NextLevelButton(props) {
     return(
       <button
+        className="game-button"
         onClick={props.onClick}
       >
         Next Level

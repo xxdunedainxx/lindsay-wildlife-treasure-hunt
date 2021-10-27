@@ -36,7 +36,7 @@ class HintDisplay extends React.Component {
 // Hint Display Components
 function DisplayCurrentClue(props) {
     return(
-        <div className="clue-text">
+        <div className="clue-text game-text">
         {props.currentClue}
         </div>
     );
@@ -47,7 +47,8 @@ function DisplayExtraHint(props) {
       if(!props.displayExtraHint) {
       return(
           <button
-          onClick={props.onClick}
+            className="game-button"
+            onClick={props.onClick}
           >Need a hint?</button>
       );
       }

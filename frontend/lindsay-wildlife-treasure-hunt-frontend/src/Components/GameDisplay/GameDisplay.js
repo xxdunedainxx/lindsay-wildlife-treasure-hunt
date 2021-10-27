@@ -195,7 +195,6 @@ export class GameDisplay extends React.Component {
           artifactText={this.state.artifactText}
           artifactMediaUrl={this.state.artifactMediaUrl}
         />
-        <br/>
         <ScanDisplay
           qrScannerUpdate={this}
           readyForBarcode={this.state.readyForBarcode}
