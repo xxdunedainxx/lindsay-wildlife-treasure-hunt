@@ -1,6 +1,14 @@
 import HttpClient from '../HttpClient' 
 
 import Logger from '../../util/Logger';
+import GameController from '../../game/Game';
+
+function deleteProgress() {
+  GameController.resetGame();
+  GameController.gameState.gameComplete = false;
+  GameController.saveState();
+  window.location.href = '/ui/game';
+}
 
 class UserInformationSubmitClient extends HttpClient {
   constructor(url) {
@@ -9,10 +17,14 @@ class UserInformationSubmitClient extends HttpClient {
 
   successfulRequest(result){
     Logger.info("Successful user submission request")
-    if(result.response == 'invalid email') {
+    Logger.info(JSON.stringify(result))
+    if(result.response == 'Invalid Request') {
       alert('invalid email provided.. :(')
+      return false;
     } else{
       alert('you should receive an email with your certificate shortly!')
+      deleteProgress()
+      return  true;
     }
   }
 

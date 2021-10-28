@@ -30,7 +30,7 @@ export class MobileNav extends React.Component {
           <li>
             <Link to="/ui/report">
               <div className="mobileItemText">
-                Report a bug
+                Report an issue
               </div>
             </Link>
           </li>

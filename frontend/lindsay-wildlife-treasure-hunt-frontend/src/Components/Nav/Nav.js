@@ -38,7 +38,7 @@ export class Nav extends React.Component {
           <li>
             <Link to="/ui/report">
               <div className="navText">
-                Report a bug
+                Report an issue
               </div>
             </Link>
           </li>

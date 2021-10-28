@@ -2,6 +2,19 @@ import React from "react";
 import GameController from "../../src/game/Game";
 import './WinDisplay.css'
 
+import './WinDisplay.css';
+
+import Logger from '../../src/util/Logger';
+import UserInformationSubmitClient from '../../src/http/clients/UserInformationSubmitClient';
+import Configuration from '../../src/conf/Configuration';
+
+function deleteProgress() {
+  GameController.resetGame();
+  GameController.gameState.gameComplete = false;
+  GameController.saveState();
+  window.location.href = '/ui/game';
+}
+
 export class WinDisplay extends React.Component {
 
     constructor(props) {
@@ -60,19 +73,31 @@ class GetCertificateDisplay extends React.Component {
         });
     }
 
-    submitEmail() {
+    async submitEmail() {
         const email = document.getElementById("email-input").value;
+        if(!email || email == ''){
+          alert("The 'email' field is required")
+          return
+        }
         let names = [];
         for(let i = 0; i < this.state.numberOfPlayers; i++) {
             const name = document.getElementById("name-input-"+(i+1));
-            if(name && name != '') {
-                names.push(name.value);
+            if(!name || name.value == ''){
+              alert('Please fill out all of the name fields')
+              return
             }
+            names.push(name.value);
         }
-        console.log("submitting email to " + email + " for " + names);
-        return
+        Logger.info("submitting email to " + email + " for " + names);
+        let userSubmitClient = new UserInformationSubmitClient(
+          `${Configuration.remoteEndpoint}`
+        );
+        let goodRequest = await userSubmitClient.submitUserRequest(email, names);
+        console.log(goodRequest)
+        if(goodRequest == true){
+          deleteProgress();
+        }
     }
-
     formPreventDefault(e) {
         e.preventDefault();
         this.submitEmail();
@@ -178,20 +203,13 @@ class RestartGameDisplay extends React.Component {
         })
     }
 
-    deleteProgress() {
-        GameController.resetGame();
-        GameController.gameState.gameComplete = false;
-        GameController.saveState();
-        window.location.href = '/ui/game';
-    }
-
     render() {
         return(
             <div className="restart-game-container">
                 <RestartGameButton
                     restartGameButton={this.restartGameButton.bind(this)}
                     tryAgainClicked={this.state.tryAgainClicked}
-                    deleteProgress={this.deleteProgress.bind(this)}
+                    deleteProgress={deleteProgress.bind(this)}
                 />
             </div>
         );
