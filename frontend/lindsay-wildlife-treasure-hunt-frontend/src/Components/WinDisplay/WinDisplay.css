@@ -1,50 +1,31 @@
-.restart-game-button {
-  background:  #EEAA33; 
-  color: white;
-  border-radius: 10px;
-  padding: 0;
-  height: 50px;
-  width:100%;
-  font-size: xx-large;
+.win-text {
+    color: rgb(122, 114, 111);
+    font-family: 'Avenir', sans-serif;
 }
 
-.delete-progress-button{
-  background:  #EEAA33; 
-  color: white;
-  border-radius: 10px;
-  padding: 0;
-  height: 50px;
-  width:100%;
-  font-size: xx-large;
+.win-button {
+    background-color: rgb(171, 162, 160);
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Verdana', 'Tahoma', 'Arial', sans-serif;
 }
 
-.delete-progress-button:hover {
-  background: #F9C872;
+.cert-button {
+    background: rgb(98, 168, 229);
 }
 
-.restart-game-button:hover {
-  background: #F9C872;
+.num-players-drop-down {
+    border: none;
+    font-size: 22px;
 }
 
-.submitButton:hover {
-  background: #93C2E8;
-}
-
-.submitButton {
-  background: #649dcb;
-  height: 50px;
-  width:100%;
-  color: white;
-  border-radius: 10px;
-  font-size: xx-large;
-}
-
-.win-page-container {
-  background: white;
-  border-radius: 10px;
-}
-
-.win-page-error-container{
-   background: white;
-  border-radius: 10px; 
+.num-players-button {
+    background-color: rgb(151, 169, 38);
 }
