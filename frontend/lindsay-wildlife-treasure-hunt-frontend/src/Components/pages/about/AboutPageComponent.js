@@ -25,7 +25,7 @@ export class AboutPage extends React.Component {
   render(){
     return (
       <div>
-        This application was made in collaboration with Zach McFadden and Roderick McLeod. 
+        This application was made in collaboration with Zach McFadden and Roderick MacLeod. 
         The source code for the treasure hunt can be found <a href="https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt">here</a>!
         <br/>
         <br/>
