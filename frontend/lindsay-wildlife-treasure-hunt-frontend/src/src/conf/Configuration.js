@@ -1,4 +1,4 @@
-import * as confData from './client_conf.json';
+import * as confData from './prod_client_conf.json';
 
 export class Configuration {
   static conf
@@ -10,7 +10,7 @@ export class Configuration {
 
   static Init() {
     console.log(confData)
-    Configuration.version = "0.12.0"
+    Configuration.version = "0.13.0"
     Configuration.logLevel = confData.logging.level
     Configuration.conf = confData
     Configuration.headers = confData.headers
