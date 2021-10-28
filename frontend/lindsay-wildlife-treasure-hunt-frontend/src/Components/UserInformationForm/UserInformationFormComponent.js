@@ -31,6 +31,7 @@ export class UserInformationFormComponent extends React.Component {
   }
 
   handleUsernameChange(event) {
+    console.log(event)
     this.setState(
       {
         usernameValue: event.target.value

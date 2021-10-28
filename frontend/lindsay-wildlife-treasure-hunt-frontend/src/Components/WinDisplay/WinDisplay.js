@@ -1,6 +1,19 @@
 import React from "react";
 import GameController from "../../src/game/Game";
 
+import './WinDisplay.css';
+
+import Logger from '../../src/util/Logger';
+import UserInformationSubmitClient from '../../src/http/clients/UserInformationSubmitClient';
+import Configuration from '../../src/conf/Configuration';
+
+function deleteProgress() {
+  GameController.resetGame();
+  GameController.gameState.gameComplete = false;
+  GameController.saveState();
+  window.location.href = '/ui/game';
+}
+
 export class WinDisplay extends React.Component {
 
     constructor(props) {
@@ -13,14 +26,12 @@ export class WinDisplay extends React.Component {
     }
 
     render(){
-        if(this.state.gameComplete) {
+        if(this.state.gameComplete) { 
             return(
                 <div className="win-page-container">
                     <h2>You Win!</h2>
                     <h4>Now get your certificate of Lindsay Wildlife Experience Scavenger Hunt Mastery!</h4>
                     <GetCertificateDisplay/>
-                    <br/>
-                    <br/>
                     <RestartGameDisplay/>
                 </div>
             );
@@ -59,17 +70,30 @@ class GetCertificateDisplay extends React.Component {
         });
     }
 
-    submitEmail() {
+    async submitEmail() {
         const email = document.getElementById("email-input").value;
+        if(!email || email == ''){
+          alert("The 'email' field is required")
+          return
+        }
         let names = [];
         for(let i = 0; i < this.state.numberOfPlayers; i++) {
             const name = document.getElementById("name-input-"+(i+1));
-            if(name && name != '') {
-                names.push(name.value);
+            if(!name || name.value == ''){
+              alert('Please fill out all of the name fields')
+              return
             }
+            names.push(name.value);
         }
-        console.log("submitting email to " + email + " for " + names);
-        return
+        Logger.info("submitting email to " + email + " for " + names);
+        let userSubmitClient = new UserInformationSubmitClient(
+          `${Configuration.remoteEndpoint}`
+        );
+        let goodRequest = await userSubmitClient.submitUserRequest(email, names);
+        console.log(goodRequest)
+        if(goodRequest == true){
+          deleteProgress();
+        }
     }
 
     formPreventDefault(e) {
@@ -109,7 +133,9 @@ class GetCertificateDisplay extends React.Component {
                             <option value="4">4</option>
                             <option value="5">5</option>
                         </select>
-                        <button
+                        <br />
+                        <br />
+                        <button className="submitButton"
                             onClick={this.submitNumberOfPlayersButton.bind(this)}
                         >Submit</button>
                     </div>
@@ -145,7 +171,7 @@ function EmailForm(props) {
                     id="email-input"
                 ></input><br/>
                 <br/>
-                <button
+                <button className="submitButton"
                     onClick={props.formPreventDefault}
                 >Get Your Certificate(s)!</button>
             </form>
@@ -170,18 +196,12 @@ class RestartGameDisplay extends React.Component {
     } 
 
     restartGameButton() {
-        console.log("hi")
         this.setState({
             tryAgainClicked: true,
         })
     }
 
-    deleteProgress() {
-        GameController.resetGame();
-        GameController.gameState.gameComplete = false;
-        GameController.saveState();
-        window.location.href = '/ui/game';
-    }
+
 
     render() {
         return(
@@ -189,7 +209,7 @@ class RestartGameDisplay extends React.Component {
                 <RestartGameButton
                     restartGameButton={this.restartGameButton.bind(this)}
                     tryAgainClicked={this.state.tryAgainClicked}
-                    deleteProgress={this.deleteProgress.bind(this)}
+                    deleteProgress={deleteProgress.bind(this)}
                 />
             </div>
         );
@@ -203,7 +223,7 @@ function RestartGameButton(props) {
                 className="restart-game-button"
                 onClick={props.restartGameButton}
             >
-                Want to play again?
+              Play Again?
             </button>
         );
     }

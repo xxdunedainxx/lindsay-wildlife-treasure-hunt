@@ -1,0 +1,50 @@
+.restart-game-button {
+  background:  #EEAA33; 
+  color: white;
+  border-radius: 10px;
+  padding: 0;
+  height: 50px;
+  width:100%;
+  font-size: xx-large;
+}
+
+.delete-progress-button{
+  background:  #EEAA33; 
+  color: white;
+  border-radius: 10px;
+  padding: 0;
+  height: 50px;
+  width:100%;
+  font-size: xx-large;
+}
+
+.delete-progress-button:hover {
+  background: #F9C872;
+}
+
+.restart-game-button:hover {
+  background: #F9C872;
+}
+
+.submitButton:hover {
+  background: #93C2E8;
+}
+
+.submitButton {
+  background: #649dcb;
+  height: 50px;
+  width:100%;
+  color: white;
+  border-radius: 10px;
+  font-size: xx-large;
+}
+
+.win-page-container {
+  background: white;
+  border-radius: 10px;
+}
+
+.win-page-error-container{
+   background: white;
+  border-radius: 10px; 
+}
