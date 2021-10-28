@@ -22,7 +22,8 @@
 /* Top Message */
 
 .top-message {
-    padding: 1vh 10vh;
+    margin-top: 3vh;
+    padding: 1vh 5vh 0 5vh;
 }
 
 .welcome-sub-msg {
@@ -38,14 +39,10 @@
     background-color: rgb(98, 168, 229);
 }
 
-.current-level-text {
-
-}
-
 /* Answer Display */
 
 .artifact-image {
-    max-width: 50vw;
+    max-width: 80vw;
     height: auto;
     border-radius: 5%;
     border-style: solid;
@@ -69,6 +66,7 @@
 }
 
 .next-level-button {
+    font-size: 24px;
     background: rgb(151, 169, 38);
 }
 
