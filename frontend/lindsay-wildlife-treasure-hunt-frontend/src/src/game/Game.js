@@ -162,6 +162,10 @@ export class GameController {
     return GameController.gameState.gameInfo.game.GameSequence[artifactId].MediaLink;
   }
 
+  static getArtifactPhotoCredit(artifactId) {
+    return GameController.gameState.gameInfo.game.GameSequence[artifactId].Credit;
+  }
+
   static getCorrectAnswerOnCurrentLevel() {
     return GameController.gameState.correctAnswerOnCurrentLevel;
   }

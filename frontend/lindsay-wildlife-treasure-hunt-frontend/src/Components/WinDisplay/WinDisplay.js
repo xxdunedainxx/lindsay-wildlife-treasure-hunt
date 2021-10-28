@@ -1,5 +1,6 @@
 import React from "react";
 import GameController from "../../src/game/Game";
+import './WinDisplay.css'
 
 export class WinDisplay extends React.Component {
 
@@ -15,7 +16,7 @@ export class WinDisplay extends React.Component {
     render(){
         if(this.state.gameComplete) {
             return(
-                <div className="win-page-container">
+                <div className="win-text win-page-container">
                     <h2>You Win!</h2>
                     <h4>Now get your certificate of Lindsay Wildlife Experience Scavenger Hunt Mastery!</h4>
                     <GetCertificateDisplay/>
@@ -88,7 +89,6 @@ class GetCertificateDisplay extends React.Component {
                         className="get-certificate-container"
                     >
                         <EmailForm
-
                             numberOfPlayers={this.state.numberOfPlayers}
                             formPreventDefault={this.formPreventDefault.bind(this)}
                             onClickPreventDefault={this.formPreventDefault.bind(this)}
@@ -98,9 +98,10 @@ class GetCertificateDisplay extends React.Component {
             }
             else{
                 return(
-                    <div className="get-number-of-players-container">
+                    <div className="win-text get-number-of-players-container">
                         <p>How many players were there? (You'll get a certificate for each one!)</p>
                         <select
+                            className="win-text num-players-drop-down"
                             id="drop-down-num-players"
                         >
                             <option value="1">1</option>
@@ -108,8 +109,9 @@ class GetCertificateDisplay extends React.Component {
                             <option value="3">3</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
-                        </select>
+                        </select>&nbsp;&nbsp;
                         <button
+                            className="win-button num-players-button"
                             onClick={this.submitNumberOfPlayersButton.bind(this)}
                         >Submit</button>
                     </div>
@@ -146,6 +148,7 @@ function EmailForm(props) {
                 ></input><br/>
                 <br/>
                 <button
+                    className="win-button cert-button"
                     onClick={props.formPreventDefault}
                 >Get Your Certificate(s)!</button>
             </form>
@@ -170,7 +173,6 @@ class RestartGameDisplay extends React.Component {
     } 
 
     restartGameButton() {
-        console.log("hi")
         this.setState({
             tryAgainClicked: true,
         })
@@ -200,7 +202,7 @@ function RestartGameButton(props) {
     if(!props.tryAgainClicked) {
         return(
             <button
-                className="restart-game-button"
+                className="win-button restart-game-button"
                 onClick={props.restartGameButton}
             >
                 Want to play again?
@@ -215,7 +217,7 @@ function RestartGameButton(props) {
                     (Make sure you got your certificate!)
                 </p>
                 <button
-                    className="delete-progress-button"
+                    className="win-button delete-progress-button"
                     onClick={props.deleteProgress}
                 >
                     Restart Game
