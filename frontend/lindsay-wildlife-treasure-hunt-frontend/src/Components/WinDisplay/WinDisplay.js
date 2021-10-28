@@ -170,7 +170,6 @@ class RestartGameDisplay extends React.Component {
     } 
 
     restartGameButton() {
-        console.log("hi")
         this.setState({
             tryAgainClicked: true,
         })

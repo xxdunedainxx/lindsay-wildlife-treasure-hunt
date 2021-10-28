@@ -29,6 +29,7 @@ export class GameDisplay extends React.Component {
       artifactName: (GameController.gameState.gameStarted ? GameController.getArtifactName(GameController.gameState.currentArtifactIdInSequence) : ''),
       artifactText: (GameController.gameState.gameStarted ? GameController.getArtifactText(GameController.gameState.currentArtifactIdInSequence) : ''),
       artifactMediaUrl: (GameController.gameState.gameStarted ? GameController.getArtifactMediaUrl(GameController.gameState.currentArtifactIdInSequence) : ''),
+      artifactPhotoCredit: (GameController.gameState.gameStarted ? GameController.getArtifactPhotoCredit(GameController.gameState.currentArtifactIdInSequence) : ''),
       readyForBarcode: GameController.gameState.gameStarted,
       numberOfArtifacts: GameController.gameState.gameStarted ? GameController.getNumberOfArtifacts() : 0,
       scannerOpen: false,
@@ -51,9 +52,11 @@ export class GameDisplay extends React.Component {
         artifactName: (GameController.gameState.gameStarted ? GameController.getArtifactName(GameController.gameState.currentArtifactIdInSequence) : ''),
         artifactText: (GameController.gameState.gameStarted ? GameController.getArtifactText(GameController.gameState.currentArtifactIdInSequence) : ''),
         artifactMediaUrl: (GameController.gameState.gameStarted ? GameController.getArtifactMediaUrl(GameController.gameState.currentArtifactIdInSequence) : ''),
+        artifactPhotoCredit: (GameController.gameState.gameStarted ? GameController.getArtifactPhotoCredit(GameController.gameState.currentArtifactIdInSequence) : ''),
         readyForBarcode: GameController.gameState.gameStarted,
         numberOfArtifacts: GameController.getNumberOfArtifacts(),
         gameComplete: GameController.gameState.gameComplete,
+        tryAgainClicked: false,
       }
     )
   }
@@ -146,6 +149,25 @@ export class GameDisplay extends React.Component {
     })
   }
 
+  restartGameButton() {
+    this.setState({
+        tryAgainClicked: true,
+    })
+  }
+
+  deleteProgress() {
+    GameController.resetGame();
+    GameController.gameState.gameComplete = false;
+    
+    GameController.saveState();
+    this.updateGameState();
+    this.setState({
+      readyForBarcode: false,
+      manualEntryMode: false,  
+      tryAgainClicked: false,   
+    })
+  }
+
   debugCorrectAnswerButton() {
     GameController.correctAnswer();
     GameController.saveState();
@@ -213,9 +235,15 @@ export class GameDisplay extends React.Component {
           manualEntryModeButton={this.manualEntryModeButton.bind(this)}
         />
         <br/><br/>
-        <ResetGameButton
+        <RestartGameDisplay
           gameStarted={this.state.gameStarted}
-          onClick={this.resetGame.bind(this)}
+          restartGameButton={this.restartGameButton.bind(this)}
+          deleteProgress={this.deleteProgress.bind(this)}
+          tryAgainClicked={this.state.tryAgainClicked}
+        /><br/><br/>
+        <PhotoCredit
+          displayAnswer={this.state.displayAnswer}
+          photoCredit={this.state.artifactPhotoCredit}
         />
       </div>
     );
@@ -226,13 +254,70 @@ export class GameDisplay extends React.Component {
 function ResetGameButton(props) {
   if(props.gameStarted === true) {
     return(
-      <button
-        className="game-button"
-        onClick={props.onClick}
-      >
-        Reset Game
-      </button>
+      <RestartGameDisplay/>
     )
+  }
+  else return null;
+}
+
+// Restart Game Display
+
+class RestartGameDisplay extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    if(this.props.gameStarted === true) {
+      return(
+          <div className="restart-game-container">
+              <RestartGameButton
+                  restartGameButton={this.props.restartGameButton}
+                  tryAgainClicked={this.props.tryAgainClicked}
+                  deleteProgress={this.props.deleteProgress.bind(this)}
+              />
+          </div>
+      );
+    }
+    else return null;
+  }
+}
+
+function RestartGameButton(props) {
+  if(!props.tryAgainClicked) {
+      return(
+          <button
+              className="game-button restart-game-button"
+              onClick={props.restartGameButton}
+          >
+              Reset Game
+          </button>
+      );
+  }
+  else {
+      return(
+          <div className="game-text restart-game-button-container">
+                  Are you sure? You'll lose your progress.<br/>
+              <button
+                  className="game-button restart-game-button"
+                  onClick={props.deleteProgress}
+              >
+                  Reset Game
+              </button>
+          </div>
+      );
+  }
+}
+
+// Photo Credit
+
+function PhotoCredit(props) {
+  if(props.displayAnswer) {
+    return(
+      <div className="game-text photo-credit-container">
+        Photo Credit: {props.photoCredit}
+      </div>
+    );
   }
   else return null;
 }

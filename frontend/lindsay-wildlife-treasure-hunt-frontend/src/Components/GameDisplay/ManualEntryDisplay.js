@@ -76,7 +76,7 @@ class ManualEntryField extends React.Component {
           >
           </input>
           <input
-            className="manual-entry-submit"
+            className="game-button manual-entry-submit"
             type="submit"
             value="Submit"
             onSubmit={this.onClickPreventDefault}

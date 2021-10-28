@@ -1,27 +1,28 @@
 /* All components */
 
 .game-text {
-    color: #3a3a31;
+    color: rgb(122, 114, 111);
+    font-family: 'Avenir', sans-serif;
 }
 
 .game-button {
-    background-color: rgb(185, 108, 56);
-    border: 1px solid #3a3a31;
-    border-radius: 30px;
+    background-color: rgb(171, 162, 160);
     color: white;
+    border: none;
+    border-radius: 3px;
     padding: 10px 15px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
     font-weight: bold;
-    box-shadow: 2px 3px dimgray;
+    font-family: 'Verdana', 'Tahoma', 'Arial', sans-serif;
 }
 
 /* Top Message */
 
-.welcome-top-msg {
-    text-shadow: 3px 3px 5px gray;
+.top-message {
+    padding: 1vh 10vh;
 }
 
 .welcome-sub-msg {
@@ -34,11 +35,11 @@
 
 .game-start-button {
     padding: 15px 32px;
+    background-color: rgb(98, 168, 229);
 }
 
 .current-level-text {
-    font-family:monospace;
-    text-shadow: 1px 1px 2px gray; 
+
 }
 
 /* Answer Display */
@@ -54,8 +55,8 @@
 
 .artifact-name {
     border-bottom: 1px;
+    color: rgb(98, 168, 229);
 }
-
 
 .artifact-text-container {
     box-sizing: border-box;
@@ -64,7 +65,11 @@
     margin-left: 6vh;
     margin-right: 6vh;
     background: rgba(199, 190, 186, 0.5);
-    font-weight: 600;
+    font-weight: 400;
+}
+
+.next-level-button {
+    background: rgb(151, 169, 38);
 }
 
 /* Scan Display */
@@ -72,6 +77,7 @@
 .open-scanner-button {
     padding: 10px 22px;
     font-size: 24px;
+    background: rgb(98, 168, 229);
 }
 
 /* Hint Display */
@@ -84,7 +90,7 @@
     margin-right: 6vh;
     margin-bottom: 2vh;
     background: rgba(199, 190, 186, 0.5);
-    font-weight: 600;
+    font-weight: 400;
 }
 
 /* Manual Entry Display */
@@ -94,9 +100,8 @@
 }
 
 .manual-entry-submit{
-    background-color: rgb(185, 108, 56);
-    border: 1px solid #3a3a31;
-    border-radius: 10px;
+    background-color: rgb(98, 168, 229);
+    border: none;
     color: white;
     padding: 3px 5px;
     text-align: center;
@@ -105,4 +110,10 @@
     font-size: 16px;
     font-weight: bold;
     margin-left: 5px;
+}
+
+/* Photo Credit */
+
+.photo-credit-container {
+    font-size: 12px;
 }

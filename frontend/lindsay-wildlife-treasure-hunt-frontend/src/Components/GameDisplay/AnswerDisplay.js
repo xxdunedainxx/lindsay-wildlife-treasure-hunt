@@ -11,9 +11,9 @@ export class AnswerDisplay extends React.Component {
         if(this.props.displayAnswer) {
         return(
             <div className="display-answer-container">
-            <h1 className="game-text artifact-name">
+            <div className="artifact-name-container"><h1 className="game-text artifact-name">
                 {this.props.artifactName}
-            </h1>
+            </h1></div>
             <img
                 className="artifact-image"
                 src={this.props.artifactMediaUrl}
@@ -38,7 +38,7 @@ export class AnswerDisplay extends React.Component {
 function NextLevelButton(props) {
     return(
       <button
-        className="game-button"
+        className="game-button next-level-button"
         onClick={props.onClick}
       >
         Next Level
