@@ -6,6 +6,41 @@ class ScanDisplay extends React.Component {
 
     constructor(props) {
       super(props);
+
+      let scannerWidth, scannerHeight;
+
+      let width, height;
+      if(window.innerWidth < 640) {
+        width = 350;
+        height = 350;
+      }
+      else {
+        width = 500;
+        height = 500;
+      }
+
+      this.state = {
+        availWidth: window.innerWidth,
+        availHeight: window.innerHeight,
+        scannerWidth: width,
+        scannerHeight: height,
+      }
+    }
+
+    componentDidMount() {
+      window.addEventListener('resize', this.updateWindowSize.bind(this));
+    }
+
+    componentWillUnmount() {
+      window.removeEventListener('resize', this.updateWindowSize.bind(this));
+    }
+
+    updateWindowSize() {
+      console.log("WINDOW: " + window.innerWidth + ", " + window.innerHeight)
+      this.setState({
+        availWidth: window.innerWidth,
+        availHeight: window.innerHeight
+      })
     }
   
     render() {
@@ -21,15 +56,18 @@ class ScanDisplay extends React.Component {
           );
         } else {
           return(
-            <div className="scanner-container">
+            <div className="scanner-display-container">
+              <div className="scanner-container">
               <BarcodeScanner
                 qrScannerUpdate={this.props.qrScannerUpdate}
+                scannerWidth = {this.state.scannerWidth}
+                scannerHeight = {this.state.scannerHeight}
               />
-              <br/>
+              </div>
               <ReadyToScanButton
                 onClick={this.props.readyToScanButton}
                 scannerOpen={this.props.scannerOpen}
-              />
+              /><br/>
               <DebugCorrectAnswerButton
                 onClick={this.props.debugCorrectAnswerButton}
               />
@@ -49,10 +87,11 @@ class ScanDisplay extends React.Component {
   
 // Scan Display Components
 function ReadyToScanButton(props) {
-  const buttonDisplay = props.scannerOpen ? "Close scanner" : "Open scanner";
+  const buttonDisplay = props.scannerOpen ? "Close Scanner" : "Open Scanner";
   return(
       <button
-      onClick={props.onClick}
+        className="game-button open-scanner-button"
+        onClick={props.onClick}
       >
       {buttonDisplay}
       </button>
@@ -62,8 +101,8 @@ function ReadyToScanButton(props) {
 function BarcodeScanner(props) {
   return(
       <BarcodeScannerComponent
-        width={500}
-        height={500}
+        width={props.scannerWidth}
+        height={props.scannerHeight}
         onUpdate={(err, result) => {
             props.qrScannerUpdate.qrScannerUpdate(result)
         }}

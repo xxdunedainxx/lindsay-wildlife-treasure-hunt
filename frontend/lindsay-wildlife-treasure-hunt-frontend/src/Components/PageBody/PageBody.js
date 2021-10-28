@@ -10,9 +10,6 @@ export class PageBody extends React.Component {
   render(){
     return (
       <div>
-        <h1>
-        Lindsay Wildlife Treasure Hunt :)
-        </h1>
         </div>
     );
   }

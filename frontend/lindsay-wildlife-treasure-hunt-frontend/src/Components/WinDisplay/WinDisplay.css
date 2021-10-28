@@ -1,0 +1,31 @@
+.win-text {
+    color: rgb(122, 114, 111);
+    font-family: 'Avenir', sans-serif;
+}
+
+.win-button {
+    background-color: rgb(171, 162, 160);
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Verdana', 'Tahoma', 'Arial', sans-serif;
+}
+
+.cert-button {
+    background: rgb(98, 168, 229);
+}
+
+.num-players-drop-down {
+    border: none;
+    font-size: 22px;
+}
+
+.num-players-button {
+    background-color: rgb(151, 169, 38);
+}

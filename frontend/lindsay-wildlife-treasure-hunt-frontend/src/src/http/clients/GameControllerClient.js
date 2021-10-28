@@ -33,6 +33,9 @@ class GameControllerClient extends HttpClient {
       GameController.Init()
       GameController.gameState.gameInfo = MockData.exampleMockedDataOne
       Session.OverrideGameStateSessionData()
+      if(GameControllerClient.dependentPage != null){
+        GameControllerClient.dependentPage.enablePage()
+      }
     } else {
     return this.get(
       "scavenger_hunt",
