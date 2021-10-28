@@ -67,7 +67,7 @@ class ScanDisplay extends React.Component {
               <ReadyToScanButton
                 onClick={this.props.readyToScanButton}
                 scannerOpen={this.props.scannerOpen}
-              />
+              /><br/>
               <DebugCorrectAnswerButton
                 onClick={this.props.debugCorrectAnswerButton}
               />
