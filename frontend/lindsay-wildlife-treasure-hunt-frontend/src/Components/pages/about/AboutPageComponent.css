@@ -1,0 +1,20 @@
+.profilePic {
+  max-width: 20%;
+  border-radius: 60%;
+}
+
+.profile {
+  background-color: white;
+  border-radius: 5px;
+}
+
+.profileName{
+  float: left;
+  padding-left: 5px;
+  font-weight: bold;
+}
+
+.logoContainer{
+  display: inline-block;
+  padding-left: 2.5%;
+}
