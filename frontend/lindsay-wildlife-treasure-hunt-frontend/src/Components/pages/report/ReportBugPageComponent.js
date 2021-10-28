@@ -10,7 +10,7 @@ export class ReportBugPage extends React.Component {
   render(){
     return (
       <div>
-        report a bug
+        Report An Issue:
       </div>
     );
   }

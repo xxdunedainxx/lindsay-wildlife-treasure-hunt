@@ -56,12 +56,19 @@
 }
 
 #nav li:hover {
-  /*background-color: white;*/
   color: black;
   transform: translateY(-10px);
   border-radius: 30px;
   cursor: pointer;
 }
+
+#navVersion:hover {
+  color: white !important;
+  transform: none !important;
+  border-radius: none !important;
+  cursor: none !important;
+}
+
 
 /* Mobile overrides */
 @media only screen and (max-width: 700px) {
