@@ -5,10 +5,10 @@ from src.Configuration import Configuration, CONF_INSTANCE
 from flask import Flask, request, send_from_directory, abort
 flask_ref: Flask = WebServerInit.flask
 
-class RenderHTML:
+class ImageFetcher:
 
   @staticmethod
-  @flask_ref.route('/get-image/<id:image_name>')
+  @flask_ref.route('/get-image/<path:image_name>')
   @http_logger
   def get_image(image_name):
     try:
