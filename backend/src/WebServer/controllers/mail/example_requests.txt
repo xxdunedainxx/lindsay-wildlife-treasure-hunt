@@ -1,0 +1,7 @@
+curl -X POST http://localhost/report \
+   -H 'Content-Type: application/json' \
+   -d '{"message":"something dont work","sessionID":"someID", "deviceInfo": "mac", "version": "1337"}'
+
+ curl -X POST http://localhost/mail \
+   -H 'Content-Type: application/json' \
+   -d '{"email":"zrmmaster92@gmail.com","username":"Zach"}'

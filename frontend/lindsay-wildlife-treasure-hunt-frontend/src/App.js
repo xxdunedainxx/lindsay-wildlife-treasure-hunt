@@ -25,6 +25,11 @@ import {HomePage} from './Components/pages/home/HomePageComponent';
 import {ReportBugPage} from './Components/pages/report/ReportBugPageComponent';
 
 function App() {
+  // redirect to home
+  if(window.location.pathname == '/ui/' || window.location.pathname == '/ui'){
+    window.location.href = '/ui/home';
+  }
+
   Setup.Run()
   Logger.info("START REACT APP", true)
   Logger.info(Configuration)
@@ -32,6 +37,7 @@ function App() {
   // var appHealthClient = new AppHealthClient(Configuration.healthEndpoint)
   // appHealthClient.health()
   // appHealthClient.dependencies()
+
 
   return (
 

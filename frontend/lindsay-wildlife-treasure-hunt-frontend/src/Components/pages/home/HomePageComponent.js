@@ -16,9 +16,11 @@ export class HomePage extends React.Component {
   render(){
     return (
       <div>
-        Welcome!
-        <Link to="/ui/game">
-          Start!
+        <div className="welcomeMessage">
+          Welcome to the Lindsay Wildlife Bio-Diversity treasure hunt. The goal of the treasure hunt is to match all the given clues with various exhibits at Lindsay Wildlife Experience!
+        </div>
+        <Link to="/ui/game" className="startButton">
+          Lets go!
         </Link>
       </div>
     );
