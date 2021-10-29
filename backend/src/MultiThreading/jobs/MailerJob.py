@@ -9,8 +9,11 @@ from src.Configuration import CONF_INSTANCE
 from src.Mail.MailQ import MailQ
 from src.Singletons import Singletons
 from src.Mail.SMTP import SMTP
+from src.Mail.MailFormatter import MailTypes
 
 class MailerJob:
+
+
 
   emailsPerJobExecution: int = CONF_INSTANCE.MAIL_JOB_EMAILS_PER_JOB
   mailQ: MailQ
@@ -44,22 +47,38 @@ class MailerJob:
 
   @staticmethod
   def send_mail(emailData: {}):
-    # TODO Re-q if the email fails 'x' number of times
-    # TODO more advanced, configurable Email Templates (html??)
-    # TODO More redis unit testing
-    # TODO better way to do redis things?
-    # TODO emailer to support single email objects, and not just arrays
+    if emailData["type"] == MailTypes.END_USER_CERTIFICATE_EMAIL:
+      MailerJob.send_cert_email(emailData)
+    elif emailData["type"] == MailTypes.REPORT_A_BUG_EMAIL:
+      MailerJob.send_bug_email(emailData)
+    else:
+      LogFactory.MAIN_LOG.warning("invalid mail type provided?")
+
+  @staticmethod
+  def send_cert_email(emailData: {}):
     LogFactory.MAIN_LOG.info(f"attempting to send email data {emailData}")
 
-
     toEmail = emailData["email"]
-    toUsername = emailData["username"]
 
     MailerJob.mailer.send_html_email(
-      username=toUsername,
+      emailData=emailData,
       toEmail=toEmail,
       subject="Congrats from Lindsay Wildlife!",
       emailBody="Some Email body"
+    )
+    LogFactory.MAIN_LOG.info(f"Email sent!")
+
+
+  @staticmethod
+  def send_bug_email(emailData: {}):
+    LogFactory.MAIN_LOG.info(f"attempting to send email data {emailData}")
+
+    MailerJob.mailer.send_html_email(
+      emailData=emailData,
+      toEmail=CONF_INSTANCE.BUG_REPORT_EMAIL_LIST,
+      subject="Bug Reported",
+      emailBody="Some Email body",
+      formatter=MailTypes.REPORT_A_BUG_EMAIL
     )
     LogFactory.MAIN_LOG.info(f"Email sent!")
 

@@ -10,14 +10,24 @@
     font-size: 16px;
     font-weight: bold;
     font-family: 'Verdana', 'Tahoma', 'Arial', sans-serif;
+    background-color: rgb(98, 168, 229);
 }
 
-
-.manual-entry-text {
-    font-style: italic;
+.reportAnIssueWrapper{
+  background-color: white;
+  border-radius: 10px;
+  height: 75%;
 }
 
-.manual-entry-submit{
+.userInfoInputLabel {
+  font-style: italic;
+  font-weight: bold;
+  padding-right: 2%;
+}
+
+.userInfoSubmitButton {
+    width: 10%;
+    height: 40px;
     background-color: rgb(98, 168, 229);
     border: none;
     color: white;
@@ -28,4 +38,15 @@
     font-size: 16px;
     font-weight: bold;
     margin-left: 5px;
+}
+
+.userInfoInput {
+  resize: none;
+  width: 75%;
+  height: 100px;
+  padding-left: 5px;
+  padding-top: 5px;
+  border-width: medium;
+  border-radius: 10px;
+  font-size: x-large;
 }
