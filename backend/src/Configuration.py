@@ -32,6 +32,9 @@ class Configuration:
     "LOG_ROTATION_JOB_ARCHIVE_DIR"      : f"archive{os.sep}",
     "UI_LOGGING_JOB_INTERVAL_MINUTES" : 1,
     "UI_LOGGING_JOB_LOGS_PER_JOB"     : 50,
+
+    # Static image directory
+    "IMAGE_DIR" : f"{os.getcwd()}{os.sep}assets"
   }
 
   def __init__(self):
@@ -75,7 +78,8 @@ class Configuration:
     self.UI_LOGGING_JOB_INTERVAL_MINUTES: int = self.__get_value("UI_LOGGING_JOB_INTERVAL_MINUTES")
     self.UI_LOGGING_JOB_LOGS_PER_JOB: int = self.__get_value("UI_LOGGING_JOB_LOGS_PER_JOB")
 
-
+    # Static images
+    self.IMAGE_DIR: str = self.__get_value("IMAGE_DIR")
 
 
   def __get_value(self, key: str):

@@ -10,6 +10,7 @@ class Level(Model):
     self.hint: str = self.get_attribute(jObject, "AdditionalHint")
     self.correctMessage: str = self.get_attribute(jObject, "CorrectMessage")
     self.mediaLink: str = self.get_attribute(jObject, "MediaLink")
+    self.photoCredit: str = self.get_attribute(jObject, "PhotoCredit")
 
   def to_dictionary(self) -> dict:
     return self._original_object
