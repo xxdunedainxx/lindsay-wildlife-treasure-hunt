@@ -23,7 +23,7 @@ export class ManualEntryDisplay extends React.Component {
                 return(
                     <div className="manual-entry-container">
                         <br/>
-                        <p className="game-text manual-entry-text">If the QR scanner isn't working, you can enter your answer manually:</p>
+                        <div className="game-text manual-entry-text">If the QR scanner isn't working, you can enter your answer manually:</div>
                         <ManualEntryField
                             onClick={this.props.manualEntryTextSubmitButton}
                         />

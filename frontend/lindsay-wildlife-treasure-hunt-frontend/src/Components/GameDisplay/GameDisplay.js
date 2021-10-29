@@ -158,12 +158,12 @@ export class GameDisplay extends React.Component {
   deleteProgress() {
     GameController.resetGame();
     GameController.gameState.gameComplete = false;
-    
     GameController.saveState();
     this.updateGameState();
     this.setState({
       readyForBarcode: false,
       manualEntryMode: false,  
+      displayExtraHint: false,
       tryAgainClicked: false,   
     })
   }

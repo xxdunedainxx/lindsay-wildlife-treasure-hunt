@@ -37,6 +37,7 @@
 .game-start-button {
     padding: 15px 30px;
     background-color: rgb(98, 168, 229);
+    font-size: 40px;
 }
 
 /* Answer Display */
@@ -44,9 +45,9 @@
 .artifact-image {
     max-width: 80vw;
     height: auto;
-    border-radius: 5%;
+    border-radius: 5px;
     border-style: solid;
-    border-width: 3px;
+    border-width: 1px;
     border-color: #3a3a31;
 }
 
@@ -78,6 +79,10 @@
     background: rgb(98, 168, 229);
 }
 
+.scanner-container {
+    margin-bottom: 10px;
+}
+
 /* Hint Display */
 
 .clue-text {
@@ -91,10 +96,27 @@
     font-weight: 400;
 }
 
+.extra-hint-button {
+    background-color: rgb(151, 169, 38);
+    margin-bottom: 10px;
+}
+
+.extra-hint-text {
+    box-sizing: border-box;
+    padding: 10px 20px 15px;
+    border-radius: 20px;
+    margin-left: 6vh;
+    margin-right: 6vh;
+    margin-bottom: 2vh;
+    background: rgba(199, 190, 186, 0.5);
+    font-weight: 400;
+}
+
 /* Manual Entry Display */
 
 .manual-entry-text {
     font-style: italic;
+    margin: 0 5vh 1vh 5vh;
 }
 
 .manual-entry-submit{

@@ -47,14 +47,14 @@ function DisplayExtraHint(props) {
       if(!props.displayExtraHint) {
       return(
           <button
-            className="game-button"
+            className="game-button extra-hint-button"
             onClick={props.onClick}
           >Need a hint?</button>
       );
       }
       else{
       return(
-          <div className="extra-hint-text">
+          <div className="game-text extra-hint-text">
           {props.extraHint}
           </div>
       );

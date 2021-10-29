@@ -20,8 +20,6 @@ class ScanDisplay extends React.Component {
       }
 
       this.state = {
-        availWidth: window.innerWidth,
-        availHeight: window.innerHeight,
         scannerWidth: width,
         scannerHeight: height,
       }
@@ -36,10 +34,18 @@ class ScanDisplay extends React.Component {
     }
 
     updateWindowSize() {
-      console.log("WINDOW: " + window.innerWidth + ", " + window.innerHeight)
+      let width, height;
+      if(window.innerWidth < 640) {
+        width = 350;
+        height = 350;
+      }
+      else {
+        width = 500;
+        height = 500;
+      }
       this.setState({
-        availWidth: window.innerWidth,
-        availHeight: window.innerHeight
+        scannerWidth: width,
+        scannerHeight: height,
       })
     }
   
