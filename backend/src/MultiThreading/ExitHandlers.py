@@ -6,6 +6,10 @@ from src.util.LogFactory import LogFactory
 from src.util.ErrorFactory import errorStackTrace
 from src.util.FileIO import FileIO
 
+SIGNALS_TO_IGNORE : [int] =[
+  28 #SIGWINCH
+]
+
 class ExitHandlers:
   LOGGER=None
 
@@ -46,7 +50,10 @@ class ExitHandlers:
     catchable_sigs = set(signal.Signals)
     for sig in catchable_sigs:
       try:
-        LogFactory.MAIN_LOG.info(f"Detecting signal {sig}")
-        signal.signal(sig,  ExitHandlers.sigterm_handler)
+        if sig in SIGNALS_TO_IGNORE:
+          LogFactory.MAIN_LOG.info(f"SKIPPING signal {sig}")
+        else:
+          LogFactory.MAIN_LOG.info(f"Detecting signal {sig}")
+          signal.signal(sig,  ExitHandlers.sigterm_handler)
       except Exception as e:
         LogFactory.MAIN_LOG.error(f"Failed to add signal with stack trace {errorStackTrace(e)}")
