@@ -5,7 +5,7 @@ from src.Configuration import Configuration, CONF_INSTANCE
 from flask import Flask, request, send_from_directory, abort
 flask_ref: Flask = WebServerInit.flask
 
-class ImageFetcher:
+class ImageController:
 
   @staticmethod
   @flask_ref.route('/get-image/<path:image_name>')
@@ -14,4 +14,4 @@ class ImageFetcher:
     try:
       return send_from_directory(CONF_INSTANCE.IMAGE_DIR, image_name)
     except FileNotFoundError:
-      abort(404)
+      "Image can't be found", 404
