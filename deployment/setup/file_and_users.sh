@@ -11,7 +11,6 @@ else
   exit
 
   sudo su
-  echo "lindsay-wildlife-app ALL=(ALL) ALL" >> /etc/sudoers
   echo "lindsay-wildlife-app ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
   exit
 
