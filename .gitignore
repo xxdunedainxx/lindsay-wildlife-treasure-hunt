@@ -1,6 +1,7 @@
 # Deploy tmp files
 deployment/INSTANCE.txt
 deployment/SSH_KEY_PATH.txt
+deployment/USERNAME.txt
 deployment/images
 
 # configs
