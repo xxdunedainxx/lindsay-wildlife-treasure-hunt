@@ -1,6 +1,6 @@
 #! /bin/bash
 
-APPLICATION_DEPLOYMENT_PATH=/home/lindsay-wildlife-app/app/
+APPLICATION_DEPLOYMENT_PATH=/home/lindsay-wildlife-app/app
 HOME=$(pwd)
 
 if [[ ! -f "./deployment/INSTANCE.txt" || ! -f "./deployment/SSH_KEY_PATH.txt" || ! -f "./deployment/USERNAME.txt" ]] ;then
