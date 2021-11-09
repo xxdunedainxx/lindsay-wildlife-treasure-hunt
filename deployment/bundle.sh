@@ -1,16 +1,20 @@
 #! /bin/bash
 
+APPLICATION_DEPLOYMENT_PATH=/home/lindsay-wildlife-app/app/
 HOME=$(pwd)
 
-if [ -f "./deployment/INSTANCE.txt" && -f "./deployment/SSH_KEY_PATH.txt" ];then
+if [[ ! -f "./deployment/INSTANCE.txt" || ! -f "./deployment/SSH_KEY_PATH.txt" || ! -f "./deployment/USERNAME.txt" ]] ;then
   read -p "Please provide your AWS EC2 instance:" AWS_EC2_INSTANCE
   read -p "Please specify the path of your SSH Key" SSH_KEY_PATH
+  read -p "Please specify your username" USERNAME
 
   echo "${AWS_EC2_INSTANCE}" > "./deployment/INSTANCE.txt"
   echo "${SSH_KEY_PATH}"     > "./deployment/SSH_KEY_PATH.txt"
+  echo "${USERNAME}"         > "./deployment/USERNAME.txt"
 else
   AWS_EC2_INSTANCE=$(cat "./deployment/INSTANCE.txt")
   SSH_KEY_PATH=$(cat "./deployment/SSH_KEY_PATH.txt")
+  USERNAME=$(cat "./deployment/USERNAME.txt")
 fi
 
 ./build.sh
@@ -26,17 +30,23 @@ docker save lindsay-redis-server:latest | gzip > deployment/images/lindsay-redis
 
 # Upload steps
 
+echo "Running initial user / FS setup"
+scp -v -i "${SSH_KEY_PATH}" "deployment/setup/file_and_users.sh" "${USERNAME}@${AWS_EC2_INSTANCE}":~/
+ssh "${USERNAME}@${AWS_EC2_INSTANCE}" -i "${SSH_KEY_PATH}" -- """\
+./file_and_users.sh;
+"""
+
 echo "Uploading docker files..."
-scp -v -i "${SSH_KEY_PATH}" "deployment/images/lindsay-ingress.tar.gz" "ec2-user@${AWS_EC2_INSTANCE}":~/ 
-scp -v -i "${SSH_KEY_PATH}" "deployment/images/lindsay-react-app.tar.gz" "ec2-user@${AWS_EC2_INSTANCE}":~/ 
-scp -v -i "${SSH_KEY_PATH}" "deployment/images/lindsay-redis-server.tar.gz" "ec2-user@${AWS_EC2_INSTANCE}":~/ 
-scp -v -i "${SSH_KEY_PATH}" "deployment/images/lindsay_app_backend.tar.gz" "ec2-user@${AWS_EC2_INSTANCE}":~/ 
+scp -v -i "${SSH_KEY_PATH}" "deployment/images/lindsay-ingress.tar.gz" "${USERNAME}@${AWS_EC2_INSTANCE}":"${APPLICATION_DEPLOYMENT_PATH}"
+scp -v -i "${SSH_KEY_PATH}" "deployment/images/lindsay-react-app.tar.gz" "${USERNAME}@${AWS_EC2_INSTANCE}":"${APPLICATION_DEPLOYMENT_PATH}"
+scp -v -i "${SSH_KEY_PATH}" "deployment/images/lindsay-redis-server.tar.gz" "${USERNAME}@${AWS_EC2_INSTANCE}":"${APPLICATION_DEPLOYMENT_PATH}"
+scp -v -i "${SSH_KEY_PATH}" "deployment/images/lindsay_app_backend.tar.gz" "${USERNAME}@${AWS_EC2_INSTANCE}":"${APPLICATION_DEPLOYMENT_PATH}"
 
 echo "Publishing docker compose"
-scp -v -i "${SSH_KEY_PATH}" "docker-compose.yml" "ec2-user@${AWS_EC2_INSTANCE}":~/
+scp -v -i "${SSH_KEY_PATH}" "docker-compose.yml" "${USERNAME}@${AWS_EC2_INSTANCE}":"${APPLICATION_DEPLOYMENT_PATH}"
 
 echo "Publishing util scripts"
-scp -v -i "${SSH_KEY_PATH}" "deployment/setup/install_new_images.sh" "ec2-user@${AWS_EC2_INSTANCE}":~/
-scp -v -i "${SSH_KEY_PATH}" "deployment/setup/docker_setup.sh" "ec2-user@${AWS_EC2_INSTANCE}":~/
-scp -v -i "${SSH_KEY_PATH}" "run.sh" "ec2-user@${AWS_EC2_INSTANCE}":~/
-scp -v -i "${SSH_KEY_PATH}" "prod.conf.json" "ec2-user@${AWS_EC2_INSTANCE}":~/
+scp -v -i "${SSH_KEY_PATH}" "deployment/setup/install_new_images.sh" "${USERNAME}@${AWS_EC2_INSTANCE}":"${APPLICATION_DEPLOYMENT_PATH}"
+scp -v -i "${SSH_KEY_PATH}" "deployment/setup/docker_setup.sh" "${USERNAME}@${AWS_EC2_INSTANCE}":"${APPLICATION_DEPLOYMENT_PATH}"
+scp -v -i "${SSH_KEY_PATH}" "run.sh" "${USERNAME}@${AWS_EC2_INSTANCE}":"${APPLICATION_DEPLOYMENT_PATH}"
+scp -v -i "${SSH_KEY_PATH}" "prod.conf.json" "${USERNAME}@${AWS_EC2_INSTANCE}":"${APPLICATION_DEPLOYMENT_PATH}"
