@@ -57,7 +57,7 @@
 
 #nav li:hover {
   color: black;
-  transform: translateY(-10px);
+  /*transform: translateY(-10px);*/
   border-radius: 30px;
   cursor: pointer;
 }
