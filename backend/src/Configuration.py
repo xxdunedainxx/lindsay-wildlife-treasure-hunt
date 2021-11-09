@@ -36,7 +36,7 @@ class Configuration:
   }
 
   def __init__(self):
-    self.VERSION='0.13.1'
+    self.VERSION='0.13.2'
     self.CONF_FILE_LOCATION: str  = './conf.json'
     self.RAW_CONF: str = open(self.CONF_FILE_LOCATION,"r").read().strip()
     print(f"Raw configuration file {self.RAW_CONF}")
