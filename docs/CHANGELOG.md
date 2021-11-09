@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.13.2
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/112)
+* Minor UI improvements
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/113)
+* Deployment updates
+
+[Release](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/releases/tag/MVP-0.13.2)
+
 ## 0.13.1
 
 [PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/109)
