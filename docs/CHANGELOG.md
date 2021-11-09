@@ -4,6 +4,7 @@
 
 [PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/112)
 * Minor UI improvements
+
 [PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/113)
 * Deployment updates
 
