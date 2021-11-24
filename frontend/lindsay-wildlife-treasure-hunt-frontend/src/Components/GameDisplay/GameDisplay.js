@@ -11,10 +11,11 @@ import './GameDisplay.css';
 
 // Display Daddy
 export class GameDisplay extends React.Component {
-
+  static instance = null
 
   constructor(props) {
     super(props)
+    GameDisplay.instance = this
     GameController.loadSessionData();
     this.state = {
       gameStarted: GameController.gameState.gameStarted,
