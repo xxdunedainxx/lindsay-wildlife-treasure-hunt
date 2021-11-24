@@ -6,16 +6,19 @@ import ScanDisplay from './ScanDisplay';
 import HintDisplay from './HintDisplay';
 import AnswerDisplay from './AnswerDisplay';
 import ManualEntryDisplay from './ManualEntryDisplay';
-
+import ScanDisplayControls from './ScanDisplayControls';
 import './GameDisplay.css';
 
 // Display Daddy
 export class GameDisplay extends React.Component {
-
+  static INSTANCE = undefined
 
   constructor(props) {
     super(props)
+    GameDisplay.INSTANCE = this
     GameController.loadSessionData();
+    this.scannerDisplay = undefined
+    this.scanDisplayControls = undefined
     this.state = {
       gameStarted: GameController.gameState.gameStarted,
       currentLevel: GameController.gameState.currentLevel,
@@ -72,6 +75,27 @@ export class GameDisplay extends React.Component {
     }
   }
 
+  fullScreenScannerView(){
+    this.scannerDisplay.fullscreen()
+  }
+
+  exitFullScreenScannerView(){
+    console.log('game display is closing main scanner display')
+    this.scannerDisplay.exitFullscreen()
+  }
+
+  mouseOverGameDisplay(){
+    if(this.scanDisplayControls != undefined) {
+      this.scanDisplayControls.visible()
+    }
+  }
+
+  mouseOutGameDisplay(){
+    if(this.scanDisplayControls != undefined) {
+      this.scanDisplayControls.invisible()
+    }
+  }
+
   resetGame() {
     GameController.resetGame();
     this.updateGameState();
@@ -95,9 +119,17 @@ export class GameDisplay extends React.Component {
   }
 
   readyToScanButton() {
+
     this.setState({
       scannerOpen: !this.state.scannerOpen
     })
+    if(this.state.scannerOpen == true) {
+      this.mouseOutGameDisplay()
+      this.scanDisplayControls.disableControls()
+    } else{
+      this.scanDisplayControls.enableControls()
+    }
+    
   }
 
   nextLevelButton() {
@@ -217,7 +249,11 @@ export class GameDisplay extends React.Component {
           artifactText={this.state.artifactText}
           artifactMediaUrl={this.state.artifactMediaUrl}
         />
+        <ScanDisplayControls
+          parentComponent={this}
+        />
         <ScanDisplay
+          parentComponent={this}
           qrScannerUpdate={this}
           readyForBarcode={this.state.readyForBarcode}
           displayAnswer={this.state.displayAnswer}

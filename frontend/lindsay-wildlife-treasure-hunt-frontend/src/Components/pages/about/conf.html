@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<!-- saved from url=(0051)https://golangbyexample.com/nested-packages-golang/ -->
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+	<!-- This site is optimized with the Yoast SEO plugin v16.2 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Nested Packages in Go (Golang) - Welcome To Golang By Example</title>
+	<link rel="canonical" href="https://golangbyexample.com/nested-packages-golang/">
+	<meta property="og:locale" content="en_US">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Nested Packages in Go (Golang) - Welcome To Golang By Example">
+	<meta property="og:description" content="Overview In GO it is possible to create nested packages.  Nested packages are those packages that lie within another package. Let’s see an example Example Create a directory named learn. Let’s create...">
+	<meta property="og:url" content="https://golangbyexample.com/nested-packages-golang/">
+	<meta property="og:site_name" content="Welcome To Golang By Example">
+	<meta property="article:published_time" content="2020-11-20T09:01:23+00:00">
+	<meta property="article:modified_time" content="2020-11-20T09:01:34+00:00">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:label1" content="Written by">
+	<meta name="twitter:data1" content="admin">
+	<meta name="twitter:label2" content="Est. reading time">
+	<meta name="twitter:data2" content="1 minute">
+	<script type="text/javascript" async="" src="./conf_files/analytics.js"></script><script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://golangbyexample.com/#website","url":"https://golangbyexample.com/","name":"Welcome To Golang By Example","description":"","potentialAction":[{"@type":"SearchAction","target":"https://golangbyexample.com/?s={search_term_string}","query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"WebPage","@id":"https://golangbyexample.com/nested-packages-golang/#webpage","url":"https://golangbyexample.com/nested-packages-golang/","name":"Nested Packages in Go (Golang) - Welcome To Golang By Example","isPartOf":{"@id":"https://golangbyexample.com/#website"},"datePublished":"2020-11-20T09:01:23+00:00","dateModified":"2020-11-20T09:01:34+00:00","author":{"@id":"https://golangbyexample.com/#/schema/person/8833ea7638dafd763cb1db6c0ca4576f"},"breadcrumb":{"@id":"https://golangbyexample.com/nested-packages-golang/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://golangbyexample.com/nested-packages-golang/"]}]},{"@type":"BreadcrumbList","@id":"https://golangbyexample.com/nested-packages-golang/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"WebPage","@id":"https://golangbyexample.com/","url":"https://golangbyexample.com/","name":"Home"}},{"@type":"ListItem","position":2,"item":{"@type":"WebPage","@id":"https://golangbyexample.com/blog/","url":"https://golangbyexample.com/blog/","name":"Blog"}},{"@type":"ListItem","position":3,"item":{"@id":"https://golangbyexample.com/nested-packages-golang/#webpage"}}]},{"@type":"Person","@id":"https://golangbyexample.com/#/schema/person/8833ea7638dafd763cb1db6c0ca4576f","name":"admin","image":{"@type":"ImageObject","@id":"https://golangbyexample.com/#personlogo","inLanguage":"en-US","url":"https://secure.gravatar.com/avatar/?s=96&d=mm&r=g","contentUrl":"https://secure.gravatar.com/avatar/?s=96&d=mm&r=g","caption":"admin"}}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel="dns-prefetch" href="https://www.googletagmanager.com/">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+<link rel="dns-prefetch" href="https://s.w.org/">
+<link rel="dns-prefetch" href="https://v0.wordpress.com/">
+<link rel="dns-prefetch" href="https://i0.wp.com/">
+<link rel="dns-prefetch" href="https://i1.wp.com/">
+<link rel="dns-prefetch" href="https://i2.wp.com/">
+<link rel="alternate" type="application/rss+xml" title="Welcome To Golang By Example » Feed" href="https://golangbyexample.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="Welcome To Golang By Example » Comments Feed" href="https://golangbyexample.com/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="Welcome To Golang By Example » Nested Packages in Go (Golang) Comments Feed" href="https://golangbyexample.com/nested-packages-golang/feed/">
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/golangbyexample.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.8.2"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./conf_files/wp-emoji-release.min.js" type="text/javascript" defer=""></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel="stylesheet" id="wp-block-library-css" href="./conf_files/style.min.css" type="text/css" media="all">
+<style id="wp-block-library-inline-css" type="text/css">
+.has-text-align-justify{text-align:justify;}
+</style>
+<link rel="stylesheet" id="prismatic-blocks-css" href="./conf_files/styles-blocks.css" type="text/css" media="all">
+<link rel="stylesheet" id="prismatic-prism-css" href="./conf_files/theme-default.css" type="text/css" media="all">
+<link rel="stylesheet" id="name_for_css_file-css" href="./conf_files/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="ez-icomoon-css" href="./conf_files/style.min(1).css" type="text/css" media="all">
+<link rel="stylesheet" id="ez-toc-css" href="./conf_files/screen.min.css" type="text/css" media="all">
+<style id="ez-toc-inline-css" type="text/css">
+div#ez-toc-container p.ez-toc-title {font-size: 120%;}div#ez-toc-container p.ez-toc-title {font-weight: 800;}div#ez-toc-container ul li {font-size: 100%;}
+</style>
+<link rel="stylesheet" id="affiliate-newspaperly-style-css" href="./conf_files/style(1).css" type="text/css" media="all">
+<link rel="stylesheet" id="font-awesome-css" href="./conf_files/font-awesome.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="newspaperly-style-css" href="./conf_files/style(2).css" type="text/css" media="all">
+<style id="newspaperly-style-inline-css" type="text/css">
+.cat-links, .byline { clip: rect(1px, 1px, 1px, 1px); height: 1px; position: absolute; overflow: hidden; width: 1px; }
+</style>
+<link crossorigin="anonymous" rel="stylesheet" id="newspaperly-google-fonts-css" href="./conf_files/css" type="text/css" media="all">
+<link rel="stylesheet" id="tablepress-default-css" href="./conf_files/default.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="sccss_style-css" href="./conf_files/saved_resource(1)" type="text/css" media="all">
+<link rel="stylesheet" id="jetpack_css-css" href="./conf_files/jetpack.css" type="text/css" media="all">
+<script type="text/javascript" src="./conf_files/jquery.min.js" id="jquery-core-js"></script>
+<script type="text/javascript" src="./conf_files/jquery-migrate.min.js" id="jquery-migrate-js"></script>
+<script type="text/javascript" src="./conf_files/js" id="google_gtagjs-js" async=""></script>
+<script type="text/javascript" id="google_gtagjs-js-after">
+window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}
+gtag('set', 'linker', {"domains":["golangbyexample.com"]} );
+gtag("js", new Date());
+gtag("set", "developer_id.dZTNiMT", true);
+gtag("config", "UA-157093109-1", {"anonymize_ip":true});
+</script>
+<link rel="https://api.w.org/" href="https://golangbyexample.com/wp-json/"><link rel="alternate" type="application/json" href="https://golangbyexample.com/wp-json/wp/v2/posts/4382"><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://golangbyexample.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://golangbyexample.com/wp-includes/wlwmanifest.xml"> 
+<meta name="generator" content="WordPress 5.8.2">
+<link rel="shortlink" href="https://wp.me/paOs1b-18G">
+<link rel="alternate" type="application/json+oembed" href="https://golangbyexample.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fgolangbyexample.com%2Fnested-packages-golang%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://golangbyexample.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fgolangbyexample.com%2Fnested-packages-golang%2F&amp;format=xml">
+
+        <!-- BuySellAds.com Ad Code -->
+        <script type="text/javascript">
+        (function(){
+          var bsa = document.createElement('script');
+              bsa.type= 'text/javascript';
+              bsa.async = true;
+              bsa.src='//s3.buysellads.com/ac/bsa.js';
+          (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);
+        })();
+        </script><script type="text/javascript" async="" src="./conf_files/bsa.js"></script>
+        <!-- END BuySellAds.com Ad Code --> 
+      <meta name="generator" content="Site Kit by Google 1.31.0"><script data-ad-client="ca-pub-2467863025261092" async="" src="./conf_files/f.txt"></script><style type="text/css">img#wpstats{display:none}</style>
+		
+		<style type="text/css">
+			.header-widgets-wrapper, .content-wrap-bg { background-color:  }
+			.featured-sidebar, .featured-sidebar ul li { border-color: #0a0000 !important; }
+			.page-numbers li a, .blogposts-list .blogpost-button, .page-numbers.current, span.page-numbers.dots { background: ; }
+			.banner-widget-wrapper p, .banner-widget-wrapper h1, .banner-widget-wrapper h2, .banner-widget-wrapper h3, .banner-widget-wrapper h4, .banner-widget-wrapper h5, .banner-widget-wrapper h6, .banner-widget-wrapper ul, .banner-widget-wrapper{ color: #ffffff }
+			.banner-widget-wrapper a, .banner-widget-wrapper a:hover, .banner-widget-wrapper a:active, .banner-widget-wrapper a:focus{ color: #dd3333; }
+			.banner-widget-wrapper ul li { border-color: #eeee22; }
+			body, .site, .swidgets-wrap h3, .post-data-text { background: ; }
+			.site-title a, .site-description { color: ; }
+			.header-bg { background-color: #bdc3c8 !important; }
+			.main-navigation ul li a, .main-navigation ul li .sub-arrow, .super-menu .toggle-mobile-menu,.toggle-mobile-menu:before, .mobile-menu-active .smenu-hide { color: ; }
+			#smobile-menu.show .main-navigation ul ul.children.active, #smobile-menu.show .main-navigation ul ul.sub-menu.active, #smobile-menu.show .main-navigation ul li, .smenu-hide.toggle-mobile-menu.menu-toggle, #smobile-menu.show .main-navigation ul li, .primary-menu ul li ul.children li, .primary-menu ul li ul.sub-menu li, .primary-menu .pmenu, .super-menu { border-color: ; border-bottom-color: ; }
+			#secondary .widget h3, #secondary .widget h3 a, #secondary .widget h4, #secondary .widget h1, #secondary .widget h2, #secondary .widget h5, #secondary .widget h6 { color: #2f00db; }
+			#secondary .widget a, #secondary a, #secondary .widget li a , #secondary span.sub-arrow{ color: #600019; }
+			#secondary, #secondary .widget, #secondary .widget p, #secondary .widget li, .widget time.rpwe-time.published { color: #0a0a0a; }
+			#secondary .swidgets-wrap, .featured-sidebar .search-field { border-color: #0a0000; }
+			.site-info, .footer-column-three input.search-submit, .footer-column-three p, .footer-column-three li, .footer-column-three td, .footer-column-three th, .footer-column-three caption { color: ; }
+			.footer-column-three h3, .footer-column-three h4, .footer-column-three h5, .footer-column-three h6, .footer-column-three h1, .footer-column-three h2, .footer-column-three h4, .footer-column-three h3 a { color: #0a0a0a; }
+			.footer-column-three a, .footer-column-three li a, .footer-column-three .widget a, .footer-column-three .sub-arrow { color: ; }
+			.footer-column-three h3:after { background: ; }
+			.site-info, .widget ul li, .footer-column-three input.search-field, .footer-column-three input.search-submit { border-color: ; }
+			.site-footer { background-color: ; }
+			.archive .page-header h1, .blogposts-list h2 a, .blogposts-list h2 a:hover, .blogposts-list h2 a:active, .search-results h1.page-title { color: ; }
+			.blogposts-list .post-data-text, .blogposts-list .post-data-text a{ color: ; }
+			.blogposts-list p { color: ; }
+			.page-numbers li a, .blogposts-list .blogpost-button, span.page-numbers.dots, .page-numbers.current, .page-numbers li a:hover { color: ; }
+			.archive .page-header h1, .search-results h1.page-title, .blogposts-list.fbox, span.page-numbers.dots, .page-numbers li a, .page-numbers.current { border-color: ; }
+			.blogposts-list .post-data-divider { background: ; }
+			.page .comments-area .comment-author, .page .comments-area .comment-author a, .page .comments-area .comments-title, .page .content-area h1, .page .content-area h2, .page .content-area h3, .page .content-area h4, .page .content-area h5, .page .content-area h6, .page .content-area th, .single  .comments-area .comment-author, .single .comments-area .comment-author a, .single .comments-area .comments-title, .single .content-area h1, .single .content-area h2, .single .content-area h3, .single .content-area h4, .single .content-area h5, .single .content-area h6, .single .content-area th, .search-no-results h1, .error404 h1 { color: ; }
+			.single .post-data-text, .page .post-data-text, .page .post-data-text a, .single .post-data-text a, .comments-area .comment-meta .comment-metadata a { color: ; }
+			.page .content-area p, .page article, .page .content-area table, .page .content-area dd, .page .content-area dt, .page .content-area address, .page .content-area .entry-content, .page .content-area li, .page .content-area ol, .single .content-area p, .single article, .single .content-area table, .single .content-area dd, .single .content-area dt, .single .content-area address, .single .entry-content, .single .content-area li, .single .content-area ol, .search-no-results .page-content p { color: ; }
+			.single .entry-content a, .page .entry-content a, .comment-content a, .comments-area .reply a, .logged-in-as a, .comments-area .comment-respond a { color: ; }
+			.comments-area p.form-submit input { background: ; }
+			.error404 .page-content p, .error404 input.search-submit, .search-no-results input.search-submit { color: ; }
+			.page .comments-area, .page article.fbox, .page article tr, .page .comments-area ol.comment-list ol.children li, .page .comments-area ol.comment-list .comment, .single .comments-area, .single article.fbox, .single article tr, .comments-area ol.comment-list ol.children li, .comments-area ol.comment-list .comment, .error404 main#main, .error404 .search-form label, .search-no-results .search-form label, .error404 input.search-submit, .search-no-results input.search-submit, .error404 main#main, .search-no-results section.fbox.no-results.not-found{ border-color: ; }
+			.single .post-data-divider, .page .post-data-divider { background: ; }
+			.single .comments-area p.form-submit input, .page .comments-area p.form-submit input { color: ; }
+			.bottom-header-wrapper { padding-top: px; }
+			.bottom-header-wrapper { padding-bottom: px; }
+			.bottom-header-wrapper { background: ; }
+			.bottom-header-wrapper *{ color: ; }
+			.header-widget a, .header-widget li a, .header-widget i.fa { color: ; }
+			.header-widget, .header-widget p, .header-widget li, .header-widget .textwidget { color: ; }
+			.header-widget .widget-title, .header-widget h1, .header-widget h3, .header-widget h2, .header-widget h4, .header-widget h5, .header-widget h6{ color: ; }
+			.header-widget.swidgets-wrap, .header-widget ul li, .header-widget .search-field { border-color: ; }
+			.header-widgets-wrapper .swidgets-wrap{ background: ; }
+			.primary-menu .pmenu, .super-menu, #smobile-menu, .primary-menu ul li ul.children, .primary-menu ul li ul.sub-menu { background-color: ; }
+			#secondary .swidgets-wrap{ background: ; }
+			#secondary .swidget { border-color: #0a0000; }
+			.archive article.fbox, .search-results article.fbox, .blog article.fbox { background: ; }
+			.comments-area, .single article.fbox, .page article.fbox { background: ; }
+		</style>
+	<link rel="pingback" href="https://golangbyexample.com/xmlrpc.php">		<style type="text/css">
+	.sheader .content-wrap .header-bg {
+			background: url(https://golangbyexample.com/wp-content/uploads/2019/11/cropped-XlhZVsKykw-2.jpg);
+		    background-size: cover;
+		}
+
+	.site-title a,
+		.site-description {
+			color: #ffffff;
+		}
+
+	
+		https://golangbyexample.com/wp-content/uploads/2019/11/cropped-XlhZVsKykw-2.jpg"
+				.site-title a,
+		.site-description {
+			color: #ffffff;
+		}
+				</style>
+		<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #e0e0e0; }
+</style>
+	<link rel="amphtml" href="https://golangbyexample.com/nested-packages-golang/amp/"><script async="" src="./conf_files/f.txt"></script><script>(adsbygoogle = window.adsbygoogle || []).push({"google_ad_client":"ca-pub-2467863025261092","enable_page_level_ads":true,"tag_partner":"site_kit"});</script><link rel="icon" href="https://i2.wp.com/golangbyexample.com/wp-content/uploads/2021/05/cropped-go_border-1.png?fit=32%2C32&amp;ssl=1" sizes="32x32">
+<link rel="icon" href="https://i2.wp.com/golangbyexample.com/wp-content/uploads/2021/05/cropped-go_border-1.png?fit=192%2C192&amp;ssl=1" sizes="192x192">
+<link rel="apple-touch-icon" href="https://i2.wp.com/golangbyexample.com/wp-content/uploads/2021/05/cropped-go_border-1.png?fit=180%2C180&amp;ssl=1">
+<meta name="msapplication-TileImage" content="https://i2.wp.com/golangbyexample.com/wp-content/uploads/2021/05/cropped-go_border-1.png?fit=270%2C270&amp;ssl=1">
+			<style type="text/css" id="wp-custom-css">
+				#carbonads {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#carbonads {
+  display: flex;
+  max-width: 330px;
+  background-color: hsl(0, 0%, 98%);
+  box-shadow: 0 1px 4px 1px hsla(0, 0%, 0%, .1);
+}
+
+#carbonads a {
+  color: inherit;
+  text-decoration: none;
+}
+
+#carbonads a:hover {
+  color: inherit;
+}
+
+#carbonads span {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+
+#carbonads .carbon-wrap {
+  display: flex;
+}
+
+.carbon-img {
+  display: block;
+  margin: 0;
+  line-height: 1;
+}
+
+.carbon-img img {
+  display: block;
+}
+
+.carbon-text {
+  padding: 10px;
+  text-align: left;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.carbon-poweredby {
+  display: block;
+  padding: 8px 10px;
+  background: repeating-linear-gradient(-45deg, transparent, transparent 5px, hsla(0, 0%, 0%, .025) 5px, hsla(0, 0%, 0%, .025) 10px) hsla(203, 11%, 95%, .4);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  font-weight: 600;
+  font-size: 9px;
+  line-height: 1;
+}
+			</style>
+		<style id="tt-easy-google-font-styles" type="text/css">p { line-height: 1.6; padding-top: 12px; border-top-color: #c10016; border-top-style: none; }
+h1 { }
+h2 { }
+h3 { }
+h4 { }
+h5 { }
+h6 { }
+</style><script async="" type="text/javascript" src="./conf_files/count.js"></script><script type="text/javascript" async="" src="./conf_files/embed.js"></script><link rel="prefetch" as="style" href="https://c.disquscdn.com/next/embed/styles/lounge.45ce3ab7627dd20241bfd7e5b01d3737.css"><link rel="prefetch" as="script" href="https://c.disquscdn.com/next/embed/common.bundle.2f2f40d40785c9541a90e9086c8770a3.js"><link rel="prefetch" as="script" href="https://c.disquscdn.com/next/embed/lounge.bundle.00efd9d3730bb84ed1ca64779ee82e9a.js"><link rel="prefetch" as="script" href="https://disqus.com/next/config.js"><script charset="utf-8" src="./conf_files/button.0d6aa7fd095b2a9dd19cc66c7c2ed64b.js"></script><script src="./conf_files/alfie_v4.63f1ab6d6b9d5807dc0c94ef3fe0b851.js" async="" charset="UTF-8"></script></head>
+
+<body class="post-template-default single single-post postid-4382 single-format-standard custom-background header-image categories-hidden author-hidden">
+	   
+	<div id="page" class="site">
+		<header id="masthead" class="sheader site-header clearfix">
+			<div class="content-wrap">
+
+				<!-- Header background color and image is added to class below -->
+				<div class="header-bg">
+											<div class="site-branding">
+							 
+								<!-- If you are viewing the a sub page, make the title a paragraph -->
+								<p class="site-title"><a href="https://golangbyexample.com/" rel="home">Welcome To Golang By Example</a></p>
+								
+							</div>
+																				</div>
+					</div>
+
+					<!-- Navigation below these lines, move it up if you want it above the header -->
+					<nav id="primary-site-navigation" class="primary-menu main-navigation clearfix">
+						<a href="https://golangbyexample.com/nested-packages-golang/#" id="pull" class="smenu-hide toggle-mobile-menu menu-toggle" aria-controls="secondary-menu" aria-expanded="false">Menu</a>
+						<div class="content-wrap text-center">
+							<div class="center-main-menu">
+								<div class="menu-main-menu-container"><ul id="primary-menu" class="pmenu"><li id="menu-item-21" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-21"><a href="https://golangbyexample.com//">Home</a></li>
+<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-33"><a href="https://golangbyexample.com/blog/">Blog</a></li>
+<li id="menu-item-20" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20"><a href="https://golangbyexample.com/contact-us/">Contact Us</a></li>
+<li id="menu-item-2406" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2406"><a href="https://golangbyexample.com/support/">Support this website</a></li>
+</ul></div>								</div>
+							</div>
+						</nav>
+						<div class="content-wrap">
+							<div class="super-menu clearfix">
+								<div class="super-menu-inner">
+									<a href="https://golangbyexample.com/nested-packages-golang/#" id="pull" class="toggle-mobile-menu menu-toggle" aria-controls="secondary-menu" aria-expanded="false">Menu</a>
+								</div>
+							</div>
+						</div>
+						<div id="mobile-menu-overlay"></div>
+						<!-- Navigation above these lines, move it up if you want it above the header -->
+					</header>
+
+					<div class="content-wrap">
+
+
+						<!-- Upper widgets -->
+						<div class="header-widgets-wrapper">
+							
+							
+													</div>
+
+					</div>
+
+					<div id="content" class="site-content clearfix">
+						<div class="content-wrap">
+							<div class="content-wrap-bg">
+
+	<div id="primary" class="featured-content content-area">
+		<main id="main" class="site-main">
+
+		
+<article id="post-4382" class="posts-entry fbox post-4382 post type-post status-publish format-standard hentry category-tech tag-go tag-golang">
+			<header class="entry-header">
+		<h1 class="entry-title">Nested Packages in Go (Golang)</h1>		<div class="entry-meta">
+			<div class="blog-data-wrapper">
+				<div class="post-data-divider"></div>
+				<div class="post-data-positioning">
+					<div class="post-data-text">
+						<span class="posted-on">Posted on <a href="https://golangbyexample.com/nested-packages-golang/" rel="bookmark"><time class="entry-date published" datetime="2020-11-20T14:31:23+05:30">November 20, 2020</time><time class="updated" datetime="2020-11-20T14:31:34+05:30">November 20, 2020</time></a></span><span class="byline"> by <span class="author vcard"><a class="url fn n" href="https://golangbyexample.com/author/admin/">admin</a></span></span>					</div>
+				</div>
+			</div>
+		</div><!-- .entry-meta -->
+			</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		
+<div id="ez-toc-container" class="ez-toc-v2_0_17 counter-hierarchy counter-decimal ez-toc-light-blue">
+<div class="ez-toc-title-container">
+<p class="ez-toc-title">Table of Contents</p>
+<span class="ez-toc-title-toggle"><a class="ez-toc-pull-right ez-toc-btn ez-toc-btn-xs ez-toc-btn-default ez-toc-toggle" style="display: inline;"><i class="ez-toc-glyphicon ez-toc-icon-toggle"></i></a></span></div>
+<nav><ul class="ez-toc-list ez-toc-list-level-1"><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-1" href="https://golangbyexample.com/nested-packages-golang/#Overview" title="Overview">Overview</a></li><li class="ez-toc-page-1 ez-toc-heading-level-1"><a class="ez-toc-link ez-toc-heading-2" href="https://golangbyexample.com/nested-packages-golang/#Example" title="Example">Example</a></li></ul></nav></div>
+<h1><span class="ez-toc-section" id="Overview"></span><strong>Overview</strong><span class="ez-toc-section-end"></span></h1>
+
+
+
+<p class="has-medium-font-size">In GO it is possible to create nested packages.&nbsp; Nested packages are those packages that lie within another package. Let’s see an example</p>
+
+
+
+<h1><span class="ez-toc-section" id="Example"></span><strong>Example</strong><span class="ez-toc-section-end"></span></h1>
+
+
+
+<p class="has-medium-font-size">Create a directory named <strong>learn</strong>. Let’s create a module with import path as <strong>“sample.com/learn” </strong>in the learn directory.</p>
+
+
+
+<pre class="wp-block-prismatic-blocks language-go"><code class=" language-go"><span class="token keyword">go</span> mod init sample<span class="token punctuation">.</span>com<span class="token operator">/</span>learn</code></pre>
+
+
+
+<p class="has-medium-font-size">It will create a go.mod file</p>
+
+
+
+<p class="has-medium-font-size"><strong>go.mod</strong></p>
+
+
+
+<pre class="wp-block-prismatic-blocks language-go"><code class=" language-go">module sameple<span class="token punctuation">.</span>com<span class="token operator">/</span>learn
+
+<span class="token keyword">go</span> <span class="token number">1.14</span></code></pre>
+
+
+
+<p class="has-medium-font-size">Let’s create below files and directories</p>
+
+
+
+<ul class="has-medium-font-size"><li>learn/main.go</li></ul>
+
+
+
+<ul class="has-medium-font-size"><li>learn/math/math.go</li></ul>
+
+
+
+<ul class="has-medium-font-size"><li>learn/math/advanced/advanced.go</li></ul>
+
+
+
+<p class="has-medium-font-size">You can see that <strong>advanced</strong> is a nested package inside the <strong>math</strong> package.</p>
+
+
+
+<p class="has-medium-font-size"><strong>learn/math/math.go</strong></p>
+
+
+
+<pre class="wp-block-prismatic-blocks language-go"><code class=" language-go"><span class="token keyword">package</span> math
+<span class="token keyword">func</span> <span class="token function">Add</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> a <span class="token operator">+</span> b
+<span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token function">Subtract</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> a <span class="token operator">-</span> b
+<span class="token punctuation">}</span></code></pre>
+
+
+
+<p class="has-medium-font-size"><strong>learn/math/advanced/advanced.go</strong></p>
+
+
+
+<pre class="wp-block-prismatic-blocks language-go"><code class=" language-go"><span class="token keyword">package</span> advanced
+<span class="token keyword">func</span> <span class="token function">Square</span><span class="token punctuation">(</span>a <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> a <span class="token operator">*</span> a
+<span class="token punctuation">}</span></code></pre>
+
+
+
+<p class="has-medium-font-size"><strong>learn/main.go</strong></p>
+
+
+
+<pre class="wp-block-prismatic-blocks language-go"><code class=" language-go"><span class="token keyword">package</span> main
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+    <span class="token string">"fmt"</span>
+    <span class="token string">"sample.com/learn/math"</span>
+    <span class="token string">"sample.com/learn/math/advanced"</span>
+<span class="token punctuation">)</span>
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>math<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>math<span class="token punctuation">.</span><span class="token function">Subtract</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>advanced<span class="token punctuation">.</span><span class="token function">Square</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span></code></pre>
+
+
+
+<p class="has-medium-font-size">Let’s run this program</p>
+
+
+
+<pre class="wp-block-prismatic-blocks language-go"><code class=" language-go">learn $ <span class="token keyword">go</span> install
+learn $ learn
+<span class="token number">3</span>
+<span class="token number">1</span>
+<span class="token number">4</span></code></pre>
+
+
+
+<p class="has-medium-font-size">Points to note about above program</p>
+
+
+
+<ul class="has-medium-font-size"><li>We imported the <strong>advanced</strong> package in main.go with full qualified path i.e,&nbsp; <strong>import “sample.com/learn/math/advanced”</strong></li></ul>
+
+
+
+<ul class="has-medium-font-size"><li><strong>Square</strong> function is referred to using <strong>advanced</strong> package i.e, <strong>advanced.Square(2)</strong></li></ul>
+
+			<div class="tags-list">
+				<li><a href="https://golangbyexample.com/tag/go/" rel="tag">go</a></li><li><a href="https://golangbyexample.com/tag/golang/" rel="tag">golang</a></li>			</div>
+	</div><!-- .entry-content -->
+</article><!-- #post-4382 -->
+
+<div id="disqus_thread"><iframe id="dsq-app2800" name="dsq-app2800" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="./conf_files/saved_resource.html" style="width: 1px !important; min-width: 100% !important; border: none !important; overflow: hidden !important; height: 394px !important;" horizontalscrolling="no" verticalscrolling="no"></iframe></div>
+
+		</main><!-- #main -->
+	</div><!-- #primary -->
+
+
+<aside id="secondary" class="featured-sidebar widget-area">
+	<section id="custom_html-90" class="widget_text fbox swidgets-wrap widget widget_custom_html"><div class="textwidget custom-html-widget"><iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" class="twitter-follow-button twitter-follow-button-rendered" style="position: static; visibility: visible; width: 207px; height: 28px;" title="Twitter Follow Button" src="./conf_files/follow_button.a53eecb4584348a2ad32ec2ae21f6eae.en.html" data-screen-name="golangbyexample"></iframe><script async="" src="./conf_files/widgets.js" charset="utf-8"></script></div></section><section id="widget_sp_image-3" class="fbox swidgets-wrap widget widget_sp_image"><a href="https://www.linkedin.com/in/golangbyexample/" target="_blank" class="widget_sp_image-image-link"><img width="95" height="30" class="attachment-full" style="max-width: 100%;" src="./conf_files/linkedin.jpeg"></a></section><section id="search-10" class="fbox swidgets-wrap widget widget_search"><form role="search" method="get" class="search-form" action="https://golangbyexample.com/">
+				<label>
+					<span class="screen-reader-text">Search for:</span>
+					<input type="search" class="search-field" placeholder="Search …" value="" name="s">
+				</label>
+				<input type="submit" class="search-submit" value="Search">
+			</form></section><section id="text-3" class="fbox swidgets-wrap widget widget_text"><div class="swidget"><div class="sidebar-title-border"><h3 class="widget-title">Popular Articles</h3></div></div>			<div class="textwidget"><p><a href="https://golangbyexample.com/golang-comprehensive-tutorial/">Golang Comprehensive Tutorial Series</a></p>
+<p><a href="https://golangbyexample.com/all-design-patterns-golang/">All Design Patterns in Go (Golang)</a></p>
+<p><a href="https://golangbyexample.com/slice-in-golang">Slice in golang</a></p>
+<p><a href="https://golangbyexample.com/variables-in-golang-complete-guide">Variables in Go (Golang) – Complete Guide</a></p>
+<p><a href="https://golangbyexample.com/oop-inheritance-golang-complete/">OOP: Inheritance in GOLANG complete guide</a></p>
+<p><a href="https://golangbyexample.com/using-context-in-golang-complete-guide/">Using Context Package in GO (Golang) – Complete Guide</a></p>
+<p><a href="https://golangbyexample.com/all-data-types-in-golang-with-examples/">All data types in Golang with examples</a></p>
+<p><a href="https://golangbyexample.com/all-about-time-and-date-golang/">Understanding time and date in Go (Golang) – Complete Guide</a></p>
+</div>
+		</section><section id="custom_html-88" class="widget_text fbox swidgets-wrap widget widget_custom_html"><div class="textwidget custom-html-widget"><script async="" src="./conf_files/f.txt"></script>
+<ins class="adsbygoogle" style="display:block" data-ad-format="autorelaxed" data-ad-client="ca-pub-2467863025261092" data-ad-slot="1916017719"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></section><section id="custom_html-80" class="widget_text fbox swidgets-wrap widget widget_custom_html"><div class="textwidget custom-html-widget"><script async="" src="./conf_files/f.txt"></script>
+<!-- First Vertical -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2467863025261092" data-ad-slot="5967600566" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></section><section id="custom_html-81" class="widget_text fbox swidgets-wrap widget widget_custom_html"><div class="textwidget custom-html-widget"><script async="" src="./conf_files/f.txt"></script>
+<!-- First Vertical -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2467863025261092" data-ad-slot="5967600566" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></section><section id="custom_html-82" class="widget_text fbox swidgets-wrap widget widget_custom_html"><div class="textwidget custom-html-widget"><script async="" src="./conf_files/f.txt"></script>
+<!-- First Vertical -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2467863025261092" data-ad-slot="5967600566" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></section><section id="custom_html-83" class="widget_text fbox swidgets-wrap widget widget_custom_html"><div class="textwidget custom-html-widget"><script async="" src="./conf_files/f.txt"></script>
+<!-- First Vertical -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2467863025261092" data-ad-slot="5967600566" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></section><section id="custom_html-84" class="widget_text fbox swidgets-wrap widget widget_custom_html"><div class="textwidget custom-html-widget"><script async="" src="./conf_files/f.txt"></script>
+<!-- First Vertical -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2467863025261092" data-ad-slot="5967600566" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></section><section id="custom_html-93" class="widget_text fbox swidgets-wrap widget widget_custom_html"><div class="textwidget custom-html-widget"><script async="" src="./conf_files/f.txt"></script>
+<!-- First Vertical -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2467863025261092" data-ad-slot="5967600566" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></section><section id="custom_html-94" class="widget_text fbox swidgets-wrap widget widget_custom_html"><div class="textwidget custom-html-widget"><script async="" src="./conf_files/f.txt"></script>
+<!-- First Vertical -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2467863025261092" data-ad-slot="5967600566" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></section><section id="custom_html-98" class="widget_text fbox swidgets-wrap widget widget_custom_html"><div class="textwidget custom-html-widget"><script async="" src="./conf_files/f.txt"></script>
+<!-- First Vertical -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2467863025261092" data-ad-slot="5967600566" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></section></aside><!-- #secondary -->
+	</div>
+</div>
+</div><!-- #content -->
+<div class="content-wrap">
+
+	<footer id="colophon" class="site-footer clearfix">
+
+					<div class="footer-column-wrapper">
+				<div class="footer-column-three footer-column-left">
+					<section id="custom_html-85" class="widget_text fbox widget widget_custom_html"><div class="textwidget custom-html-widget"><script async="" src="./conf_files/f.txt"></script>
+<!-- First Vertical -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2467863025261092" data-ad-slot="5967600566" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></section>				</div>
+			
+							<div class="footer-column-three footer-column-middle">
+					<section id="custom_html-86" class="widget_text fbox widget widget_custom_html"><div class="textwidget custom-html-widget"><script async="" src="./conf_files/f.txt"></script>
+<!-- First Vertical -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2467863025261092" data-ad-slot="5967600566" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></section>				</div>
+			
+							<div class="footer-column-three footer-column-right">
+					<section id="custom_html-87" class="widget_text fbox widget widget_custom_html"><div class="textwidget custom-html-widget"><script async="" src="./conf_files/f.txt"></script>
+<!-- First Vertical -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2467863025261092" data-ad-slot="5967600566" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></section>				
+				</div>
+						<div class="site-info">
+				©2021 Welcome To Golang By Example
+
+				<!-- Delete below lines to remove copyright from footer -->
+				<span class="footer-info-right">
+					 | Design: <a href="https://superbthemes.com/" rel="nofollow">Newspaperly WordPress Theme</a>
+				</span>
+				<!-- Delete above lines to remove copyright from footer -->
+
+			</div>
+		</div>
+	</footer><!-- #colophon -->
+</div>
+
+</div><!-- #page -->
+
+<div id="smobile-menu" class="mobile-only"><nav id="primary-site-navigation" class="primary-menu main-navigation clearfix">
+						<a href="https://golangbyexample.com/nested-packages-golang/#" id="pull" class="smenu-hide toggle-mobile-menu menu-toggle" aria-controls="secondary-menu" aria-expanded="false">Menu</a>
+						<div class="content-wrap text-center">
+							<div class="center-main-menu">
+								<div class="menu-main-menu-container"><ul id="primary-menu" class="pmenu"><li id="menu-item-21" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-21"><a href="https://golangbyexample.com//">Home</a></li>
+<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-33"><a href="https://golangbyexample.com/blog/">Blog</a></li>
+<li id="menu-item-20" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20"><a href="https://golangbyexample.com/contact-us/">Contact Us</a></li>
+<li id="menu-item-2406" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2406"><a href="https://golangbyexample.com/support/">Support this website</a></li>
+</ul></div>								</div>
+							</div>
+						</nav></div>
+<div id="mobile-menu-overlay"></div>
+
+<script type="text/javascript" src="./conf_files/photon.min.js" id="jetpack-photon-js"></script>
+<script type="text/javascript" id="disqus_count-js-extra">
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"golangbyexample"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./conf_files/comment_count.js" id="disqus_count-js"></script>
+<script type="text/javascript" id="disqus_embed-js-extra">
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"integration":"wordpress 3.0.21"},"disqusIdentifier":"4382 https:\/\/golangbyexample.com\/?p=4382","disqusShortname":"golangbyexample","disqusTitle":"Nested Packages in Go (Golang)","disqusUrl":"https:\/\/golangbyexample.com\/nested-packages-golang\/","postId":"4382"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./conf_files/comment_embed.js" id="disqus_embed-js"></script>
+<script type="text/javascript" src="./conf_files/prism-core.js" id="prismatic-prism-js"></script>
+<script type="text/javascript" src="./conf_files/lang-go.js" id="prismatic-prism-go-js"></script>
+<script type="text/javascript" src="./conf_files/navigation.js" id="newspaperly-navigation-js"></script>
+<script type="text/javascript" src="./conf_files/skip-link-focus-fix.js" id="newspaperly-skip-link-focus-fix-js"></script>
+<script type="text/javascript" src="./conf_files/jquery.flexslider.js" id="newspaperly-flexslider-jquery-js"></script>
+<script type="text/javascript" src="./conf_files/script.js" id="newspaperly-script-js"></script>
+<script type="text/javascript" src="./conf_files/comment-reply.min.js" id="comment-reply-js"></script>
+<script type="text/javascript" src="./conf_files/q2w3-fixed-widget.min.js" id="q2w3_fixed_widget-js"></script>
+<script type="text/javascript" src="./conf_files/wp-embed.min.js" id="wp-embed-js"></script>
+<script type="text/javascript" src="./conf_files/jquery.smooth-scroll.min.js" id="jquery-smooth-scroll-js"></script>
+<script type="text/javascript" src="./conf_files/js.cookie.min.js" id="js-cookie-js"></script>
+<script type="text/javascript" src="./conf_files/jquery.sticky-kit.min.js" id="jquery-sticky-kit-js"></script>
+<script type="text/javascript" id="ez-toc-js-js-extra">
+/* <![CDATA[ */
+var ezTOC = {"smooth_scroll":"1","visibility_hide_by_default":"","width":"auto","scroll_offset":"30"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./conf_files/front.min.js" id="ez-toc-js-js"></script>
+<script src="./conf_files/e-202145.js" defer=""></script>
+<script>
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:9.6.2',blog:'159787465',post:'4382',tz:'5.5',srv:'golangbyexample.com'} ]);
+	_stq.push([ 'clickTrackerInit', '159787465', '4382' ]);
+</script>
+
+
+<img src="./conf_files/g.gif" alt=":)" width="6" height="5" id="wpstats"><iframe scrolling="no" frameborder="0" allowtransparency="true" src="./conf_files/widget_iframe.a53eecb4584348a2ad32ec2ae21f6eae.html" title="Twitter settings iframe" style="display: none;"></iframe><iframe style="display: none;" src="./conf_files/saved_resource(2).html"></iframe><iframe id="rufous-sandbox" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" style="position: absolute; visibility: hidden; display: none; width: 0px; height: 0px; padding: 0px; border: none;" title="Twitter analytics iframe" src="./conf_files/saved_resource(3).html"></iframe></body></html>
