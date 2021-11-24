@@ -78,19 +78,6 @@
     background: rgb(98, 168, 229);
 }
 
-/* Hint Display */
-
-.clue-text {
-    box-sizing: border-box;
-    border-radius: 20px;
-    padding: 10px 20px 15px;
-    margin-left: 6vh;
-    margin-right: 6vh;
-    margin-bottom: 2vh;
-    background: rgba(199, 190, 186, 0.5);
-    font-weight: 400;
-}
-
 /* Manual Entry Display */
 
 .manual-entry-text {

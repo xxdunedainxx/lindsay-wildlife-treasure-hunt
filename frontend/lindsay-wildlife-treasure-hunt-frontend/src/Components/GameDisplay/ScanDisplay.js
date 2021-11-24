@@ -43,7 +43,8 @@ class ScanDisplay extends React.Component {
         },
         showViewFinder: false,
         resolution: "2080",
-        legacyMode: true
+        legacyMode: true,
+        fullscreen: false
       }
 
       this.qrReaderConstraints = {
@@ -61,12 +62,14 @@ class ScanDisplay extends React.Component {
     }
 
     fullscreen(){
+      console.log("scan display going full screen")
       this.setState(
         {
           scannerContainerStyle: {
             width: window.screen.width,
             height: window.screen.height
-          }
+          },
+          fullscreen: true
         }
       );
       this.render()
@@ -79,24 +82,24 @@ class ScanDisplay extends React.Component {
           scannerContainerStyle: {
             width: this.width,
             height: this.height
-          }
+          },
+          fullscreen: false
         }
       );
       this.render()
     }
     
     scanDomElement(){
-      this.domElement= document.getElementById("scannerDisplay");
-      this.domElement.onmouseover = this.onMouseOverDomElem
-      this.domElement.onmouseout = this.onMouseOutDomElem
-      this.cssStyle = document.getElementById("scannerDisplay").style;
-      console.log(this.domElement.getBoundingClientRect())
-      console.log('setting scan display control position...');
-      this.scanDisplayControls.positionControls (
-        this.domElement.getBoundingClientRect().y, 
-        this.domElement.getBoundingClientRect().x, 
-        this.domElement.getBoundingClientRect().width
-      );
+      if(this.domElement != null){
+        this.cssStyle = document.getElementById("scannerDisplay").style;
+        console.log(this.domElement.getBoundingClientRect())
+        console.log('setting scan display control position...');
+        this.scanDisplayControls.positionControls (
+          this.domElement.getBoundingClientRect().y, 
+          this.domElement.getBoundingClientRect().x, 
+          this.domElement.getBoundingClientRect().width
+        );
+      }
     }
 
     componentDidMount() {
@@ -114,7 +117,12 @@ class ScanDisplay extends React.Component {
       //     // The constraints could not be satisfied by the available devices.
       //   });
       // });
-      this.scanDomElement();
+      this.domElement= document.getElementById("scannerDisplay"); 
+      if(this.domElement != null){
+        this.domElement.onmousedown = this.onMouseOverDomElem
+        //this.domElement.onmouseout = this.onMouseOutDomElem
+        this.scanDomElement();
+      }
       window.addEventListener('resize', this.updateWindowSize.bind(this));
     }
     componentDidUpdate(){
@@ -158,6 +166,8 @@ class ScanDisplay extends React.Component {
     }
   
     render() {
+      console.log("scan display state")
+      console.log(this.state)
       if(!this.props.displayAnswer && this.props.readyForBarcode && !this.props.manualEntryMode) {
         if(this.props.scannerOpen === false) {
           return(
@@ -188,10 +198,14 @@ class ScanDisplay extends React.Component {
               <div className="scanner-container">
 
               </div>
-              <ReadyToScanButton
-                onClick={this.props.readyToScanButton}
-                scannerOpen={this.props.scannerOpen}
-              /><br/>
+              { 
+                this.state.fullscreen == false ? 
+                <ReadyToScanButton
+                  onClick={this.props.readyToScanButton}
+                  scannerOpen={this.props.scannerOpen}
+                /> : ""
+              }
+              <br/>
               <DebugCorrectAnswerButton
                 onClick={this.props.debugCorrectAnswerButton}
               />

@@ -3,7 +3,7 @@ import GameController from '../../src/game/Game';
 
 import TopMessage from './TopMessage';
 import ScanDisplay from './ScanDisplay';
-import HintDisplay from './HintDisplay';
+import HintDisplay from './components/HintDisplay/HintDisplay';
 import AnswerDisplay from './AnswerDisplay';
 import ManualEntryDisplay from './ManualEntryDisplay';
 import ScanDisplayControls from './ScanDisplayControls';
@@ -17,8 +17,11 @@ export class GameDisplay extends React.Component {
     super(props)
     GameDisplay.INSTANCE = this
     GameController.loadSessionData();
+
     this.scannerDisplay = undefined
     this.scanDisplayControls = undefined
+    this.hintDisplay = undefined
+
     this.state = {
       gameStarted: GameController.gameState.gameStarted,
       currentLevel: GameController.gameState.currentLevel,
@@ -38,6 +41,7 @@ export class GameDisplay extends React.Component {
       scannerOpen: false,
       manualEntryMode: false,
       gameComplete: GameController.gameState.gameComplete,
+      fullscreen: false
     }
   }
 
@@ -76,11 +80,23 @@ export class GameDisplay extends React.Component {
   }
 
   fullScreenScannerView(){
+    this.setState(
+      {
+        fullscreen: true
+      }
+    );
     this.scannerDisplay.fullscreen()
+    this.hintDisplay.fullscreen()
   }
 
   exitFullScreenScannerView(){
     console.log('game display is closing main scanner display')
+    this.setState(
+      {
+        fullscreen: false
+      }
+    );
+    this.hintDisplay.exitFullScreen()
     this.scannerDisplay.exitFullscreen()
   }
 
@@ -146,10 +162,14 @@ export class GameDisplay extends React.Component {
     }
   }
 
-  extraHintButton() {
+  displayExtraHint(){
     this.setState({
       displayExtraHint: true,
     })
+  }
+
+  extraHintButton() {
+    this.displayExtraHint()
   }
 
   checkAnswer() {
@@ -222,14 +242,17 @@ export class GameDisplay extends React.Component {
   render(){
     return(
       <div className="game-display-container">
-        <TopMessage
-          gameStarted={this.state.gameStarted}
-          currentLevel={this.state.currentLevel}
-          displayAnswer={this.state.displayAnswer}
-          lastGuessWrong={this.state.lastGuessWrong}
-          attempts={this.state.attempts}
-          startGameButton={this.startGameButton.bind(this)}
-        />
+        { 
+        this.state.fullscreen == false ? 
+              <TopMessage
+              gameStarted={this.state.gameStarted}
+              currentLevel={this.state.currentLevel}
+              displayAnswer={this.state.displayAnswer}
+              lastGuessWrong={this.state.lastGuessWrong}
+              attempts={this.state.attempts}
+              startGameButton={this.startGameButton.bind(this)}
+            /> : ""
+        }
         <HintDisplay
           gameStarted={this.state.gameStarted}
           displayAnswer={this.state.displayAnswer}
@@ -263,13 +286,16 @@ export class GameDisplay extends React.Component {
           debugWrongAnswerButton={this.debugWrongAnswerButton.bind(this)}
           manualEntryMode={this.state.manualEntryMode}
         />
-        <ManualEntryDisplay
-          gameStarted={this.state.gameStarted}
-          displayAnswer={this.state.displayAnswer}
-          manualEntryMode={this.state.manualEntryMode}
-          manualEntryTextSubmitButton={this.manualEntryTextSubmitButton.bind(this)}
-          manualEntryModeButton={this.manualEntryModeButton.bind(this)}
-        />
+        { 
+          this.state.fullscreen == false ? 
+          <ManualEntryDisplay
+            gameStarted={this.state.gameStarted}
+            displayAnswer={this.state.displayAnswer}
+            manualEntryMode={this.state.manualEntryMode}
+            manualEntryTextSubmitButton={this.manualEntryTextSubmitButton.bind(this)}
+            manualEntryModeButton={this.manualEntryModeButton.bind(this)}
+          /> : ""
+        }
         <br/><br/>
         <RestartGameDisplay
           gameStarted={this.state.gameStarted}
