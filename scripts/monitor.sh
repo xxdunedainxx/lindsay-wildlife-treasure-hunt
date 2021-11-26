@@ -5,7 +5,7 @@ source ~/.lindsay_monitor.src
 EMAIL_ARRAY=($EMAIL_ADDRESSES)
 
 # function to send email
-send_alert_email() {
+#send_alert_email() {
     # TODO: function takes a space separated list of emails as args
     #to=$1
     #echo "Sending alert message to $to"
@@ -16,11 +16,15 @@ send_alert_email() {
   #--mail-from 'lindsaywildlifetech@gmail.com' \
   #--mail-rcpt '$to' \
   #--upload-file alert_email.txt
-}
+#}
 
 # get app health status
-status=$(curl https://lindsay-wildlife-apps.zee-aws.net/backend/health \
+#touch ./scripts/health_curl_time.txt
+status=$(curl -s ${LINDSAY_URL} \
     | jq --raw-output '.status')
+timestamp=$(date)
+curl_time=$(curl -s -w curl_time=%{time_total} $LINDSAY_URL)
+echo "$timestamp $curl_time" >> ./scripts/health_curl_time.txt
 if [[ $status == 'HEALTHY' ]]; then
     echo 'App is healthy :)'
 # if we don't get a healthy response:
