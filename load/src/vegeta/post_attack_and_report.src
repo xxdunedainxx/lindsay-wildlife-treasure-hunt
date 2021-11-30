@@ -1,0 +1,13 @@
+#! /bin/bash
+
+source ./src/vegeta/attack_and_report.src
+
+function postAttackAndReport(){
+  endPoint=$1
+  duration=$2
+  requestRate=$3
+  reportName="${4}"
+  postData=$5
+
+  attackAndReport "POST ${endPoint}\n${postData}" $duration $requestRate $reportName
+}

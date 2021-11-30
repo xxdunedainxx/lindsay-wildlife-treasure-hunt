@@ -1,0 +1,9 @@
+#! /bin/bash
+
+function vegetaReport(){
+  reportFile=$1
+  cat "${reportFile}" | vegeta report -type=text
+  cat "${reportFile}" | vegeta report -type=text >> "${RESULT_FILE}"
+  cat "${reportFile}" | vegeta plot > "${reportFile}.html"
+  echo -e "\n" >> "${RESULT_FILE}"
+}
