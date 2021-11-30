@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.13.3
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/119)
+* Multiple Barcode scanners for testing
+* Custom barcode scanner w/ ZXING barcode decoding algorithm
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/117)
+* Health Monitoring Scripts
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/116)
+* Load Testing Framework
+
+[Release](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/releases/tag/mvp-0.13.3)
+
 ## 0.13.2
 
 [PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/112)
