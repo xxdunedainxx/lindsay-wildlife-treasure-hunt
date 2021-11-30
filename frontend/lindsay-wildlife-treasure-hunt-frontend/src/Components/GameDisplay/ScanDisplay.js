@@ -125,6 +125,13 @@ class ScanDisplay extends React.Component {
             <div className="scanner-display-container">
               <div className="scanner-container">
               Current Barcode Scanner: <b>{this.state.barCodeScannerVersion}</b><br/>
+              <b>Bar code scanner toggle</b>
+              <select onChange={this.barCodeScannerToggle.bind(this)}>
+                <option selected name={ScanDisplay.BARCODE_SCANNERS.ZBarcodeScanner} value={ScanDisplay.BARCODE_SCANNERS.ZBarcodeScanner}>{ScanDisplay.BARCODE_SCANNERS.ZBarcodeScanner}</option>
+                <option name={ScanDisplay.BARCODE_SCANNERS.BarcodeScannerComponent} value={ScanDisplay.BARCODE_SCANNERS.BarcodeScannerComponent}>{ScanDisplay.BARCODE_SCANNERS.BarcodeScannerComponent}</option>
+                <option name={ScanDisplay.BARCODE_SCANNERS.QrReader} value={ScanDisplay.BARCODE_SCANNERS.QrReader}>{ScanDisplay.BARCODE_SCANNERS.QrReader}</option>
+              </select>
+              <br />
               {this.__getScanner()} 
               </div>
               <ReadyToScanButton
@@ -137,12 +144,6 @@ class ScanDisplay extends React.Component {
               <DebugWrongAnswerButton
                 onClick={this.props.debugWrongAnswerButton}
               />
-              Bar code scanner toggle
-              <select onChange={this.barCodeScannerToggle.bind(this)}>
-                <option selected name={ScanDisplay.BARCODE_SCANNERS.ZBarcodeScanner} value={ScanDisplay.BARCODE_SCANNERS.ZBarcodeScanner}>{ScanDisplay.BARCODE_SCANNERS.ZBarcodeScanner}</option>
-                <option name={ScanDisplay.BARCODE_SCANNERS.BarcodeScannerComponent} value={ScanDisplay.BARCODE_SCANNERS.BarcodeScannerComponent}>{ScanDisplay.BARCODE_SCANNERS.BarcodeScannerComponent}</option>
-                <option name={ScanDisplay.BARCODE_SCANNERS.QrReader} value={ScanDisplay.BARCODE_SCANNERS.QrReader}>{ScanDisplay.BARCODE_SCANNERS.QrReader}</option>
-              </select>
             </div>
           );
         }
