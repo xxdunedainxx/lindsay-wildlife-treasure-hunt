@@ -6,6 +6,7 @@ import ScanDisplay from './ScanDisplay';
 import HintDisplay from './HintDisplay';
 import AnswerDisplay from './AnswerDisplay';
 import ManualEntryDisplay from './ManualEntryDisplay';
+import TestZoomComponent from './TestZoomComponent';
 
 import './GameDisplay.css';
 

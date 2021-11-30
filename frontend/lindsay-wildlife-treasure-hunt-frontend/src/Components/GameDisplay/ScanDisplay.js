@@ -1,9 +1,16 @@
 import React from "react";
+import ZBarcodeScanner from '../BarcodeScanner/ZBarcodeScanner';
 import BarcodeScannerComponent from "react-webcam-barcode-scanner";
 import QrReader from 'react-qr-reader'
 import GameDisplay from './GameDisplay';
 // Scan Display
 class ScanDisplay extends React.Component {
+
+    static BARCODE_SCANNERS = {
+      "ZBarcodeScanner" : "ZBarcodeScanner",
+      "QrReader" : "QrReader",
+      "BarcodeScannerComponent" : "BarcodeScannerComponent"
+    }
 
     constructor(props) {
       super(props);
@@ -26,8 +33,9 @@ class ScanDisplay extends React.Component {
         scannerWidth: width,
         scannerHeight: height,
         showViewFinder: true,
+        scannerOpen: props.scannerOpen,
         resolution: 600,
-        barCodeScannerVersion: 'react-webcam-barcode-scanner'
+        barCodeScannerVersion: ScanDisplay.BARCODE_SCANNERS.ZBarcodeScanner
       }
     }
 
@@ -47,20 +55,12 @@ class ScanDisplay extends React.Component {
       })
     }
   
-    barCodeScannerToggle() {
-      if(this.state.barCodeScannerVersion == 'react-webcam-barcode-scanner') {
-        this.setState(
-          {
-            barCodeScannerVersion: 'react-qr-reader'
-          }
-        );
-      } else {
-        this.setState(
-          {
-            barCodeScannerVersion: 'react-webcam-barcode-scanner'
-          }
-        );
-      }
+    barCodeScannerToggle(event) {
+      this.setState(
+        {
+            barCodeScannerVersion: event.target.value
+        }
+      )
     }
 
     handleScanError(error){
@@ -71,6 +71,41 @@ class ScanDisplay extends React.Component {
     handleScan = data => {
       if (data) {
         GameDisplay.instance.qrScannerUpdate(data)
+      }
+    }
+
+    __getScanner(){
+      if(this.state.barCodeScannerVersion == ScanDisplay.BARCODE_SCANNERS.BarcodeScannerComponent) {
+        return (
+          <BarcodeScannerComponent
+            width={this.state.scannerWidth}
+            height={this.state.scannerHeight}
+            onUpdate={(err, result) => {
+                this.handleScan(result)
+            }}
+          />
+        )
+      } else if(this.state.barCodeScannerVersion == ScanDisplay.BARCODE_SCANNERS.QrReader) {
+        return (
+          <QrReader
+            delay={500}
+            showViewFinder={this.state.showViewFinder}
+            onError={this.handleScanError}
+            onScan={this.handleScan}
+            className="qrScannerV2"
+            resolution={this.state.resolution}
+            style={{ width: this.state.scannerWidth, height: this.state.scannerHeight }}
+          />
+        )
+      } else{
+        return (
+          <ZBarcodeScanner
+            width={this.state.scannerWidth}
+            height={this.state.scannerHeight}
+            onSuccessScan={this.handleScan}
+            scanEnabled={this.props.scannerOpen}
+          />
+        )
       }
     }
 
@@ -90,26 +125,7 @@ class ScanDisplay extends React.Component {
             <div className="scanner-display-container">
               <div className="scanner-container">
               Current Barcode Scanner: <b>{this.state.barCodeScannerVersion}</b><br/>
-              {
-                this.state.barCodeScannerVersion == 'react-webcam-barcode-scanner' ? 
-                <BarcodeScannerComponent
-                  width={this.state.scannerWidth}
-                  height={this.state.scannerHeight}
-                  onUpdate={(err, result) => {
-                      this.handleScan(result)
-                  }}
-                />
-                :
-                <QrReader
-                  delay={500}
-                  showViewFinder={this.state.showViewFinder}
-                  onError={this.handleScanError}
-                  onScan={this.handleScan}
-                  className="qrScannerV2"
-                  resolution={this.state.resolution}
-                  style={{ width: this.state.scannerWidth, height: this.state.scannerHeight }}
-                />
-              } 
+              {this.__getScanner()} 
               </div>
               <ReadyToScanButton
                 onClick={this.props.readyToScanButton}
@@ -121,7 +137,12 @@ class ScanDisplay extends React.Component {
               <DebugWrongAnswerButton
                 onClick={this.props.debugWrongAnswerButton}
               />
-              <button onClick={this.barCodeScannerToggle.bind(this)} >Bar code scanner toggle</button>
+              Bar code scanner toggle
+              <select onChange={this.barCodeScannerToggle.bind(this)}>
+                <option selected name={ScanDisplay.BARCODE_SCANNERS.ZBarcodeScanner} value={ScanDisplay.BARCODE_SCANNERS.ZBarcodeScanner}>{ScanDisplay.BARCODE_SCANNERS.ZBarcodeScanner}</option>
+                <option name={ScanDisplay.BARCODE_SCANNERS.BarcodeScannerComponent} value={ScanDisplay.BARCODE_SCANNERS.BarcodeScannerComponent}>{ScanDisplay.BARCODE_SCANNERS.BarcodeScannerComponent}</option>
+                <option name={ScanDisplay.BARCODE_SCANNERS.QrReader} value={ScanDisplay.BARCODE_SCANNERS.QrReader}>{ScanDisplay.BARCODE_SCANNERS.QrReader}</option>
+              </select>
             </div>
           );
         }
