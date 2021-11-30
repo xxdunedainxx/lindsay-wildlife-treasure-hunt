@@ -129,3 +129,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Health check monitor last alert time
+./scripts/LAST_ALERT.txt
