@@ -1,0 +1,15 @@
+#! /bin/bash
+
+source ./src/util/VEGETA.src
+
+rm -rf ./reports
+
+mkdir reports
+
+rm "${RESULT_FILE}"
+
+touch "${RESULT_FILE}"
+
+echo -e "# ${VERSION} Load Test Results\n" >> "${RESULT_FILE}"
+
+echo -e "**NOTE**: THIS FILE IS AUTOMAGICALLY GENERATED :)\n" >> "${RESULT_FILE}"

@@ -1,0 +1,25 @@
+#! /bin/bash
+
+source ./src/vegeta/vegeta_report.src
+
+function attackAndReport(){
+  vegateCommand=$1
+  duration=$2
+  requestRate=$3
+  reportName="./reports/${4}.bin" 
+
+  echo -e "### ${4}\n" >> "${RESULT_FILE}"
+
+  echo "${1}, ${2}, ${3}, ${4}"
+
+  commandToRun="echo \"${vegateCommand}\" \
+  | vegeta attack -duration="${duration}" -rate="${requestRate}" -output "${reportName}" \
+  | tee "${reportName}" \
+  | vegeta report"
+
+  echo "Running Vegeta command: ${commandToRun}"
+
+  eval "${commandToRun}"
+
+  vegetaReport $reportName
+}
