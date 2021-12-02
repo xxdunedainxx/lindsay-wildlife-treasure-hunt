@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.13.4
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/120)
+* Z Scanner in favor over open source barcode scanners
+* Remove scanner toggle and other two open source barcode scanners
+* disable audio for video element
+* 'ready for answer' btn formatting
+
 ## 0.13.3
 
 [PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/119)
