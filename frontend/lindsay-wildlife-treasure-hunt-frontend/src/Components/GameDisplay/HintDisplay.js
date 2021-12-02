@@ -66,7 +66,7 @@ function DisplayExtraHint(props) {
 function GetAnswerButton(props) {
   if(props.attempts >= 3) {
     return(
-      <button
+      <button className="game-button"
         onClick={props.onClick}
       >Ready for the answer?</button>
     );

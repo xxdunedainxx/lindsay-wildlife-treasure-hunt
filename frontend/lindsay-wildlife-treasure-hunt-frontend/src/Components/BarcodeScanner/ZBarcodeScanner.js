@@ -116,7 +116,13 @@ class ZBarcodeScanner extends React.Component {
   render() {
     return (
       <div id={this.state.containerElementID}>
-        <video id={this.state.videoElementID} width={this.state.width} height={this.state.height}></video>
+        <video 
+          id={this.state.videoElementID} 
+          width={this.state.width} 
+          height={this.state.height} 
+          muted="true"
+        >
+        </video>
       </div>
     );
   }
