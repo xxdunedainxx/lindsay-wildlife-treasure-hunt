@@ -1,4 +1,5 @@
 from src.util.LogFactory import LogFactory
+from src.util.ErrorFactory import errorStackTrace
 from src.Setup import Setup
 from src.MultiThreading.Cron import Cron
 from src.WebServer.controllers.monitor.AppHealthStatuses import AppHealthStatus
@@ -47,12 +48,16 @@ class MailerJob:
 
   @staticmethod
   def send_mail(emailData: {}):
-    if emailData["type"] == MailTypes.END_USER_CERTIFICATE_EMAIL:
-      MailerJob.send_cert_email(emailData)
-    elif emailData["type"] == MailTypes.REPORT_A_BUG_EMAIL:
-      MailerJob.send_bug_email(emailData)
-    else:
-      LogFactory.MAIN_LOG.warning("invalid mail type provided?")
+    try:
+      if emailData["type"] == MailTypes.END_USER_CERTIFICATE_EMAIL:
+        MailerJob.send_cert_email(emailData)
+      elif emailData["type"] == MailTypes.REPORT_A_BUG_EMAIL:
+        MailerJob.send_bug_email(emailData)
+      else:
+        LogFactory.MAIN_LOG.warning("invalid mail type provided?")
+    except Exception as e:
+      LogFactory.MAIN_LOG.error(f"Failed to send email with email Data {emailData}, due to exception {errorStackTrace(e)}")
+      MailerJob.mailQ.add_to_q(emailData)
 
   @staticmethod
   def send_cert_email(emailData: {}):

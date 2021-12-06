@@ -1,6 +1,6 @@
 #! /bin/bash
 
-YOUR_IP="172.19.0.1"
+YOUR_IP="10.77.159.233"
 
 function runRedisServer(){
 	# Runs the GUI alongside the redis cluster
@@ -15,5 +15,16 @@ function runRedisCommander(){
 	docker run --name redis-commander -d   --env REDIS_HOSTS="${YOUR_IP}"   -p 8081:8081   rediscommander/redis-commander:latest
 }
 
+function checkRedisConnection() {
+  nc -z localhost 6379
+  if [[ $? != 0 ]];
+  then
+    echo "Issue spinning up redis?"
+  else
+    echo "Redis is up and connected!"
+  fi
+}
+
 runRedisServer
 runRedisCommander
+checkRedisConnection
