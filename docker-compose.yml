@@ -21,6 +21,7 @@ services:
     #   CONF_FILE: REPLACE_ME
     volumes:
       - ./prod.conf.json:/conf.json
+      - ./logs:/logs
   redis:
     image: lindsay_redis_server
     container_name: lindsay_redis_server
