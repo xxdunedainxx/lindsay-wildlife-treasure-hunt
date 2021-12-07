@@ -9,7 +9,11 @@ import rory from './rm-headshot.jpeg';
 import zach from './zach.jpeg';
 
 var zachDescription = `
-Hey im zach
+Hey! I am a Bay Area native through and through. 
+Born in Vallejo and growing up in Moraga, 
+I had the amazing opportunity to visit Lindsay Wildlife 
+all the time as a kid and appreciate its amazingness. These days I work as a full time Software Engineer at Workday, based in Pleasanton. When I'm not working I enjoy spending time with friends and family, playing music, tinkering with video game development, and most importantly: spending time with my partner Erin and my two dogs Bear and Fox. 
+Shout out to Lindsay Wildlife for the amazing experience of working on this addition to the exhibit hall!
 `;
 
 var roryDescription = `
