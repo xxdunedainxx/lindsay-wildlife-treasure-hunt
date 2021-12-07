@@ -5,7 +5,7 @@ import './AboutPageComponent.css';
 // Asset Imports
 import linkedinLogo from './linkedin.png';
 import githubLogo from './github.png';
-import rory from './rory.jpeg';
+import rory from './rm-headshot.jpeg';
 import zach from './zach.jpeg';
 
 var zachDescription = `
@@ -13,7 +13,7 @@ Hey im zach
 `;
 
 var roryDescription = `
-Hey im rory
+Roderick MacLeod is a QA and Software Developer from the Bay Area. He has fond memories of visiting the Lindsay Wildlife Experience throughout his childhood while growing up in Lafayette. He attended U.C. Santa Cruz, where he studied math and physics. His interests include data science and cybersecurity, as well as cooking, art and hiking.
 `;
 
 export class AboutPage extends React.Component {
@@ -38,7 +38,7 @@ export class AboutPage extends React.Component {
         />
         <br/>
         <Profile 
-          name="Rory" 
+          name="Roderick" 
           description={roryDescription} 
           profilePic={rory} 
           linkedInHref="https://www.linkedin.com/in/rjmacleod/"
