@@ -30,7 +30,7 @@ export class WinDisplay extends React.Component {
         if(this.state.gameComplete) {
             return(
                 <div className="win-text win-page-container">
-                    <h2>You Win!</h2>
+                    <h2>You did it!</h2>
                     <h4>Now get your certificate of Lindsay Wildlife Experience Scavenger Hunt Mastery!</h4>
                     <GetCertificateDisplay/>
                     <br/>

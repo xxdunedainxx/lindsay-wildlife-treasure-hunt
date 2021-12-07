@@ -86,6 +86,8 @@
     padding: 10px 22px;
     font-size: 24px;
     background: rgb(98, 168, 229);
+    width: 200px;
+    height: 100px;
 }
 
 /* Hint Display */
