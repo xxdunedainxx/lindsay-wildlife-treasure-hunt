@@ -39,6 +39,10 @@
     background-color: rgb(98, 168, 229);
 }
 
+.current-level-text {
+  /*font-size: xx-large;*/
+}
+
 /* Answer Display */
 
 .artifact-image {
@@ -68,6 +72,9 @@
 .next-level-button {
     font-size: 24px;
     background: rgb(151, 169, 38);
+    width: 175px;
+    height: 175px;
+    border-radius: 50% !important;
 }
 
 /* Scan Display */
@@ -75,6 +82,7 @@
 .scanner-display-container {
   margin-left: auto;
   margin-right: auto;
+  margin-top: 2%;
 }
 
 .qrScannerV2 {
@@ -86,8 +94,13 @@
     padding: 10px 22px;
     font-size: 24px;
     background: rgb(98, 168, 229);
-    width: 200px;
-    height: 100px;
+    width: 175px;
+    height: 175px;
+    border-radius: 50% !important;
+}
+
+.open-scanner-button:focus {
+  background-color: #EEAA33;
 }
 
 /* Hint Display */
