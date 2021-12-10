@@ -17,10 +17,11 @@ export class HomePage extends React.Component {
     return (
       <div>
         <div className="welcomeMessage">
-          Welcome to the Lindsay Wildlife Bio-Diversity treasure hunt. The goal of the treasure hunt is to match all the given clues with various exhibits at Lindsay Wildlife Experience!
+         Welcome to the Lindsay Wildlife’s Biodiversity Scavenger Hunt. To play, match each clue to the correct specimen located in the California Biodiversity exhibit and win a special surprise!
         </div>
+        <br />
         <Link to="/ui/game" className="startButton">
-          Lets go!
+          Get Started!
         </Link>
       </div>
     );

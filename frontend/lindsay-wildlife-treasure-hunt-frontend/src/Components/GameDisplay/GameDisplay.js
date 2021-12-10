@@ -192,6 +192,16 @@ export class GameDisplay extends React.Component {
   render(){
     return(
       <div className="game-display-container">
+        <ScanDisplay
+          qrScannerUpdate={this}
+          readyForBarcode={this.state.readyForBarcode}
+          displayAnswer={this.state.displayAnswer}
+          scannerOpen={this.state.scannerOpen}
+          readyToScanButton={this.readyToScanButton.bind(this)}
+          debugCorrectAnswerButton={this.debugCorrectAnswerButton.bind(this)}
+          debugWrongAnswerButton={this.debugWrongAnswerButton.bind(this)}
+          manualEntryMode={this.state.manualEntryMode}
+        />
         <TopMessage
           gameStarted={this.state.gameStarted}
           currentLevel={this.state.currentLevel}
@@ -218,16 +228,6 @@ export class GameDisplay extends React.Component {
           artifactName={this.state.artifactName}
           artifactText={this.state.artifactText}
           artifactMediaUrl={this.state.artifactMediaUrl}
-        />
-        <ScanDisplay
-          qrScannerUpdate={this}
-          readyForBarcode={this.state.readyForBarcode}
-          displayAnswer={this.state.displayAnswer}
-          scannerOpen={this.state.scannerOpen}
-          readyToScanButton={this.readyToScanButton.bind(this)}
-          debugCorrectAnswerButton={this.debugCorrectAnswerButton.bind(this)}
-          debugWrongAnswerButton={this.debugWrongAnswerButton.bind(this)}
-          manualEntryMode={this.state.manualEntryMode}
         />
         <ManualEntryDisplay
           gameStarted={this.state.gameStarted}

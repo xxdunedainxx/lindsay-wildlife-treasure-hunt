@@ -1,6 +1,7 @@
 import React from "react";
 import ZBarcodeScanner from '../BarcodeScanner/ZBarcodeScanner';
 import GameDisplay from './GameDisplay';
+import HttpArgParser from '../../src/util/HttpArgParser';
 // Scan Display
 class ScanDisplay extends React.Component {
 
@@ -69,6 +70,23 @@ class ScanDisplay extends React.Component {
         )
     }
 
+    __getDebugComponents(){
+      if(HttpArgParser.DEBUG_MODE == "true") {
+        return (
+          <div>
+            <DebugCorrectAnswerButton
+              onClick={this.props.debugCorrectAnswerButton}
+            />
+            <DebugWrongAnswerButton
+              onClick={this.props.debugWrongAnswerButton}
+            />
+          </div>
+        )
+      } else {
+        return ("");
+      }
+    }
+
     render() {
       if(!this.props.displayAnswer && this.props.readyForBarcode && !this.props.manualEntryMode) {
         if(this.props.scannerOpen === false) {
@@ -91,12 +109,7 @@ class ScanDisplay extends React.Component {
                 onClick={this.props.readyToScanButton}
                 scannerOpen={this.props.scannerOpen}
               /><br/>
-              <DebugCorrectAnswerButton
-                onClick={this.props.debugCorrectAnswerButton}
-              />
-              <DebugWrongAnswerButton
-                onClick={this.props.debugWrongAnswerButton}
-              />
+              {this.__getDebugComponents()}
             </div>
           );
         }
