@@ -25,6 +25,7 @@ worker-pool*-info.json
 __pycache__
 
 # Logs
+backend/logs
 logs
 *.log
 npm-debug.log*
