@@ -5,7 +5,7 @@ function TopMessage(props) {
     if(props.gameStarted === false) {
       return(
         <div className="game-text top-message">
-          <h1 className="welcome-top-msg">Welcome to the treasure hunt!</h1>
+          <h1 className="welcome-top-msg">Welcome to the scavenger hunt!</h1>
           <h5 className="welcome-sub-msg">Let's get started.</h5>
           <button
             className="game-button game-start-button"
@@ -54,7 +54,7 @@ function TopMessage(props) {
   function DisplayCurrentLevel(props) {
     return(
       <div className="current-level-text game-text">
-        <h3>Level {props.currentLevel}</h3>
+        <h2>Level {props.currentLevel}</h2>
       </div>
     );
   }
