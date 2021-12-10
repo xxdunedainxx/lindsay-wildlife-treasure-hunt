@@ -6,7 +6,7 @@ import os
 
 class LogFactory():
     loggers = {}
-    log_dir = os.getcwd()
+    log_dir = f"{os.getcwd()}{os.sep}logs"
     log_level= 'INFO'
     log_stdout = True
     MAIN_LOG = None

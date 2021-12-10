@@ -1,6 +1,7 @@
 import os
 import json
 from src.Services import ServiceNames
+from src.util.LogFactory import LogFactory
 
 class Configuration:
 
@@ -29,7 +30,7 @@ class Configuration:
     # Default once a day
     "LOG_ROTATION_JOB_INTERVAL_MINUTES" : 1440,
     "LOG_ROTATION_JOB_EXPIRATION_DAYS"  : 1,
-    "LOG_ROTATION_JOB_ARCHIVE_DIR"      : f"archive{os.sep}",
+    "LOG_ROTATION_JOB_ARCHIVE_DIR"      : f"{LogFactory.log_dir}{os.sep}archive{os.sep}",
     "UI_LOGGING_JOB_INTERVAL_MINUTES" : 1,
     "UI_LOGGING_JOB_LOGS_PER_JOB"     : 50,
     "BUG_REPORT_EMAIL_LIST" : ["zrmmaster92@gmail.com", "roderickjmacleod@gmail.com"]
