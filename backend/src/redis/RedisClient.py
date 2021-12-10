@@ -65,7 +65,7 @@ class RedisClient:
     # returns the key of the item in the queue
     def add_to_q(self, json_object):
         try:
-            redis_key = self.q_size() + 1
+            redis_key = self.get_next_key()
             self.put_item(redis_key, json.dumps(json_object))
             return redis_key
         except Exception as e:
@@ -79,6 +79,14 @@ class RedisClient:
 
     def __init_logger(self):
         self._logger = LogFactory.get_logger(f"redis-{self.clientType}")
+
+    def get_next_key(self):
+        keys = self.get_keys_sorted()
+
+        if len(keys) == 0:
+            return 1
+        else:
+            return (keys[-1] + 1)
 
     def get_keys_sorted(self):
         keys= self.get_keys()
