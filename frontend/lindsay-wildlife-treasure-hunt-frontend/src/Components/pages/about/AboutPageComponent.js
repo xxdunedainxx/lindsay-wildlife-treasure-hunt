@@ -5,15 +5,19 @@ import './AboutPageComponent.css';
 // Asset Imports
 import linkedinLogo from './linkedin.png';
 import githubLogo from './github.png';
-import rory from './rory.jpeg';
+import rory from './rm-headshot.jpeg';
 import zach from './zach.jpeg';
 
 var zachDescription = `
-Hey im zach
+Hey! I am a Bay Area native through and through. 
+Born in Vallejo and growing up in Moraga, 
+I had the amazing opportunity to visit Lindsay Wildlife 
+all the time as a kid and appreciate its amazingness. These days I work as a full time Software Engineer at Workday, based in Pleasanton. When I'm not working I enjoy spending time with friends and family, playing music, tinkering with video game development, and most importantly: spending time with my partner Erin and my two dogs Bear and Fox. 
+Shout out to Lindsay Wildlife for the amazing experience of working on this addition to the exhibit hall!
 `;
 
 var roryDescription = `
-Hey im rory
+Roderick MacLeod is a QA and Software Developer from the Bay Area. He has fond memories of visiting the Lindsay Wildlife Experience throughout his childhood while growing up in Lafayette. He attended U.C. Santa Cruz, where he studied math and physics. His interests include data science and cybersecurity, as well as cooking, art and hiking.
 `;
 
 export class AboutPage extends React.Component {
@@ -38,7 +42,7 @@ export class AboutPage extends React.Component {
         />
         <br/>
         <Profile 
-          name="Rory" 
+          name="Roderick" 
           description={roryDescription} 
           profilePic={rory} 
           linkedInHref="https://www.linkedin.com/in/rjmacleod/"
