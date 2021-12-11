@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.13.5
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/124)
+* Re-queue redis emails if email sending fails
+* improve key iteration (bug)
+* some documentation on redis things
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/125)
+* Mount container logs on host so we have persistence and visibility on logs outside of container
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/126)
+* About page updates (Zach and Rory about sections)
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/127)
+* See [Issue 123](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/issues/123) for more details
+* UI improvement requests from Lindsay team
+* HTTP Arg parser + Debug mode HTTP arg
+
 ## 0.13.4
 
 [PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/120)
