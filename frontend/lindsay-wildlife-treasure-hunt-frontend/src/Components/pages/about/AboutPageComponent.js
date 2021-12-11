@@ -5,7 +5,7 @@ import './AboutPageComponent.css';
 // Asset Imports
 import linkedinLogo from './linkedin.png';
 import githubLogo from './github.png';
-import rory from './rm-headshot.jpeg';
+import rory from './rm-headshot.jpg';
 import zach from './zach.jpeg';
 
 var zachDescription = `
