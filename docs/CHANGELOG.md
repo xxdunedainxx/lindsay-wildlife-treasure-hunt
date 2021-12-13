@@ -1,5 +1,10 @@
 # Changelog
 
+## [HotPatch] 0.13.5.1
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/130)
+* Bug identified in log rotator which caused backend to crash :(
+
 ## 0.13.5
 
 [PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/124)
