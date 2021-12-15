@@ -42,7 +42,6 @@ class LogRotationJob:
       else:
         # LogFactory.MAIN_LOG
         LogFactory.MAIN_LOG.info(f"Archiving {fullPath}")
-
         FileIO.copy_file(fullPath, f"{CONF_INSTANCE.LOG_ROTATION_JOB_ARCHIVE_DIR}{datetime.datetime.now()}-{fullPath}")
         FileIO.whipe_file_contents(fullPath)
 

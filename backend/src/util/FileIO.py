@@ -82,6 +82,7 @@ class FileIO:
 
   @staticmethod
   def copy_file(source: str, destintation: str):
+    FileIO.create_file_if_does_not_exist(destintation)
     shutil.copyfile(source, destintation)
 
   @staticmethod
