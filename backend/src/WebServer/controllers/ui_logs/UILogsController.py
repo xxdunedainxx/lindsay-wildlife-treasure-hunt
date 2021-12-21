@@ -45,10 +45,15 @@ class UILogsController:
       }, 500
 
   @staticmethod
-  @flask_ref.route('/quilogs', methods=['POST'])
+  @flask_ref.route('/quilogs', methods=['POST', 'OPTIONS'])
   @http_logger
   def queue_ui_log():
     try:
+      if request.method == 'OPTIONS':
+        return {
+          "response" : "ok"
+        }, 200
+
       if request.json == None or UILogsController.__valid_post_payload(request) == False:
         return {
           "response" : "Invalid body provided"

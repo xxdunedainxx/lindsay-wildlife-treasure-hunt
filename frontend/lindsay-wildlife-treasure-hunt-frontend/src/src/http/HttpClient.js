@@ -43,6 +43,7 @@ class HttpClient {
       // instead of a catch() block so that we don't swallow
       // exceptions from actual bugs in components.
       (error) => {
+        console.log(error.stack)
         Logger.error(`HTTP POST request failed to endpoint ${this.url}/${endpoint}, with error ${JSON.stringify(error)}`)
         errorMethod(error)
       }
