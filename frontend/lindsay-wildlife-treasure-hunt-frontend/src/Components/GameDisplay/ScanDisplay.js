@@ -80,6 +80,7 @@ class ScanDisplay extends React.Component {
             <DebugWrongAnswerButton
               onClick={this.props.debugWrongAnswerButton}
             />
+            <DebugWinPage />
           </div>
         )
       } else {
@@ -153,5 +154,27 @@ function DebugWrongAnswerButton(props) {
       </button>
   );
 }
+
+class DebugWinPage extends React.Component {
+
+    constructor(props) {
+      super(props);
+    }
+    render() {
+        return(
+        <div>
+          <button
+          onClick={this.redirectToWinPage}
+          >
+          Redirect to win page
+          </button>
+        </div>
+      );
+    }
+
+    redirectToWinPage(){
+      window.location.href = '/ui/win?debug=true';
+    }
+};
 
 export default ScanDisplay;
