@@ -24,10 +24,15 @@ class MailController:
     return "message" not in request.json or "deviceInfo" not in request.json or "sessionID" not in request.json or "version" not in request.json
 
   @staticmethod
-  @flask_ref.route('/mail', methods=['POST'])
+  @flask_ref.route('/mail', methods=['POST', 'OPTIONS'])
   @http_logger
   def mail_api():
     try:
+      if request.method == 'OPTIONS':
+        return {
+          "response" : "ok"
+        }, 200
+
       if request.json == None:
         return {
           "response" : "no payload provided"
@@ -65,10 +70,15 @@ class MailController:
       }, 500
 
   @staticmethod
-  @flask_ref.route('/report', methods=['POST'])
+  @flask_ref.route('/report', methods=['POST', 'OPTIONS'])
   @http_logger
   def report_a_bug_api():
     try:
+      if request.method == 'OPTIONS':
+        return {
+          "response" : "ok"
+        }, 200
+
       if request.json == None:
         return {
            "response": "no payload provided"
