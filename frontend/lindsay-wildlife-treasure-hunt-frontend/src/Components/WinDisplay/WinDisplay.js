@@ -7,6 +7,7 @@ import './WinDisplay.css';
 import Logger from '../../src/util/Logger';
 import UserInformationSubmitClient from '../../src/http/clients/UserInformationSubmitClient';
 import Configuration from '../../src/conf/Configuration';
+import HttpArgParser from '../../src/util/HttpArgParser';
 
 function deleteProgress() {
   GameController.resetGame();
@@ -27,11 +28,14 @@ export class WinDisplay extends React.Component {
     }
 
     render(){
-        if(this.state.gameComplete) {
+        if(this.state.gameComplete || HttpArgParser.DEBUG_MODE == "true") {
             return(
                 <div className="win-text win-page-container">
-                    <h2>You did it!</h2>
-                    <h4>Now get your certificate of Lindsay Wildlife Experience Scavenger Hunt Mastery!</h4>
+                    <h2>You Win!</h2>
+                    Congratulations you found all the correct answers! To collect your prize, just tell our Guest Experience team located at the front desk that you completed the scavenger hunt!
+                    <br /><br/>
+                    <h3>Want to redeem your prize later? </h3>
+                    Fill out the information below and get emailed a certificate. When you're ready to collect, show your certificate to the Guest Experience team and get your well earned treasure.
                     <GetCertificateDisplay/>
                     <br/>
                     <br/>
