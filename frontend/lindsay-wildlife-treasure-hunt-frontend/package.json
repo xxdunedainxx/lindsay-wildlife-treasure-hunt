@@ -9,6 +9,7 @@
     "babel-polyfill": "^6.26.0",
     "dom-to-image": "^2.6.0",
     "jest": "26.6.0",
+    "qrcode-reader": "^1.0.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-native-camera": "git+https://git@github.com/react-native-community/react-native-camera.git",

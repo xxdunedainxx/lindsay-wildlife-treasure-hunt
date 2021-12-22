@@ -1,24 +1,35 @@
 import React from 'react';
 
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+//https://www.npmjs.com/package/qrcode-reader
 import { BrowserMultiFormatReader, BrowserQRCodeReader, Result, BarcodeFormat, DecodeHintType } from '@zxing/library'
 import Webcam from 'react-webcam'
-
+import QrCode from 'qrcode-reader';
 class ZBarcodeScanner extends React.Component {
 
  constructor(props) {
     super(props)
     console.log("start zbarcode scanner")
+    this.qr_reader = new QrCode()
+    this.qr_reader.callback = function(error, result) {
+      if(error) {
+        return;
+      }
+      console.log(result)
+      alert(`Found ${result}`)
+    }
     this.__setupClassVariables(props)
     this.__setupScanCallBacks(props)
     this.__setupCodeReader()
-
+    this.videoStyle= {
+      visibility: "hidden"
+    }
     this.state = {
       videoElementID: this.videoElementID,
       containerElementID: this.containerElementID,
-      width: this.width,
+      width: 750,
       scanEnabled: false,
-      height: this.height,
+      height: 750,
       videoConstraints : {
         width: 1280,
         height: 720,
@@ -57,16 +68,102 @@ class ZBarcodeScanner extends React.Component {
 
 
     this.codeReader = new BrowserQRCodeReader(hints)
+    this.codeBootstrapper = new BrowserQRCodeReader(hints)
   }
 
   defaultOnSuccessScan(result){ console.log(result); alert(result) }
   defaultOnErrorScan(error){} // default no-op
 
+  setupCanvas(){
+    var canvas = document.getElementById('qrcodecanvas');
+    var ctx    = canvas.getContext('2d');
+    ctx.imageSmoothingEnabled = true;
+    ctx.mozImageSmoothingEnabled = true;
+    ctx.webkitImageSmoothingEnabled = true;
+    ctx.msImageSmoothingEnabled = true;
+    var video  = document.getElementById(this.videoElementID);
+    video = this.codeReader.prepareVideoElement(video)
+    video.setAttribute('autoplay', 'true');
+    video.setAttribute('muted', 'true');
+    video.setAttribute('playsinline', 'true');
+    var img = document.getElementById('barcodeimgElement')
+    console.log(canvas)
+    console.log(ctx)
+    var self = this
+    setTimeout(this.decodeImage, 1000/5)
+    video.addEventListener('play', function () {
+        var $this = this; //cache
+        (function loop() {
+            console.log("video loop")
+            if (!$this.paused && !$this.ended) {
+                ctx.drawImage($this, 200, 200,// adjusts location to focus on
+                  50, 50, // adjust 'zoom'
+                  0, 0,
+                  750, 750
+                );
+                var pngUrl = canvas.toDataURL();
+                var img = document.getElementById('barcodeimgElement')
+                img.src = pngUrl
+                self.decodeImage(pngUrl)
+                console.log("back in play listener?")
+                setTimeout(loop, 1000 / 60); // drawing at 30fps
+                // alert('draw')
+            }
+        })();
+    }, 0); 
+  }
+
+  decodeImage(data){
+    if(this.qr_reader != undefined){
+      console.log("decoding??????")
+      console.log(this.codeReader)
+      let result = this.qr_reader.decode(data);
+      console.log(result)
+    }
+    // if(this.codeReader != undefined){
+    // var barcode = document.getElementById("barcodeimgElement")
+    // var prepedElem = this.codeReader.prepareImageElement(barcode)
+    // // var bitMap = this.codeReader.createBinaryBitmap(ctx)
+    // // console.log(bitMap)
+    // this.codeReader.decodeFromImageElement(prepedElem,
+    //   (result, err) => { 
+    //  // do something with the result in here  
+    //   if(result) {
+    //     this.onSuccessScan(result)
+    //   }
+
+    //   if(err) {
+    //     var canvas = document.getElementById('qrcodecanvas');
+    //     var ctx    = canvas.getContext('2d');
+    //     var video  = document.getElementById(this.videoElementID);
+    //     console.log("error...")
+    //     ctx.drawImage(video, 0, 0);
+    //     var pngUrl = canvas.toDataURL();
+    //     var barcodeelement = document.getElementById("barcodeimgElement")
+    //     barcodeelement.src=pngUrl
+    //     this.decodeImage()
+    //     console.log("back in play listener?")
+    //     this.onErrorScan(err)
+    //   }
+    // }).catch(err => console.log(err))
+    //   console.log("returning?") 
+    // } else{
+    //   console.log("codereader not ready yet")
+    // }
+  } 
 
   // after the component is mounted, grab the device ID 
   componentDidMount(){
     console.log("getting video info...")
+    const hdConstraints = {
+      video: { width: { min: 1280 }, height: { min: 720 } },
+    };
+    let video = document.getElementById(this.videoElementID)
+    navigator.mediaDevices.getUserMedia(hdConstraints).then((stream) => {
+        video.srcObject = stream;
+    });
     this.__setupContinualScan()
+    this.setupCanvas()
   }
 
   componentWillUnmount(){
@@ -75,16 +172,40 @@ class ZBarcodeScanner extends React.Component {
   }
 
   __setupContinualScan(){
-    this.codeReader.decodeFromVideoDevice(undefined, this.state.videoElementID, (result, err) => { 
+    this.codeBootstrapper.decodeFromVideoDevice(undefined, this.state.videoElementID, (result, err) => { 
     /* do something with the result in here */ 
-      if(result) {
-        this.onSuccessScan(result)
-      }
+      // if(result) {
+      //   this.onSuccessScan(result)
+      // }
 
-      if(err) {
-        this.onErrorScan(err)
-      }
+      // if(err) {
+      //   this.onErrorScan(err)
+      // }
     })
+    console.log("setting up scanner loop")
+    // const loop = () => {
+    //   try {
+    //     var barcode = document.getElementById("barcodeimgElement")
+    //     if(barcode != undefined && barcode.src != ''){
+    //       this.codeReader.decodeFromImage("barcodeimgElement",(result, err) => { 
+    //        do something with the result in here  
+    //         if(result) {
+    //           this.onSuccessScan(result)
+    //         }
+
+    //         if(err) {
+    //           this.onErrorScan(err)
+    //         }
+    //       })
+    //     } 
+    //   } catch {
+        
+    //   }
+
+    //   setTimeout(loop, 5000)
+    // }
+
+    // loop()
   }
 
   /**
@@ -116,11 +237,39 @@ class ZBarcodeScanner extends React.Component {
   render() {
     return (
       <div id={this.state.containerElementID}>
+       
+      <TransformWrapper
+        initialScale={1}
+        initialPositionX={200}
+        initialPositionY={100}
+      >
+        {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
+          <React.Fragment>
+            <div className="tools">
+              <button onClick={() => zoomIn()}>+</button>
+              <button onClick={() => zoomOut()}>-</button>
+              <button onClick={() => resetTransform()}>x</button>
+            </div>
+            <TransformComponent>
+              <img id="barcodeimgElement"  />
+              <canvas id="qrcodecanvas"
+                  width={this.state.width} 
+                  height={this.state.height}
+                  
+              >
+            </canvas>
+            </TransformComponent>
+          </React.Fragment>
+        )}
+      </TransformWrapper>
+
+        
         <video 
           id={this.state.videoElementID} 
-          width={this.state.width} 
-          height={this.state.height} 
+          width={this.state.width}
+          height={this.state.height}
           muted="true"
+          
         >
         </video>
       </div>
