@@ -5,6 +5,7 @@ import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import { BrowserMultiFormatReader, BrowserQRCodeReader, Result, BarcodeFormat, DecodeHintType } from '@zxing/library'
 import Webcam from 'react-webcam'
 import QrCode from 'qrcode-reader';
+import './ZBarcodeScanner.css';
 class ZBarcodeScanner extends React.Component {
 
  constructor(props) {
@@ -34,7 +35,8 @@ class ZBarcodeScanner extends React.Component {
         width: 1280,
         height: 720,
         facingMode: "environment"
-      }
+      },
+      zoom: 2.5,
     }
     console.log(this.props)
   }
@@ -96,17 +98,22 @@ class ZBarcodeScanner extends React.Component {
         (function loop() {
             console.log("video loop")
             if (!$this.paused && !$this.ended) {
-                ctx.drawImage($this, 200, 200,// adjusts location to focus on
-                  50, 50, // adjust 'zoom'
-                  0, 0,
-                  750, 750
-                );
+                ctx.setTransform(1,0,0,1,0,0);
+                ctx.clearRect(0,0,canvas.width,canvas.height);
+                ctx.scale(self.state.zoom, self.state.zoom);
+                ctx.drawImage($this,0,0);
+
+                // 200, 200,// adjusts location to focus on
+                //   50, 50, // adjust 'zoom'
+                //   0, 0,
+                //   750, 750
+                // );
                 var pngUrl = canvas.toDataURL();
                 var img = document.getElementById('barcodeimgElement')
                 img.src = pngUrl
                 self.decodeImage(pngUrl)
                 console.log("back in play listener?")
-                setTimeout(loop, 1000 / 60); // drawing at 30fps
+                setTimeout(loop, 1000 / 120); // drawing at 30fps
                 // alert('draw')
             }
         })();
@@ -156,14 +163,28 @@ class ZBarcodeScanner extends React.Component {
   componentDidMount(){
     console.log("getting video info...")
     const hdConstraints = {
-      video: { width: { min: 1280 }, height: { min: 720 } },
+      video: { width: { min: 1280 }, height: { min: 720 }, facingMode: { exact: "environment" }},
     };
     let video = document.getElementById(this.videoElementID)
     navigator.mediaDevices.getUserMedia(hdConstraints).then((stream) => {
         video.srcObject = stream;
     });
+    var self = this
+    var slider = document.getElementById("myRange");
     this.__setupContinualScan()
     this.setupCanvas()
+  }
+
+  updateZoomValue(event){
+      var nZoomValue = event.target.value
+      console.log("update zoom value")
+      console.log(nZoomValue)
+      this.setState(
+      {
+        zoom: nZoomValue
+      }
+      )
+      // console.log(this.state)
   }
 
   componentWillUnmount(){
@@ -237,39 +258,22 @@ class ZBarcodeScanner extends React.Component {
   render() {
     return (
       <div id={this.state.containerElementID}>
-       
-      <TransformWrapper
-        initialScale={1}
-        initialPositionX={200}
-        initialPositionY={100}
-      >
-        {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
-          <React.Fragment>
-            <div className="tools">
-              <button onClick={() => zoomIn()}>+</button>
-              <button onClick={() => zoomOut()}>-</button>
-              <button onClick={() => resetTransform()}>x</button>
-            </div>
-            <TransformComponent>
-              <img id="barcodeimgElement"  />
-              <canvas id="qrcodecanvas"
-                  width={this.state.width} 
-                  height={this.state.height}
-                  
-              >
-            </canvas>
-            </TransformComponent>
-          </React.Fragment>
-        )}
-      </TransformWrapper>
-
-        
+            <img id="barcodeimgElement" style={this.videoStyle} />
+            <canvas id="qrcodecanvas"
+                width={this.state.width} 
+                height={this.state.height}
+                
+            >
+          </canvas>
+        <div class="slidecontainer">
+          <input type="range" min="0" max="10" value={this.state.zoom} step=".1" class="slider" id="myRange" onInput={this.updateZoomValue.bind(this)} />
+        </div>
         <video 
           id={this.state.videoElementID} 
           width={this.state.width}
           height={this.state.height}
           muted="true"
-          
+          style={this.videoStyle}
         >
         </video>
       </div>
