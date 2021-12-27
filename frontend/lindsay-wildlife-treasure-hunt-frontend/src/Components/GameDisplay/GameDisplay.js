@@ -192,6 +192,14 @@ export class GameDisplay extends React.Component {
   render(){
     return(
       <div className="game-display-container">
+        <TopMessage
+          gameStarted={this.state.gameStarted}
+          currentLevel={this.state.currentLevel}
+          displayAnswer={this.state.displayAnswer}
+          lastGuessWrong={this.state.lastGuessWrong}
+          attempts={this.state.attempts}
+          startGameButton={this.startGameButton.bind(this)}
+        />
         <ScanDisplay
           qrScannerUpdate={this}
           readyForBarcode={this.state.readyForBarcode}
@@ -201,14 +209,6 @@ export class GameDisplay extends React.Component {
           debugCorrectAnswerButton={this.debugCorrectAnswerButton.bind(this)}
           debugWrongAnswerButton={this.debugWrongAnswerButton.bind(this)}
           manualEntryMode={this.state.manualEntryMode}
-        />
-        <TopMessage
-          gameStarted={this.state.gameStarted}
-          currentLevel={this.state.currentLevel}
-          displayAnswer={this.state.displayAnswer}
-          lastGuessWrong={this.state.lastGuessWrong}
-          attempts={this.state.attempts}
-          startGameButton={this.startGameButton.bind(this)}
         />
         <HintDisplay
           gameStarted={this.state.gameStarted}
