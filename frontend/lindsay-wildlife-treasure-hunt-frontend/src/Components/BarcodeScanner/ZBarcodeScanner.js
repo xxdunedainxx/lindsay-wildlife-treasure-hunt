@@ -179,7 +179,6 @@ class ZBarcodeScanner extends React.Component {
 
   componentWillUnmount(){
     console.log("unloading barcode scanner")
-    this.codeReader.stopContinuousDecode()
   }
 
   render() {
