@@ -3,8 +3,6 @@ from src.util.ErrorFactory import errorStackTrace, ExitCodes, CriticalAppCrashed
 from src.App import App
 from src.MultiThreading.ExitHandlers import ExitHandlers
 
-from src.MultiThreading.jobs.LogRotationJob import LogRotationJob
-
 def main():
   try:
     ExitHandlers.catch_all_signals()
