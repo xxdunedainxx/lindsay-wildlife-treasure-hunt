@@ -1,3 +1,31 @@
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../../src/fonts/Montserrat-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Stag';
+  src: url('../../src/fonts/Stag-Book.otf');
+}
+
+/* Remove styling from list */
+ul {
+  font-family: 'Stag';
+  list-style-type: none;
+}
+a:link {
+  text-decoration: none;
+}
+a:visited {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+a:active {
+  
+}
+
 #navContainer {
   background-color:#303023 !important;
   float:left;
@@ -18,13 +46,14 @@
 }
 
 #nav li {
-  display:inline-block;
+  display: inline-block;
   color: white;
   padding: 8px 15px;
   text-decoration: none;
   font-weight: bold;
   background-color:rgba(0, 0, 0, 0);
   max-width: 300px;
+  list-style: none;
 }
 
 .navText{
@@ -44,6 +73,7 @@
 }
 
 #navLogo {
+  display: block;
   float: left;
 }
 
@@ -51,11 +81,14 @@
    position:absolute;
    top:0;
    right:0;
+   margin-top: 20px;
    display: inline-block !important;
-   font-size: small !important;
+   font-size: 10px !important;
+   font-family: 'Montserrat';
 }
 
 #nav li:hover {
+  list-style-type: none;
   color: black;
   /*transform: translateY(-10px);*/
   border-radius: 30px;
@@ -83,19 +116,22 @@
 
   #nav img {
     display: block;
-    margin-left: auto;
+    margin-left: 0;
     margin-right: auto;
     width: 50%;
   }
+
   .navText {
+    font-family: 'Stag';
     display: none;
   }
 
   #navHamburger{
      position:absolute;
-     top:0;
-     right:0;
+     top:40px;
+     right: 10px;
      display: inline-block !important;
+     scale: 150%
   }
 
   #navContainer {
@@ -103,6 +139,10 @@
   }
 
   #navVersion {
-    top: 5%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
   }
 }

@@ -1,25 +1,46 @@
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../../../src/fonts/Montserrat-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Stag';
+  src: url('../../../src/fonts/Stag-Book.otf');
+}
+
 .welcomeMessage {
-  background-color: white;
-  width: 50%;
-    display: block;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 10px;
-  margin-top:2.5%;
-  padding-left: 2%;
-  padding-right: 2%;
+  /*background-color: white;*/
+  margin: 1em auto 0 auto;
+  display: block;
+  padding: 1vh 5vh 0 5vh;
+  font-size: 40px;
+  font-style: bold;
+  font-family: 'Stag';
+  color: #303023;
+}
+
+.instructions {
+  margin: 1em auto 0 auto;
+  display: block;
+  padding: 1vh 5vh 0 5vh;
+  font-family: 'Stag';
+  font-size: 24px;
 }
 
 .startButton {
-    background-color: rgb(98, 168, 229);
+    background-color: #99CC66;
+    line-height: 175px;
+    width: 175px;
+    height: 175px;
+    border-radius: 50% !important;
     color: white;
     border: none;
-    border-radius: 3px;
+    border-radius: 50%;
     padding: 10px 15px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
-    font-weight: bold;
-    font-family: 'Verdana', 'Tahoma', 'Arial', sans-serif;
+    font-weight: lighter;
+    font-size: 30px;
+    font-family: 'Stag', 'Verdana', 'Tahoma', 'Arial', sans-serif;
 }

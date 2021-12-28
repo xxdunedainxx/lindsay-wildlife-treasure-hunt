@@ -1,6 +1,21 @@
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../../src/fonts/Montserrat-Regular.ttf');
+  }
+  
+  @font-face {
+    font-family: 'Stag';
+    src: url('../../src/fonts/Stag-Book.otf');
+  }
+
+  @font-face {
+    font-family: 'Stag Light';
+    src: url('../../src/fonts/Stag-Light.otf');
+  }
+
 .win-text {
-    color: rgb(122, 114, 111);
-    font-family: 'Avenir', sans-serif;
+    color: #303023;
+    font-family: 'Stag Light', 'Avenir', sans-serif;
 }
 
 .win-button {
@@ -14,7 +29,7 @@
     display: inline-block;
     font-size: 16px;
     font-weight: bold;
-    font-family: 'Verdana', 'Tahoma', 'Arial', sans-serif;
+    font-family: 'Stag', 'Verdana', 'Tahoma', 'Arial', sans-serif;
 }
 
 .cert-button {

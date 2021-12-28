@@ -9,6 +9,7 @@ import ManualEntryDisplay from './ManualEntryDisplay';
 import TestZoomComponent from './TestZoomComponent';
 
 import './GameDisplay.css';
+import { ReedSolomonException } from '@zxing/library';
 
 // Display Daddy
 export class GameDisplay extends React.Component {
@@ -16,10 +17,14 @@ export class GameDisplay extends React.Component {
 
   constructor(props) {
     super(props)
-    GameDisplay.instance = this
+    GameDisplay.instance = this;
     GameController.loadSessionData();
+    if(!GameController.gameState.gameStarted) {
+      GameController.startGame();
+    }
+
     this.state = {
-      gameStarted: GameController.gameState.gameStarted,
+      gameStarted: true,
       currentLevel: GameController.gameState.currentLevel,
       displayAnswer: (GameController.gameState.gameStarted ? GameController.getCorrectAnswerOnCurrentLevel() : false),
       lastGuessWrong: ((GameController.gameState.attemptsOnCurrentLevel > 0) ? true : false),
@@ -32,7 +37,7 @@ export class GameDisplay extends React.Component {
       artifactText: (GameController.gameState.gameStarted ? GameController.getArtifactText(GameController.gameState.currentArtifactIdInSequence) : ''),
       artifactMediaUrl: (GameController.gameState.gameStarted ? GameController.getArtifactMediaUrl(GameController.gameState.currentArtifactIdInSequence) : ''),
       artifactPhotoCredit: (GameController.gameState.gameStarted ? GameController.getArtifactPhotoCredit(GameController.gameState.currentArtifactIdInSequence) : ''),
-      readyForBarcode: GameController.gameState.gameStarted,
+      readyForBarcode: true,
       numberOfArtifacts: GameController.gameState.gameStarted ? GameController.getNumberOfArtifacts() : 0,
       scannerOpen: false,
       manualEntryMode: false,
@@ -43,7 +48,7 @@ export class GameDisplay extends React.Component {
   updateGameState() {
     this.setState(
       {
-        gameStarted: GameController.gameState.gameStarted,
+        gameStarted: true,
         currentLevel: GameController.gameState.currentLevel,
         displayAnswer: (GameController.gameState.gameStarted ? GameController.getCorrectAnswerOnCurrentLevel() : false),
         lastGuessWrong: ((GameController.gameState.attemptsOnCurrentLevel > 0) ? true : false),
@@ -55,7 +60,7 @@ export class GameDisplay extends React.Component {
         artifactText: (GameController.gameState.gameStarted ? GameController.getArtifactText(GameController.gameState.currentArtifactIdInSequence) : ''),
         artifactMediaUrl: (GameController.gameState.gameStarted ? GameController.getArtifactMediaUrl(GameController.gameState.currentArtifactIdInSequence) : ''),
         artifactPhotoCredit: (GameController.gameState.gameStarted ? GameController.getArtifactPhotoCredit(GameController.gameState.currentArtifactIdInSequence) : ''),
-        readyForBarcode: GameController.gameState.gameStarted,
+        readyForBarcode: true,
         numberOfArtifacts: GameController.getNumberOfArtifacts(),
         gameComplete: GameController.gameState.gameComplete,
         tryAgainClicked: false,
@@ -64,8 +69,7 @@ export class GameDisplay extends React.Component {
   }
 
   startGameButton() {
-    GameController.startGame();
-    this.updateGameState();
+    
     this.setState({
       readyForBarcode: true,        
     })
@@ -78,7 +82,7 @@ export class GameDisplay extends React.Component {
     GameController.resetGame();
     this.updateGameState();
     this.setState({
-      readyForBarcode: false,
+      //readyForBarcode: false,
       manualEntryMode: false,     
     })
   }
@@ -164,7 +168,7 @@ export class GameDisplay extends React.Component {
     GameController.saveState();
     this.updateGameState();
     this.setState({
-      readyForBarcode: false,
+      //readyForBarcode: false,
       manualEntryMode: false,  
       tryAgainClicked: false,   
     })
@@ -192,16 +196,6 @@ export class GameDisplay extends React.Component {
   render(){
     return(
       <div className="game-display-container">
-        <ScanDisplay
-          qrScannerUpdate={this}
-          readyForBarcode={this.state.readyForBarcode}
-          displayAnswer={this.state.displayAnswer}
-          scannerOpen={this.state.scannerOpen}
-          readyToScanButton={this.readyToScanButton.bind(this)}
-          debugCorrectAnswerButton={this.debugCorrectAnswerButton.bind(this)}
-          debugWrongAnswerButton={this.debugWrongAnswerButton.bind(this)}
-          manualEntryMode={this.state.manualEntryMode}
-        />
         <TopMessage
           gameStarted={this.state.gameStarted}
           currentLevel={this.state.currentLevel}
@@ -221,6 +215,16 @@ export class GameDisplay extends React.Component {
           displayExtraHint={this.state.displayExtraHint}
           attempts={this.state.attempts}
           getAnswerButton={this.getAnswerButton.bind(this)}
+        />
+        <ScanDisplay
+          qrScannerUpdate={this}
+          readyForBarcode={this.state.readyForBarcode}
+          displayAnswer={this.state.displayAnswer}
+          scannerOpen={this.state.scannerOpen}
+          readyToScanButton={this.readyToScanButton.bind(this)}
+          debugCorrectAnswerButton={this.debugCorrectAnswerButton.bind(this)}
+          debugWrongAnswerButton={this.debugWrongAnswerButton.bind(this)}
+          manualEntryMode={this.state.manualEntryMode}
         />
         <AnswerDisplay
           displayAnswer={this.state.displayAnswer}

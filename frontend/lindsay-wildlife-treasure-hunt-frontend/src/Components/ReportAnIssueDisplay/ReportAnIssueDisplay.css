@@ -1,16 +1,24 @@
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../../src/fonts/Montserrat-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Stag';
+  src: url('../../src/fonts/Stag-Book.otf');
+}
+
 .game-button {
-    background-color: rgb(171, 162, 160);
-    color: white;
-    border: none;
-    border-radius: 3px;
-    padding: 10px 15px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    font-weight: bold;
-    font-family: 'Verdana', 'Tahoma', 'Arial', sans-serif;
-    background-color: rgb(98, 168, 229);
+  background-color: rgb(171, 162, 160);
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-family: 'Stag', 'Verdana', 'Tahoma', 'Arial', sans-serif;
 }
 
 .reportAnIssueWrapper{
