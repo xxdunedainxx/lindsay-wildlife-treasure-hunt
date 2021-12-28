@@ -4,6 +4,7 @@ from src.Configuration import CONF_INSTANCE
 from src.MultiThreading.ThreadPool import process_is_alive, WorkerPool
 from src.Singletons import Singletons
 from src.Services import ServiceNames
+from src.util.LogFactory import LogFactory
 
 import json
 
@@ -55,7 +56,9 @@ class AppHealthStatusUtil:
 
   @staticmethod
   def lay_down_status_files():
+    LogFactory.MAIN_LOG.debug("Laying down app health  status files")
     for service in AppHealthStatusUtil.get_enabled_services():
+        LogFactory.MAIN_LOG.debug(f"Laying down {service} service file")
         AppHealthStatusUtil.write_status(service, AppHealthStatus.UNKNOWN)
 
   @staticmethod
@@ -72,3 +75,9 @@ class AppHealthStatusUtil:
       return AppHealthStatus.HEALTHY
     else:
       return AppHealthStatus.UNHEALTHY
+
+  @staticmethod
+  def print_all_service_status():
+    LogFactory.MAIN_LOG.info("===== SERVICE STATUSES =====")
+    for service in AppHealthStatusUtil.get_enabled_services():
+        LogFactory.MAIN_LOG.info(f"* [{service.upper()}]: {AppHealthStatusUtil.get_status(service)}")

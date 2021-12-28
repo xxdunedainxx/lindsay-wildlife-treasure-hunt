@@ -28,7 +28,7 @@ class RedisClient:
         self._logger.info('connection established!')
 
     def put_item(self, key, value):
-        self._logger.info(f"Redis put {key} = {value}")
+        self._logger.info(f"Redis PUT {key} in {self.clientType}")
         self.redis_connection.set(key, value)
 
     def get_keys(self):
