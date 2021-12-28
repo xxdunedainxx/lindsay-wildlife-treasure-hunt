@@ -3,12 +3,11 @@ from src.util.ErrorFactory import errorStackTrace, ExitCodes, CriticalAppCrashed
 from src.App import App
 from src.MultiThreading.ExitHandlers import ExitHandlers
 
-from src.MultiThreading.jobs.LogRotationJob import LogRotationJob
-
 def main():
   try:
     ExitHandlers.catch_all_signals()
     app: App = App()
+    LogFactory.MAIN_LOG.info('====== RUNNING BACKEND APP ======')
     app.run()
   except CriticalAppCrashedException as e:
     LogFactory.MAIN_LOG.error(f"A known exception was raised {errorStackTrace(e)}")
@@ -19,5 +18,5 @@ def main():
 
 if __name__ == "__main__":
   LogFactory.main_log()
-  LogFactory.MAIN_LOG.info('running main app')
+  LogFactory.MAIN_LOG.info('====== INITIALIZING BACKEND ======')
   main()
