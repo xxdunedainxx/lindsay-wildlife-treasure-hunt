@@ -46,7 +46,7 @@ class ExitHandlers:
     catchable_sigs = set(signal.Signals)
     for sig in catchable_sigs:
       try:
-        LogFactory.MAIN_LOG.info(f"Detecting signal {sig}")
+        LogFactory.MAIN_LOG.debug(f"Detecting signal {sig}")
         signal.signal(sig,  ExitHandlers.sigterm_handler)
       except Exception as e:
-        LogFactory.MAIN_LOG.error(f"Failed to add signal with stack trace {errorStackTrace(e)}")
+        LogFactory.MAIN_LOG.debug(f"Failed to add signal [{sig}]")

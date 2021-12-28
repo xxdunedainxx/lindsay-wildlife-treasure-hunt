@@ -15,10 +15,12 @@ class Singletons:
 
   @staticmethod
   def generate_singletons():
+    LogFactory.MAIN_LOG.info("===== SETTING UP SINGLETONS ====")
     Singletons.generate_smtp_client()
     Singletons.generate_mail_q()
     Singletons.generate_db_connection()
     Singletons.generate_ui_log_queue()
+    Singletons.print_singletons()
 
   @staticmethod
   def generate_ui_log_queue():
@@ -35,8 +37,6 @@ class Singletons:
       port=CONF_INSTANCE.SMTP_PORT
     )
 
-
-
   @staticmethod
   def generate_mail_q():
     LogFactory.MAIN_LOG.info('generating mail queue')
@@ -48,3 +48,13 @@ class Singletons:
     LogFactory.MAIN_LOG.info('generating DB client')
     if CONF_INSTANCE.DATABASE_ENGINE == "json" :
       Singletons.db = JsonDB.get_db_client(CONF_INSTANCE.DATABASE)
+
+  @staticmethod
+  def print_singletons():
+    LogFactory.MAIN_LOG.info("Singletons:")
+    LogFactory.MAIN_LOG.info(f"""\n
+SMTP : {Singletons.smtp} \n
+Mail Q: {Singletons.mailQ} \n
+DB: {Singletons.db} \n
+uiLogQ: {Singletons.uiLogQ}
+""")
