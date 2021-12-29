@@ -34,6 +34,7 @@ class LogRotationJob:
 
   @staticmethod
   def rotate_daily_logs():
+    dt_for_logs=datetime.datetime.now()
     for path in Path('.').rglob('*.log'):
       fullPath: str = f"{os.sep}".join(path.parts)
       if 'archive' in fullPath:
@@ -42,7 +43,7 @@ class LogRotationJob:
       else:
         # LogFactory.MAIN_LOG
         LogFactory.MAIN_LOG.info(f"Archiving {fullPath}")
-        FileIO.copy_file(fullPath, f"{CONF_INSTANCE.LOG_ROTATION_JOB_ARCHIVE_DIR}{datetime.datetime.now()}-{fullPath}")
+        FileIO.copy_file(fullPath, f"{CONF_INSTANCE.LOG_ROTATION_JOB_ARCHIVE_DIR}{dt_for_logs}{os.sep}{fullPath}")
         FileIO.whipe_file_contents(fullPath)
 
   @staticmethod

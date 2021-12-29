@@ -16,9 +16,7 @@ class JsonDB(DBClient):
 
   def get_item(self, key: str):
     db: dict = json.load(open(self.__dbPath, 'r'))
-
     return db[key]
-
 
   def put_item(self, key: str, data: dict):
     db: dict = json.load(open(self.__dbPath, 'r'))

@@ -29,6 +29,7 @@ export class ReportAnIssueDisplay extends React.Component {
   }
 
   handleSubmit(event) {
+    event.preventDefault()
     var reportIssueClient = new ReportAnIssueClient(
       `${Configuration.remoteEndpoint}`
     );

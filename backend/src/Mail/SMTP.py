@@ -56,14 +56,6 @@ class SMTP:
     LogFactory.MAIN_LOG.info('end smtp session')
     self.smtp_client.close()
 
-  """
-  send_email(
-      toEmails=["blah@gmail.com"],
-      subject="Test omg email",
-      emailBody="hello world"
-    )
-  """
-
   def send_email(self, toEmails: [str], subject: str, emailBody: str):
     email_text = """\
 From: %s
