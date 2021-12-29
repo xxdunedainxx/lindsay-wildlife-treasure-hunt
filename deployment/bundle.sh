@@ -27,6 +27,7 @@ docker save lindsay-ingress:latest | gzip > deployment/images/lindsay-ingress.ta
 docker save lindsay-react-app:latest | gzip > deployment/images/lindsay-react-app.tar.gz
 docker save lindsay_app_backend:latest | gzip > deployment/images/lindsay_app_backend.tar.gz
 docker save lindsay-redis-server:latest | gzip > deployment/images/lindsay-redis-server.tar.gz
+docker save lindsay-static-assets:latest | gzip > deployment/images/lindsay-static-assets.tar.gz
 
 # Upload steps
 
@@ -41,6 +42,7 @@ scp -v -i "${SSH_KEY_PATH}" "deployment/images/lindsay-ingress.tar.gz" "${USERNA
 scp -v -i "${SSH_KEY_PATH}" "deployment/images/lindsay-react-app.tar.gz" "${USERNAME}@${AWS_EC2_INSTANCE}":"${APPLICATION_DEPLOYMENT_PATH}"
 scp -v -i "${SSH_KEY_PATH}" "deployment/images/lindsay-redis-server.tar.gz" "${USERNAME}@${AWS_EC2_INSTANCE}":"${APPLICATION_DEPLOYMENT_PATH}"
 scp -v -i "${SSH_KEY_PATH}" "deployment/images/lindsay_app_backend.tar.gz" "${USERNAME}@${AWS_EC2_INSTANCE}":"${APPLICATION_DEPLOYMENT_PATH}"
+scp -v -i "${SSH_KEY_PATH}" "deployment/images/lindsay-static-assets.tar.gz" "${USERNAME}@${AWS_EC2_INSTANCE}":"${APPLICATION_DEPLOYMENT_PATH}"
 
 echo "Publishing docker compose"
 scp -v -i "${SSH_KEY_PATH}" "docker-compose.yml" "${USERNAME}@${AWS_EC2_INSTANCE}":"${APPLICATION_DEPLOYMENT_PATH}"
