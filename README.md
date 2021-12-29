@@ -1,35 +1,23 @@
 # Lindsay Wildlife Bio-diversity Treasure Hunt
 
-Treasure hunt game for Lindsay Wildlife
+The Lindsay Wildlife Bio-diversity Treasure Hunt is a game featured in the exhibit halls of Lindsay Wildlife experience. The intention is to provide a more immersive experience for visitors at Lindsay Wildlife, by prodividing a cutting edge technological experience when interfacing with exhibit hall features. 
 
-## User Quick Start Guide
+This particular feature is a "Treasure Hunt", where visitors must match a given clue with an exhibit in the exhibit hall via barcode scans associated with various exhibits around the exhibit hall. 
 
-### Navigating the game
+For example, if the visitor is given a clue like "brown furry tailed rodent, which can be found climbing trees around town", that clue would match a squirrel. The visitor must then find the Squirrel exhibit in the exhibit hall and scan the relevant barcode. If the visitor scans the correct barcode, they are given a picture of the exhibit feature and a blurb about the feature, and then can proceed to the next exhibit clue. If they are not correct, they may be given an additional clue to push them in the direction of the correct exhibit.
 
-#### Scanner
+## User Manual
 
-#### Scanner Manual Override
-
-#### Restarting a game
-
-#### Winning the game
-
-### Reporting an issue through the website
-
-### Power User Options
-
-#### "Debug" Mode
-
-## Versioning
+The user manual for the application can be found [here](docs/USER_MANUAL.md).
 
 ## Technical Docs
 
-* Backend
-* Frontend
-* Deployments
-* Infrastructure
-* Architecture
-* Testing
+* [Backend](backend/README.md)
+* [Frontend](frontend/README.md)
+* [Deployments](deployment/README.md)
+* [Infrastructure](infrastructure/README.md)
+* [Architecture](docs/ARCHITECTURE.md)
+* [Testing](docs/TESTING.md)
 
 ### Contributing to the project
 
@@ -38,6 +26,10 @@ Want to contribute? Check out our [contributing doc](docs/CONTRIBUTING.md) to ge
 ## Changelog
 
 [You can see the history of the changes made to this software here](docs/CHANGELOG.md)
+
+### Versioning
+
+Every deployment in the CHANGELOG will contain a unique release, and therefore a unique release version. The version of the application a user is using, can be found in the top right corner of their browser. 
 
 ## Mobile Client Support
 
