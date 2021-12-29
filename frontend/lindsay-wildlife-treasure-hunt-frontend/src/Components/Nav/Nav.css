@@ -1,6 +1,6 @@
 @font-face {
-  font-family: 'Montserrat';
-  src: url('../../src/fonts/Montserrat-Regular.ttf');
+  font-family: 'Avenir Book';
+  src: url('../../src/fonts/AvenirLTStd-Book.otf')
 }
 
 @font-face {
@@ -84,7 +84,7 @@ a:active {
    margin-top: 20px;
    display: inline-block !important;
    font-size: 10px !important;
-   font-family: 'Montserrat';
+   font-family: 'Avenir Book';
 }
 
 #nav li:hover {

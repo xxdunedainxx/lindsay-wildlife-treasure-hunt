@@ -1,8 +1,4 @@
-@font-face {
-    font-family: 'Montserrat';
-    src: url('../../src/fonts/Montserrat-Regular.ttf');
-  }
-  
+ 
 @font-face {
     font-family: 'Stag';
     src: url('../../src/fonts/Stag-Book.otf');
@@ -13,11 +9,16 @@
     src: url('../../src/fonts/Stag-Light.otf');
   }
 
+@font-face {
+    font-family: 'Avenir Book';
+    src: url('../../src/fonts/AvenirLTStd-Book.otf')
+}
+
 /* All components */
 
 .game-text {
     color: #303023;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Avenir Book', sans-serif;
 }
 
 .game-button {
@@ -88,6 +89,7 @@
     margin-right: 6vh;
     background: rgba(199, 190, 186, 0.5);
     font-weight: 400;
+    font-size: 17px !important;
 }
 
 .next-level-button {

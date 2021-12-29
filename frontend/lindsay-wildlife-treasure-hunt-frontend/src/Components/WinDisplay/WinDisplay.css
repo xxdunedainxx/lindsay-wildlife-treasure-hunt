@@ -1,17 +1,17 @@
 @font-face {
-    font-family: 'Montserrat';
-    src: url('../../src/fonts/Montserrat-Regular.ttf');
-  }
+  font-family: 'Avenir Book';
+  src: url('../../src/fonts/AvenirLTStd-Book.otf')
+}
   
-  @font-face {
-    font-family: 'Stag';
-    src: url('../../src/fonts/Stag-Book.otf');
-  }
+@font-face {
+  font-family: 'Stag';
+  src: url('../../src/fonts/Stag-Book.otf');
+}
 
-  @font-face {
-    font-family: 'Stag Light';
-    src: url('../../src/fonts/Stag-Light.otf');
-  }
+@font-face {
+  font-family: 'Stag Light';
+  src: url('../../src/fonts/Stag-Light.otf');
+}
 
 .win-text {
     color: #303023;

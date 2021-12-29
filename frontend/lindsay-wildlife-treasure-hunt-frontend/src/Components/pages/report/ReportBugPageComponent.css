@@ -1,7 +1,7 @@
 @font-face {
-    font-family: 'Montserrat';
-    src: url('../../../src/fonts/Montserrat-Regular.ttf');
-  }
+  font-family: 'Avenir Book';
+  src: url('../../../src/fonts/AvenirLTStd-Book.otf')
+}
   
   @font-face {
     font-family: 'Stag';
