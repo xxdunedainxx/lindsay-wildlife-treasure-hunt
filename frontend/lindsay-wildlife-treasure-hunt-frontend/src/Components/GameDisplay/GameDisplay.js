@@ -9,7 +9,6 @@ import ManualEntryDisplay from './ManualEntryDisplay';
 import TestZoomComponent from './TestZoomComponent';
 
 import './GameDisplay.css';
-import { ReedSolomonException } from '@zxing/library';
 
 // Display Daddy
 export class GameDisplay extends React.Component {
