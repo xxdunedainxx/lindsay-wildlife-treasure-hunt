@@ -13,8 +13,7 @@ export class GameController {
   // if session data exists, loads it
   static Init(){
     Logger.info('init game controller', true)
-    Session.Init()
-    this.loadSessionData();
+    GameController.loadSessionData();
     Logger.info(`Game controller gameState info ${JSON.stringify(GameController.gameState)}`, true)
   }
 
