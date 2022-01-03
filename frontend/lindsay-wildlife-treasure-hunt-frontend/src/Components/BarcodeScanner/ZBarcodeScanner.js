@@ -4,6 +4,7 @@ import React from 'react';
 import Webcam from 'react-webcam'
 import QrCode from 'qrcode-reader';
 import './ZBarcodeScanner.css';
+import HttpArgParser from '../../src/util/HttpArgParser';
 
 class ZBarcodeScanner extends React.Component {
 
@@ -34,9 +35,9 @@ class ZBarcodeScanner extends React.Component {
     this.state = {
       videoElementID: this.videoElementID,
       containerElementID: this.containerElementID,
-      width: 640,
+      width: 500,
       scanEnabled: false,
-      height: 480,
+      height: 375,
       videoConstraints : {
         width: 640,
         height: 480,
@@ -44,8 +45,33 @@ class ZBarcodeScanner extends React.Component {
       },
       zoom: 1.0,
       zoomFloor: 1.0,
-      zoomCeiling: 10.0
+      zoomCeiling: 10.0,
+      qrParentStyle: {
+        // ensure to maintain a 4:3 aspect ratio when scaling
+        width: 500,
+        height: 375,
+        margin: "auto"
+      },
+      scrollerStyle: {
+        width: 500,
+        margin: "auto"
+      }
     }
+
+    if(window.innerWidth < 640) {
+      console.log("override ZBarCodeScanner width and height!")
+      this.state.qrParentStyle = {
+        width: 400,
+        height: 300,
+        margin: "auto"
+      }
+      this.state.scrollerStyle = {
+        width: 400,
+        margin: "auto"
+      }
+      console.log(this.state)
+    }
+
     console.log(this.props)
   }
 
@@ -78,6 +104,14 @@ class ZBarcodeScanner extends React.Component {
         console.log(result)
         self.onSuccessScan(result)
       }
+    }
+  }
+
+  __getDebugImage(){
+    if(HttpArgParser.DEBUG_MODE == "true"){
+      return (<img id="barcodeimgElement" style={this.videoStyle} />)
+    } else{
+      return ("")
     }
   }
 
@@ -129,8 +163,8 @@ class ZBarcodeScanner extends React.Component {
   setupCanvas(){
     var canvas = document.getElementById('qrcodecanvas');
     this.canvasParent = document.getElementById('qrcodeParent')
-    canvas.width =   this.state.width
-    canvas.height = this.state.height
+    canvas.width =   this.state.qrParentStyle.width
+    canvas.height = this.state.qrParentStyle.height
     var ctx    = canvas.getContext('2d');
     ctx.imageSmoothingEnabled = true;
     ctx.mozImageSmoothingEnabled = true;
@@ -184,11 +218,11 @@ class ZBarcodeScanner extends React.Component {
   render() {
     return (
       <div id={this.state.containerElementID}>
-            <img id="barcodeimgElement" style={this.videoStyle} />
-            <div id="qrcodeParent" style={this.qrParentStyle}>
+            <div id="qrcodeParent" style={this.state.qrParentStyle}>
+            {this.__getDebugImage()}
             <canvas id="qrcodecanvas"
-                width={this.state.width} 
-                height={this.state.height}
+                width={this.state.qrParentStyle.width} 
+                height={this.state.qrParentStyle.height}
             >
             </canvas>
           </div>
@@ -201,6 +235,7 @@ class ZBarcodeScanner extends React.Component {
             step=".1" 
             class="slider" 
             id="zvideoSlider" 
+            style={this.state.scrollerStyle}
             onInput={this.updateZoomValue.bind(this)} 
           />
         </div>

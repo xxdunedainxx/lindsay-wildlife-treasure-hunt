@@ -1,3 +1,7 @@
+body {
+  overflow-x: hidden !important;
+}
+
 .slider {
   -webkit-appearance: none;
   width: 100%;
