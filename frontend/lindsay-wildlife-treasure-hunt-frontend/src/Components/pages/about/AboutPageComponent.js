@@ -29,9 +29,8 @@ export class AboutPage extends React.Component {
   render(){
     return (
       <div>
-        This application was made in collaboration with Zach McFadden and Roderick MacLeod. 
-        The source code for the treasure hunt can be found <a href="https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt">here</a>!
-        <br/>
+        <div className="about-top-message">This application was made in collaboration with Zach McFadden and Roderick MacLeod. 
+        The source code for the treasure hunt can be found <a className="repo-link" href="https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt">here</a>.</div>
         <br/>
         <Profile 
           name="Zach" 
@@ -40,7 +39,6 @@ export class AboutPage extends React.Component {
           linkedInHref="https://www.linkedin.com/in/zach-mcfadden-09551aa2/"
           githubHref="https://github.com/xxdunedainxx"
         />
-        <br/>
         <Profile 
           name="Roderick" 
           description={roryDescription} 
@@ -75,9 +73,11 @@ export class Profile extends React.Component {
         <div className="profilePicContainer">
           <img className="profilePic" src={this.state.profilePic} alt="Hey!" />
         </div>
+        <br/>
         <div className="profileAbout">
-          About me: {this.state.description}
+          {this.state.description}
         </div>
+        <br/>
         <div className="logoContainer">
           <a href={this.state.linkedInHref}>
             <img src={linkedinLogo} alt="Linked In" />

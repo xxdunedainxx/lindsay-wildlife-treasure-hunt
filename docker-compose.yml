@@ -22,6 +22,10 @@ services:
     volumes:
       - ./prod.conf.json:/conf.json
       - ./logs:/logs
+      - ./archive:/archive
+  static_assets:
+    image: lindsay-static-assets
+    container_name: lindsay-static-assets
   redis:
     image: lindsay_redis_server
     container_name: lindsay_redis_server

@@ -25,8 +25,8 @@ class ReportAnIssueClient extends HttpClient {
     window.location.href = '/ui/home';
   }
 
-  failedRequest(result) {
-    Logger.error("Failed remote logging...")
+  failedRequest(error) {
+    Logger.error(`failed submitting an issue report... ${JSON.stringify(error)}`)
     alert("Failed to submit issue.")
   }
 

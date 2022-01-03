@@ -1,3 +1,13 @@
+@font-face {
+  font-family: 'Avenir Book';
+  src: url('../../../src/fonts/AvenirLTStd-Book.otf')
+}
+  
+  @font-face {
+    font-family: 'Stag';
+    src: url('../../../src/fonts/Stag-Book.otf');
+  }
+
 .game-button {
     background-color: rgb(171, 162, 160);
     color: white;
@@ -8,8 +18,8 @@
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    font-weight: bold;
-    font-family: 'Verdana', 'Tahoma', 'Arial', sans-serif;
+    font-weight: lighter;
+    font-family: 'Stag', 'Verdana', 'Tahoma', 'Arial', sans-serif;
 }
 
 

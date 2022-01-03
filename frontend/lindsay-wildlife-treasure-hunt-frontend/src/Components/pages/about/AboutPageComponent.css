@@ -1,24 +1,58 @@
+@font-face {
+  font-family: 'Avenir Book';
+  src: url('../../../src/fonts/AvenirLTStd-Book.otf')
+}
+
+@font-face {
+  font-family: 'Stag';
+  src: url('../../../src/fonts/Stag-Book.otf');
+}
+
+.repo-link {
+  font-weight: 700;
+}
+
+.about-top-message {
+  margin-left: 1em;
+  margin-right: 1em;
+  margin-top: 3em;
+  padding: 1em auto 0 1em;
+  font-family: 'Avenir Book';
+  font-size: 15px;
+}
+
 .profilePic {
-  max-width: 10%;
-  border-radius: 60%;
+  max-width: 300px;
+  display: block;
+  margin-left: 30%;
+  margin-right: auto;
+  border-radius: 50%;
 }
 
 .profile {
+  margin: 0 .5em 1em .5em;
+  padding: 0em 1em 0em 1em;
   background-color: white;
   border-radius: 5px;
+  font-family: 'Avenir Book';
+  font-size: 14px;
 }
 
 .profileName{
   float: left;
   padding-left: 1%;
   padding-top: 1%;
-  font-weight: bold;
+  font-weight: lighter;
+  font-family: 'Stag';
 }
 
 .logoContainer{
   display: inline-block;
   padding-left: 2.5%;
 }
+
+
+
 
 @media only screen and (max-width: 700px) {
   .logoContainer img {
@@ -27,6 +61,6 @@
   }
 
   .profilePic {
-    max-width: 20%;
+    max-width: 40%;
   }
 }

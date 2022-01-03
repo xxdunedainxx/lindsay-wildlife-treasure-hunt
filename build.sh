@@ -30,6 +30,12 @@ function buildRedis(){
   cd $HOME
 }
 
+function buildStaticAssetServices(){
+  cd infrastructure/static_assets
+  ./build.sh
+  cd $HOME
+}
+
 function buildNginxIngress(){
   log "build ingress"
   cd infrastructure/nginx-ingress
@@ -41,4 +47,5 @@ log "BEGIN BUILDING EVERYTHING"
 buildBackend
 buildFrontend
 buildRedis
+buildStaticAssetServices
 buildNginxIngress

@@ -1,7 +1,15 @@
+@font-face {
+  font-family: 'Avenir Book';
+  src: url('./src/fonts/AvenirLTStd-Book.otf')
+}
+
+@font-face {
+  font-family: 'Stag';
+  src: url('./src/fonts/Stag-Book.otf');
+}
+
 .App {
   text-align: center;
-  /* Stag for headers? */
-  font-family: 'Avenir';
 }
 
 .App-logo {
@@ -25,7 +33,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: 24px;
   color: #7a726f;
 }
 
