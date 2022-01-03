@@ -1,5 +1,35 @@
 # Changelog
 
+## 0.14.0
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/commit/494c7e1550a9ba6fb4f89becbe3dcc93875e2560)
+* Custom Zoom Feature via canvas draw
+* utilize qr-reader instead of ZXING
+* re-uptake react-webcam
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/commit/db8b1b7a92349ae1721532172f4e54bd5ee97e23)
+* Lots of cosmetic updates and proper fonts
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/161)
+* Static asset hosting service
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/162)
+* Log Rotator bug fix
+* Properly mount './archive' dir in docker-compose
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/156)
+* Add more logging and remove some verbose logging in redis
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/155)
+* Report issue button bug fix
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/133)
+* update run.sh to remove orphaned containers
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/131)
+* Win page updates
+* Win page debugger arg
+
 ## [HotPatch] 0.13.5.1
 
 [PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/130)
