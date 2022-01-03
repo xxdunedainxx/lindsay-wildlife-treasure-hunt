@@ -31,11 +31,11 @@ export class WinDisplay extends React.Component {
         if(this.state.gameComplete || HttpArgParser.DEBUG_MODE == "true") {
             return(
                 <div className="win-text win-page-container">
-                    <h2>You Win!</h2>
-                    Congratulations you found all the correct answers! To collect your prize, just tell our Guest Experience team located at the front desk that you completed the scavenger hunt!
+                    <h2>You did it!</h2>
+                    Congratulations! You found all the correct answers! To collect your prize, go to the front desk and let our Guest Experience team know that you completed the scavenger hunt!
                     <br /><br/>
-                    <h3>Want to redeem your prize later? </h3>
-                    Fill out the information below and get emailed a certificate. When you're ready to collect, show your certificate to the Guest Experience team and get your well earned treasure.
+                    <h3>Need to redeem your prize later? </h3>
+                    Fill out the information below to receive a certificate. Then show your certificate to the Guest Experience team on your next visit and get your well-earned treasure.
                     <GetCertificateDisplay/>
                     <br/>
                     <br/>

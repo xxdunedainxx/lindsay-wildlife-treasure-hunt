@@ -41,7 +41,7 @@ function NextLevelButton(props) {
         className="game-button next-level-button"
         onClick={props.onClick}
       >
-        Next Level
+        Next
       </button>
     );
 }

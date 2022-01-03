@@ -54,7 +54,7 @@ function TopMessage(props) {
   function DisplayCurrentLevel(props) {
     return(
       <div className="current-level-text game-text">
-        <h2>Level {props.currentLevel}</h2>
+        <h2>Question {props.currentLevel}</h2>
       </div>
     );
   }

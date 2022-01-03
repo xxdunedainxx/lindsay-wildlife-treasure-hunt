@@ -1,8 +1,24 @@
+ 
+@font-face {
+    font-family: 'Stag';
+    src: url('../../src/fonts/Stag-Book.otf');
+}
+
+@font-face {
+    font-family: 'Stag Light';
+    src: url('../../src/fonts/Stag-Light.otf');
+  }
+
+@font-face {
+    font-family: 'Avenir Book';
+    src: url('../../src/fonts/AvenirLTStd-Book.otf')
+}
+
 /* All components */
 
 .game-text {
-    color: rgb(122, 114, 111);
-    font-family: 'Avenir', sans-serif;
+    color: #303023;
+    font-family: 'Avenir Book', sans-serif;
 }
 
 .game-button {
@@ -16,7 +32,7 @@
     display: inline-block;
     font-size: 16px;
     font-weight: bold;
-    font-family: 'Verdana', 'Tahoma', 'Arial', sans-serif;
+    font-family: 'Stag', 'Verdana', 'Tahoma', 'Arial', sans-serif;
 }
 
 /* Top Message */
@@ -24,6 +40,7 @@
 .top-message {
     margin-top: 3vh;
     padding: 1vh 5vh 0 5vh;
+    
 }
 
 .welcome-sub-msg {
@@ -31,6 +48,7 @@
 }
 
 .correct-msg {
+    font-family: 'Stag Light';
     font-style: italic;
 }
 
@@ -41,6 +59,9 @@
 
 .current-level-text {
   /*font-size: xx-large;*/
+    font-weight: 700;
+    font-size: 24px;
+    font-family: 'Stag';
 }
 
 /* Answer Display */
@@ -55,6 +76,7 @@
 }
 
 .artifact-name {
+    font-family: 'Stag';
     border-bottom: 1px;
     color: rgb(98, 168, 229);
 }
@@ -67,11 +89,12 @@
     margin-right: 6vh;
     background: rgba(199, 190, 186, 0.5);
     font-weight: 400;
+    font-size: 17px !important;
 }
 
 .next-level-button {
-    font-size: 24px;
-    background: rgb(151, 169, 38);
+    font-size: 32px !important;
+    background-color: #99CC66 !important;
     width: 175px;
     height: 175px;
     border-radius: 50% !important;
@@ -79,10 +102,11 @@
 
 /* Scan Display */
 
+
 .scanner-display-container {
   margin-left: auto;
   margin-right: auto;
-  margin-top: 2%;
+  margin-top: 0px;
 }
 
 .qrScannerV2 {
@@ -91,9 +115,11 @@
 }
 
 .open-scanner-button {
+    margin-top: 10px;
     padding: 10px 22px;
-    font-size: 24px;
-    background: rgb(98, 168, 229);
+    font-size: 32px !important;
+    font-style: bold !important;
+    background-color: #99CC66 !important;
     width: 175px;
     height: 175px;
     border-radius: 50% !important;
@@ -114,6 +140,7 @@
     margin-bottom: 2vh;
     background: rgba(199, 190, 186, 0.5);
     font-weight: 400;
+    font-size: 22px;
 }
 
 /* Manual Entry Display */

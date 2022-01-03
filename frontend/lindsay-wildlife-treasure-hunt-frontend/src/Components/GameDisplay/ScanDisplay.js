@@ -62,6 +62,7 @@ class ScanDisplay extends React.Component {
     __getScanner(){
         return (
           <ZBarcodeScanner
+            className="ZScanner"
             width={this.state.scannerWidth}
             height={this.state.scannerHeight}
             onSuccessScan={this.handleScan}
