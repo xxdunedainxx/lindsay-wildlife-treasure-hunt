@@ -6,7 +6,6 @@ export class Session {
 
   static Init(){
     Logger.info('init session object')
-    Session.FetchSessionData()
   }
 
   static CheckIfExists(){
@@ -14,6 +13,8 @@ export class Session {
   }
 
   static OverrideGameStateSessionData(){
+    Logger.info("override gamestate")
+    console.log(GameController.gameState)
     Session.SetSessionData(GameController.gameState)
   }
 

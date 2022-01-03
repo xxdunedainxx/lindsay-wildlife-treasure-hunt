@@ -15,8 +15,9 @@ class GameControllerClient extends HttpClient {
   }
 
   successfulGetDB(result){
+    Logger.info("Got DB result")
     GameController.gameState.gameInfo = result
-    Session.OverrideGameStateSessionData()
+    
     GameController.Init()
     if(GameControllerClient.dependentPage != null){
       GameControllerClient.dependentPage.enablePage()
@@ -37,11 +38,11 @@ class GameControllerClient extends HttpClient {
         GameControllerClient.dependentPage.enablePage()
       }
     } else {
-    return this.get(
-      "scavenger_hunt",
-      this.successfulGetDB,
-      this.couldNotGetDB
-    )
+      return this.get(
+        "scavenger_hunt",
+        this.successfulGetDB,
+        this.couldNotGetDB
+      )
     }
   }
 }
