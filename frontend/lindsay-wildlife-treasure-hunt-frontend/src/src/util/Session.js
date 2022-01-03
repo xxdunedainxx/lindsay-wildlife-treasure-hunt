@@ -14,7 +14,9 @@ export class Session {
   }
 
   static OverrideGameStateSessionData(){
-    Session.SetSessionData(GameController.gameState)
+    // this was causing game to be reset on each reload
+    // for dev server using mock data -Rory
+    //Session.SetSessionData(GameController.gameState)
   }
 
   // loads session data if it exists, otherwise, creates it

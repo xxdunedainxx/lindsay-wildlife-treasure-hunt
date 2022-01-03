@@ -13,9 +13,9 @@ export class GameController {
   // if session data exists, loads it
   static Init(){
     Logger.info('init game controller', true)
-    Logger.info(`Game controller gameState info ${JSON.stringify(GameController.gameState)}`, true)
     Session.Init()
-    GameController.loadSessionData()
+    this.loadSessionData();
+    Logger.info(`Game controller gameState info ${JSON.stringify(GameController.gameState)}`, true)
   }
 
   static gameState = {
@@ -32,8 +32,7 @@ export class GameController {
     }
   }
 
-  static startGame() {
-    GameController.loadSessionData()
+  static async startGame() {
     GameController.gameState.gameStarted = true;
     GameController.gameState.lastGuess = null;
     GameController.gameState.currentLevel = 1;
@@ -45,18 +44,19 @@ export class GameController {
   }
 
   static resetGame() {
-    GameController.gameState.gameStarted = false;
-    GameController.gameState.currentLevel = null;
-    GameController.gameState.lastGuess = null;
-    GameController.gameState.attemptsOnCurrentLevel = 0;
-    GameController.gameState.correctAnswerOnCurrentLevel = false;
+    //GameController.gameState.gameStarted = false;
+    //GameController.gameState.currentLevel = null;
+    //GameController.gameState.lastGuess = null;
+    //GameController.gameState.attemptsOnCurrentLevel = 0;
+    //GameController.gameState.correctAnswerOnCurrentLevel = false;
+    this.startGame();
     GameController.saveState();
   }
 
   // if session data exists, loads it
   // sets gameState to loaded session data
-  static loadSessionData() {
-    GameController.gameState = Session.FetchSessionData()
+  static async loadSessionData() {
+    await(GameController.gameState = Session.FetchSessionData());
    }
 
   static saveState() {

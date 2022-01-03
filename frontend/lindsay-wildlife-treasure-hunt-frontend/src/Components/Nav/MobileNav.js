@@ -20,6 +20,13 @@ export class MobileNav extends React.Component {
     return (
       <div>
         <ul>
+        <li>
+            <Link to="/ui/home">
+              <div className="mobileItemText">
+                Start Scavenger Hunt
+              </div>
+            </Link>
+          </li>
           <li>
               <Link to="/ui/about">
                 <div className="mobileItemText">
@@ -34,6 +41,7 @@ export class MobileNav extends React.Component {
               </div>
             </Link>
           </li>
+          
         </ul>
       </div>
     );

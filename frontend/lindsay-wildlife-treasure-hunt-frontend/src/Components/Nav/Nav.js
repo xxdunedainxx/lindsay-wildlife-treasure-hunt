@@ -20,11 +20,18 @@ export class Nav extends React.Component {
   render(){
     return (
       <div id="navContainer">
-        <ul id="nav">
+        <ul className="nav-list" id="nav">
           <li id="navLogo">
             <Link to="/ui/home">
               <div id="lindsayLogoNav">
                 <img src={lindsayLogo} alt="Logo" />
+              </div>
+            </Link>
+          </li>
+          <li>
+            <Link to="/ui/home">
+              <div className="navText">
+                Game
               </div>
             </Link>
           </li>
@@ -42,17 +49,17 @@ export class Nav extends React.Component {
               </div>
             </Link>
           </li>
+          <li id="navVersion">
+            <div className="versionText">
+              <Version />
+            </div>
+          </li>
           <li id="navHamburger">
             <Link to="/ui/mobileNav">
             <div className="hamburgerText">
               ☰
             </div>
             </Link>
-          </li>
-          <li id="navVersion">
-            <div className="versionText">
-              <Version />
-            </div>
           </li>
         </ul>
       </div>
