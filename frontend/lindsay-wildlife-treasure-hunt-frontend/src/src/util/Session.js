@@ -18,14 +18,23 @@ export class Session {
     Session.SetSessionData(GameController.gameState)
   }
 
-  // loads session data if it exists, otherwise, creates it
+  // loads session data if it exists, otherwise, return a null object.
+  // Callers to session client should set / update session state
   static FetchSessionData(){
     Logger.info('fetching session data')
     if(Session.CheckIfExists() == false) {
-      Logger.info('Session data does not exist, setting')
-      Session.OverrideGameStateSessionData()
+      return null
+    } else {
+      return JSON.parse(localStorage.getItem(Session.sessionKey))
     }
-    return JSON.parse(localStorage.getItem(Session.sessionKey))
+  }
+
+  static GetSessionID(){
+    if(Session.CheckIfExists()) {
+      return Session.FetchSessionData().sessionID
+    } else {
+      return 'no-session-established'
+    }
   }
 
   static SetSessionData(data) {

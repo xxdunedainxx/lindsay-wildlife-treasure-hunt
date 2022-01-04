@@ -13,8 +13,10 @@ export class GameController {
   // if session data exists, loads it
   static Init(){
     Logger.info('init game controller', true)
+    console.log(GameController.gameState)
+    console.log(Session.FetchSessionData())
     GameController.loadSessionData();
-    Logger.info(`Game controller gameState info ${JSON.stringify(GameController.gameState)}`, true)
+
   }
 
   static gameState = {
@@ -55,7 +57,11 @@ export class GameController {
   // if session data exists, loads it
   // sets gameState to loaded session data
   static async loadSessionData() {
-    await(GameController.gameState = Session.FetchSessionData());
+    if(Session.CheckIfExists()){
+      GameController.gameState = Session.FetchSessionData()
+    } else {
+      Session.SetSessionData(GameController.gameState)
+    }
    }
 
   static saveState() {
