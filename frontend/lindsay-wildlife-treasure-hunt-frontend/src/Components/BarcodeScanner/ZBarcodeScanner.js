@@ -30,6 +30,7 @@ class ZBarcodeScanner extends React.Component {
     }
 
     this.qrParentStyle = {
+      margin: "auto"
       // width: "75%",
       // height: "500px"
     }
@@ -67,13 +68,6 @@ class ZBarcodeScanner extends React.Component {
         height: 300,
         margin: "auto"
       }
-
-      this.state.videoConstraints = {
-        width: 400,
-        height: 300,
-        facingMode: "environment"
-      }
-
       this.state.scrollerStyle = {
         width: 400,
         margin: "auto"
@@ -177,7 +171,6 @@ class ZBarcodeScanner extends React.Component {
     this.canvasParent = document.getElementById('qrcodeParent')
     canvas.width =   this.state.qrParentStyle.width
     canvas.height = this.state.qrParentStyle.height
-    
     var ctx    = canvas.getContext('2d');
     ctx.imageSmoothingEnabled = true;
     ctx.mozImageSmoothingEnabled = true;
