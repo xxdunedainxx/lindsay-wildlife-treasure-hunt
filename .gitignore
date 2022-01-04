@@ -1,5 +1,6 @@
 # load test files
 load/reports
+load/vegeta_tmp_cmd
 
 # Deploy tmp files
 deployment/INSTANCE.txt
