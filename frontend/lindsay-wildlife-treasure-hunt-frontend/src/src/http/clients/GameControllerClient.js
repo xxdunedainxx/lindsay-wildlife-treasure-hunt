@@ -31,12 +31,7 @@ class GameControllerClient extends HttpClient {
   async getDb(){
     // toggle mockData off to fetch data from a live API server
     if(Configuration.mockData == true){
-      GameController.Init()
-      GameController.gameState.gameInfo = MockData.exampleMockedDataOne
-      Session.OverrideGameStateSessionData()
-      if(GameControllerClient.dependentPage != null){
-        GameControllerClient.dependentPage.enablePage()
-      }
+      this.successfulGetDB(MockData.exampleMockedDataOne)
     } else {
       return this.get(
         "scavenger_hunt",

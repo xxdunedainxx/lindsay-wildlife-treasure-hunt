@@ -2,6 +2,7 @@ from smtplib import SMTP_SSL
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from typing import Any
+import os
 
 from src.util.LogFactory import LogFactory
 from src.Mail.MailFormatter import MailFormatter, MailTypes, ReportBugFormatter
@@ -80,6 +81,7 @@ Subject: %s
     # Create the body of the message (a plain-text and an HTML version).
     if formatter == MailTypes.END_USER_CERTIFICATE_EMAIL:
       mailFormatter: MailFormatter = MailFormatter(emailData)
+
     else:
       mailFormatter: ReportBugFormatter = ReportBugFormatter(emailData)
 

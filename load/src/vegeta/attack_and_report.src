@@ -12,8 +12,9 @@ function attackAndReport(){
 
   echo "${1}, ${2}, ${3}, ${4}"
 
-  commandToRun="echo \"${vegateCommand}\" \
-  | vegeta attack -duration="${duration}" -rate="${requestRate}" -output "${reportName}" \
+  printf "${vegateCommand}" > vegeta_tmp_cmd
+
+  commandToRun="vegeta attack -targets=vegeta_tmp_cmd -duration="${duration}" -rate="${requestRate}" -output "${reportName}" \
   | tee "${reportName}" \
   | vegeta report"
 
