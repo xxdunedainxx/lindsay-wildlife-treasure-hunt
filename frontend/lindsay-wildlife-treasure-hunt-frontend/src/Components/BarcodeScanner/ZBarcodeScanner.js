@@ -2,6 +2,8 @@ import React from 'react';
 
 //https://www.npmjs.com/package/qrcode-reader
 import Webcam from 'react-webcam'
+//https://www.npmjs.com/package/jsqr
+import jsQR from "jsqr";
 import QrCode from 'qrcode-reader';
 import './ZBarcodeScanner.css';
 import HttpArgParser from '../../src/util/HttpArgParser';
@@ -39,8 +41,8 @@ class ZBarcodeScanner extends React.Component {
       scanEnabled: false,
       height: 375,
       videoConstraints : {
-        width: 640,
-        height: 480,
+        width: 500,
+        height: 375,
         facingMode: "environment"
       },
       zoom: 1.0,
@@ -65,6 +67,13 @@ class ZBarcodeScanner extends React.Component {
         height: 300,
         margin: "auto"
       }
+
+      this.state.videoConstraints = {
+        width: 400,
+        height: 300,
+        facingMode: "environment"
+      }
+
       this.state.scrollerStyle = {
         width: 400,
         margin: "auto"
@@ -128,22 +137,25 @@ class ZBarcodeScanner extends React.Component {
           self.canvasContext.scale(self.state.zoom * 2, self.state.zoom * 2);
           self.canvasContext.drawImage(
             self.videoElement,
-            self.state.width / 2, self.state.height / 2, // sx, sy
-            self.state.width,self.state.height, // swidth, sheight
+            self.canvasElement.width / 2, self.canvasElement.height / 2, // sx, sy
+            self.canvasElement.width,self.canvasElement.height, // swidth, sheight
             0,0, //dx, dy <-- dont touch, effects destination x / y cropping
-            self.state.width,self.state.height // dwidth, dheight
+            self.canvasElement.width,self.canvasElement.height // dwidth, dheight
           );
 
           var pngUrl = self.canvasElement.toDataURL();
+          var pixelData = self.canvasContext.getImageData(0,0,self.canvasElement.width,self.canvasElement.height)
+
           var img = document.getElementById('barcodeimgElement')
           if(img != undefined) {
             img.src = pngUrl
           }
-          self.decodeImage(pngUrl)
+          self.decodeImage(pixelData.data)
       } else {
         // console.log(self.videoElement)
       }
-      setTimeout(loop, 1000 / 120); // drawing at 30fps
+      window.requestAnimationFrame(loop)
+      //setTimeout(loop, 1000 / 120); // drawing at 30fps
     }
     loop()
   }
@@ -165,6 +177,7 @@ class ZBarcodeScanner extends React.Component {
     this.canvasParent = document.getElementById('qrcodeParent')
     canvas.width =   this.state.qrParentStyle.width
     canvas.height = this.state.qrParentStyle.height
+    
     var ctx    = canvas.getContext('2d');
     ctx.imageSmoothingEnabled = true;
     ctx.mozImageSmoothingEnabled = true;
@@ -175,21 +188,29 @@ class ZBarcodeScanner extends React.Component {
   }
 
   decodeImage(data){
-    if(this.qr_reader != undefined){
-      let result = this.qr_reader.decode(data);
+    
+    if(data){
+      const code = jsQR(data, this.canvasElement.width, this.canvasElement.height);
+      if(code){
+        console.log(code.data)
+        alert(`Decoding ${code.data}`)
+        this.onSuccessScan(code.data)
+      } else {
+        this.onErrorScan(code)
+      }
     }
   } 
 
   // after the component is mounted, grab the device ID 
   componentDidMount(){
     console.log("getting video info...")
-    const hdConstraints = {
-      video: { width: { min: 1280 }, height: { min: 720 }, facingMode: { exact: "environment" }},
-    };
-    let video = document.getElementById(this.videoElementID)
-    navigator.mediaDevices.getUserMedia(hdConstraints).then((stream) => {
-        video.srcObject = stream;
-    });
+    // const hdConstraints = {
+    //   video: { width: { min: 1280 }, height: { min: 720 }, facingMode: { exact: "environment" }},
+    // };
+    // let video = document.getElementById(this.videoElementID)
+    // navigator.mediaDevices.getUserMedia(hdConstraints).then((stream) => {
+    //     video.srcObject = stream;
+    // });
     var self = this
     var slider = document.getElementById("myRange");
 
@@ -243,8 +264,8 @@ class ZBarcodeScanner extends React.Component {
         <div id={this.state.videoElementID}>
           <Webcam
             audio={false}
-            height={720}
-            width={1280}
+            height={this.state.qrParentStyle.height}
+            width={this.state.qrParentStyle.width}
             videoConstraints={this.state.videoConstraints}
           />
         </div>
