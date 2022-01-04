@@ -56,7 +56,7 @@ class ZBarcodeScanner extends React.Component {
         margin: "auto"
       },
       scrollerStyle: {
-        width: 500,
+        width: 400,
         margin: "auto"
       }
     }
@@ -69,7 +69,7 @@ class ZBarcodeScanner extends React.Component {
         margin: "auto"
       }
       this.state.scrollerStyle = {
-        width: 400,
+        width: 300,
         margin: "auto"
       }
       console.log(this.state)
