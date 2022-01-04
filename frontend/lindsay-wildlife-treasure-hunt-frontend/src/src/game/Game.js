@@ -16,7 +16,6 @@ export class GameController {
     console.log(GameController.gameState)
     console.log(Session.FetchSessionData())
     GameController.loadSessionData();
-
   }
 
   static gameState = {
@@ -50,7 +49,7 @@ export class GameController {
     //GameController.gameState.lastGuess = null;
     //GameController.gameState.attemptsOnCurrentLevel = 0;
     //GameController.gameState.correctAnswerOnCurrentLevel = false;
-    this.startGame();
+    GameController.startGame();
     GameController.saveState();
   }
 
@@ -60,6 +59,7 @@ export class GameController {
     if(Session.CheckIfExists()){
       GameController.gameState = Session.FetchSessionData()
     } else {
+      // First time load, no session, must explicitly set from existing gamestate
       Session.SetSessionData(GameController.gameState)
     }
    }

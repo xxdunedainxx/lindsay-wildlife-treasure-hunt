@@ -12,12 +12,6 @@ export class Session {
     return localStorage.getItem(Session.sessionKey) != null
   }
 
-  static OverrideGameStateSessionData(){
-    Logger.info("override gamestate")
-    console.log(GameController.gameState)
-    Session.SetSessionData(GameController.gameState)
-  }
-
   // loads session data if it exists, otherwise, return a null object.
   // Callers to session client should set / update session state
   static FetchSessionData(){
