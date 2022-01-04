@@ -53,6 +53,7 @@ class ReportBugFormatter:
       "$VERSION",
       self.version
     )
+
     return html_content
 
 
