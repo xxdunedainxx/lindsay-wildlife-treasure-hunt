@@ -32,7 +32,7 @@ class RemoteLogger extends HttpClient {
   async log(data){
     var userLogData={
       logData : `${data}`,
-      sessionID: Session.FetchSessionData().sessionID,
+      sessionID: Session.GetSessionID(),
       deviceInfo : RemoteLogger.getDeviceInformation(),
       version:   Configuration.version
     }
