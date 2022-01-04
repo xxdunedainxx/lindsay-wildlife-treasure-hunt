@@ -1,33 +1,56 @@
 <html>
   <head>
       <style>
+          @font-face {
+            font-family: 'Stag';
+            src: url('https://lindsay-wildlife-apps.zee-aws.net/static-assets/fonts/Stag-Book.otf')
+          }
+
+          @font-face {
+            font-family: 'Stag Light';
+            src: url('https://lindsay-wildlife-apps.zee-aws.net/static-assets/fonts/Stag-Light.otf')
+          }
+          
           .mainDoc {
               margin: auto;
               width: 50%;
-              border: 3px solid green;
               padding: 10px;
               text-align: center;
               font-size: xx-large;
             }
 
           .topOfHeader  {
-            color: #d08c60;
+             overflow: hidden;
+             max-width: 100%;
+             margin: auto;
+          }
+
+          .topOfHeader img {
+            max-width: 100%;
           }
           .username {
-            color: #62a8e5;
+            color: #97a926;
+            font-family: 'Stag';
           }
           .prize {
             color: #97a926;
+          }
+
+          p {
+            font-family: 'Stag Light';
           }
 
           @media only screen and (max-width: 700px) {
             .mainDoc {
               margin: auto;
               width: 100%;
-              border: 3px solid green;
               padding: 10px;
               text-align: center;
               font-size: medium;
+            }
+
+            .topOfHeader  {
+
             }
         }
       </style>
@@ -36,12 +59,17 @@
     <div class="mainDoc">
         <p>
             <div class="topOfHeader">
-                <h1>Lindsay Wildlife Treasure Hunt</h1>
+                <!-- Bas64 encoded header image -->
+                <img id="lwe-logo" src="https://lindsay-wildlife-apps.zee-aws.net/static-assets/images/LWEbrowngreenheader.png" />
             </div>
-            <b class="username">$USERNAME</b> Congratulations!<br />
-            This is an official certificate of completion of the Lindsay Wildlife Treasure Hunt.
-            <br/>
-            If you present this to a front desk representative, they have a <b class="prize">prize</b> for you!
+            <h3 class="username">$USERNAME</h3>
+            <p>
+                <b>You have successfully completed the Lindsay Wildlife Experience Scavenger Hunt</b>
+                <br/>
+                Congratulations!
+                <br/>
+                Please show this message to the front desk to collect your prize.
+            </p>
         </p>
     </div>
   </body>
