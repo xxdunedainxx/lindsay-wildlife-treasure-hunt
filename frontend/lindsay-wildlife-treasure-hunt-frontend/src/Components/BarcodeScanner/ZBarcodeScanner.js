@@ -81,6 +81,11 @@ export class ZBarcodeScanner extends React.Component {
     console.log(this.props)
   }
 
+  isSafari(){
+    var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && window['safari'].pushNotification));
+    return isSafari
+  }
+
   __setupClassVariables(props) {
     this.containerElementID = props.containerElementID != undefined ? props.videoElementID : 'zbarcodeScannerContainer'
     this.videoElementID = props.videoElementID != undefined ? props.videoElementID : 'zvideo'
@@ -124,6 +129,7 @@ export class ZBarcodeScanner extends React.Component {
       var zoomSupport = supportedConstraints.zoom ? supportedConstraints.zoom.toString() : 'false' 
       var facingSupport = supportedConstraints.facingMode ? supportedConstraints.facingMode.toString() : 'false'
       var focusMode = supportedConstraints.focusMode ? supportedConstraints.focusMode.toString() : 'false'
+      var isItSafari = this.isSafari()
       return (<div>
         <h3>Device Pixel Ratio: {pixelRatio}</h3>
         <div>
@@ -136,7 +142,8 @@ export class ZBarcodeScanner extends React.Component {
           </div>
         <div>
           Optimized Zoom Support: {this.state.optimizedZoomSupported.toString()}
-
+          <br />
+          Is Safar: {isItSafari.toString()}
         </div>
         <br />
         <h3>Debug Image:</h3>
@@ -199,6 +206,9 @@ export class ZBarcodeScanner extends React.Component {
           self.canvasContext.clearRect(0,0,self.canvasElement.width,self.canvasElement.height);
           if(!self.state.optimizedZoomSupported){
             self.canvasContext.scale(self.state.zoom * 2, self.state.zoom * 2);
+          }
+          if(!self.state.optimizedZoomSupported && !self.isSafari()){
+            
             self.canvasContext.drawImage(
               self.videoElement,
               self.canvasElement.width / 2, self.canvasElement.height / 2 , // sx, sy
@@ -251,10 +261,10 @@ export class ZBarcodeScanner extends React.Component {
     var video  = document.getElementById(this.videoElementID);
     this.videoElement = video.getElementsByTagName("video")[0];
 
-    this.videoElement.setAttribute('autoplay', 'true');
+    this.videoElement.setAttribute('autoPlay', 'true');
     this.videoElement.setAttribute('muted', 'true');
     this.videoElement.setAttribute('playsinline', 'true');
-    this.videoElement.play()
+    
     console.log("video elem")
     console.log(this.videoElement)
     var self = this
@@ -291,7 +301,11 @@ export class ZBarcodeScanner extends React.Component {
   decodeImage(data){
     
     if(data){
-      const code = jsQR(data, this.canvasElement.width, this.canvasElement.height);
+      const code = jsQR(
+        data, 
+        this.canvasElement.width, 
+        this.canvasElement.height
+      );
       if(code){
         console.log(code.data)
         this.onSuccessScan(code.data)
@@ -337,7 +351,7 @@ export class ZBarcodeScanner extends React.Component {
     return (
       <div id={this.state.containerElementID}>
         <div id={this.state.videoElementID}>
-        <video style={this.videoStyle} autoplay></video>
+        <video style={this.videoStyle} autoPlay></video>
         </div>
             <div id="qrcodeParent" style={this.state.qrParentStyle}>
             {this.__altText()}
