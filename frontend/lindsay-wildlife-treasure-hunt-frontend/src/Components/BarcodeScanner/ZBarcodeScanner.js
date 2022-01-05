@@ -8,7 +8,7 @@ import QrCode from 'qrcode-reader';
 import './ZBarcodeScanner.css';
 import HttpArgParser from '../../src/util/HttpArgParser';
 
-class ZBarcodeScanner extends React.Component {
+export class ZBarcodeScanner extends React.Component {
 
  constructor(props) {
     super(props)
@@ -58,7 +58,8 @@ class ZBarcodeScanner extends React.Component {
       scrollerStyle: {
         width: 400,
         margin: "auto"
-      }
+      },
+      videoRendering: false
     }
 
     if(window.innerWidth < 640) {
@@ -112,7 +113,12 @@ class ZBarcodeScanner extends React.Component {
 
   __getDebugImage(){
     if(HttpArgParser.DEBUG_MODE == "true"){
-      return (<img id="barcodeimgElement" style={this.videoStyle} />)
+      var pixelRatio = window.devicePixelRatio
+      return (<div>
+        <h3>Device Pixel Ratio: {pixelRatio}</h3>
+        <img id="barcodeimgElement" style={this.videoStyle} />
+        </div>
+      )
     } else{
       return ("")
     }
@@ -121,17 +127,34 @@ class ZBarcodeScanner extends React.Component {
   defaultOnSuccessScan(result){ console.log(result); alert(result) }
   defaultOnErrorScan(error){} // default no-op
 
+  videoIsRendering(){
+    this.setState(
+      {
+        videoRendering: true
+      }
+    )
+  }
+
+  videoNotRendering(){
+    this.setState(
+      {
+        videoRendering: false
+      }
+    )
+  }
+
   async drawCanvasAndDecodeConinuously(){
     // Cache reference to this object
     var self = this
     function loop() {
       if (self.videoElement != undefined && !self.videoElement.paused && !self.videoElement.ended) {
+          self.videoIsRendering()
           self.canvasContext.setTransform(1,0,0,1,0,0);
           self.canvasContext.clearRect(0,0,self.canvasElement.width,self.canvasElement.height);
           self.canvasContext.scale(self.state.zoom * 2, self.state.zoom * 2);
           self.canvasContext.drawImage(
             self.videoElement,
-            self.canvasElement.width / 2, self.canvasElement.height / 2, // sx, sy
+            self.canvasElement.width / 2, self.canvasElement.height / 2 , // sx, sy
             self.canvasElement.width,self.canvasElement.height, // swidth, sheight
             0,0, //dx, dy <-- dont touch, effects destination x / y cropping
             self.canvasElement.width,self.canvasElement.height // dwidth, dheight
@@ -146,12 +169,30 @@ class ZBarcodeScanner extends React.Component {
           }
           self.decodeImage(pixelData.data)
       } else {
-        // console.log(self.videoElement)
+        self.videoNotRendering()
       }
       window.requestAnimationFrame(loop)
       //setTimeout(loop, 1000 / 120); // drawing at 30fps
     }
     loop()
+  }
+
+  __altText(){
+    if(this.state.videoRendering){
+      return (
+        ""
+      )
+    } else {
+      return (<h3>No video feed</h3>)
+    }
+  }
+
+  videoContent(){
+    this.videoRendering = true
+  }
+
+  noVideoContent(){
+    this.videoRendering = false
   }
 
   setupVideo(){
@@ -234,6 +275,7 @@ class ZBarcodeScanner extends React.Component {
       <div id={this.state.containerElementID}>
             <div id="qrcodeParent" style={this.state.qrParentStyle}>
             {this.__getDebugImage()}
+            {this.__altText()}
             <canvas id="qrcodecanvas"
                 width={this.state.qrParentStyle.width} 
                 height={this.state.qrParentStyle.height}
