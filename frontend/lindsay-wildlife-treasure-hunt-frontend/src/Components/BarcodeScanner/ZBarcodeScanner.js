@@ -113,9 +113,22 @@ export class ZBarcodeScanner extends React.Component {
 
   __getDebugImage(){
     if(HttpArgParser.DEBUG_MODE == "true"){
+      var parStyle = {
+        white_space: "pre-line"
+      }
       var pixelRatio = window.devicePixelRatio
+      var supportedConstraints = (navigator.mediaDevices.getSupportedConstraints())
+      
       return (<div>
         <h3>Device Pixel Ratio: {pixelRatio}</h3>
+        <div>
+        Supported constraints: 
+          <ul >
+            <li> Zoom: {supportedConstraints.zoom.toString()}</li>
+            <li> Facing Mode: {supportedConstraints.facingMode.toString()}</li>
+            <li> Focus Mode: {supportedConstraints.focusMode.toString()}</li>
+          </ul>
+          </div>
         <img id="barcodeimgElement" style={this.videoStyle} />
         </div>
       )
@@ -227,7 +240,6 @@ export class ZBarcodeScanner extends React.Component {
       const code = jsQR(data, this.canvasElement.width, this.canvasElement.height);
       if(code){
         console.log(code.data)
-        alert(`Decoding ${code.data}`)
         this.onSuccessScan(code.data)
       } else {
         this.onErrorScan(code)
@@ -238,13 +250,6 @@ export class ZBarcodeScanner extends React.Component {
   // after the component is mounted, grab the device ID 
   componentDidMount(){
     console.log("getting video info...")
-    // const hdConstraints = {
-    //   video: { width: { min: 1280 }, height: { min: 720 }, facingMode: { exact: "environment" }},
-    // };
-    // let video = document.getElementById(this.videoElementID)
-    // navigator.mediaDevices.getUserMedia(hdConstraints).then((stream) => {
-    //     video.srcObject = stream;
-    // });
     var self = this
     var slider = document.getElementById("myRange");
 
