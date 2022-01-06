@@ -37,7 +37,11 @@ export class ZBarcodeScanner extends React.Component {
 
 
     // 4:3 aspect ratio
-    let widthToUse = window.innerWidth * .95 // 65% of window width
+    if(this.isSmallAppleDevice() == false){
+      var widthToUse = window.innerWidth * .95 // 95% of window width
+    } else {
+      var widthToUse = window.screen.width * .95 // 95% of window width
+    }
     let heightToUse = (widthToUse * .75)
 
     this.videoStyle = {
@@ -98,6 +102,10 @@ export class ZBarcodeScanner extends React.Component {
     console.log(this.props)
   }
 
+  isSmallAppleDevice(){
+    return (navigator.platform == "iPad" || navigator.platform == "iPhone" || navigator.platform == "iPod" )
+  }
+
   isSafari(){
     var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && window['safari'].pushNotification));
     return isSafari
@@ -147,6 +155,7 @@ export class ZBarcodeScanner extends React.Component {
       var facingSupport = supportedConstraints.facingMode ? supportedConstraints.facingMode.toString() : 'false'
       var focusMode = supportedConstraints.focusMode ? supportedConstraints.focusMode.toString() : 'false'
       var isItSafari = this.isSafari()
+      var isItSmallAppleDevice = (this.isSmallAppleDevice())
       var innerWidth = window.innerWidth
       var outerWidth = window.outerWidth
       return (<div>
@@ -162,7 +171,9 @@ export class ZBarcodeScanner extends React.Component {
         <div>
           Optimized Zoom Support: {this.state.optimizedZoomSupported.toString()}
           <br />
-          Is Safar: {isItSafari.toString()}
+          Safari?: {isItSafari.toString()}
+          <br />
+          Ipad/Iphone? {isItSmallAppleDevice.toString()}
           <br /> 
           Inner Width: {innerWidth}
           <br />
