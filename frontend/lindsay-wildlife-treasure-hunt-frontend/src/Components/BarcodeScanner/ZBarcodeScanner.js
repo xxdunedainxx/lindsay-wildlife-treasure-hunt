@@ -8,6 +8,10 @@ import QrCode from 'qrcode-reader';
 import './ZBarcodeScanner.css';
 import HttpArgParser from '../../src/util/HttpArgParser';
 
+import playbutton from './play_button.svg';
+import pausebutton from './pause_button.svg';
+
+
 export class ZBarcodeScanner extends React.Component {
 
  constructor(props) {
@@ -58,6 +62,10 @@ export class ZBarcodeScanner extends React.Component {
         width: 500,
         height: 375,
         margin: "auto"
+      },
+      qrCanvasStyle: {
+        display: "",
+        visibility: ""
       },
       scrollerStyle: {
         width: 400,
@@ -185,7 +193,11 @@ export class ZBarcodeScanner extends React.Component {
   videoIsRendering(){
     this.setState(
       {
-        videoRendering: true
+        videoRendering: true,
+        qrCanvasStyle: {
+          visibility: "",
+          display: ""
+        }
       }
     )
   }
@@ -193,7 +205,11 @@ export class ZBarcodeScanner extends React.Component {
   videoNotRendering(){
     this.setState(
       {
-        videoRendering: false
+        videoRendering: false,
+        qrCanvasStyle: {
+          visibility: "hidden",
+          display: "none"
+        }
       }
     )
   }
@@ -372,18 +388,17 @@ export class ZBarcodeScanner extends React.Component {
       <div id={this.state.containerElementID}>
         <div id={this.state.videoElementID}>
         <video style={this.videoStyle} playsinline autoplay muted loop></video>
-        <button onClick={this.playVideo.bind(this)}>Play video</button>
-        <button onClick={this.stopVideo.bind(this)}>Stop video</button>
         </div>
             <div id="qrcodeParent" style={this.state.qrParentStyle}>
             {this.__altText()}
             <canvas id="qrcodecanvas"
                 width={this.state.qrParentStyle.width} 
                 height={this.state.qrParentStyle.height}
+                style={this.state.qrCanvasStyle}
             >
             </canvas>
           </div>
-        <div class="slidecontainer">
+        <div class="slidecontainer" style={this.state.scrollerStyle}>  
           <input 
             type="range" 
             min={this.state.zoomFloor} 
@@ -392,9 +407,11 @@ export class ZBarcodeScanner extends React.Component {
             step=".1" 
             class="slider" 
             id="zvideoSlider" 
-            style={this.state.scrollerStyle}
+            
             onInput={this.updateZoomValue.bind(this)} 
           />
+          <button class="videoButton" onClick={this.playVideo.bind(this)}><img src={playbutton} alt="Play Video" /></button>
+          <button class="videoButton" onClick={this.stopVideo.bind(this)}><img src={pausebutton} alt="Pause Video" /></button>
         </div>
        {this.__getDebugImage()}
       </div>
