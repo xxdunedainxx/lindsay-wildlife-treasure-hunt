@@ -272,7 +272,7 @@ export class ZBarcodeScanner extends React.Component {
     var self = this
     navigator.mediaDevices.getUserMedia({video: self.state.videoConstraints})
       .then(mediaStream => {
-        document.querySelector('video').srcObject = mediaStream;
+        this.videoElement.srcObject = mediaStream;
 
         self.videoElementTrack = mediaStream.getVideoTracks()[0]
         self.videoElementCapabilities = this.videoElementTrack.getCapabilities();
@@ -280,6 +280,13 @@ export class ZBarcodeScanner extends React.Component {
         console.log(self.videoElementCapabilities)
         console.log(self.videoElementSettings)
         self.optimizedZoomSupport()
+        self.videoElement.setAttribute('autoPlay', 'true');
+        self.videoElement.setAttribute('muted', 'true');
+        self.videoElement.setAttribute('playsinline', 'true');
+        self.videoElement.setAttribute('loop', 'true');
+        self.videoElement.setAttribute('autobuffer', 'true');
+        self.videoElement.load()
+        self.playVideo()
       })
       .catch(error => console.log('Argh!', error.name || error));
 
