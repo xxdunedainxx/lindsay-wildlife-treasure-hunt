@@ -11,6 +11,7 @@ import HttpArgParser from '../../src/util/HttpArgParser';
 import playbutton from './play_button.svg';
 import pausebutton from './pause_button.svg';
 
+import Logger from '../../src/util/Logger';
 
 export class ZBarcodeScanner extends React.Component {
 
@@ -355,7 +356,8 @@ export class ZBarcodeScanner extends React.Component {
         this.canvasElement.height
       );
       if(code){
-        console.log(code.data)
+
+        Logger.info(`Code detected: ${code.data}`)
         this.onSuccessScan(code.data)
       } else {
         this.onErrorScan(code)
@@ -404,6 +406,10 @@ export class ZBarcodeScanner extends React.Component {
 
   componentWillUnmount(){
     console.log("unloading barcode scanner")
+  }
+
+  onPlay(){
+    alert('video starting..')
   }
 
   render() {
