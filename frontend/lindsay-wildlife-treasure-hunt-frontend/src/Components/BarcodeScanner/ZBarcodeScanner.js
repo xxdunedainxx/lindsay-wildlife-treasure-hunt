@@ -17,6 +17,8 @@ export class ZBarcodeScanner extends React.Component {
     this.__setupClassVariables(props)
     this.__setupScanCallBacks(props)
 
+    this.videoPaused = false
+
     // DEPRECATED this.__setupCodeReader()
     this.videoStyle = {
       visibility: "hidden",
@@ -231,7 +233,12 @@ export class ZBarcodeScanner extends React.Component {
           }
           self.decodeImage(pixelData.data)
       } else {
+        self.canvasContext.setTransform(1,0,0,1,0,0);
+        self.canvasContext.clearRect(0,0,self.canvasElement.width,self.canvasElement.height);
         self.videoNotRendering()
+        if(self.videoElement != undefined && !self.videoPaused){
+          self.playVideo()
+        }
       }
       window.requestAnimationFrame(loop)
       //setTimeout(loop, 1000 / 120); // drawing at 30fps
@@ -260,11 +267,6 @@ export class ZBarcodeScanner extends React.Component {
   async setupVideo(){
     var video  = document.getElementById(this.videoElementID);
     this.videoElement = video.getElementsByTagName("video")[0];
-
-    this.videoElement.setAttribute('autoPlay', 'true');
-    this.videoElement.setAttribute('muted', 'true');
-    this.videoElement.setAttribute('playsinline', 'true');
-    
     console.log("video elem")
     console.log(this.videoElement)
     var self = this
@@ -343,6 +345,17 @@ export class ZBarcodeScanner extends React.Component {
       }
   }
 
+  playVideo(){
+    this.videoElement.play()
+    this.videoPaused = false
+  }
+
+
+  stopVideo(){
+    this.videoElement.pause()
+    this.videoPaused = true
+  }
+
   componentWillUnmount(){
     console.log("unloading barcode scanner")
   }
@@ -351,7 +364,9 @@ export class ZBarcodeScanner extends React.Component {
     return (
       <div id={this.state.containerElementID}>
         <div id={this.state.videoElementID}>
-        <video style={this.videoStyle} autoPlay></video>
+        <video style={this.videoStyle} playsinline autoplay muted loop></video>
+        <button onClick={this.playVideo.bind(this)}>Play video</button>
+        <button onClick={this.stopVideo.bind(this)}>Stop video</button>
         </div>
             <div id="qrcodeParent" style={this.state.qrParentStyle}>
             {this.__altText()}
