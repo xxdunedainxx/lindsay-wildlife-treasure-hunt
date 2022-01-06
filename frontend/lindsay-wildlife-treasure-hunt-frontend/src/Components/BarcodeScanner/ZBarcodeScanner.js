@@ -23,12 +23,6 @@ export class ZBarcodeScanner extends React.Component {
 
     this.videoPaused = false
 
-    // DEPRECATED this.__setupCodeReader()
-    this.videoStyle = {
-      visibility: "hidden",
-      display: "none"
-    }
-
     this.sliderStyle = {
       width: "75%",
       height: "50px",
@@ -41,16 +35,29 @@ export class ZBarcodeScanner extends React.Component {
       // height: "500px"
     }
 
+
+    // 4:3 aspect ratio
+    let widthToUse = window.innerWidth * .95 // 65% of window width
+    let heightToUse = (widthToUse * .75)
+
+    this.videoStyle = {
+      visibility: "hidden",
+      display: "none",
+      width: widthToUse,
+      height: heightToUse
+    }
+
+
     this.state = {
       videoElementID: this.videoElementID,
       containerElementID: this.containerElementID,
-      width: 500,
+      width: widthToUse,
       scanEnabled: false,
       optimizedZoomSupported: false,
-      height: 375,
+      height: heightToUse,
       videoConstraints : {
-        width: 500,
-        height: 375,
+        width: widthToUse,
+        height: heightToUse,
         facingMode: "environment",
         zoom: true
       },
@@ -59,8 +66,8 @@ export class ZBarcodeScanner extends React.Component {
       zoomCeiling: 10.0,
       qrParentStyle: {
         // ensure to maintain a 4:3 aspect ratio when scaling
-        width: 500,
-        height: 375,
+        width: widthToUse,
+        height: heightToUse,
         margin: "auto"
       },
       qrCanvasStyle: {
@@ -68,25 +75,25 @@ export class ZBarcodeScanner extends React.Component {
         visibility: ""
       },
       scrollerStyle: {
-        width: 400,
+        width: (widthToUse * .75),
         margin: "auto"
       },
       videoRendering: false
     }
 
-    if(window.innerWidth < 640) {
-      console.log("override ZBarCodeScanner width and height!")
-      this.state.qrParentStyle = {
-        width: 400,
-        height: 300,
-        margin: "auto"
-      }
-      this.state.scrollerStyle = {
-        width: 300,
-        margin: "auto"
-      }
-      console.log(this.state)
-    }
+    // if(window.innerWidth < 640) {
+    //   console.log("override ZBarCodeScanner width and height!")
+    //   this.state.qrParentStyle = {
+    //     width: 400,
+    //     height: 300,
+    //     margin: "auto"
+    //   }
+    //   this.state.scrollerStyle = {
+    //     width: 300,
+    //     margin: "auto"
+    //   }
+    //   console.log(this.state)
+    // }
 
     console.log(this.props)
   }
@@ -140,6 +147,8 @@ export class ZBarcodeScanner extends React.Component {
       var facingSupport = supportedConstraints.facingMode ? supportedConstraints.facingMode.toString() : 'false'
       var focusMode = supportedConstraints.focusMode ? supportedConstraints.focusMode.toString() : 'false'
       var isItSafari = this.isSafari()
+      var innerWidth = window.innerWidth
+      var outerWidth = window.outerWidth
       return (<div>
         <h3>Device Pixel Ratio: {pixelRatio}</h3>
         <div>
@@ -154,6 +163,10 @@ export class ZBarcodeScanner extends React.Component {
           Optimized Zoom Support: {this.state.optimizedZoomSupported.toString()}
           <br />
           Is Safar: {isItSafari.toString()}
+          <br /> 
+          Inner Width: {innerWidth}
+          <br />
+          Outer Width : {outerWidth}
         </div>
         <br />
         <h3>Debug Image:</h3>
@@ -223,15 +236,14 @@ export class ZBarcodeScanner extends React.Component {
           self.canvasContext.setTransform(1,0,0,1,0,0);
           self.canvasContext.clearRect(0,0,self.canvasElement.width,self.canvasElement.height);
           if(!self.state.optimizedZoomSupported){
-            self.canvasContext.scale(self.state.zoom * 2, self.state.zoom * 2);
+            self.canvasContext.scale(self.state.zoom, self.state.zoom);
           }
           if(!self.state.optimizedZoomSupported && !self.isSafari()){
-            
             self.canvasContext.drawImage(
-              self.videoElement,
-              self.canvasElement.width / 2, self.canvasElement.height / 2 , // sx, sy
-              self.canvasElement.width,self.canvasElement.height, // swidth, sheight
-              0,0, //dx, dy <-- dont touch, effects destination x / y cropping
+              self.videoElement, // src image
+              0, 0, // sx, sy
+              self.canvasElement.width / 2,self.canvasElement.height / 2, // swidth, sheight
+              0,0, // dx, dy
               self.canvasElement.width,self.canvasElement.height // dwidth, dheight
             );
           } else {
