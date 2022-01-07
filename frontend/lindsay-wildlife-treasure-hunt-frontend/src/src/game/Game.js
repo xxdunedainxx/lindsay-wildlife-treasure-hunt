@@ -85,6 +85,18 @@ export class GameController {
     GameController.saveState();
   }
 
+  static checkAnswerNumber(answer) {
+    const correctNumber = this.getArtifactNumberId(GameController.gameState.currentArtifactIdInSequence);
+    console.log("Correct answer: " + correctNumber + ", Guess: " + answer)
+    if(answer == correctNumber) {
+      GameController.correctAnswer()
+      GameController.saveState()
+      return
+    }
+    GameController.wrongAnswer();
+    GameController.saveState();
+  }
+
   static nextLevel() {
     // if game is not over
     if(GameController.gameState.currentLevel < GameController.getNumberOfArtifacts()) {
@@ -145,6 +157,10 @@ export class GameController {
 
   static getClue(artifactId) {
     return GameController.gameState.gameInfo.game.GameSequence[artifactId].Clue;
+  }
+
+  static getArtifactNumberId(artifactId) {
+    return GameController.gameState.gameInfo.game.GameSequence[artifactId].NumberId
   }
 
   static getExtraHint(artifactId) {

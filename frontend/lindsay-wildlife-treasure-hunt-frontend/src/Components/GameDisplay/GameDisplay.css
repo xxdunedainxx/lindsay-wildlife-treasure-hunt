@@ -40,7 +40,6 @@
 .top-message {
     margin-top: 3vh;
     padding: 1vh 5vh 0 5vh;
-    
 }
 
 .welcome-sub-msg {
@@ -145,8 +144,119 @@
 
 /* Manual Entry Display */
 
+.manual-entry-container {
+    align-items: center;
+    justify-content: center;
+    display: inline-block;
+    font-family: 'Stag';
+}
+
+.numpad-body {
+    margin-left: auto;
+    margin-right: auto;
+    height: 95vw;
+    width: 65vw;
+    display: grid;
+    grid-template: 1.2fr 1fr 1fr 1fr 1fr / 1fr 1fr 1fr;
+    grid-gap: 5px;
+    max-height: 500px;
+    max-width: 450px;
+    padding: 17px;
+}
+
+.man-btn {
+    border-style: none;
+    border-radius: 100%;
+    font-family: 'Stag';
+    font-size: 34px;
+    background-color: #99CC66;
+    color: white;
+}
+
+.display {
+    color: #303023 !important;
+    font-size: 48px;
+    grid-row: 1;
+    grid-column: 1/4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: 5px;
+    padding-left: 5px;
+    overflow:hidden;
+    margin-bottom: 5px;
+    border: 1px solid;
+    border-radius: 10px;
+}
+
+/* buttons for manual entry */
+
+.btn-del {
+    grid-row: 5;
+    grid-column: 1;
+}
+
+.btn-submit {
+    font-size: 20px;
+    grid-row: 5;
+    grid-column: 3;
+}
+
+.btn-zero {
+    grid-row: 5;
+    grid-column: 2;
+}
+
+.btn-one {
+    grid-row: 4;
+    grid-column: 1;
+}
+
+.btn-two {
+    grid-row: 4;
+    grid-column: 2;
+}
+
+.btn-three {
+    grid-row: 4;
+    grid-column: 3;
+}
+
+.btn-four {
+    grid-row: 3;
+    grid-column: 1;
+}
+
+.btn-five {
+    grid-row: 3;
+    grid-column: 2;
+}
+
+.btn-six {
+    grid-row: 3;
+    grid-column: 3;
+}
+
+.btn-seven {
+    grid-row: 2;
+    grid-column: 1;
+}
+
+.btn-eight {
+    grid-row: 2;
+    grid-column: 2;
+}
+
+.btn-nine {
+    grid-row: 2;
+    grid-column: 3;
+}
+
 .manual-entry-text {
+    margin-left: 5vw;
+    margin-right: 5vw;
     font-style: italic;
+    font-size: 14px;
 }
 
 .manual-entry-submit{
