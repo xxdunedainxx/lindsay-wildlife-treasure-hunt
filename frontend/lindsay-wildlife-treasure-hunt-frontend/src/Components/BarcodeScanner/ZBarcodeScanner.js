@@ -52,6 +52,7 @@ export class ZBarcodeScanner extends React.Component {
       height: heightToUse
     }
 
+    this.canvasHealthThreshold = 60
 
     this.state = {
       videoElementID: this.videoElementID,
@@ -59,6 +60,10 @@ export class ZBarcodeScanner extends React.Component {
       width: widthToUse,
       scanEnabled: false,
       optimizedZoomSupported: false,
+      canvasState : {
+        previousCanvasUrl: '',
+        duplicateCanvasDetected: 0
+      },
       height: heightToUse,
       videoConstraints : {
         width: widthToUse,
@@ -110,6 +115,24 @@ export class ZBarcodeScanner extends React.Component {
   isSafari(){
     var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && window['safari'].pushNotification));
     return isSafari
+  }
+
+  __canvasHealthCheck(canvas) {
+    if(this.canvasElement.toDataURL() == this.state.canvasState.previousCanvasUrl) {
+      this.setState({
+        canvasState: {
+          duplicateCanvasDetected: (this.state.canvasState.duplicateCanvasDetected + 1),
+          previousCanvasUrl: this.canvasElement.toDataURL()
+        }
+      })
+    } else {
+      this.setState({
+        canvasState: {
+          duplicateCanvasDetected: 0,
+          previousCanvasUrl: this.canvasElement.toDataURL()
+        }
+      })
+    }
   }
 
   __setupClassVariables(props) {
@@ -272,6 +295,7 @@ export class ZBarcodeScanner extends React.Component {
             img.src = pngUrl
           }
           self.decodeImage(pixelData.data)
+          self.__canvasHealthCheck()
       } else {
         self.canvasContext.setTransform(1,0,0,1,0,0);
         self.canvasContext.clearRect(0,0,self.canvasElement.width,self.canvasElement.height);
@@ -288,9 +312,20 @@ export class ZBarcodeScanner extends React.Component {
 
   __altText(){
     if(this.state.videoRendering){
-      return (
-        ""
-      )
+      if(this.state.canvasState.duplicateCanvasDetected > this.canvasHealthThreshold) {
+        return (
+          <h3>Video Rendering issue. Please try closing and opening your browser. If this does not fix your issue you can use the 'manual entry mode'</h3>
+        )
+      } else if(this.state.canvasState.duplicateCanvasDetected > 2) {
+        return (
+          <h3>Attempting to load video feed...</h3>
+        )
+      }
+      else {
+        return (
+          ""
+        )
+      }
     } else {
       return (<h3>No video feed</h3>)
     }
