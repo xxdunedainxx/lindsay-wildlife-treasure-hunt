@@ -113,4 +113,24 @@ class ManualEntryNumpad extends React.Component {
   }
 }
 
+function ManualEntryModeButton(props) {
+  let buttonMessage;
+  if(props.manualEntryMode) {
+    buttonMessage = "Scanner Mode"
+  }
+  else {
+    buttonMessage = "Scanner not working?"
+  }
+  return(
+    <div>
+      <button
+        className="game-button"
+        onClick={props.onClick}
+      >
+        <i>{buttonMessage}</i>
+      </button>
+    </div>
+  );
+}
+
 export default ManualEntryDisplay;
