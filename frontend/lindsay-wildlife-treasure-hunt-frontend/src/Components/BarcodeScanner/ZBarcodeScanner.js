@@ -182,6 +182,7 @@ export class ZBarcodeScanner extends React.Component {
       var isItSmallAppleDevice = (this.isSmallAppleDevice())
       var innerWidth = window.innerWidth
       var outerWidth = window.outerWidth
+      var navPlatform = navigator.platform
       return (<div>
         <h3>Device Pixel Ratio: {pixelRatio}</h3>
         <div>
@@ -202,6 +203,8 @@ export class ZBarcodeScanner extends React.Component {
           Inner Width: {innerWidth}
           <br />
           Outer Width : {outerWidth}
+          <br />
+          Nav Platform: {navPlatform}
         </div>
         <br />
         <h3>Debug Image:</h3>
@@ -212,8 +215,7 @@ export class ZBarcodeScanner extends React.Component {
       return ("")
     }
   }
-          // Video Settings: {JSON.stringify(this.videoElementSettings)}
-          // Video Capabilities: {JSON.stringify(this.videoElementCapabilities)}
+
   defaultOnSuccessScan(result){ console.log(result); alert(result) }
   defaultOnErrorScan(error){} // default no-op
 
