@@ -53,8 +53,10 @@ export class ZBarcodeScanner extends React.Component {
     }
 
     this.canvasHealthThreshold = 60
+    this.canvasRequiredSuccessChecks = 5
 
     this.state = {
+      mounted: true,
       videoElementID: this.videoElementID,
       containerElementID: this.containerElementID,
       width: widthToUse,
@@ -62,7 +64,9 @@ export class ZBarcodeScanner extends React.Component {
       optimizedZoomSupported: false,
       canvasState : {
         previousCanvasUrl: '',
-        duplicateCanvasDetected: 0
+        duplicateCanvasDetected: 0,
+        successfulChecks       : 0,
+        healthy: false
       },
       height: heightToUse,
       videoConstraints : {
@@ -117,18 +121,44 @@ export class ZBarcodeScanner extends React.Component {
     return isSafari
   }
 
+  __compononentDidMount(){
+    this.mounted = true
+  }
+
+  __componentDidUnMount(){
+    this.mounted = false
+  }
+
+  __isMounted(){
+    return this.mounted
+  }
+
+  __canvasIsHealthy(){
+    return this.state.canvasState.healthy
+  }
+
   __canvasHealthCheck(canvas) {
+
+
     if(this.canvasElement.toDataURL() == this.state.canvasState.previousCanvasUrl) {
       this.setState({
         canvasState: {
+          healthy: false,
           duplicateCanvasDetected: (this.state.canvasState.duplicateCanvasDetected + 1),
-          previousCanvasUrl: this.canvasElement.toDataURL()
+          previousCanvasUrl: this.canvasElement.toDataURL(),
+          successfulChecks: this.state.canvasState.successfulChecks
         }
       })
     } else {
+      var canvasIsHealthy = false
+      if(this.state.canvasState.successfulChecks > this.canvasRequiredSuccessChecks) {
+        canvasIsHealthy = true
+      }
       this.setState({
         canvasState: {
+          healthy: canvasIsHealthy,
           duplicateCanvasDetected: 0,
+          successfulChecks: (this.state.canvasState.successfulChecks + 1), 
           previousCanvasUrl: this.canvasElement.toDataURL()
         }
       })
@@ -268,45 +298,49 @@ export class ZBarcodeScanner extends React.Component {
     // Cache reference to this object
     var self = this
     function loop() {
-      if (self.videoElement != undefined && !self.videoElement.paused && !self.videoElement.ended) {
-          self.videoIsRendering()
+      if(self.__isMounted()){
+        if (self.videoElement != undefined && !self.videoElement.paused && !self.videoElement.ended) {
+            self.videoIsRendering()
+            self.canvasContext.setTransform(1,0,0,1,0,0);
+            self.canvasContext.clearRect(0,0,self.canvasElement.width,self.canvasElement.height);
+            if(!self.state.optimizedZoomSupported){
+              self.canvasContext.scale(self.state.zoom, self.state.zoom);
+            }
+            if(!self.state.optimizedZoomSupported && !self.isSafari()){
+              self.canvasContext.drawImage(
+                self.videoElement, // src image
+                0, 0, // sx, sy
+                self.canvasElement.width / 2,self.canvasElement.height / 2, // swidth, sheight
+                0,0, // dx, dy
+                self.canvasElement.width,self.canvasElement.height // dwidth, dheight
+              );
+            } else {
+              self.canvasContext.drawImage(
+                self.videoElement, 0,0
+              );
+            }
+
+            var pngUrl = self.canvasElement.toDataURL();
+            var pixelData = self.canvasContext.getImageData(0,0,self.canvasElement.width,self.canvasElement.height)
+
+            var img = document.getElementById('barcodeimgElement')
+            if(img != undefined) {
+              img.src = pngUrl
+            }
+            self.decodeImage(pixelData.data)
+            if(self.__canvasIsHealthy() == false){
+              self.__canvasHealthCheck()
+            }
+        } else {
           self.canvasContext.setTransform(1,0,0,1,0,0);
           self.canvasContext.clearRect(0,0,self.canvasElement.width,self.canvasElement.height);
-          if(!self.state.optimizedZoomSupported){
-            self.canvasContext.scale(self.state.zoom, self.state.zoom);
+          self.videoNotRendering()
+          if(self.videoElement != undefined && !self.videoPaused){
+            self.playVideo()
           }
-          if(!self.state.optimizedZoomSupported && !self.isSafari()){
-            self.canvasContext.drawImage(
-              self.videoElement, // src image
-              0, 0, // sx, sy
-              self.canvasElement.width / 2,self.canvasElement.height / 2, // swidth, sheight
-              0,0, // dx, dy
-              self.canvasElement.width,self.canvasElement.height // dwidth, dheight
-            );
-          } else {
-            self.canvasContext.drawImage(
-              self.videoElement, 0,0
-            );
-          }
-
-          var pngUrl = self.canvasElement.toDataURL();
-          var pixelData = self.canvasContext.getImageData(0,0,self.canvasElement.width,self.canvasElement.height)
-
-          var img = document.getElementById('barcodeimgElement')
-          if(img != undefined) {
-            img.src = pngUrl
-          }
-          self.decodeImage(pixelData.data)
-          self.__canvasHealthCheck()
-      } else {
-        self.canvasContext.setTransform(1,0,0,1,0,0);
-        self.canvasContext.clearRect(0,0,self.canvasElement.width,self.canvasElement.height);
-        self.videoNotRendering()
-        if(self.videoElement != undefined && !self.videoPaused){
-          self.playVideo()
         }
+        window.requestAnimationFrame(loop)
       }
-      window.requestAnimationFrame(loop)
       //setTimeout(loop, 1000 / 120); // drawing at 30fps
     }
     loop()
@@ -318,7 +352,7 @@ export class ZBarcodeScanner extends React.Component {
         return (
           <h3>Video Rendering issue. Please try closing and opening your browser. If this does not fix your issue you can use the 'manual entry mode'</h3>
         )
-      } else if(this.state.canvasState.duplicateCanvasDetected > 2) {
+      } else if(this.state.canvasState.duplicateCanvasDetected > 2 || this.state.canvasState.successfulChecks < this.canvasRequiredSuccessChecks) {
         return (
           <h3>Attempting to load video feed...</h3>
         )
@@ -410,6 +444,7 @@ export class ZBarcodeScanner extends React.Component {
 
     // DEPRECATED
     //this.__setupContinualScan()
+    this.__compononentDidMount()
     this.setupCanvas()
     this.setupVideo()
     this.drawCanvasAndDecodeConinuously()
@@ -442,6 +477,7 @@ export class ZBarcodeScanner extends React.Component {
   }
 
   componentWillUnmount(){
+    this.__componentDidUnMount()
     console.log("unloading barcode scanner")
   }
 
