@@ -36,7 +36,6 @@ export class ZBarcodeScanner extends React.Component {
       // height: "500px"
     }
 
-
     // 4:3 aspect ratio
     if(this.isSmallAppleDevice() == false){
       var widthToUse = window.innerWidth * .95 // 95% of window width
@@ -303,14 +302,17 @@ export class ZBarcodeScanner extends React.Component {
             self.videoIsRendering()
             self.canvasContext.setTransform(1,0,0,1,0,0);
             self.canvasContext.clearRect(0,0,self.canvasElement.width,self.canvasElement.height);
-            if(!self.state.optimizedZoomSupported){
+            // if no zoom is applied, provide the default video feed
+            // if optimized zoom, DO NOT scale the canvas
+            if(!self.state.optimizedZoomSupported && self.state.zoom != self.state.zoomFloor){
+
               self.canvasContext.scale(self.state.zoom, self.state.zoom);
             }
             if(!self.state.optimizedZoomSupported && !self.isSafari()){
               self.canvasContext.drawImage(
                 self.videoElement, // src image
                 0, 0, // sx, sy
-                self.canvasElement.width / 2,self.canvasElement.height / 2, // swidth, sheight
+                self.canvasElement.width,self.canvasElement.height, // swidth, sheight
                 0,0, // dx, dy
                 self.canvasElement.width,self.canvasElement.height // dwidth, dheight
               );
@@ -492,7 +494,9 @@ export class ZBarcodeScanner extends React.Component {
         <video style={this.videoStyle} playsinline autoplay muted loop></video>
         </div>
             <div id="qrcodeParent" style={this.state.qrParentStyle}>
+            <div id="altText">
             {this.__altText()}
+            </div>
             <canvas id="qrcodecanvas"
                 width={this.state.qrParentStyle.width} 
                 height={this.state.qrParentStyle.height}
