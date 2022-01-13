@@ -113,7 +113,6 @@ export class GameDisplay extends React.Component {
       displayExtraHint: false,
     });
     this.updateGameState();
-    console.log(GameController.gameState.gameComplete)
     if(GameController.gameState.gameComplete) {
       window.location.href = '/ui/win';
     }
