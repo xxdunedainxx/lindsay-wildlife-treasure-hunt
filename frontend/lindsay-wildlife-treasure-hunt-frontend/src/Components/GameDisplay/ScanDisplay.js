@@ -40,7 +40,6 @@ class ScanDisplay extends React.Component {
     }
 
     updateWindowSize() {
-      console.log("WINDOW: " + window.innerWidth + ", " + window.innerHeight)
       this.setState({
         availWidth: window.innerWidth,
         availHeight: window.innerHeight

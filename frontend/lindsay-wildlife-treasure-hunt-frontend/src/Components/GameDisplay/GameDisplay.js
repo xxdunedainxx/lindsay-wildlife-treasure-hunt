@@ -63,6 +63,7 @@ export class GameDisplay extends React.Component {
         numberOfArtifacts: GameController.getNumberOfArtifacts(),
         gameComplete: GameController.gameState.gameComplete,
         tryAgainClicked: false,
+        manualEntryMode: this.state.manualEntryMode
       }
     )
   }
@@ -113,7 +114,6 @@ export class GameDisplay extends React.Component {
       displayExtraHint: false,
     });
     this.updateGameState();
-    console.log(GameController.gameState.gameComplete)
     if(GameController.gameState.gameComplete) {
       window.location.href = '/ui/win';
     }
@@ -130,17 +130,19 @@ export class GameDisplay extends React.Component {
     this.updateGameState();
   }
 
-  manualEntryTextSubmitButton(e) {
-    const textField = document.getElementById("manual-entry-text-field");
-    this.state.currentGuess = textField.value.toLowerCase();
-    textField.value = '';
-    this.checkAnswer();
+  checkAnswerNumber(number) {
+    GameController.checkAnswerNumber(number)
+    this.updateGameState()
   }
 
   manualEntryModeButton() {
     this.setState({
       manualEntryMode: !this.state.manualEntryMode,
     })
+  }
+
+  submitManualNumpad(guess) {
+    this.checkAnswerNumber(guess)
   }
 
   getAnswerButton() {
@@ -236,7 +238,7 @@ export class GameDisplay extends React.Component {
           gameStarted={this.state.gameStarted}
           displayAnswer={this.state.displayAnswer}
           manualEntryMode={this.state.manualEntryMode}
-          manualEntryTextSubmitButton={this.manualEntryTextSubmitButton.bind(this)}
+          submitManualNumpad={this.submitManualNumpad.bind(this)}
           manualEntryModeButton={this.manualEntryModeButton.bind(this)}
         />
         <br/><br/>
