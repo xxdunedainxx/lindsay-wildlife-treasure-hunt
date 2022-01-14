@@ -10,7 +10,7 @@ export class Configuration {
 
   static Init() {
     console.log(confData)
-    Configuration.version = "0.14.2.8"
+    Configuration.version = "0.15.0"
     Configuration.logLevel = confData.logging.level
     Configuration.conf = confData
     Configuration.headers = confData.headers
