@@ -69,7 +69,7 @@ class FileIO:
   def create_directory_if_does_not_exist(directory):
     print(directory)
     if os.path.exists(directory) == False:
-      os.mkdir(directory)
+      os.makedirs(directory, exist_ok=True)
 
   @staticmethod
   def delete_file(path):

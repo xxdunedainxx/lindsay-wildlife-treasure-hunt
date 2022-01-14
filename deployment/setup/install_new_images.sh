@@ -1,5 +1,9 @@
 #! /bin/bash
 
+echo "Prune back old images"
+
+docker image prune -f
+
 echo "Loading new images"
 
 docker load < lindsay-ingress.tar.gz

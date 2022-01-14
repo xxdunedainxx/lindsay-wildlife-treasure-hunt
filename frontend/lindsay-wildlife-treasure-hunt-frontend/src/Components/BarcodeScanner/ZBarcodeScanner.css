@@ -2,6 +2,33 @@ body {
   overflow-x: hidden !important;
 }
 
+canvas {
+    image-rendering: optimizeSpeed;             
+    image-rendering: -moz-crisp-edges;         
+    image-rendering: -webkit-optimize-contrast; 
+    image-rendering: -o-crisp-edges;            
+    image-rendering: crisp-edges;              
+    -ms-interpolation-mode: nearest-neighbor; 
+}
+
+#qrcodecanvas {
+  padding-left: 12.5%;
+}
+
+#zbarcodeScannerContainer {
+  overflow-x: hidden !important;
+}
+
+.videoButton {
+  width: 50px;
+  height: 50px;
+  padding-left: 5px;
+  padding-top: 20px;
+  background: none;
+  color: inherit;
+  border: none;
+}
+
 .slider {
   -webkit-appearance: none;
   width: 100%;

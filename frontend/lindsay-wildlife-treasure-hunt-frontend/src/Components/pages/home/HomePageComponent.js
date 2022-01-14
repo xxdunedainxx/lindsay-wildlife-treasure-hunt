@@ -1,4 +1,5 @@
 import React from 'react';
+import ZBarcodeScanner from '../../BarcodeScanner/ZBarcodeScanner';
 import './HomePageComponent.css';
 import {
   BrowserRouter as Router,
@@ -11,6 +12,10 @@ export class HomePage extends React.Component {
 
   constructor(props) {
     super(props)
+    this.videoStyle = {
+      visibility: "hidden",
+      display: "none"
+    }
   }
 
   render(){
@@ -26,6 +31,9 @@ export class HomePage extends React.Component {
         <Link to="/ui/game" className="startButton">
           Get Started!
         </Link>
+        <div style={this.videoStyle}>
+        <ZBarcodeScanner />
+        </div>
       </div>
     );
   }
