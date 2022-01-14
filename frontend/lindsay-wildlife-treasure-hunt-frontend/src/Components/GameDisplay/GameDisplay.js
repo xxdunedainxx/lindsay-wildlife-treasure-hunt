@@ -63,6 +63,7 @@ export class GameDisplay extends React.Component {
         numberOfArtifacts: GameController.getNumberOfArtifacts(),
         gameComplete: GameController.gameState.gameComplete,
         tryAgainClicked: false,
+        manualEntryMode: this.state.manualEntryMode
       }
     )
   }
