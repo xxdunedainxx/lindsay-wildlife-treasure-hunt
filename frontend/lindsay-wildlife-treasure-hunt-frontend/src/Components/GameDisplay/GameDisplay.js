@@ -9,7 +9,7 @@ import ManualEntryDisplay from './ManualEntryDisplay';
 import TestZoomComponent from './TestZoomComponent';
 
 import './GameDisplay.css';
-
+import Logger from '../../src/util/Logger';
 // Display Daddy
 export class GameDisplay extends React.Component {
   static instance = null
@@ -88,10 +88,12 @@ export class GameDisplay extends React.Component {
   }
 
   qrScannerUpdate(result) {
+    Logger.info("qrScannerUpdate..")
     if (result) {
+      Logger.info("Guessing")
       this.setState(
         {
-          currentGuess: result.text,
+          currentGuess: result,
           scannerOpen: false,
         }
       );

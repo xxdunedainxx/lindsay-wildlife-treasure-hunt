@@ -1,4 +1,5 @@
 from src.util.LogFactory import LogFactory
+from src.util.ErrorFactory import errorStackTrace
 from src.Setup import Setup
 from src.MultiThreading.Cron import Cron
 from src.util.FileIO import FileIO
@@ -28,9 +29,12 @@ class LogRotationJob:
   def rotate_logs():
     # copy contents of log files to dated log file
     # delete archive log files older than expiration days
-    LogFactory.MAIN_LOG.info("Running log rotation job")
-    LogRotationJob.rotate_daily_logs()
-    LogRotationJob.prune_old_logs()
+    try:
+      LogFactory.MAIN_LOG.info("Running log rotation job")
+      LogRotationJob.rotate_daily_logs()
+      LogRotationJob.prune_old_logs()
+    except Exception as e:
+      LogFactory.MAIN_LOG.error(f"Failed to rotate with error {errorStackTrace(e)}")
 
   @staticmethod
   def rotate_daily_logs():

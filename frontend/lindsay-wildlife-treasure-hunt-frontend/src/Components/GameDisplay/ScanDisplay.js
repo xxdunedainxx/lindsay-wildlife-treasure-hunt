@@ -2,6 +2,7 @@ import React from "react";
 import ZBarcodeScanner from '../BarcodeScanner/ZBarcodeScanner';
 import GameDisplay from './GameDisplay';
 import HttpArgParser from '../../src/util/HttpArgParser';
+import Logger from '../../src/util/Logger';
 // Scan Display
 class ScanDisplay extends React.Component {
 
@@ -53,7 +54,9 @@ class ScanDisplay extends React.Component {
     }
 
     handleScan = data => {
+      Logger.info(`Data for hadleScan: ${data}`)
       if (data) {
+        Logger.info("Running QR Scanner Update")
         GameDisplay.instance.qrScannerUpdate(data)
       }
     }
