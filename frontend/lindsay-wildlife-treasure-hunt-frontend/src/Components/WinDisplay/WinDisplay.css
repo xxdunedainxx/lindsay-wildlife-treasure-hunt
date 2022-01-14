@@ -13,6 +13,11 @@
   src: url('../../src/fonts/Stag-Light.otf');
 }
 
+.win-page-container {
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
 .win-text {
     color: #303023;
     font-family: 'Stag Light', 'Avenir', sans-serif;

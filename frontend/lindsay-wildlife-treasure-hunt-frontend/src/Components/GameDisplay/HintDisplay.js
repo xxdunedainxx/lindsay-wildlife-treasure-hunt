@@ -54,7 +54,7 @@ function DisplayExtraHint(props) {
       }
       else{
       return(
-          <div className="extra-hint-text">
+          <div className="clue-text game-text">
           {props.extraHint}
           </div>
       );
