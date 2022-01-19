@@ -34,10 +34,6 @@ function App() {
   Logger.info("START REACT APP", true)
   Logger.info(Configuration)
   var headers = Configuration.headers
-  // var appHealthClient = new AppHealthClient(Configuration.healthEndpoint)
-  // appHealthClient.health()
-  // appHealthClient.dependencies()
-
 
   return (
 
