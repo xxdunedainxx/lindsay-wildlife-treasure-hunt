@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.15.0
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/176)
+* Manual Numpad Entry mode
+* Update Artifact DB with NumberID
+* Fix Manual Entry reload persistence issue
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/177)
+* Zoom Optimization
+* clean up barcode scanner UI (no overflow)
+* detect apple device info
+* switch to jsQR decode algorithm
+* add Zoom component controls (play / pause)
+* canvas health check
+* debug mode which spits out device information
+* only scan video feed if the component is mounted
+* remove sx/sy division
+* apply video constraints ourself
+* fix detection of successful result
+* request webcam permissions on home page
+* docker image pruning when installing new images
+* try / catch for archive logger
+
 ## 0.14.0
 
 [PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/commit/494c7e1550a9ba6fb4f89becbe3dcc93875e2560)
