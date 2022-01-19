@@ -4,6 +4,6 @@ VERSION=$(cat ../VERSION)
 LINDSAY_APP_NAME="https://lindsay-wildlife-apps.zee-aws.net"
 PATH=$PATH:$(pwd)
 
-RESULT_FILE="history/${VERSION}-results.md"
+RESULT_FILE="history/${VERSION//./_}-results.md"
 
 # echo "GET https://lindsay-wildlife-apps.zee-aws.net/health" | vegeta attack -duration=1s | tee results.bin  | vegeta report -type=text
