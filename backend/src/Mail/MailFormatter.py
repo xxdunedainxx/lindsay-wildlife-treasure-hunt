@@ -4,6 +4,7 @@ from src.util.FileIO import FileIO
 class MailTypes:
   END_USER_CERTIFICATE_EMAIL: str = "END_USER_CERTIFICATE_EMAIL"
   REPORT_A_BUG_EMAIL: str = "REPORT_A_BUG_EMAIL"
+  SERVER_IS_DOWN_EMAIL: str ="SERVER_IS_DOWN_EMAIL"
 
 
 class MailFormatter:
@@ -57,7 +58,41 @@ class ReportBugFormatter:
     return html_content
 
 
+class ServerDownEmail:
+
+  TEMPLATE_DIR = f"src{os.sep}Mail{os.sep}html_templates"
+
+  def __init__(self,emailData: dict,  htmlTemplate: str = 'ServerDown.html'):
+    self.message: str = emailData["message"]
+    self.version: str = emailData["version"]
+    self.host: str = emailData["host"]
+
+    self.template: str = htmlTemplate
+
+
+  def formatted_html(self) -> str:
+    cwd=os.getcwd()
+    html_content = FileIO.read_file_content_to_string(f"{os.getcwd()}{os.sep}{MailFormatter.TEMPLATE_DIR}{os.sep}{self.template}") # open(f"{MailFormatter.TEMPLATE_DIR}{os.sep}{self.template}").read()
+
+    html_content = html_content.replace(
+      "$VERSION",
+      self.version
+    )
+
+    html_content = html_content.replace(
+      "$HOST",
+      self.host
+    )
+
+    html_content = html_content.replace(
+      "$MESSAGE",
+      self.message
+    )
+
+    return html_content
+
 FORMATTERS : dict  = {
   MailTypes.END_USER_CERTIFICATE_EMAIL : MailFormatter,
-  MailTypes.REPORT_A_BUG_EMAIL : ReportBugFormatter
+  MailTypes.REPORT_A_BUG_EMAIL : ReportBugFormatter,
+  MailTypes.SERVER_IS_DOWN_EMAIL: ServerDownEmail
 }
