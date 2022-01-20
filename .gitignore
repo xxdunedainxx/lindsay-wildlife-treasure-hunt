@@ -10,7 +10,7 @@ INSTANCE.txt
 SSH_KEY_PATH.txt
 USERNAME.txt
 deployment/images
-monitoring/images
+backend/monitoring/images
 
 # configs
 prod.conf.json
