@@ -13,7 +13,6 @@ import 'regenerator-runtime'
 setupFetchMock()
 Setup.Run()
 
-
 test('Execute a valid HTTP app health request', async () => {
   console.log('Execute a valid HTTP app health request')
   fetch.mockResponseOnce(JSON.stringify(goodAppHealthData()));

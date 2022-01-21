@@ -44,7 +44,7 @@ function runReactTests(){
   cd frontend/lindsay-wildlife-treasure-hunt-frontend
 
   log "Executing react Unit testing"
-  npm run-script unit-testing
+  ./test/scripts/unit_tests.sh
   # log "Executing react integration tests"
   # npm run-script integration-testing
   cd $HOME
