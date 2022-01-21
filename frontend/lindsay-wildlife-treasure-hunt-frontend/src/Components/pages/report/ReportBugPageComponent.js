@@ -12,8 +12,8 @@ export class ReportBugPage extends React.Component {
 
   render(){
     return (
-      <div>
-        <h3>Having an issue? We want to hear your feedback:</h3>
+      <div data-testid="test-report-bug-container">
+        <h3 data-testid="test-report-bug-header">Having an issue? We want to hear your feedback:</h3>
         <ReportAnIssueDisplay/>
       </div>
     );

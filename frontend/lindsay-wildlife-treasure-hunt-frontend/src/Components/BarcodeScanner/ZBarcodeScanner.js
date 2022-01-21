@@ -1,7 +1,7 @@
 import React from 'react';
 
 //https://www.npmjs.com/package/qrcode-reader
-import Webcam from 'react-webcam'
+//import Webcam from 'react-webcam'
 //https://www.npmjs.com/package/jsqr
 import jsQR from "jsqr";
 import QrCode from 'qrcode-reader';

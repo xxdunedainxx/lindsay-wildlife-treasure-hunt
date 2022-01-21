@@ -39,8 +39,8 @@ export class ReportAnIssueDisplay extends React.Component {
 
   render() {
     return (
-      <div class="reportAnIssueWrapper">
-        <form onSubmit={this.handleSubmit}>
+      <div class="reportAnIssueWrapper" data-testid="test-issue-display-container">
+        <form onSubmit={this.handleSubmit} data-testid="test-issue-display-form">
           <label for="describeIssueInput" class="userInfoInputLabel">
             Describe your issue:
           </label>

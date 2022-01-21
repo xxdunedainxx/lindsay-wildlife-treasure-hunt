@@ -68,13 +68,18 @@ export class GameController {
     Session.SetSessionData(GameController.gameState);
   }
 
+  static setLastGuess(guess){
+    GameController.gameState.lastGuess = guess
+  }
+
   // takes a lower case arg
   // checks answer and updates session with gameState
   // returns true if correct, false otherwise
   static checkAnswer(answer) {
+    GameController.setLastGuess(answer)
     const correctAnswers = GameController.getAllArtifactNames(GameController.gameState.currentArtifactIdInSequence);
     for(let i = 0; i < correctAnswers.length; i++) {
-      if(answer == correctAnswers[i].toLowerCase()) {
+      if(answer.toLowerCase() == correctAnswers[i].toLowerCase()) {
         GameController.correctAnswer();
         GameController.saveState();
         return
@@ -86,6 +91,7 @@ export class GameController {
   }
 
   static checkAnswerNumber(answer) {
+    GameController.setLastGuess(answer)
     const correctNumber = this.getArtifactArtifactId(GameController.gameState.currentArtifactIdInSequence);
     if(answer == correctNumber) {
       GameController.correctAnswer()
