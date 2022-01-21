@@ -77,6 +77,15 @@ class AppHealthStatusUtil:
       return AppHealthStatus.UNHEALTHY
 
   @staticmethod
+  def get_all_services_html_formatted() -> str:
+    LogFactory.MAIN_LOG.debug("Collecting service info html formatted")
+    html_message: str = ""
+    for service in AppHealthStatusUtil.get_enabled_services():
+        html_message+=(f"<br /> * <b>[{service.upper()}]</b>: {AppHealthStatusUtil.get_status(service)}")
+    return html_message
+
+
+  @staticmethod
   def print_all_service_status():
     LogFactory.MAIN_LOG.info("===== SERVICE STATUSES =====")
     for service in AppHealthStatusUtil.get_enabled_services():

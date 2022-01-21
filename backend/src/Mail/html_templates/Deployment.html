@@ -1,0 +1,48 @@
+<html>
+  <head>
+      <style>
+          .mainDoc {
+              margin: auto;
+              width: 50%;
+              border: 3px solid green;
+              padding: 10px;
+              text-align: center;
+              font-size: xx-large;
+            }
+
+          .topOfHeader  {
+            color: #d08c60;
+          }
+          .username {
+            color: #62a8e5;
+          }
+          .prize {
+            color: #97a926;
+          }
+
+          @media only screen and (max-width: 700px) {
+            .mainDoc {
+              margin: auto;
+              width: 100%;
+              border: 3px solid green;
+              padding: 10px;
+              text-align: center;
+              font-size: medium;
+            }
+        }
+      </style>
+  </head>
+  <body>
+    <div class="mainDoc">
+        <p>
+            <div class="topOfHeader">
+                <h1>Lindsay Wildlife Treasure Hunt Deployment Completed</h1>
+            </div>
+            Below is information regarding the latest application deployment:<br />
+            <b>App Version</b>: $VERSION<br />
+            <b>Hostname</b>: $HOST<br />
+            <b>Service Information (nerdy info)</b>: $SERVICE_INFO<br />
+        </p>
+    </div>
+  </body>
+</html>
