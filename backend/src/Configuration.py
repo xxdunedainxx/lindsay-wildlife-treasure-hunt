@@ -34,6 +34,9 @@ class Configuration:
     "UI_LOGGING_JOB_INTERVAL_MINUTES" : 1,
     "UI_LOGGING_JOB_LOGS_PER_JOB"     : 50,
     "BUG_REPORT_EMAIL_LIST" : ["zrmmaster92@gmail.com", "roderickjmacleod@gmail.com"]
+
+    # Static image directory
+    "IMAGE_DIR" : f"{os.getcwd()}{os.sep}assets"
   }
 
   def __init__(self):
@@ -77,6 +80,9 @@ class Configuration:
     self.UI_LOGGING_JOB_INTERVAL_MINUTES: int = self.__get_value("UI_LOGGING_JOB_INTERVAL_MINUTES")
     self.UI_LOGGING_JOB_LOGS_PER_JOB: int = self.__get_value("UI_LOGGING_JOB_LOGS_PER_JOB")
     self.BUG_REPORT_EMAIL_LIST: [str] = self.__get_value("BUG_REPORT_EMAIL_LIST")
+    
+    # Static images
+    self.IMAGE_DIR: str = self.__get_value("IMAGE_DIR")
 
 
 
