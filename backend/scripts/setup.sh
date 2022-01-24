@@ -20,6 +20,7 @@ ${PYTHON_INTERPRETER} -m pip install qrcode
 ${PYTHON_INTERPRETER} -m pip install schedule
 ${PYTHON_INTERPRETER} -m pip install redis
 ${PYTHON_INTERPRETER} -m pip install psutil
+${PYTHON_INTERPRETER} -m pip install requests
 ${PYTHON_INTERPRETER} -m pip install flask
 ${PYTHON_INTERPRETER} -m pip install flask-cors
 ${PYTHON_INTERPRETER} -m pip install mock
