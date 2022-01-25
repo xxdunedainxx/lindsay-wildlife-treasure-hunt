@@ -31,8 +31,17 @@ test('Test startGame()', async () => {
 });
 
 test('Test Get Operations', () => 
-  {
-
+  { 
+    let currentID = GameController.gameState.currentArtifactIdInSequence
+    expect(GameController.getClue(currentID)).toBe(GameController.gameState.gameInfo.game.GameSequence[currentID].Clue);
+    expect(GameController.getArtifactArtifactId(currentID)).toBe(GameController.gameState.gameInfo.game.GameSequence[currentID].ArtifactId);
+    expect(GameController.getExtraHint(currentID)).toBe(GameController.gameState.gameInfo.game.GameSequence[currentID].AdditionalHint);
+    expect(GameController.getArtifactName(currentID)).toBe(GameController.gameState.gameInfo.game.GameSequence[currentID].ArtifactName[0]);
+    expect(GameController.getAllArtifactNames(currentID)).toBe(GameController.gameState.gameInfo.game.GameSequence[currentID].ArtifactName);
+    expect(GameController.getArtifactText(currentID)).toBe(GameController.gameState.gameInfo.game.GameSequence[currentID].CorrectMessage);
+    expect(GameController.getArtifactMediaUrl(currentID)).toBe(GameController.gameState.gameInfo.game.GameSequence[currentID].MediaLink);
+    expect(GameController.getArtifactPhotoCredit(currentID)).toBe(GameController.gameState.gameInfo.game.GameSequence[currentID].Credit);
+    expect(GameController.getCorrectAnswerOnCurrentLevel(currentID)).toBe(GameController.gameState.correctAnswerOnCurrentLevel);
   }
 )
 
@@ -57,22 +66,46 @@ test('Test checkAnswer() logic', () =>
 )
 
 
-// test('Test checkAnswerNumber()', () => 
-//   {
+
+
+test('Test nextLevel() upon completion of game', () => 
+  {
+    GameController.gameState.currentLevel = GameController.getNumberOfArtifacts() + 1
+    GameController.nextLevel()
+    expect(GameController.gameState.gameComplete).toBe(true)
+  }
+)
+
+test('Test correctAnswer() + wrongAnswer()', () => 
+  {
+    let attempts = GameController.gameState.attemptsOnCurrentLevel+1
+    GameController.wrongAnswer()
+    expect(GameController.gameState.attemptsOnCurrentLevel).toBe(attempts)
+    expect(GameController.gameState.correctAnswerOnCurrentLevel).toBe(false)
     
-//   }
-// )
+    GameController.correctAnswer()
+    expect(GameController.gameState.correctAnswerOnCurrentLevel).toBe(true)
+  }
+)
 
-// test('Test nextLevel() + checkAnswer()', () => 
-//   {
 
-//   }
-// )
+test('Test checkAnswerNumber()', () => 
+  {
+    let correctID = GameController.getArtifactArtifactId(GameController.gameState.currentArtifactIdInSequence)
+    let wrongID = 9999
+    GameController.correctAnswer = jest.fn();
+    GameController.wrongAnswer = jest.fn();
+    GameController.saveState = jest.fn();
 
-// test('Test correctAnswer() + wrongAnswer()', () => 
-//   {
+    GameController.checkAnswerNumber(wrongID)
+    expect(GameController.wrongAnswer).toHaveBeenCalled();
+    expect(GameController.saveState).toHaveBeenCalled();
 
-//   }
-// )
+    
+    GameController.checkAnswerNumber(correctID)
+    expect(GameController.correctAnswer).toHaveBeenCalled();
+    expect(GameController.saveState).toHaveBeenCalled();
+  }
+)
 
 

@@ -4,6 +4,8 @@ import ReportBugPage from '../../../../src/Components/pages/report/ReportBugPage
 import { render } from "@testing-library/react";
 //https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom/extend-expect';
+import { shallow } from 'enzyme';
+
 test('Report a bug render DOM test', () => {
 
   const { container, getByText, getByTestId } = render(
@@ -20,10 +22,13 @@ test('Report Issue Sub-component display testing', () => {
   const { container, getByText, getByTestId } = render(
     <ReportBugPage />
   );
+  console.log(container.state)
   
   const reportIssueDisplay = getByTestId('test-issue-display-container')
-  expect(reportIssueDisplay).toHaveClass('reportAnIssueWrapper')
-
   const reportIssueForm = getByTestId("test-issue-display-form")
+
+  expect(reportIssueDisplay).toHaveClass('reportAnIssueWrapper')
+  expect(reportIssueDisplay).toContainElement(reportIssueForm)
+  
   expect(reportIssueForm).toBeInTheDocument()
 });

@@ -45,8 +45,10 @@ function runReactTests(){
 
   log "Executing react Unit testing"
   ./test/scripts/unit_tests.sh
-  # log "Executing react integration tests"
-  # npm run-script integration-testing
+
+  log "Executing react component integration testing"
+  ./test/scripts/integration_tests.sh
+  
   cd $HOME
 }
 
