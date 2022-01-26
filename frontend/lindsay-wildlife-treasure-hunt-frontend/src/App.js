@@ -5,6 +5,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import DebugLogger from "react-debug-logging-console"
 
 import {Nav} from './Components/Nav/Nav';
 
@@ -12,6 +13,7 @@ import {Nav} from './Components/Nav/Nav';
 import Setup from './src/util/Setup';
 import Configuration from './src/conf/Configuration';
 import Logger from './src/util/Logger';
+import HttpArgParser from './src/util/HttpArgParser';
 import TestClient from './src/http/clients/TestClient';
 import AppHealthClient from './src/http/clients/AppHealthClient';
 import GameControllerClient from './src/http/clients/GameControllerClient';
@@ -23,6 +25,8 @@ import {AboutPage} from './Components/pages/about/AboutPageComponent';
 import {GamePage} from './Components/pages/game/GamePageComponent';
 import {HomePage} from './Components/pages/home/HomePageComponent';
 import {ReportBugPage} from './Components/pages/report/ReportBugPageComponent';
+
+
 
 function App() {
   // redirect to home
@@ -46,6 +50,7 @@ function App() {
         <Router>
           <Nav headers={headers}/>
           <ApplicationRouter />
+          <DebugLogger enabled={HttpArgParser.DEBUG_MODE != "false"}/>
         </Router>
       </header>
     </div>
