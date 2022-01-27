@@ -1,4 +1,4 @@
-import * as confData from './client_conf.json';
+import * as confData from './prod_client_conf.json';
 
 export class Configuration {
   static conf
