@@ -1,4 +1,6 @@
-import * as confData from './prod_client_conf.json';
+import * as confFile from './client_conf.json';
+
+import {env} from './env/env.js';
 
 export class Configuration {
   static conf
@@ -9,7 +11,11 @@ export class Configuration {
   static mockData = false
 
   static Init() {
-    console.log(confData)
+    console.log(env)
+    console.log(`Environment: ${env}`)
+    console.log(confFile)
+    let confData = confFile["default"][env]
+    Configuration.isProd = (env == "prod")
     Configuration.version = "0.15.0"
     Configuration.logLevel = confData.logging.level
     Configuration.conf = confData

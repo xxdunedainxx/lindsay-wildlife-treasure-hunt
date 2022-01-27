@@ -18,6 +18,8 @@ fi
 
 HOME=$(pwd)
 
+export DEPLOY_ENV="prod"
+
 ./deployment/bundle.sh
 
 echo "DEPLOYING"
