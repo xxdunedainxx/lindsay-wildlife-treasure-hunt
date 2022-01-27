@@ -5,14 +5,16 @@ from src.MultiThreading.ThreadPool import process_is_alive, WorkerPool
 from src.Singletons import Singletons
 from src.Services import ServiceNames
 from src.util.LogFactory import LogFactory
+from src.util.ErrorFactory import errorStackTrace
 
 import json
+import requests
 
 class AppHealthStatusUtil:
 
   @staticmethod
   def check_service_pids(service: str) -> bool:
-    if ServiceNames.redis == service:
+    if ServiceNames.redis == service or ServiceNames.reactApp == service:
       return True
 
     if FileIO.file_exists(WorkerPool.generate_info_filename(service)):
@@ -40,11 +42,13 @@ class AppHealthStatusUtil:
   def get_status(service: str) -> str:
     if service == ServiceNames.redis:
       return AppHealthStatusUtil.check_redis_health()
-
-    if AppHealthStatusUtil.check_service_pids(service) == False:
-       return AppHealthStatus.MISSING
+    elif service == ServiceNames.reactApp:
+      return AppHealthStatusUtil.check_react_health()
     else:
-      return FileIO.read_file_content_to_string(AppHealthStatusUtil.status_file_path(service))
+      if AppHealthStatusUtil.check_service_pids(service) == False:
+         return AppHealthStatus.MISSING
+      else:
+        return FileIO.read_file_content_to_string(AppHealthStatusUtil.status_file_path(service))
 
   @staticmethod
   def write_status(service: str, status: str):
@@ -77,6 +81,7 @@ class AppHealthStatusUtil:
       return AppHealthStatus.UNHEALTHY
 
   @staticmethod
+
   def get_all_services_html_formatted() -> str:
     LogFactory.MAIN_LOG.debug("Collecting service info html formatted")
     html_message: str = ""
@@ -84,6 +89,17 @@ class AppHealthStatusUtil:
         html_message+=(f"<br /> * <b>[{service.upper()}]</b>: {AppHealthStatusUtil.get_status(service)}")
     return html_message
 
+  def check_react_health():
+    try:
+      req = requests.get(f"{CONF_INSTANCE.REACT_APP}/ui", allow_redirects=False)
+      if req.status_code == 301:
+        return AppHealthStatus.HEALTHY
+      else:
+        LogFactory.MAIN_LOG.error(f"React health check failed, returned status code: {req.status_code}")
+        return AppHealthStatus.UNHEALTHY
+    except Exception as e:
+      LogFactory.MAIN_LOG.error(f"Failed to check react health with error: {errorStackTrace(e)}")
+      return AppHealthStatus.FATAL
 
   @staticmethod
   def print_all_service_status():

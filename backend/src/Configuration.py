@@ -19,8 +19,10 @@ class Configuration:
       ServiceNames.apiServer : True,
       ServiceNames.logRotation: True,
       ServiceNames.redis: True,
-      ServiceNames.uiLogger: True
+      ServiceNames.uiLogger: True,
+      ServiceNames.reactApp: True,
     },
+    "REACT_APP" : "http://localhost",
     "PRODUCTION_ENVIRONMENT" : False,
     "ENVIRONMENT_HOSTNAME" : "localhost",
     "DATABASE_ENGINE" : "json",
@@ -34,7 +36,10 @@ class Configuration:
     "LOG_ROTATION_JOB_ARCHIVE_DIR"      : f"archive{os.sep}",
     "UI_LOGGING_JOB_INTERVAL_MINUTES" : 1,
     "UI_LOGGING_JOB_LOGS_PER_JOB"     : 50,
-    "BUG_REPORT_EMAIL_LIST" : ["zrmmaster92@gmail.com", "roderickjmacleod@gmail.com"]
+    "BUG_REPORT_EMAIL_LIST" : ["zrmmaster92@gmail.com", "roderickjmacleod@gmail.com"],
+
+    # Static image directory
+    "IMAGE_DIR" : f"{os.getcwd()}{os.sep}assets"
   }
 
   def __init__(self):
@@ -69,6 +74,7 @@ class Configuration:
     self.DATABASE: str = self.__get_value("DATABASE")
     self.MAIL_JOB_INTERVAL_MINUTES: int = self.__get_value("MAIL_JOB_INTERVAL_MINUTES")
     self.MAIL_JOB_EMAILS_PER_JOB: int = self.__get_value("MAIL_JOB_EMAILS_PER_JOB")
+    self.REACT_APP: str = self.__get_value("REACT_APP")
 
     # Log rotation job configuration
     self.LOG_ROTATION_JOB_INTERVAL_MINUTES: int = self.__get_value("LOG_ROTATION_JOB_INTERVAL_MINUTES")
@@ -79,6 +85,9 @@ class Configuration:
     self.UI_LOGGING_JOB_INTERVAL_MINUTES: int = self.__get_value("UI_LOGGING_JOB_INTERVAL_MINUTES")
     self.UI_LOGGING_JOB_LOGS_PER_JOB: int = self.__get_value("UI_LOGGING_JOB_LOGS_PER_JOB")
     self.BUG_REPORT_EMAIL_LIST: [str] = self.__get_value("BUG_REPORT_EMAIL_LIST")
+
+    # Static images
+    self.IMAGE_DIR: str = self.__get_value("IMAGE_DIR")
 
 
 
