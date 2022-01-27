@@ -24,6 +24,7 @@ class Configuration:
     },
     "REACT_APP" : "http://localhost",
     "PRODUCTION_ENVIRONMENT" : False,
+    "ENVIRONMENT_HOSTNAME" : "localhost",
     "DATABASE_ENGINE" : "json",
     "DATABASE" : "db.json",
     "MAIL_JOB_INTERVAL_MINUTES" : 1,
@@ -68,6 +69,7 @@ class Configuration:
     # General Configs
     self.SERVICE_TOGGLES: dict = self.__get_value("SERVICE_TOGGLES")
     self.PRODUCTION_ENVIRONMENT: bool = self.__get_value("PRODUCTION_ENVIRONMENT")
+    self.ENVIRONMENT_HOSTNAME: bool = self.__get_value("ENVIRONMENT_HOSTNAME")
     self.DATABASE_ENGINE: str = self.__get_value("DATABASE_ENGINE")
     self.DATABASE: str = self.__get_value("DATABASE")
     self.MAIL_JOB_INTERVAL_MINUTES: int = self.__get_value("MAIL_JOB_INTERVAL_MINUTES")

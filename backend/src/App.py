@@ -1,10 +1,13 @@
 from src.util.LogFactory import LogFactory
+from src.util.ErrorFactory import errorStackTrace
 from src.MultiThreading.Cron import Cron
 from src.Configuration import Configuration, CONF_INSTANCE
 from src.Services import ServiceNames
 from src.WebServer.APIFactory import APIFactory
 from src.WebServer.controllers.monitor.AppHealthUtil import AppHealthStatusUtil
+from src.Singletons import Singletons
 from src.Setup import Setup
+from src.Mail.MailFormatter import  MailTypes
 from src.MultiThreading.ThreadPool import WorkerPool
 from src.MultiThreading.jobs.MailerJob import MailerJob
 from src.MultiThreading.jobs.LogRotationJob import LogRotationJob
@@ -25,8 +28,28 @@ class App:
     self.init_log_rotation_job()
     self.init_ui_logger_job()
 
+  def email_on_production_deployment(self):
+    try:
+      LogFactory.MAIN_LOG.info("production deployment, sending email...")
+      service_info: str = AppHealthStatusUtil.get_all_services_html_formatted()
+      Singletons.smtp.send_html_email(
+        emailData={
+          "service_info": service_info,
+          "hostname" : CONF_INSTANCE.ENVIRONMENT_HOSTNAME,
+          "version" : CONF_INSTANCE.VERSION
+        },
+        toEmail=CONF_INSTANCE.BUG_REPORT_EMAIL_LIST,
+        subject="New Lindsay App deployed",
+        emailBody="",
+        formatter=MailTypes.DEPLOYMENT_EMAIL
+      )
+    except Exception as e:
+      LogFactory.MAIN_LOG.error(f"Failed to email prod deploy info with error {errorStackTrace(e)}")
+
   def run(self):
     AppHealthStatusUtil.print_all_service_status()
+    if CONF_INSTANCE.PRODUCTION_ENVIRONMENT:
+      self.email_on_production_deployment()
     self.init_cron_jobs()
 
   def init_cron_jobs(self):
