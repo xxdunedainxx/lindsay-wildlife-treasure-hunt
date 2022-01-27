@@ -1,5 +1,6 @@
 import React from 'react';
 import ZBarcodeScanner from '../../BarcodeScanner/ZBarcodeScanner';
+import LordRichard from '../../Avatars/LordRichard/LordRichard';
 import './HomePageComponent.css';
 import {
   BrowserRouter as Router,
@@ -24,6 +25,7 @@ export class HomePage extends React.Component {
         <div className="welcomeMessage">
          Welcome to our Biodiversity Scavenger Hunt!
         </div>
+        <LordRichard />
         <div className="instructions">
           To play, match each clue to the correct specimen located in the California Biodiversity exhibit and win a special surprise!
         </div>
