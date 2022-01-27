@@ -19,8 +19,10 @@ class Configuration:
       ServiceNames.apiServer : True,
       ServiceNames.logRotation: True,
       ServiceNames.redis: True,
-      ServiceNames.uiLogger: True
+      ServiceNames.uiLogger: True,
+      ServiceNames.reactApp: True,
     },
+    "REACT_APP" : "http://localhost",
     "PRODUCTION_ENVIRONMENT" : False,
     "DATABASE_ENGINE" : "json",
     "DATABASE" : "db.json",
@@ -70,6 +72,7 @@ class Configuration:
     self.DATABASE: str = self.__get_value("DATABASE")
     self.MAIL_JOB_INTERVAL_MINUTES: int = self.__get_value("MAIL_JOB_INTERVAL_MINUTES")
     self.MAIL_JOB_EMAILS_PER_JOB: int = self.__get_value("MAIL_JOB_EMAILS_PER_JOB")
+    self.REACT_APP: str = self.__get_value("REACT_APP")
 
     # Log rotation job configuration
     self.LOG_ROTATION_JOB_INTERVAL_MINUTES: int = self.__get_value("LOG_ROTATION_JOB_INTERVAL_MINUTES")
