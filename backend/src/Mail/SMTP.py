@@ -5,7 +5,7 @@ from typing import Any
 import os
 
 from src.util.LogFactory import LogFactory
-from src.Mail.MailFormatter import MailFormatter, MailTypes, ReportBugFormatter, DeploymentFormatter
+from src.Mail.MailFormatter import MailFormatter, MailTypes, ReportBugFormatter, ServerDownEmail, DeploymentFormatter
 
 class SMTP:
 
@@ -81,6 +81,8 @@ Subject: %s
     # Create the body of the message (a plain-text and an HTML version).
     if formatter == MailTypes.END_USER_CERTIFICATE_EMAIL:
       mailFormatter: MailFormatter = MailFormatter(emailData)
+    elif formatter == MailTypes.SERVER_IS_DOWN_EMAIL:
+      mailFormatter: ServerDownEmail = ServerDownEmail(emailData)
     elif formatter == MailTypes.DEPLOYMENT_EMAIL:
       mailFormatter: DeploymentFormatter = DeploymentFormatter(emailData)
     else:
