@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.20.0
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/197)
+* Lord richard avatar
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/194)
+* Artifact DB Update
+* Image controller
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/190)
+* React client health check
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/184)
+* deployment email notification
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/182)
+* Dynamic config frontend
+
 ## 0.15.0
 
 [PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/176)
