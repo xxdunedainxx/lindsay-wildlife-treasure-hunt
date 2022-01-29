@@ -1,5 +1,5 @@
 import React from "react";
-
+import Configuration from '../../src/conf/Configuration';
 // Answer Display
 export class AnswerDisplay extends React.Component {
     
@@ -9,6 +9,7 @@ export class AnswerDisplay extends React.Component {
     
     render() {
         if(this.props.displayAnswer) {
+        let artifactUrl = `${Configuration.remoteEndpoint}/${this.props.artifactMediaUrl}`
         return(
             <div className="display-answer-container">
             <div className="artifact-name-container"><h1 className="game-text artifact-name">
@@ -16,7 +17,8 @@ export class AnswerDisplay extends React.Component {
             </h1></div>
             <img
                 className="artifact-image"
-                src={this.props.artifactMediaUrl}
+                src={artifactUrl}
+                alt={this.props.artifactName}
             /><br/>
             <div
                 className="artifact-text-container game-text"

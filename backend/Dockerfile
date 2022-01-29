@@ -24,6 +24,7 @@ COPY ./scripts/run.sh ./run.sh
 COPY app.py ./app.py
 COPY db.json ./db.json
 COPY src/ src/
+COPY assets/ assets/
 
 RUN ./setup.sh
 

@@ -5,4 +5,5 @@ class ServiceNames:
   logRotation: str = "log_rotator"
   redis: str = 'redis'
   uiLogger: str = 'ui_logger'
+  reactApp: str = 'react_app'
 

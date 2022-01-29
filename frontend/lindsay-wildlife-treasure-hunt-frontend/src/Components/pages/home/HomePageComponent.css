@@ -29,9 +29,9 @@
 
 .startButton {
     background-color: #99CC66;
-    line-height: 175px;
-    width: 175px;
-    height: 175px;
+    line-height: 115px;
+    width: 115px;
+    height: 115px;
     border-radius: 50% !important;
     color: white;
     border: none;
@@ -41,6 +41,6 @@
     text-decoration: none;
     display: inline-block;
     font-weight: lighter;
-    font-size: 30px;
+    font-size: 20px;
     font-family: 'Stag', 'Verdana', 'Tahoma', 'Arial', sans-serif;
 }
