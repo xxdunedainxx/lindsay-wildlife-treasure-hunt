@@ -19,44 +19,44 @@ export class Nav extends React.Component {
 
   render(){
     return (
-      <div id="navContainer">
+      <div id="nav-container">
         <ul className="nav-list" id="nav">
-          <li id="navLogo">
+          <li id="nav-logo">
             <Link to="/ui/home">
-              <div id="lindsayLogoNav">
+              <div id="lindsay-logo-nav">
                 <img src={lindsayLogo} alt="Logo" />
               </div>
             </Link>
           </li>
           <li>
             <Link to="/ui/home">
-              <div className="navText">
+              <div className="game-nav-link nav-text">
                 Game
               </div>
             </Link>
           </li>
           <li>
               <Link to="/ui/about">
-                <div className="navText">
+                <div className="about-nav-link nav-text">
                   About
                 </div>
               </Link>
           </li>
           <li>
             <Link to="/ui/report">
-              <div className="navText">
+              <div className="report-issue-nav-link nav-text">
                 Report an issue
               </div>
             </Link>
           </li>
-          <li id="navVersion">
-            <div className="versionText">
+          <li id="nav-version">
+            <div className="version-text">
               <Version />
             </div>
           </li>
-          <li id="navHamburger">
-            <Link to="/ui/mobileNav">
-            <div className="hamburgerText">
+          <li id="nav-hamburger">
+            <Link to="/ui/mobileNav" className="hamburger-link">
+            <div className="hamburger-text">
               ☰
             </div>
             </Link>

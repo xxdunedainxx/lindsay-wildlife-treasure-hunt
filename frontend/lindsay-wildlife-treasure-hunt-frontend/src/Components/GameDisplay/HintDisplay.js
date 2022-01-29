@@ -13,6 +13,7 @@ class HintDisplay extends React.Component {
           <div className="hint-display">
             <DisplayCurrentClue
               currentClue={this.props.currentClue}
+              artifactId={this.props.artifactId}
             />
             <DisplayExtraHint
               displayExtraHint={this.props.displayExtraHint}
@@ -36,7 +37,7 @@ class HintDisplay extends React.Component {
 // Hint Display Components
 function DisplayCurrentClue(props) {
     return(
-        <div className="clue-text game-text">
+        <div className="clue-text game-text" id={props.artifactId}>
         {props.currentClue}
         </div>
     );

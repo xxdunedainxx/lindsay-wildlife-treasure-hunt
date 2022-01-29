@@ -21,7 +21,7 @@ export class GameController {
   static gameState = {
     "gameStarted" : false,
     "currentLevel": null,
-    "currentArtifactIdInSequence" : null,
+    "currentArtifactIdxInSequence" : null,
     "lastGuess" : null,
     "attemptsOnCurrentLevel": 0,
     "correctAnswerOnCurrentLevel": false,
@@ -39,7 +39,7 @@ export class GameController {
     GameController.gameState.attemptsOnCurrentLevel = 0;
     GameController.gameState.correctAnswerOnCurrentLevel = false;
     GameController.generateGameSequence();
-    GameController.gameState.currentArtifactIdInSequence = GameController.gameState.gameSequence[GameController.gameState.currentLevel - 1];
+    GameController.gameState.currentArtifactIdxInSequence = GameController.gameState.gameSequence[GameController.gameState.currentLevel - 1];
     GameController.saveState();
   }
 
@@ -72,7 +72,7 @@ export class GameController {
   // checks answer and updates session with gameState
   // returns true if correct, false otherwise
   static checkAnswer(answer) {
-    const correctAnswers = GameController.getAllArtifactNames(GameController.gameState.currentArtifactIdInSequence);
+    const correctAnswers = GameController.getAllArtifactNames(GameController.gameState.currentArtifactIdxInSequence);
     for(let i = 0; i < correctAnswers.length; i++) {
       if(answer == correctAnswers[i].toLowerCase()) {
         GameController.correctAnswer();
@@ -86,7 +86,7 @@ export class GameController {
   }
 
   static checkAnswerNumber(answer) {
-    const correctNumber = this.getArtifactArtifactId(GameController.gameState.currentArtifactIdInSequence);
+    const correctNumber = this.getArtifactId(GameController.gameState.currentArtifactIdxInSequence);
     if(answer == correctNumber) {
       GameController.correctAnswer()
       GameController.saveState()
@@ -100,7 +100,7 @@ export class GameController {
     // if game is not over
     if(GameController.gameState.currentLevel < GameController.getNumberOfArtifacts()) {
       GameController.gameState.currentLevel += 1;
-      GameController.gameState.currentArtifactIdInSequence = GameController.gameState.gameSequence[GameController.gameState.currentLevel - 1];
+      GameController.gameState.currentArtifactIdxInSequence = GameController.gameState.gameSequence[GameController.gameState.currentLevel - 1];
       // reset attempt counter
       GameController.gameState.attemptsOnCurrentLevel = 0;
       GameController.gameState.correctAnswerOnCurrentLevel = false;
@@ -154,36 +154,36 @@ export class GameController {
     // maybe a button to restart the game?
   }
 
-  static getClue(artifactId) {
-    return GameController.gameState.gameInfo.game.GameSequence[artifactId].Clue;
+  static getClue(artifactIdx) {
+    return GameController.gameState.gameInfo.game.GameSequence[artifactIdx].Clue;
   }
 
-  static getArtifactArtifactId(artifactId) {
-    return GameController.gameState.gameInfo.game.GameSequence[artifactId].ArtifactId
+  static getArtifactId(artifactIdx) {
+    return GameController.gameState.gameInfo.game.GameSequence[artifactIdx].ArtifactId
   }
 
-  static getExtraHint(artifactId) {
-    return GameController.gameState.gameInfo.game.GameSequence[artifactId].AdditionalHint;
+  static getExtraHint(artifactIdx) {
+    return GameController.gameState.gameInfo.game.GameSequence[artifactIdx].AdditionalHint;
   }
 
-  static getArtifactName(artifactId) {
-    return GameController.gameState.gameInfo.game.GameSequence[artifactId].ArtifactName[0];
+  static getArtifactName(artifactIdx) {
+    return GameController.gameState.gameInfo.game.GameSequence[artifactIdx].ArtifactName[0];
   }
 
-  static getAllArtifactNames(artifactId) {
-    return GameController.gameState.gameInfo.game.GameSequence[artifactId].ArtifactName;
+  static getAllArtifactNames(artifactIdx) {
+    return GameController.gameState.gameInfo.game.GameSequence[artifactIdx].ArtifactName;
   }
 
-  static getArtifactText(artifactId) {
-    return GameController.gameState.gameInfo.game.GameSequence[artifactId].CorrectMessage;
+  static getArtifactText(artifactIdx) {
+    return GameController.gameState.gameInfo.game.GameSequence[artifactIdx].CorrectMessage;
   }
 
-  static getArtifactMediaUrl(artifactId) {
-    return GameController.gameState.gameInfo.game.GameSequence[artifactId].MediaLink;
+  static getArtifactMediaUrl(artifactIdx) {
+    return GameController.gameState.gameInfo.game.GameSequence[artifactIdx].MediaLink;
   }
 
-  static getArtifactPhotoCredit(artifactId) {
-    return GameController.gameState.gameInfo.game.GameSequence[artifactId].Credit;
+  static getArtifactPhotoCredit(artifactIdx) {
+    return GameController.gameState.gameInfo.game.GameSequence[artifactIdx].Credit;
   }
 
   static getCorrectAnswerOnCurrentLevel() {
