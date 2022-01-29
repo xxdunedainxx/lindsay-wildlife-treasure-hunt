@@ -43,7 +43,7 @@ class Configuration:
   }
 
   def __init__(self, confFile: str = './conf.json'):
-    self.VERSION='0.15.0'
+    self.VERSION='0.20.0'
     self._init_conf(confFile)
     self._init_values()
 
@@ -74,14 +74,14 @@ class Configuration:
     self.APP_HEALTH_PORT: bool = self._get_value("APP_HEALTH_PORT")
 
     # General Configs
-    self.SERVICE_TOGGLES: dict = self.__get_value("SERVICE_TOGGLES")
-    self.PRODUCTION_ENVIRONMENT: bool = self.__get_value("PRODUCTION_ENVIRONMENT")
-    self.ENVIRONMENT_HOSTNAME: bool = self.__get_value("ENVIRONMENT_HOSTNAME")
-    self.DATABASE_ENGINE: str = self.__get_value("DATABASE_ENGINE")
-    self.DATABASE: str = self.__get_value("DATABASE")
-    self.MAIL_JOB_INTERVAL_MINUTES: int = self.__get_value("MAIL_JOB_INTERVAL_MINUTES")
-    self.MAIL_JOB_EMAILS_PER_JOB: int = self.__get_value("MAIL_JOB_EMAILS_PER_JOB")
-    self.REACT_APP: str = self.__get_value("REACT_APP")
+    self.SERVICE_TOGGLES: dict = self._get_value("SERVICE_TOGGLES")
+    self.PRODUCTION_ENVIRONMENT: bool = self._get_value("PRODUCTION_ENVIRONMENT")
+    self.ENVIRONMENT_HOSTNAME: bool = self._get_value("ENVIRONMENT_HOSTNAME")
+    self.DATABASE_ENGINE: str = self._get_value("DATABASE_ENGINE")
+    self.DATABASE: str = self._get_value("DATABASE")
+    self.MAIL_JOB_INTERVAL_MINUTES: int = self._get_value("MAIL_JOB_INTERVAL_MINUTES")
+    self.MAIL_JOB_EMAILS_PER_JOB: int = self._get_value("MAIL_JOB_EMAILS_PER_JOB")
+    self.REACT_APP: str = self._get_value("REACT_APP")
 
     # Log rotation job configuration
     self.LOG_ROTATION_JOB_INTERVAL_MINUTES: int = self._get_value("LOG_ROTATION_JOB_INTERVAL_MINUTES")
@@ -89,12 +89,12 @@ class Configuration:
     self.LOG_ROTATION_JOB_ARCHIVE_DIR: str = self._get_value("LOG_ROTATION_JOB_ARCHIVE_DIR")
 
     # UI Logger Job configs
-    self.UI_LOGGING_JOB_INTERVAL_MINUTES: int = self.__get_value("UI_LOGGING_JOB_INTERVAL_MINUTES")
-    self.UI_LOGGING_JOB_LOGS_PER_JOB: int = self.__get_value("UI_LOGGING_JOB_LOGS_PER_JOB")
-    self.BUG_REPORT_EMAIL_LIST: [str] = self.__get_value("BUG_REPORT_EMAIL_LIST")
+    self.UI_LOGGING_JOB_INTERVAL_MINUTES: int = self._get_value("UI_LOGGING_JOB_INTERVAL_MINUTES")
+    self.UI_LOGGING_JOB_LOGS_PER_JOB: int = self._get_value("UI_LOGGING_JOB_LOGS_PER_JOB")
+    self.BUG_REPORT_EMAIL_LIST: [str] = self._get_value("BUG_REPORT_EMAIL_LIST")
 
     # Static images
-    self.IMAGE_DIR: str = self.__get_value("IMAGE_DIR")
+    self.IMAGE_DIR: str = self._get_value("IMAGE_DIR")
 
 
   def _get_value(self, key: str):

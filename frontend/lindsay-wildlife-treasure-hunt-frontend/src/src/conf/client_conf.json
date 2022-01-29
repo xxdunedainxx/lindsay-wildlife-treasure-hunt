@@ -7,10 +7,10 @@
     },
     "backend" : {
       "ssl"  : false,
-      "host" : "0.0.0.0",
+      "host" : "localhost",
       "appHealthPort" : 9090,
       "port" : 80,
-      "hostRoute" : ""
+      "hostRoute" : "/backend"
     },
     "dev" : {
       "mockData" : false

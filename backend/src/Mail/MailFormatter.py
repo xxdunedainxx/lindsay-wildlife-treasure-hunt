@@ -123,6 +123,6 @@ class DeploymentFormatter:
 FORMATTERS : dict  = {
   MailTypes.END_USER_CERTIFICATE_EMAIL : MailFormatter,
   MailTypes.REPORT_A_BUG_EMAIL : ReportBugFormatter,
-  MailTypes.SERVER_IS_DOWN_EMAIL: ServerDownEmail
+  MailTypes.SERVER_IS_DOWN_EMAIL: ServerDownEmail,
   MailTypes.DEPLOYMENT_EMAIL: DeploymentFormatter
 }
