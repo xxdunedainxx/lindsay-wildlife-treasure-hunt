@@ -22,7 +22,7 @@ export class HomePage extends React.Component {
   render(){
     return (
       <div>
-        <div className="welcomeMessage">
+        <div className="welcome-message">
          Welcome to our Biodiversity Scavenger Hunt!
         </div>
         <LordRichard />
@@ -30,7 +30,7 @@ export class HomePage extends React.Component {
           To play, match each clue to the correct specimen located in the California Biodiversity exhibit and win a special surprise!
         </div>
         <br />
-        <Link to="/ui/game" className="startButton">
+        <Link to="/ui/game" className="start-button">
           Get Started!
         </Link>
         <div style={this.videoStyle}>
