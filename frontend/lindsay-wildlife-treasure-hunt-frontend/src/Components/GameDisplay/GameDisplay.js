@@ -29,13 +29,14 @@ export class GameDisplay extends React.Component {
       lastGuessWrong: ((GameController.gameState.attemptsOnCurrentLevel > 0) ? true : false),
       attempts: (GameController.gameState.gameStarted ? GameController.gameState.attemptsOnCurrentLevel : 0),
       currentGuess: '',
-      currentClue: (GameController.gameState.gameStarted ? GameController.getClue(GameController.gameState.currentArtifactIdInSequence) : ''),
-      extraHint: (GameController.gameState.gameStarted ? GameController.getExtraHint(GameController.gameState.currentArtifactIdInSequence) : ''),
+      currentClue: (GameController.gameState.gameStarted ? GameController.getClue(GameController.gameState.currentArtifactIdxInSequence) : ''),
+      extraHint: (GameController.gameState.gameStarted ? GameController.getExtraHint(GameController.gameState.currentArtifactIdxInSequence) : ''),
       displayExtraHint: false,
-      artifactName: (GameController.gameState.gameStarted ? GameController.getArtifactName(GameController.gameState.currentArtifactIdInSequence) : ''),
-      artifactText: (GameController.gameState.gameStarted ? GameController.getArtifactText(GameController.gameState.currentArtifactIdInSequence) : ''),
-      artifactMediaUrl: (GameController.gameState.gameStarted ? GameController.getArtifactMediaUrl(GameController.gameState.currentArtifactIdInSequence) : ''),
-      artifactPhotoCredit: (GameController.gameState.gameStarted ? GameController.getArtifactPhotoCredit(GameController.gameState.currentArtifactIdInSequence) : ''),
+      artifactName: (GameController.gameState.gameStarted ? GameController.getArtifactName(GameController.gameState.currentArtifactIdxInSequence) : ''),
+      artifactId: (GameController.gameState.gameStarted ? GameController.getArtifactId(GameController.gameState.currentArtifactIdxInSequence) : ''),
+      artifactText: (GameController.gameState.gameStarted ? GameController.getArtifactText(GameController.gameState.currentArtifactIdxInSequence) : ''),
+      artifactMediaUrl: (GameController.gameState.gameStarted ? GameController.getArtifactMediaUrl(GameController.gameState.currentArtifactIdxInSequence) : ''),
+      artifactPhotoCredit: (GameController.gameState.gameStarted ? GameController.getArtifactPhotoCredit(GameController.gameState.currentArtifactIdxInSequence) : ''),
       readyForBarcode: true,
       numberOfArtifacts: GameController.gameState.gameStarted ? GameController.getNumberOfArtifacts() : 0,
       scannerOpen: false,
@@ -53,12 +54,13 @@ export class GameDisplay extends React.Component {
         lastGuessWrong: ((GameController.gameState.attemptsOnCurrentLevel > 0) ? true : false),
         attempts: (GameController.gameState.gameStarted ? GameController.gameState.attemptsOnCurrentLevel : 0),
         currentGuess: '',
-        currentClue: (GameController.gameState.gameStarted ? GameController.getClue(GameController.gameState.currentArtifactIdInSequence) : ''),
-        extraHint: (GameController.gameState.gameStarted ? GameController.getExtraHint(GameController.gameState.currentArtifactIdInSequence) : ''),
-        artifactName: (GameController.gameState.gameStarted ? GameController.getArtifactName(GameController.gameState.currentArtifactIdInSequence) : ''),
-        artifactText: (GameController.gameState.gameStarted ? GameController.getArtifactText(GameController.gameState.currentArtifactIdInSequence) : ''),
-        artifactMediaUrl: (GameController.gameState.gameStarted ? GameController.getArtifactMediaUrl(GameController.gameState.currentArtifactIdInSequence) : ''),
-        artifactPhotoCredit: (GameController.gameState.gameStarted ? GameController.getArtifactPhotoCredit(GameController.gameState.currentArtifactIdInSequence) : ''),
+        currentClue: (GameController.gameState.gameStarted ? GameController.getClue(GameController.gameState.currentArtifactIdxInSequence) : ''),
+        extraHint: (GameController.gameState.gameStarted ? GameController.getExtraHint(GameController.gameState.currentArtifactIdxInSequence) : ''),
+        artifactName: (GameController.gameState.gameStarted ? GameController.getArtifactName(GameController.gameState.currentArtifactIdxInSequence) : ''),
+        artifactId: (GameController.gameState.gameStarted ? GameController.getArtifactId(GameController.gameState.currentArtifactIdxInSequence) : ''),
+        artifactText: (GameController.gameState.gameStarted ? GameController.getArtifactText(GameController.gameState.currentArtifactIdxInSequence) : ''),
+        artifactMediaUrl: (GameController.gameState.gameStarted ? GameController.getArtifactMediaUrl(GameController.gameState.currentArtifactIdxInSequence) : ''),
+        artifactPhotoCredit: (GameController.gameState.gameStarted ? GameController.getArtifactPhotoCredit(GameController.gameState.currentArtifactIdxInSequence) : ''),
         readyForBarcode: true,
         numberOfArtifacts: GameController.getNumberOfArtifacts(),
         gameComplete: GameController.gameState.gameComplete,
@@ -212,6 +214,7 @@ export class GameDisplay extends React.Component {
           displayAnswer={this.state.displayAnswer}
           currentLevel={this.state.currentLevel}
           currentClue={this.state.currentClue}
+          artifactId={this.state.artifactId}
           lastGuessWrong={this.state.lastGuessWrong}
           extraHint={this.state.extraHint}
           extraHintButton={this.extraHintButton.bind(this)}
@@ -249,7 +252,8 @@ export class GameDisplay extends React.Component {
           restartGameButton={this.restartGameButton.bind(this)}
           deleteProgress={this.deleteProgress.bind(this)}
           tryAgainClicked={this.state.tryAgainClicked}
-        /><br/><br/>
+        />
+        <br/><br/>
         <PhotoCredit
           displayAnswer={this.state.displayAnswer}
           photoCredit={this.state.artifactPhotoCredit}

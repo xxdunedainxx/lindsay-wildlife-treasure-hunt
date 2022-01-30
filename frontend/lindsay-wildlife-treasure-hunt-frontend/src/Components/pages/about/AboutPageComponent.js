@@ -28,7 +28,7 @@ export class AboutPage extends React.Component {
 
   render(){
     return (
-      <div>
+      <div className="about-page-container">
         <div className="about-top-message">This application was made in collaboration with Zach McFadden and Roderick MacLeod. 
         The source code for the treasure hunt can be found <a className="repo-link" href="https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt">here</a>.</div>
         <br/>

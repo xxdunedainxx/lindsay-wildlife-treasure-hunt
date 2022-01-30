@@ -22,21 +22,21 @@ export class MobileNav extends React.Component {
         <ul>
         <li>
             <Link to="/ui/home">
-              <div className="mobileItemText">
+              <div className="game-mobile-nav-link mobile-item-text">
                 Start Scavenger Hunt
               </div>
             </Link>
           </li>
           <li>
               <Link to="/ui/about">
-                <div className="mobileItemText">
+                <div className="about-mobile-nav-link mobile-item-text">
                   About
                 </div>
               </Link>
           </li>
           <li>
             <Link to="/ui/report">
-              <div className="mobileItemText">
+              <div className="report-issue-mobile-nav-link mobile-item-text">
                 Report an issue
               </div>
             </Link>

@@ -26,7 +26,7 @@ a:active {
   
 }
 
-#navContainer {
+#nav-container {
   background-color:#303023 !important;
   float:left;
   display:block;
@@ -34,7 +34,7 @@ a:active {
   height: 200px;
 }
 
-#navHamburger{
+#nav-hamburger{
   display: none !important;
 }
 
@@ -56,7 +56,7 @@ a:active {
   list-style: none;
 }
 
-.navText{
+.nav-text{
   color: white;
 }
 
@@ -68,16 +68,16 @@ a:active {
   text-decoration: none; /* no underline */
 }
 
-.hamburgerText {
+.hamburger-text {
   color: white;
 }
 
-#navLogo {
+#nav-logo {
   display: block;
   float: left;
 }
 
-#navVersion {
+#nav-version {
    position:absolute;
    top:0;
    right:0;
@@ -95,7 +95,7 @@ a:active {
   cursor: pointer;
 }
 
-#navVersion:hover {
+#nav-version:hover {
   color: white !important;
   transform: none !important;
   border-radius: none !important;
@@ -105,7 +105,7 @@ a:active {
 
 /* Mobile overrides */
 @media only screen and (max-width: 700px) {
-  .navContainer {
+  .nav-container {
     margin: auto;
     width: 100%;
     border: 3px solid green;
@@ -121,12 +121,12 @@ a:active {
     width: 50%;
   }
 
-  .navText {
+  .nav-text {
     font-family: 'Stag';
     display: none;
   }
 
-  #navHamburger{
+  #nav-hamburger{
      position:absolute;
      top:40px;
      right: 10px;
@@ -134,11 +134,11 @@ a:active {
      scale: 150%
   }
 
-  #navContainer {
+  #nav-container {
     height: 5%;
   }
 
-  #navVersion {
+  #nav-version {
     position: absolute;
     top: 0;
     right: 0;
