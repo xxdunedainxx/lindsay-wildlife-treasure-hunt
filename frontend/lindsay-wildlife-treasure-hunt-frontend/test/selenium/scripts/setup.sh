@@ -16,3 +16,4 @@ echo $PYTHON_INTERPRETER
 
 ${PYTHON_INTERPRETER} -m pip install -U --force-reinstall pip
 ${PYTHON_INTERPRETER} -m pip install selenium
+${PYTHON_INTERPRETER} -m pip install python-dotenv
