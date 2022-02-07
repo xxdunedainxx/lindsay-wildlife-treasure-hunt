@@ -7,12 +7,8 @@ function log() {
 }
 
 function runSeleniumTests(){
-  cd $HOME
-  cd frontend/lindsay-wildlife-treasure-hunt-frontend/test/selenium
-  PYTHON_INTERPRETER=($(which python || which python3))
-
-  log "Executing Selenium integration tests"
-  ${PYTHON_INTERPRETER} selenium_ui_tests.py
+  log "Executing Selenium tests"
+  python3 test.py
 }
 
 runSeleniumTests

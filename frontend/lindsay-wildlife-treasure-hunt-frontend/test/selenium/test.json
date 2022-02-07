@@ -1,0 +1,6 @@
+{
+  "TEST_OS" : "linux",
+  "BROWSER" : "chrome",
+  "BASE_URL" : "https://localhost:3000/",
+  "PAGE_TITLE" : "Lindsay Wildlife Bio-diversity treasure hunt"
+}
