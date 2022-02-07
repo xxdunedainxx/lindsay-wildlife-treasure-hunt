@@ -18,7 +18,7 @@ export class MobileNav extends React.Component {
 
   render(){
     return (
-      <div>
+      <div mobile-nav-container>
         <ul>
         <li>
             <Link to="/ui/home">

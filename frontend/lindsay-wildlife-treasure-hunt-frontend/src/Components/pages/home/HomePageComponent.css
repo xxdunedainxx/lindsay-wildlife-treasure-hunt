@@ -8,7 +8,7 @@
   src: url('../../../src/fonts/Stag-Book.otf');
 }
 
-.welcomeMessage {
+.welcome-message {
   /*background-color: white;*/
   margin: 1em auto 0 auto;
   display: block;
@@ -27,7 +27,7 @@
   font-size: 24px;
 }
 
-.startButton {
+.start-button {
     background-color: #99CC66;
     line-height: 115px;
     width: 115px;
