@@ -43,7 +43,7 @@ export class Session {
   }
 
   static ClearSession(){
-    localStorage.setItem(Session.sessionKey, null)
+    localStorage.removeItem(Session.sessionKey)
   }
 }
 
