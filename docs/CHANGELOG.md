@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.20.1
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/201)
+* Revert to old, non-zoomable scanner
+
 ## 0.20.0
 
 [PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/197)
