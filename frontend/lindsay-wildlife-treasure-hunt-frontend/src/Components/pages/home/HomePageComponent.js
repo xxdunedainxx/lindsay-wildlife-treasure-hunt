@@ -21,7 +21,7 @@ export class HomePage extends React.Component {
   }
 
   resetSession(){
-    //Session.ClearSession()
+    Session.ClearSession()
   }
 
   render(){

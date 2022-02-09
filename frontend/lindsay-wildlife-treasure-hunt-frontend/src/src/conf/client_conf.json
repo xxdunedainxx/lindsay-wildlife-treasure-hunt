@@ -7,7 +7,7 @@
     },
     "backend" : {
       "ssl"  : false,
-      "host" : "lindsay-wildlife-apps.zee-aws.net",
+      "host" : "localhost",
       "appHealthPort" : 9090,
       "port" : 80,
       "hostRoute" : "/backend"
