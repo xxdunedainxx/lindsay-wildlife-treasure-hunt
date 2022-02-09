@@ -41,6 +41,10 @@ export class Session {
     Logger.info(`Session ID for this session: ${sessionsID}`);
     return sessionsID;
   }
+
+  static ClearSession(){
+    localStorage.setItem(Session.sessionKey, null)
+  }
 }
 
 export default Session;

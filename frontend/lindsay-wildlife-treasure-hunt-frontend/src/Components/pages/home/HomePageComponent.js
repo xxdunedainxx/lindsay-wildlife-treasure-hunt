@@ -2,6 +2,7 @@ import React from 'react';
 import ZBarcodeScanner from '../../BarcodeScanner/ZBarcodeScanner';
 import LordRichard from '../../Avatars/LordRichard/LordRichard';
 import './HomePageComponent.css';
+import Session from '../../../src/util/Session';
 import {
   BrowserRouter as Router,
   Switch,
@@ -19,6 +20,10 @@ export class HomePage extends React.Component {
     }
   }
 
+  resetSession(){
+    Session.ClearSession()
+  }
+
   render(){
     return (
       <div>
@@ -30,7 +35,9 @@ export class HomePage extends React.Component {
           To play, match each clue to the correct specimen located in the California Biodiversity exhibit and win a special surprise!
         </div>
         <br />
-        <Link to="/ui/game" className="startButton">
+        <Link to="/ui/game" className="startButton"
+        onClick={this.resetSession}
+        >
           Get Started!
         </Link>
         <div style={this.videoStyle}>
