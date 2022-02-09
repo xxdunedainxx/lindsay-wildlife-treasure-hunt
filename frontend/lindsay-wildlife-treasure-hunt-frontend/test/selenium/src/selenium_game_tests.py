@@ -11,7 +11,6 @@ from src.util.TestSupport import TestSupport
 numpad = ["btn-zero", "btn-one", "btn-two", "btn-three", "btn-four",
                     "btn-five", "btn-six", "btn-seven", "btn-eight", "btn-nine"]
 
-@enabled
 def selenium_game_tests(a_test_os, a_browser, a_base_url, a_page_title):
     global test_os, browser, base_url, home_url, game_url, win_url, page_title
     test_os = a_test_os
@@ -31,6 +30,7 @@ class HomePageElements(unittest.TestCase):
     def tearDown(self):
         self.driver.close()
 
+    @enabled
     def test_complete_game_manual_entry_mobile(self):
         driver = self.driver
         driver.set_window_size(360, 640)
@@ -74,6 +74,7 @@ class HomePageElements(unittest.TestCase):
         elem = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "current-level-header")))
         assert elem.text == "Question 1"
 
+    @enabled
     def test_reset_game_button(self):
         driver = self.driver
         driver.set_window_size(360, 640)
@@ -103,6 +104,7 @@ class HomePageElements(unittest.TestCase):
         elem = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "current-level-header")))
         assert elem.text == ("Question 1")
 
+    @enabled
     def test_reload_game(self):
         driver = self.driver
         driver.set_window_size(360, 640)

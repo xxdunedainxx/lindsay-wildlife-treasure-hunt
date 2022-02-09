@@ -7,7 +7,6 @@ from src.util.Toggle import enabled
 from src.util.LogFactory import LogFactory
 from src.util.TestSupport import TestSupport
 
-@enabled
 def selenium_ui_tests(a_test_os, a_browser, a_base_url, a_page_title):
     global test_os, browser, base_url, home_url, game_url, win_url, page_title
     test_os = a_test_os
@@ -27,6 +26,7 @@ class HomePageElements(unittest.TestCase):
     def tearDown(self):
         self.driver.close()
 
+    @enabled
     def test_home_page_elements_desktop(self):
         driver = self.driver
         driver.set_window_size(1920, 1080)
@@ -47,6 +47,7 @@ class HomePageElements(unittest.TestCase):
         elem = driver.find_element(By.CLASS_NAME, "hamburger-text")
         assert not elem.is_displayed()
 
+    @enabled
     def test_home_page_elements_mobile(self):
         driver = self.driver
         driver.set_window_size(360, 640)
@@ -65,6 +66,7 @@ class HomePageElements(unittest.TestCase):
         elem = driver.find_element(By.CLASS_NAME, "start-button")
         assert elem
 
+    @enabled
     def test_nav_to_about_page_desktop(self):
         driver = self.driver
         driver.set_window_size(1920, 1080)
@@ -77,6 +79,7 @@ class HomePageElements(unittest.TestCase):
         elem = driver.find_element(By.CLASS_NAME, "about-page-container")
         assert elem
 
+    @enabled
     def test_nav_to_about_page_mobile(self):
         driver = self.driver
         driver.set_window_size(360, 640)
@@ -90,6 +93,7 @@ class HomePageElements(unittest.TestCase):
         elem = driver.find_element(By.CLASS_NAME, "about-page-container")
         assert elem
 
+    @enabled
     def test_lindsay_logo_link(self):
         driver = self.driver
         driver.set_window_size(360, 640)
@@ -102,6 +106,7 @@ class HomePageElements(unittest.TestCase):
         WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "welcome-message")))
         assert driver.current_url == home_url
     
+    @enabled
     def test_nav_to_report_an_issue_mobile(self):
         driver = self.driver
         driver.set_window_size(360, 640)
@@ -115,6 +120,7 @@ class HomePageElements(unittest.TestCase):
         elem = driver.find_element(By.ID, "describeIssueInput")
         assert elem
 
+    @enabled
     def test_nav_to_home_page_via_nav_bar_mobile(self):
         driver = self.driver
         driver.set_window_size(360, 640)
@@ -130,6 +136,7 @@ class HomePageElements(unittest.TestCase):
         assert elem
         assert driver.current_url == home_url
 
+    @enabled
     def test_start_game_button_mobile(self):
         driver = self.driver
         driver.set_window_size(360, 640)
@@ -141,7 +148,8 @@ class HomePageElements(unittest.TestCase):
         elem = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "current-level-header")))
         print(elem.text)
         assert elem.text == "Question 1"
-        
+
+    @enabled 
     def test_open_scanner_button_mobile(self):
         driver = self.driver
         driver.set_window_size(360, 640)
@@ -150,10 +158,10 @@ class HomePageElements(unittest.TestCase):
         driver.find_element(By.CLASS_NAME, "start-button").click()
         # open scanner
         driver.find_element(By.CLASS_NAME, "open-scanner-button").click()
-        assert driver.find_element(By.ID, "qrcodecanvas").is_displayed()
+        assert driver.find_element(By.ID, "zvideo").is_displayed()
         # close scanner
         driver.find_element(By.CLASS_NAME, "open-scanner-button").click()
-        assert len(driver.find_elements(By.ID, "qrcodecanvas")) == 0
+        assert len(driver.find_elements(By.ID, "zvideo")) == 0
 
 if __name__=="__main__":
     unittest.main()
