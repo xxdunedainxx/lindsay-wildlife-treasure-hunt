@@ -8,6 +8,8 @@ import AnswerDisplay from './AnswerDisplay';
 import ManualEntryDisplay from './ManualEntryDisplay';
 import TestZoomComponent from './TestZoomComponent';
 
+import HttpArgParser from '../../src/util/HttpArgParser';
+
 import './GameDisplay.css';
 import Logger from '../../src/util/Logger';
 // Display Daddy
@@ -198,6 +200,21 @@ export class GameDisplay extends React.Component {
     this.updateGameState();
   }
 
+  debuggerUI(){
+    if(HttpArgParser.DEBUG_MODE == "true") {
+        return (
+          <div>
+            <h1>DEBUGGER</h1>
+            <div>
+              Level {this.state.currentLevel} out of {GameController.gameSequenceSize}
+            </div>
+          </div>
+        )
+      } else {
+        return ("");
+      }
+  }
+
   render(){
     return(
       <div className="game-display-container">
@@ -258,6 +275,7 @@ export class GameDisplay extends React.Component {
           displayAnswer={this.state.displayAnswer}
           photoCredit={this.state.artifactPhotoCredit}
         />
+        {this.debuggerUI()}
       </div>
     );
   }

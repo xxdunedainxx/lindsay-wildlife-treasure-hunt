@@ -10,7 +10,7 @@
       "host" : "localhost",
       "appHealthPort" : 9090,
       "port" : 80,
-      "hostRoute" : "/backend"
+      "hostRoute" : ""
     },
     "dev" : {
       "mockData" : false
