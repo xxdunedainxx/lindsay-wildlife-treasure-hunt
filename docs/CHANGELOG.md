@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.21.0
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/207)
+* Fix up artifact db, prune back some artifacts
+* Shorten game to certain length (7)
+
 ## 0.20.1
 
 [PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/201)
