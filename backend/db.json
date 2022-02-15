@@ -1,6 +1,6 @@
 {
   "Name" : "Lindsay Wildlife treasure hunt",
-  "Version" : "0.0.1",
+  "Version" : "0.2.0",
   "game" : {
     "IntroductionMessage" : "Hey!",
     "CongratsMessage" : "yay!",
@@ -22,15 +22,6 @@
         "CorrectMessage" : "California Moray Eels have a second set of jaws with backward-facing teeth in their throat. The eels extend these jaws forward to grab prey, which they drag back into their throats. They mainly eat fish but also feed on octopus, lobsters and shrimp in the rocky reefs of southern California.",
         "MediaLink" : "get-image/1.png",
         "Credit" : "Photo by Yury Velikanau. Uploaded October 23, 2016. https://commons.wikimedia.org/wiki/File:California_Moray_Eel_(32582219365).jpg"
-      },
-      {
-        "ArtifactName" : ["Baleen"],
-        "ArtifactId" : "3",
-        "Clue": "This brush-like alternative to teeth is used by large mammals to filter food like plankton, fish, and krill out of ocean water.",
-        "AdditionalHint" : "This brush-like structure is black and wiry in appearance.",
-        "CorrectMessage" : "Balene is made out of keratin — the same material that makes up our hair and fingernails! Baleen whales open their mouths wide and expand their throats like a balloon to gulp in huge amounts of seawater and food. Then they expel the water through their balene, filtering out food to swallow.",
-        "MediaLink" : "get-image/2.png",
-        "Credit" : "Photo by Dr. Brandon Southall, NMFS/OPR. Taken on November 10, 2010. https://www.flickr.com/photos/noaaphotolib/5187319399"
       },
       {
         "ArtifactName" : ["Ammonite"],
@@ -69,24 +60,6 @@
         "Credit" : "Photo by Andrej Chudy. Taken on May 4, 2017. https://www.flickr.com/photos/76362620@N00/34435311504"
       },
       {
-        "ArtifactName" : ["Western Gray Squirrel", "Gray Squirrel", "Grey Squirrel"],
-        "ArtifactId" : "7",
-        "Clue": "This curious and expressive tree-dwelling animal communicates with tail flicking and several different vocalizations.",
-        "AdditionalHint" : "This mammal has a great bushy gray tail.",
-        "CorrectMessage" : "Unlike invasive eastern fox squirrels, western gray squirrels are fairly shy and will run up trees and chirp at you if disturbed. Unfortunately, the loss of mature oak and pine forests, increased urbanization, and competition from the more aggressive fox squirrels have caused western gray squirrel populations to decline. They are now extirpated in some areas of California. ",
-        "MediaLink" : "get-image/7.png",
-        "Credit" : "Photo by Fish Demon. Uploaded on March 9, 2010. https://commons.wikimedia.org/wiki/File:WesternGraySquirrel1.jpg"
-      },
-      {
-        "ArtifactName" : ["California Buckeye", "Buckeye"],
-        "ArtifactId" : "8",
-        "Clue": "This tree blooms in long sprays of white flowers that are often seen with pollinators like buzzing bees and butterflies.",
-        "AdditionalHint" : "When the seeds of this plant begin to split open their leathery casing, they resemble the eye of a male deer.",
-        "CorrectMessage" : "This California native plant is one of the first to leaf out in the spring and to lose its foliage to avoid the worst of the summer heat. Buckeye seeds contain poisonous compounds that evolved to deter predators from eating them.",
-        "MediaLink" : "get-image/8.png",
-        "Credit" : "Photo by John Morgan. Taken on November 25, 2007. https://commons.wikimedia.org/wiki/File:Aesculus_californica_Mount_Diablo.jpg"
-      },
-      {
         "ArtifactName" : ["California Banana Slug", "Banana Slug"],
         "ArtifactId": "9",
         "Clue": "This slimy detrivore spends its time moving slowly through damp redwood forests eating moss, dead plants, and even animal scat!",
@@ -105,24 +78,6 @@
         "Credit" : "Display at the Royal BC Museum in Victoria (Canada). Photo by Flickr user Flying Puffin. Taken on July 1, 2011. https://commons.wikimedia.org/wiki/File:Woolly_mammoth.jpg"
       },
       {
-        "ArtifactName" : ["California Ground Squirrel", "Ground Squirrel"],
-        "ArtifactId": "11",
-        "Clue": "These mammals require loose soil so they can excavate an appropriate burrow where adults will hibernate through both fall and winter.",
-        "AdditionalHint" : "This mammal has a mix of gray and brown fur and is often found scurrying along the ground.",
-        "CorrectMessage" : "California Ground Squirrels inhabit many different types of habitats  ranging from fields to woodlands. The only habitat they don’t use is deserts where the soil is too loose for them to make a burrow. If you see California Ground Squirrels above ground in the fall and winter, those will only be young squirrels as the adults hibernate during that time.",
-        "MediaLink" : "get-image/11.png",
-        "Credit" : "Photo by Howcheng. Taken on January 3, 2009. https://commons.wikimedia.org/wiki/File:CA_Ground_Squirrel_on_rock.jpg"
-      },
-      {
-        "ArtifactName" : ["Parry’s Manzanita", "Parrys Manzanita", "Manzanita"],
-        "ArtifactId": "12",
-        "Clue": "This evergreen shrub or small tree lives in California’s iconic chaparral habitat and grows dramatic red, brown, and maroon-colored twisted branches.",
-        "AdditionalHint" : "This evergreen shrub has green rounded leaves.",
-        "CorrectMessage" : "Parry’s Manzanita is a California endemic species, meaning it is found nowhere else in the world. In the spring, these shrubs grow clusters of small pinkish-white bell-shaped flowers. The fruits of this species of manzanita were a food source for the native Luiseño people of Southern California.",
-        "MediaLink" : "get-image/12.png",
-        "Credit" : "Photo by Stan Shebs. Taken in 2006. https://calscape.org/view.php?pl=329&img=8910"
-      },
-      {
         "ArtifactName" : ["Benitoite"],
         "ArtifactId": "13",
         "Clue": "This is the state gem of California.",
@@ -130,15 +85,6 @@
         "CorrectMessage" : "Benitoite is a rare deep blue gem that can cost up to $3,000 per carat depending on quality. This gem forms in hydrothermally altered serpentine — serpentine that has had hot water circulate through it —- in a high pressure but low-temperature environment. The highest quality of this rare gem is only found in the Benito Gem Mine in California.",
         "MediaLink" : "get-image/13.png",
         "Credit" : "Photo by Rob Lavinsky. Taken on April 25, 2010. https://commons.wikimedia.org/wiki/File:Benitoite-Neptunite-40041.jpg"
-      },
-      {
-        "ArtifactName" : ["California Condor", "Condor"],
-        "ArtifactId": "14",
-        "Clue": "This bird has a distinct hooked bill and is a scavenger, meaning they eat animals that are already dead.",
-        "AdditionalHint" : "This bird has a characteristic featherless head and is the largest bird in North America.",
-        "CorrectMessage" : "California Condors are one of the rarest birds in the world and the longest-living birds in North America with a lifespan of 60 years. Their population declined to only 22 surviving individuals due to poaching, agricultural chemical use like DDT, lead poisoning, and habitat destruction. In 1987, the U.S. Government captured all remaining California Condors for a captive breeding recovery program in an attempt to help them recover from extinction. Though still critically endangered, captive breeding programs have helped California Condor populations recover to 175 individuals in captivity and 329 that have been successfully reintroduced into the wild.",
-        "MediaLink" : "get-image/14.png",
-        "Credit" : "Photo by Chuck Szmurlo. Taken on December 11, 2006. https://commons.wikimedia.org/wiki/File:California-Condor3-Szmurlo_edit.jpg"
       },
       {
         "ArtifactName" : ["Desert Bighorn Sheep", "Bighorn Sheep"],
@@ -164,7 +110,7 @@
         "Clue": "As a caterpillar, this insect eats the leaves of a toxic plant called milkweed. As it undergoes metamorphosis to become a butterfly, it stores those toxins and becomes poisonous.",
         "AdditionalHint" : "This orange and black butterfly migrates through California every year.",
         "CorrectMessage" : "Monarch butterflies migrate from their summer breeding grounds in the northeastern U.S. and Canada down to Mexico to escape the cold winter. Monarch Butterflies can travel up to 100 miles per day during their 3,000-mile migration south.",
-        "MediaLink" : "get-image/16.png",
+        "MediaLink" : "get-image/17.png",
         "Credit" : "Photo by Thomas Bresson. Taken on August 31, 2009. https://commons.wikimedia.org/wiki/File:ComputerHotline_-_Danaus_plexippus_(by)_(3).jpg"
       },
       {

@@ -10,6 +10,8 @@ const maxIncorrectAttempts = 3
 
 export class GameController {
 
+  static gameSequenceSize = 7
+
   // if session data exists, loads it
   static Init(){
     Logger.info('init game controller', true)
@@ -33,6 +35,7 @@ export class GameController {
   }
 
   static async startGame() {
+    Logger.info("STARTING GAME")
     GameController.gameState.gameStarted = true;
     GameController.gameState.lastGuess = null;
     GameController.gameState.currentLevel = 1;
@@ -98,7 +101,7 @@ export class GameController {
 
   static nextLevel() {
     // if game is not over
-    if(GameController.gameState.currentLevel < GameController.getNumberOfArtifacts()) {
+    if(GameController.gameState.currentLevel < GameController.gameSequenceSize) {
       GameController.gameState.currentLevel += 1;
       GameController.gameState.currentArtifactIdxInSequence = GameController.gameState.gameSequence[GameController.gameState.currentLevel - 1];
       // reset attempt counter
@@ -125,9 +128,11 @@ export class GameController {
   }
 
   static generateGameSequence() {
+    Logger.info("Generating game sequence...")
     const n = GameController.getNumberOfArtifacts();
     let seq = Array(n).fill().map((x,i)=>i);
     GameController.gameState.gameSequence = GameController.shuffle(seq);
+    Logger.info(`Game Sequence Generated: ${JSON.stringify(GameController.gameState.gameSequence)}`)
   }
 
   static shuffle(array) {
@@ -144,8 +149,9 @@ export class GameController {
       [array[currentIndex], array[randomIndex]] = [
         array[randomIndex], array[currentIndex]];
     }
-  
-    return array;
+    
+    // Reduce size of gameplay to a desired game sequence size
+    return array.slice(0,GameController.gameSequenceSize);
   }
 
   static completeGame() {
