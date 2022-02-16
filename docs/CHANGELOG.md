@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.21.1
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/209)
+* Mobile Horizontal Display sizing fix
+
 ## 0.21.0
 
 [PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/207)
