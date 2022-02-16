@@ -23,6 +23,9 @@ export class GameDisplay extends React.Component {
     if(!GameController.gameState.gameStarted) {
       GameController.startGame();
     }
+    let width, height
+    width = window.innerWidth * .95
+    height = window.innerHeight
 
     this.state = {
       gameStarted: true,
@@ -44,6 +47,12 @@ export class GameDisplay extends React.Component {
       scannerOpen: false,
       manualEntryMode: false,
       gameComplete: GameController.gameState.gameComplete,
+      gameDisplayStyle: {
+        'width': width,
+        'height': height,
+        'overflowX' : 'hidden',
+        // 'overflowY' : 'hidden'
+      }
     }
   }
 
@@ -217,7 +226,7 @@ export class GameDisplay extends React.Component {
 
   render(){
     return(
-      <div className="game-display-container">
+      <div className="game-display-container" style={this.state.gameDisplayStyle}>
         <TopMessage
           gameStarted={this.state.gameStarted}
           currentLevel={this.state.currentLevel}
