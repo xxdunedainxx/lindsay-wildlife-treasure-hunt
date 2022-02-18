@@ -46,14 +46,13 @@ class ScanDisplay extends React.Component {
         availHeight: window.innerHeight
       })
     }
-  
 
     handleScanError(error){
       alert('something went wrong scanner..')
       alert(error)
     }
 
-    handleScan = data => {
+    handleScan(data) {
       Logger.info(`Data for hadleScan: ${data}`)
       if (data) {
         Logger.info("Running QR Scanner Update")
@@ -71,6 +70,18 @@ class ScanDisplay extends React.Component {
             scanEnabled={this.props.scannerOpen}
           />
         )
+    }
+
+    __getLoadingMessage(){
+      if(this.state.loadingScanResult){
+        return(
+          <div>
+            Loading...
+          </div>
+        )
+      } else {
+        return('')
+      }
     }
 
     __getDebugComponents(){
