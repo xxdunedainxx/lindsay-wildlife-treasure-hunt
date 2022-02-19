@@ -43,6 +43,7 @@ a:active {
   float: left;
   padding: 0;
   list-style: none;
+  margin-top: 10px;
 }
 
 #nav li {
@@ -75,6 +76,7 @@ a:active {
 #nav-logo {
   display: block;
   float: left;
+  padding: 1px 11px !important;
 }
 
 #nav-version {
@@ -135,7 +137,7 @@ a:active {
   }
 
   #nav-container {
-    height: 5%;
+    height: 80px;
   }
 
   #nav-version {

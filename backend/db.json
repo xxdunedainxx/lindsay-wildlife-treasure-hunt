@@ -25,7 +25,7 @@
       },
       {
         "ArtifactName" : ["Ammonite"],
-        "ArtifactId" : "20",
+        "ArtifactId" : "15",
         "Clue": "This now extinct cephalopod resembles modern nautilus and was an abundant predator in the warm shallow sea that covered California 200 million years ago.",
         "AdditionalHint" : "This extinct cephalopod had a tightly wound shell. ",
         "CorrectMessage" : "One of the previous explanations for these tightly wound shells was that they were actually coiled-up snakes that turned to stone, earning ammonites the nickname “snake-stones.” We now know ammonites are actually cephalopods, the taxonomic class that includes squids, octopus, cuttlefish, and nautilus. Scientists theorize that ammonites were similar to modern-day octopuses with eight arms, but with a shell similar to a nautilus.",
@@ -33,8 +33,17 @@
         "Credit" : "Image created by the DataBase Center for Life Science. Created August, 2010. https://doi.org/10.7875/togopic.2020.08"
       },
       {
+        "ArtifactName" : ["California Buckeye", "Buckeye"],
+        "ArtifactId" : "6",
+        "Clue": "This tree blooms in long sprays of white flowers that are often seen with pollinators like buzzing bees and butterflies.",
+        "AdditionalHint" : "When the seeds of this plant begin to split open their leathery casing, they resemble the eye of a male deer.",
+        "CorrectMessage" : "This California native plant is one of the first to leaf out in the spring and to lose its foliage to avoid the worst of the summer heat. Buckeye seeds contain poisonous compounds that evolved to deter predators from eating them.",
+        "MediaLink" : "get-image/8.png",
+        "Credit" : "Photo by John Morgan. Taken on November 25, 2007. https://commons.wikimedia.org/wiki/File:Aesculus_californica_Mount_Diablo.jpg"
+      },
+      {
         "ArtifactName" : ["California Quail", "Quail"],
-        "ArtifactId" : "4",
+        "ArtifactId" : "3",
         "Clue": "This charming creature is the state bird of California!",
         "AdditionalHint" : "These birds have a ‘topknot’ or head plume made of six overlapping feathers that form the shape of an apostrophe.",
         "CorrectMessage" : "You will often find California Quail running along the ground from one bush to another seeking cover. These social birds are primarily found in groups called a covey.",
@@ -43,7 +52,7 @@
       },
       {
         "ArtifactName" : ["Giant Water Bug", "Water Bug"],
-        "ArtifactId" : "5",
+        "ArtifactId" : "4",
         "Clue": "This small but fierce predator has a snorkel-like breathing tube that allows it to breathe while its head is underwater! It can also carry air bubbles under its wings that are slowly absorbed while it dives underwater.",
         "AdditionalHint" : "While it is ‘giant’ in comparison to many other bugs, in California, this bug is still only slightly larger than the size of an adult's thumb.",
         "CorrectMessage" : "Giant water bugs pierce their prey with a poisonous beak and can kill an animal 50 times their own size. Their toxins will slowly paralyze and liquify their prey from the inside out. Thankfully, these toxins aren’t lethal to humans but their bite can still be quite painful! Though their pinch seems scary, their method of parental care is fascinating. During mating season, males will carry the fertilized eggs and care for the newly-hatched young while females will continue to find different mates.",
@@ -52,7 +61,7 @@
       },
       {
         "ArtifactName" : ["Greater Roadrunner", "Roadrunner"],
-        "ArtifactId" : "6",
+        "ArtifactId" : "5",
         "Clue": "This desert-dwelling animal can run surprisingly fast, reaching speeds of 20 miles per hour when pursuing prey.",
         "AdditionalHint" : "This bird was famously represented in cartoons as the nemesis of a rather wily coyote.",
         "CorrectMessage" : "Unlike their depiction in cartoons, Greater Roadrunners can only run half the speed of a coyote — which is still pretty fast! While running, roadrunners place their head and tail parallel to the ground and use their tail as a rudder to help change direction. Greater Roadrunners are opportunistic omnivores that eat almost anything on the ground including venomous rattlesnakes and scorpions.",
@@ -61,7 +70,7 @@
       },
       {
         "ArtifactName" : ["California Banana Slug", "Banana Slug"],
-        "ArtifactId": "9",
+        "ArtifactId": "7",
         "Clue": "This slimy detrivore spends its time moving slowly through damp redwood forests eating moss, dead plants, and even animal scat!",
         "AdditionalHint" : "This detritivore is yellow in appearance",
         "CorrectMessage" : "Banana slug slime is neither solid nor liquid, but instead is a form of liquid crystal! This fascinating slime can absorb 100 times its weight in water from whatever it touches, and facilitates the transfer of chemicals and nutrients directly into the slug’s organs. Scientists have been researching ways to create and use a similar material in place of stitches! The banana slug is also the beloved mascot of UC Santa Cruz.",
@@ -70,7 +79,7 @@
       },
       {
         "ArtifactName" : ["Mammoth"],
-        "ArtifactId" : "10",
+        "ArtifactId" : "8",
         "Clue": "This giant Pleistocene mammal roamed California until the most recent mass extinction around 13,000 years ago.",
         "AdditionalHint" : "Look for a small piece of this extinct animal’s tusk.",
         "CorrectMessage" : "Even animals as large as mammoths need a way to scratch their itches. One such grooming technique was to rub against large boulders and rocky outcroppings. You can see several of these rubbing rocks or “mammoth rocks” along the Sonoma County coast. These outcrops have patches that were polished smooth by the repeated rubbing of mammoths’ bodies against the rocky surface. The appearance and scratch patterns on these ancient mammoth rocks match perfectly with rubbing rocks used by modern elephants!",
@@ -79,7 +88,7 @@
       },
       {
         "ArtifactName" : ["Benitoite"],
-        "ArtifactId": "13",
+        "ArtifactId": "9",
         "Clue": "This is the state gem of California.",
         "AdditionalHint" : "This gem is found in rocky serpentinite.",
         "CorrectMessage" : "Benitoite is a rare deep blue gem that can cost up to $3,000 per carat depending on quality. This gem forms in hydrothermally altered serpentine — serpentine that has had hot water circulate through it —- in a high pressure but low-temperature environment. The highest quality of this rare gem is only found in the Benito Gem Mine in California.",
@@ -88,7 +97,7 @@
       },
       {
         "ArtifactName" : ["Desert Bighorn Sheep", "Bighorn Sheep"],
-        "ArtifactId": "15",
+        "ArtifactId": "10",
         "Clue": "This hoofed mammal lives in dry, rocky regions on cliffs and mountain sides. Males will fight each other on these dangerous slopes using their distinctly shaped horns.",
         "AdditionalHint" : "Their big horns are shaped like croissant rolls.",
         "CorrectMessage" : "Desert bighorn sheep have specially shaped elastic hooves that allow them to easily traverse rocky, treacherous terrain. Their populations have significantly declined due to hunting and proximity to domestic livestock, which creates competition for resources and spreads disease to remaining wild herds.",
@@ -97,7 +106,7 @@
       },
       {
         "ArtifactName" : ["Serpentine"],
-        "ArtifactId": "16",
+        "ArtifactId": "11",
         "Clue": "This is California’s state rock and can be found on Mt. Diablo.",
         "AdditionalHint" : "This rock is apple-green to black with mottled light and dark areas.",
         "CorrectMessage" : "Though serpentine has a shiny wax-like appearance, it has a slightly soapy feel. Much of California’s biodiversity is attributed to serpentine outcrops due to the rock’s ability to host California native and endemic vegetation. Local vegetation has evolved to the microclimates caused by the unique chemistry of serpentine soil.",
@@ -106,7 +115,7 @@
       },
       {
         "ArtifactName" : ["Monarch Butterfly"],
-        "ArtifactId": "17",
+        "ArtifactId": "12",
         "Clue": "As a caterpillar, this insect eats the leaves of a toxic plant called milkweed. As it undergoes metamorphosis to become a butterfly, it stores those toxins and becomes poisonous.",
         "AdditionalHint" : "This orange and black butterfly migrates through California every year.",
         "CorrectMessage" : "Monarch butterflies migrate from their summer breeding grounds in the northeastern U.S. and Canada down to Mexico to escape the cold winter. Monarch Butterflies can travel up to 100 miles per day during their 3,000-mile migration south.",
@@ -115,7 +124,7 @@
       },
       {
         "ArtifactName" : ["Northern Elephant Seal", "Elephant Seal"],
-        "ArtifactId": "18",
+        "ArtifactId": "13",
         "Clue": "These marine mammals can migrate over 13,000 miles along the west coast of North America every year. Adult males can grow to 13 feet long and up to 5,000 lbs, battling each other for dominance on sandy beaches during mating season.",
         "AdditionalHint" : "Males have a distinctly large nose or “proboscis” that they can inflate to resemble an elephant trunk.",
         "CorrectMessage" : "Elephant seals will dive thousands of feet under the ocean for hours at a time to hunt for fish, squid, and octopuses. All elephant seals in the U.S. and Mexico are descended from a small group of individuals that survived being hunted to near extinction in the 1800s for their valuable blubber.",
@@ -124,7 +133,7 @@
       },
       {
         "ArtifactName" : ["Coral"],
-        "ArtifactId": "19",
+        "ArtifactId": "14",
         "Clue": "This structure is created by colonies of small animals called polyps that are related to jellyfish and anemones. The animals create a hard limestone exoskeleton that can stick together with its neighbors to form structures from a few inches wide to dozens of feet wide and over 10 feet tall!",
         "AdditionalHint" : "Large patches of these structures are called reefs.",
         "CorrectMessage" : "Coral reefs are vital to our planet’s health, creating habitats for a huge diversity of marine life including fish, sponges, oysters, clams, sea stars, and urchins. Coral polyps usually have clear bodies. The vibrant colors you see in coral reefs and aquariums are due to the algae that grow in the polyps’ tissue and that benefit from a symbiotic relationship with the coral polyps. The algae removes the coral’s waste and uses it to photosynthesize (make its food). The coral uses the oxygen and carbohydrates produced by photosynthesis to build its exoskeleton.",

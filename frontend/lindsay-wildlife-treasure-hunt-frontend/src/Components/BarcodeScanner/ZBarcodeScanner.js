@@ -2,6 +2,7 @@ import React from 'react';
 
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import { BrowserMultiFormatReader, BrowserQRCodeReader, Result, BarcodeFormat, DecodeHintType } from '@zxing/library'
+import './ZBarcodeScanner.css';
 
 class ZBarcodeScanner extends React.Component {
 
@@ -25,29 +26,11 @@ class ZBarcodeScanner extends React.Component {
       },
       loadingScanResult: false,
       videoOverrideStyle: undefined,
-      processingResultStyle: undefined
+      zvideoContainerStyle: {
+
+      }
     }
     console.log(this.props)
-  }
-
-  __setupProcessingMessageCordinates(){
-    if(this.state.processingResultStyle == undefined){
-      var video = document.getElementById(this.state.videoElementID)
-      this.videoX = video.getBoundingClientRect().x
-      this.videoY = video.getBoundingClientRect().y
-      this.setState(
-        {
-          processingResultStyle : {
-            position: "fixed",
-            zIndex: 1,
-            top: (this.videoY * 1.75) + "px",
-            left: (this.videoX * 1.75) + "px",
-            color: "black",
-            fontWeight: "bold"
-          }
-        }
-      )
-    }
   }
 
   __setupClassVariables(props) {
@@ -89,12 +72,13 @@ class ZBarcodeScanner extends React.Component {
   componentDidMount(){
     console.log("getting video info...")
     this.__setupContinualScan()
-    this.__setupProcessingMessageCordinates()
+    this.__scanEnabled()
   }
 
   componentWillUnmount(){
     console.log("unloading barcode scanner")
     this.codeReader.stopContinuousDecode()
+    this.__scanDisabled()
   }
 
   __videoOpacity(){
@@ -120,10 +104,10 @@ class ZBarcodeScanner extends React.Component {
   }
 
   __getLoadingResultUI(){
-    if(this.state.loadingScanResult != true){
+    if(this.state.loadingScanResult == true){
       this.__videoOpacity()
       return (
-        <div class="zscanner-processing-result-text">
+        <div id="zscannerProcessingText">
           Processing...
         </div>
       )
@@ -157,15 +141,39 @@ class ZBarcodeScanner extends React.Component {
     }, 1000);
   }
 
+  __scanEnabled(){
+    this.setState(
+      {
+        scanEnabled: true
+      }
+    )
+  }
+
+  __scanDisabled(){
+    this.setState(
+      {
+        scanEnabled: false
+      }
+    )
+  }
+
+  isScanEnabled(){
+    return this.state.scanEnabled
+  }
+
   __setupContinualScan(){
     this.codeReader.decodeFromVideoDevice(undefined, this.state.videoElementID, (result, err) => { 
     /* do something with the result in here */ 
-      if(result) {
-        this.__successScanWrapper(result)
-      }
+      if(this.isScanEnabled()){
 
-      if(err) {
-        this.onErrorScan(err)
+        if(result) {
+          this.__scanDisabled()
+          this.__successScanWrapper(result)
+        }
+
+        if(err) {
+          this.onErrorScan(err)
+        }
       }
     })
   }
@@ -198,10 +206,8 @@ class ZBarcodeScanner extends React.Component {
 
   render() {
     return (
-      <div id={this.state.containerElementID}>
-      <div style={this.state.processingResultStyle}>
+      <div id={this.state.containerElementID} class="zVideoBarcodeScanner">
         {this.__getLoadingResultUI()}
-      </div>
         <video 
           id={this.state.videoElementID} 
           width={this.state.width} 

@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.0
+
+* Nav re-sizing
+* Fix up asset IDs
+* Add a 'loading' delay on scan
+
 ## 0.21.1
 
 [PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/209)

@@ -11,8 +11,15 @@ canvas {
     -ms-interpolation-mode: nearest-neighbor; 
 }
 
-#zscanner-processing-result-text{
-  z-index: 1;
+#zVideoBarcodeScanner {
+
+}
+
+#zscannerProcessingText {
+/*  z-index: 1;
+  position: absolute;
+  left: 50%;
+  top: 50%;*/
 }
 
 #qrcodecanvas {
