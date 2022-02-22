@@ -1,3 +1,7 @@
+# Wallboard applet files
+.wallboardsetupcomplete
+applets/wallboard/wallboard_files
+
 # load test files
 load/reports
 load/vegeta_tmp_cmd
