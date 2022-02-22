@@ -3,8 +3,7 @@
 # LINDSAY WILDLIFE WALLBOARD
 # This script can be used to setup and run a lindsay wallboard
 
-VERSION="0.0.1"
-
+VERSION="1.0.0"
 CURRENT_DIR="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
 function log() {
@@ -36,8 +35,10 @@ function configureOnStartup(){
 
   if [[ $(uname) == 'Darwin' ]];
   then
+    log "Setting up MacOS"
     echo "${CURRENT_DIR}/wallboard.sh run" >> ~/.bash_profile
   else
+    log "Setting up Raspbian"
     # Assume raspbian
     cp -r /etc/xdg/lxsession ~/.config/
     echo "" >> ~/.config/lxsession/LXDE-pi/autostart
