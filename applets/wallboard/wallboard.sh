@@ -3,6 +3,8 @@
 # LINDSAY WILDLIFE WALLBOARD
 # This script can be used to setup and run a lindsay wallboard
 
+VERSION="0.0.1"
+
 CURRENT_DIR="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
 function log() {
@@ -18,7 +20,8 @@ function installChrome(){
   then
     log "Installing chrome on MacOS"
   else
-    if  [[ command -v chromium-browser > /dev/null ]];
+    log "Installing on Raspbian"
+    if command -v chromium-browser > /dev/null ;
     then
       log "Chromium already installed, skipping"
     else
@@ -37,6 +40,8 @@ function configureOnStartup(){
   else
     # Assume raspbian
     cp -r /etc/xdg/lxsession ~/.config/
+    echo "" >> ~/.config/lxsession/LXDE-pi/autostart
+    echo "#### Lindsay Wildlife Wallboarding Setup ####" >> ~/.config/lxsession/LXDE-pi/autostart
     echo "@${CURRENT_DIR}/wallboard.sh run" >> ~/.config/lxsession/LXDE-pi/autostart
   fi
 }
@@ -124,8 +129,15 @@ function usage(){
   echo "     ./wallboard.sh setup|run"
 }
 
+function versionFile(){
+  log "Running version ${VERSION}"
+  echo $VERSION > ./wallboard_files/VERSION
+}
+
 log "Start wallboard.sh"
 log "Running from ${CURRENT_DIR}"
+
+versionFile
 
 if [[ $1 == "setup" ]];
 then
