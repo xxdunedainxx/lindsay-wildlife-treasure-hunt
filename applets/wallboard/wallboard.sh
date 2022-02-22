@@ -3,6 +3,8 @@
 # LINDSAY WILDLIFE WALLBOARD
 # This script can be used to setup and run a lindsay wallboard
 
+CURRENT_DIR="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+
 function log() {
   log="$(date) :: ${1}"
   echo $log
@@ -15,6 +17,9 @@ function installChrome(){
 
 function configureOnStartup(){
   log "Configuring chrome wallboard to run on startup"
+
+  # Write out to login shell
+  echo "${CURRENT_DIR}/wallboard.sh run" >> ~/.bash_profile
 }
 
 function setupWallboardURL(){
@@ -72,6 +77,14 @@ function runChrome(){
     `
   else
     log "Runinng on standard Linux"
+    WALLBOARD_CMD=`
+    google-chrome \
+      --start-fullscreen \
+      --kiosk \
+      --fullscreen \
+      --private-window \
+      --app="${WALLBOARD_URL}"
+    `    
   fi
 
   log "Running command ${WALLBOARD_CMD}"
@@ -93,6 +106,7 @@ function usage(){
 }
 
 log "Start wallboard.sh"
+log "Running from ${CURRENT_DIR}"
 
 if [[ $1 == "setup" ]];
 then
