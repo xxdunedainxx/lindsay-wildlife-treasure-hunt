@@ -13,13 +13,32 @@ function log() {
 
 function installChrome(){
   log "Installing Chrome"
+
+  if [[ $(uname) == 'Darwin' ]];
+  then
+    log "Installing chrome on MacOS"
+  else
+    if  [[ command -v chromium-browser > /dev/null ]];
+    then
+      log "Chromium already installed, skipping"
+    else
+      log "Installing chrome on raspbian"
+      sudo apt-get update && sudo apt-get install chromium-browser
+    fi
+  fi
 }
 
 function configureOnStartup(){
   log "Configuring chrome wallboard to run on startup"
 
-  # Write out to login shell
-  echo "${CURRENT_DIR}/wallboard.sh run" >> ~/.bash_profile
+  if [[ $(uname) == 'Darwin' ]];
+  then
+    echo "${CURRENT_DIR}/wallboard.sh run" >> ~/.bash_profile
+  else
+    # Assume raspbian
+    cp -r /etc/xdg/lxsession ~/.config/
+    echo "@${CURRENT_DIR}/wallboard.sh run" >> ~/.config/lxsession/LXDE-pi/autostart
+  fi
 }
 
 function setupWallboardURL(){
@@ -78,12 +97,12 @@ function runChrome(){
   else
     log "Runinng on standard Linux"
     WALLBOARD_CMD=`
-    google-chrome \
+    chromium-browser \
       --start-fullscreen \
       --kiosk \
-      --fullscreen \
+      --start-maximized \
       --private-window \
-      --app="${WALLBOARD_URL}"
+      "${WALLBOARD_URL}"
     `    
   fi
 
