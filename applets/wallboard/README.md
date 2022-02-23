@@ -5,7 +5,7 @@ Wallboards are used to serve of static content of some sort. This is currenlty j
 # Installation & Setup
 
 ```bash
-mkdir -p lindsay_wallboard && cd lindsay_wallboard && curl "https://raw.githubusercontent.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/wallboard-applet/applets/wallboard/wallboard.sh" > wallboard.sh && chmod 755 wallboard.sh && ./wallboard.sh setup 
+mkdir -p lindsay_wallboard && cd lindsay_wallboard && curl "https://raw.githubusercontent.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/main/applets/wallboard/wallboard.sh" > wallboard.sh && chmod 755 wallboard.sh && ./wallboard.sh setup 
 
 ```
 
