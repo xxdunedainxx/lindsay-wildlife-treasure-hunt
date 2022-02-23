@@ -129,7 +129,7 @@ function runWallBoard(){
 
 function usage(){
   echo "How to use this cli:"
-  echo "     ./wallboard.sh setup|run"
+  echo "     ./wallboard.sh setup|run|help"
 }
 
 function versionFile(){
@@ -145,9 +145,9 @@ versionFile
 if [[ $1 == "setup" ]];
 then
   setup
-elif [[ $1 == "run" ]];
+elif [[ $1 == "help" ]];
 then
-  runWallBoard
+  usage
 else
   runWallBoard
 fi
