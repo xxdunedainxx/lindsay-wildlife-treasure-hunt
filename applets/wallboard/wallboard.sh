@@ -6,6 +6,8 @@
 VERSION="1.0.0"
 CURRENT_DIR="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
+cd $CURRENT_DIR
+
 function log() {
   log="$(date) :: ${1}"
   echo $log
@@ -43,7 +45,7 @@ function configureOnStartup(){
     cp -r /etc/xdg/lxsession ~/.config/
     echo "" >> ~/.config/lxsession/LXDE-pi/autostart
     echo "#### Lindsay Wildlife Wallboarding Setup ####" >> ~/.config/lxsession/LXDE-pi/autostart
-    echo "@${CURRENT_DIR}/wallboard.sh run" >> ~/.config/lxsession/LXDE-pi/autostart
+    echo "@lxterminal --command ${CURRENT_DIR}/wallboard.sh" >> ~/.config/lxsession/LXDE-pi/autostart
   fi
 }
 
@@ -147,5 +149,5 @@ elif [[ $1 == "run" ]];
 then
   runWallBoard
 else
-  usage
+  runWallBoard
 fi
