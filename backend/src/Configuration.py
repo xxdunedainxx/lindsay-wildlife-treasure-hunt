@@ -36,8 +36,12 @@ class Configuration:
     "LOG_ROTATION_JOB_ARCHIVE_DIR"      : f"archive{os.sep}",
     "UI_LOGGING_JOB_INTERVAL_MINUTES" : 1,
     "UI_LOGGING_JOB_LOGS_PER_JOB"     : 50,
-    "BUG_REPORT_EMAIL_LIST" : ["zrmmaster92@gmail.com", "roderickjmacleod@gmail.com"],
-
+    "BUG_REPORT_EMAIL_LIST" : [
+        "zrmmaster92@gmail.com", 
+        "roderickjmacleod@gmail.com",
+        "ewoods@lindsaywildlife.org",
+        "cschwandt@lindsaywildlife.org"
+    ],
     # Static image directory
     "IMAGE_DIR" : f"{os.getcwd()}{os.sep}assets"
   }
