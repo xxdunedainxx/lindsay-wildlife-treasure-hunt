@@ -6,7 +6,6 @@ import ScanDisplay from './ScanDisplay';
 import HintDisplay from './HintDisplay';
 import AnswerDisplay from './AnswerDisplay';
 import ManualEntryDisplay from './ManualEntryDisplay';
-import TestZoomComponent from './TestZoomComponent';
 
 import HttpArgParser from '../../src/util/HttpArgParser';
 
@@ -227,14 +226,7 @@ export class GameDisplay extends React.Component {
   render(){
     return(
       <div className="game-display-container" style={this.state.gameDisplayStyle}>
-        <TopMessage
-          gameStarted={this.state.gameStarted}
-          currentLevel={this.state.currentLevel}
-          displayAnswer={this.state.displayAnswer}
-          lastGuessWrong={this.state.lastGuessWrong}
-          attempts={this.state.attempts}
-          startGameButton={this.startGameButton.bind(this)}
-        />
+        <h2 className="game-display-question-header">Question: {this.state.currentLevel}</h2>
         <HintDisplay
           gameStarted={this.state.gameStarted}
           displayAnswer={this.state.displayAnswer}

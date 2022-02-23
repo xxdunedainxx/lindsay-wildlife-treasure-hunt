@@ -16,6 +16,11 @@
 
 /* All components */
 
+.game-display-question-header {
+  color: black;
+  font-weight: bold;
+}
+
 .game-text {
     color: #303023;
     font-family: 'Avenir Book', sans-serif;
@@ -105,7 +110,6 @@
 .scanner-display-container {
   margin-left: auto;
   margin-right: auto;
-  margin-top: 0px;
 }
 
 .qrScannerV2 {
@@ -129,6 +133,8 @@
 }
 
 /* Hint Display */
+
+.hint-display {}
 
 .clue-text {
     box-sizing: border-box;

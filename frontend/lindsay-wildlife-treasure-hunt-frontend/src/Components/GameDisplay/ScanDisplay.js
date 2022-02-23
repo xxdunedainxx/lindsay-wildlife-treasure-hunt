@@ -18,7 +18,7 @@ class ScanDisplay extends React.Component {
       }
       else {
         width = 500;
-        height = 500;
+        height = 350;
       }
 
       this.state = {
