@@ -9,15 +9,31 @@ import Session from "../util/Session";
 const maxIncorrectAttempts = 3
 
 export class GameController {
+  static correctAnswerMessages = [
+    "Nailed it!",
+    "Nice job!",
+    "You got it!",
+    "Another one in the bag!"
+  ]
+
+  static wrongAnswerMessages = [
+    "Not quite, let's try again.",
+    "Hmm, let's give it another try.",
+    "That wasn't it, but I know you can do this!"
+  ]
 
   static gameSequenceSize = 7
 
   // if session data exists, loads it
   static Init(){
     Logger.info('init game controller', true)
+
     console.log(GameController.gameState)
     console.log(Session.FetchSessionData())
     GameController.loadSessionData();
+    if(GameController.gameState.gameInfo.game.GameSequence.length < GameController.gameSequenceSize) {
+      GameController.gameSequenceSize = GameController.gameState.gameInfo.game.GameSequence.length
+    }
   }
 
   static gameState = {
@@ -33,6 +49,12 @@ export class GameController {
 
     }
   }
+
+  static getRandomElement(arr){
+    var random = arr[Math.floor(Math.random()*arr.length)]
+    return random
+  }
+
 
   static async startGame() {
     Logger.info("STARTING GAME")
@@ -117,10 +139,12 @@ export class GameController {
 
   static correctAnswer() {
     GameController.gameState.correctAnswerOnCurrentLevel = true;
+    alert(GameController.getRandomElement(GameController.correctAnswerMessages))
   }
 
   static wrongAnswer() {
     GameController.gameState.attemptsOnCurrentLevel++;
+    alert(GameController.getRandomElement(GameController.wrongAnswerMessages))
   }
 
   static getNumberOfArtifacts() {
