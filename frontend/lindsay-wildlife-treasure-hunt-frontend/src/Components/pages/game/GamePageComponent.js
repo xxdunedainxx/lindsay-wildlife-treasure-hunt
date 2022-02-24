@@ -6,7 +6,8 @@ import {GameDisplay} from '../../GameDisplay/GameDisplay';
 
 import GameControllerClient from '../../../src/http/clients/GameControllerClient';
 import Configuration from '../../../src/conf/Configuration';
-
+import HttpArgParser from '../../../src/util/HttpArgParser';
+import {ReportAnIssueDisplay} from '../../ReportAnIssueDisplay/ReportAnIssueDisplay';
 export class GamePage extends React.Component {
   static gamePageInstance = null
 
@@ -33,6 +34,22 @@ export class GamePage extends React.Component {
     this.fetchGameState()
   }
 
+  __reportFeedbackLink(){
+    if(HttpArgParser.GAME_COMPLETED_PREVIOUSLY == "true") {
+      return (
+        <div>        
+          
+          <ReportAnIssueDisplay
+            messageHeader="Have feedback? We want to hear from you!"
+            inputBodyText="Fill in feedback here"
+          />
+        </div>
+      )
+    } else {
+      return ('')
+    }
+  }
+
   constructor(props) {
     super(props)
     GamePage.gamePageInstance = this;
@@ -46,6 +63,7 @@ export class GamePage extends React.Component {
     if(this.state.gameStateLoaded) {
       return (
         <div>
+           {this.__reportFeedbackLink()}
            <PageBody />
           <GameDisplay />
         </div>

@@ -12,8 +12,11 @@ import Configuration from '../../src/conf/Configuration';
 export class ReportAnIssueDisplay extends React.Component {
   constructor(props) {
     super(props);
+    let messageToUse = props?.inputBodyText ? props.inputBodyText : "Something isn't working"
+    let messageHeader = props?.messageHeader ? props.messageHeader : "Describe your issue:"
     this.state = {
-      message: "Something isn't working"
+      message: messageToUse,
+      messageHeader: messageHeader
     };
 
     this.handleMessageChange = this.handleMessageChange.bind(this);
@@ -42,7 +45,7 @@ export class ReportAnIssueDisplay extends React.Component {
       <div class="reportAnIssueWrapper">
         <form onSubmit={this.handleSubmit}>
           <label for="describeIssueInput" class="userInfoInputLabel">
-            Describe your issue:
+            {this.state.messageHeader}
           </label>
           <textarea class="userInfoInput" id="describeIssueInput" value={this.state.message} onChange={this.handleMessageChange} />
           <br />

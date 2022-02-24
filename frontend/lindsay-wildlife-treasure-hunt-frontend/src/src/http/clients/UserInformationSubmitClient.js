@@ -7,7 +7,7 @@ function deleteProgress() {
   GameController.resetGame();
   GameController.gameState.gameComplete = false;
   GameController.saveState();
-  window.location.href = '/ui/game';
+  window.location.href = '/ui/game?game_completed_previously=true';
 }
 
 class UserInformationSubmitClient extends HttpClient {
