@@ -29,5 +29,5 @@ jobs:
     - name: Execute Tests
       env: # Or as an environment variable
         LWE_RAW_CONF_FILE: ${{ secrets.LWE_RAW_CONF_FILE }}
-      run: cd backend && ./test/scripts/integration_tests.sh
+      run: cd backend && sudo ./test/scripts/integration_tests.sh
       
