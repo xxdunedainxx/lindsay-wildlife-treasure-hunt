@@ -4,6 +4,7 @@ from test.unit.queues.MailerQUnitTests import mail_q_unit_tests
 from test.unit.queues.RedisQueueCoreOperationUnitTests import redis_queue_unit_tests
 from test.unit.util.EmailValidationUnitTesting import email_validation_tests
 from test.unit.monitor.AppHealthUnitTesting import app_health_util_unit_testing
+from test.unit.db.DBTesting import db_unit_testing
 
 class UnitTests:
 
@@ -15,3 +16,4 @@ class UnitTests:
     mail_q_unit_tests()
     email_validation_tests()
     app_health_util_unit_testing()
+    db_unit_testing()

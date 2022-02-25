@@ -4,6 +4,8 @@ from test.integration.webserver.mail_controller.MailControllerIntegrationTests i
 from test.integration.webserver.test_controller.TestControllerIntegrationTests import test_controller_integration_tests
 from test.integration.threading.WorkerIntegrationTests import threading_integration_tests
 from test.integration.webserver.monitoring.AppHealthMonitorIntegrationTests import app_health_controller_integration_tests
+from test.integration.webserver.scavenger_hunt.ScavengerHuntControllerIntegrationTests import scavenger_hunt_controller_tests
+from test.integration.asset_testing.AssetIntegrationTesting import asset_availability_testing
 
 class IntegrationTests:
 
@@ -15,3 +17,5 @@ class IntegrationTests:
     app_health_controller_integration_tests()
     test_controller_integration_tests()
     threading_integration_tests()
+    scavenger_hunt_controller_tests()
+    asset_availability_testing()
