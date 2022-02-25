@@ -1,4 +1,4 @@
-name: Backend Integration Testing
+name: CORE Backend Integration Testing
 on:  
   push:
   pull_request:
