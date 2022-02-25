@@ -1,4 +1,4 @@
-name: CI
+name: Backend Unit Testing
 on:  
   push:
   pull_request:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   test:
-    name: Run Backend Unit Testing
+    name: Run Unit Testing
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -22,7 +22,7 @@ jobs:
     - name: Bootstrap and setup environment
       run: ./setup.sh   
 
-    - name: Run Unit Testing
+    - name: Execute Tests
       env: # Or as an environment variable
         LWE_RAW_CONF_FILE: ${{ secrets.LWE_RAW_CONF_FILE }}
       run: cd backend && ./test/scripts/unit_tests.sh
