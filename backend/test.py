@@ -8,13 +8,15 @@ from test.unit.UnitTests import UnitTests
 from test.util.TestToggles import TEST_CONF
 
 def unit():
-  if TEST_CONF.UNIT_TESTING_ENABLED:
+  if TEST_CONF.UNIT_ENABLED():
+    LogFactory.MAIN_LOG.info(f"Unit Test Toggle: {TEST_CONF.UNIT_TESTING_ENABLED}")
     UnitTests.run_unit_tests()
   else:
     LogFactory.MAIN_LOG.info("UNIT TESTS DISABLED")
 
 def integration():
-  if TEST_CONF.INTEGRATION_TESTING_ENABLED:
+  if TEST_CONF.INTEGRATION_ENABLED():
+    LogFactory.MAIN_LOG.info(f"Integration Test Toggle: {TEST_CONF.INTEGRATION_TESTING_ENABLED}")
     IntegrationTests.run_integration_tests()
   else:
     LogFactory.MAIN_LOG.info("INTEGRATIONS TESTS DISABLED")
