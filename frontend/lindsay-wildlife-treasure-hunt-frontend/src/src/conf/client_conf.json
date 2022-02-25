@@ -13,7 +13,7 @@
       "hostRoute" : ""
     },
     "dev" : {
-      "mockData" : false
+      "mockData" : true
     }
   },
   "prod" : {
