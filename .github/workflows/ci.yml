@@ -16,8 +16,11 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v1
-
-    - name: Moving build to artifacts directory
+    - name: Set up Python
+      uses: actions/setup-python@v2
       with:
-          python-version: '3.8'
+        python-version: '3.8'
+    - name: Setup Python Environment
       run: ./backend/scripts/setup.sh
+      
+      
