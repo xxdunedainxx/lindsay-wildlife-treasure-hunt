@@ -9,6 +9,8 @@ jobs:
   test:
     name: Run Integration Testing
     runs-on: ubuntu-latest
+    container:
+      options: --user root
     strategy:
       matrix:
         python-version: ['3.8']
@@ -24,10 +26,10 @@ jobs:
       with:
         python-version: '3.8'
     - name: Bootstrap and setup environment
-      run: sudo ./setup.sh   
+      run: ./setup.sh   
 
     - name: Execute Tests
       env: # Or as an environment variable
         LWE_RAW_CONF_FILE: ${{ secrets.LWE_RAW_CONF_FILE }}
-      run: cd backend && sudo ./test/scripts/integration_tests.sh
+      run: cd backend && ./test/scripts/integration_tests.sh
       
