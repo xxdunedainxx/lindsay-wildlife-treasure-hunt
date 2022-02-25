@@ -12,8 +12,10 @@ function log() {
 
 function runPythonAppInBackground(){
   log "running python app in backgorund"
-  nohup ./scripts/run.sh >/dev/null 2>&1 &
-  sleep 5
+  nohup ./scripts/run.sh > backend.out 2>&1 &
+  sleep 2
+  log "Backend std.out:"
+  cat backend.out
   curl http://localhost:9090/health -v 
   PYTHON_BACKGROUND_PID=$(cat PRIMARY.PID)
   log "Python background process is running as PID ${PYTHON_BACKGROUND_PID}"
