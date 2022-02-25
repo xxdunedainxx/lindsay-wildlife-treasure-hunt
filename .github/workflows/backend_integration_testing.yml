@@ -1,4 +1,4 @@
-name: Backend Unit Testing
+name: Backend Integration Testing
 on:  
   push:
   pull_request:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   test:
-    name: Run Unit Testing
+    name: Run Integration Testing
     runs-on: ubuntu-latest
     strategy:
       matrix:
