@@ -53,8 +53,12 @@ class Configuration:
 
 
   def _init_conf(self, conf: str):
-    self.CONF_FILE_LOCATION: str  = conf
-    self.RAW_CONF: str = open(self.CONF_FILE_LOCATION,"r").read().strip()
+    if 'LWE_RAW_CONF_FILE' in os.environ.keys():
+      self.RAW_CONF: str = os.environ.get('LWE_RAW_CONF_FILE')
+      self.CONF_FILE_LOCATION: str = None
+    else:
+      self.CONF_FILE_LOCATION: str  = conf
+      self.RAW_CONF: str = open(self.CONF_FILE_LOCATION,"r").read().strip()
     print(f"Raw configuration file {self.RAW_CONF}")
     self.CONF: dict = json.loads(self.RAW_CONF)
 
