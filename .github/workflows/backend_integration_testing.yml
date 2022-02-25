@@ -9,8 +9,6 @@ jobs:
   test:
     name: Run Integration Testing
     runs-on: ubuntu-latest
-    container:
-      options: --user root
     strategy:
       matrix:
         python-version: ['3.8']
