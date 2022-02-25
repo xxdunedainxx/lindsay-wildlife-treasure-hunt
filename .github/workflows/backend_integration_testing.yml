@@ -24,7 +24,7 @@ jobs:
       with:
         python-version: '3.8'
     - name: Bootstrap and setup environment
-      run: ./setup.sh   
+      run: sudo ./setup.sh   
 
     - name: Execute Tests
       env: # Or as an environment variable
