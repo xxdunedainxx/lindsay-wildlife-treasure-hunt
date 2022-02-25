@@ -22,5 +22,7 @@ jobs:
         python-version: '3.8'
     - name: Setup Python Environment
       run: ./backend/scripts/setup.sh
-      
+    
+    - name: Run Unit Testing
+      run: ./test.sh
       
