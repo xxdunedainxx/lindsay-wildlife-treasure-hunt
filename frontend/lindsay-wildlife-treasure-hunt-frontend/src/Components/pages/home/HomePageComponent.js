@@ -18,10 +18,39 @@ export class HomePage extends React.Component {
       visibility: "hidden",
       display: "none"
     }
+    this.DualButtonStyle={
+      fontSize: "15px"
+    }
   }
 
   resetSession(){
     Session.ClearSession()
+    window.location.href = '/ui/game';
+  }
+
+  __getGameLinkButtons(){
+    if(Session.CheckIfExists()) {
+      return (<div data-testid="test-home-page-session">
+        <Link style={this.DualButtonStyle} to="/ui/game" className="startButton">
+          Continue Game
+        </Link>
+        <br />
+        <br />
+        <button style={this.DualButtonStyle} className="game-button"
+          onClick={this.resetSession}
+        >
+          Clear Progress
+        </button>
+      </div>)
+    } else {
+      return (
+        <div data-testid="test-home-page-no-session">
+          <Link to="/ui/game" className="startButton">
+            Get Started!
+          </Link>
+        </div>
+      )
+    }
   }
 
   render(){
@@ -35,11 +64,7 @@ export class HomePage extends React.Component {
           To play, match each clue to the correct specimen located in the California Biodiversity exhibit and win a special surprise!
         </div>
         <br />
-        <Link to="/ui/game" className="startButton"
-        onClick={this.resetSession}
-        >
-          Get Started!
-        </Link>
+        {this.__getGameLinkButtons()}
         <div style={this.videoStyle}>
         <ZBarcodeScanner />
         </div>
