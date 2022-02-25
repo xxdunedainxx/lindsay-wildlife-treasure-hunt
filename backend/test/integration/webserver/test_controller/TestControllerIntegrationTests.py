@@ -1,9 +1,9 @@
 from src.util.LogFactory import LogFactory
-import requests
-
+from src.Configuration import Configuration, CONF_INSTANCE
 
 from test.util.decorators.Toggle import enabled, disabled
 
+import requests
 import unittest
 
 
@@ -17,7 +17,7 @@ class TestControllerIntegrationTests(unittest.TestCase):
 
     @enabled
     def test_integration_test_controller_request(self):
-      r = requests.get("http://localhost/test",
+      r = requests.get(f"http://localhost:{CONF_INSTANCE.FLASK_PORT_BIND}/test",
           headers={ "content-type": "application/json" }
       )
       response_data = r.json()

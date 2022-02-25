@@ -42,6 +42,7 @@ def test():
     TestMetrics.report()
   except Exception as e:
     LogFactory.MAIN_LOG.error(f"!!TESTS FAILED!!")
+    exit(1)
 
 if __name__ == "__main__":
   test()

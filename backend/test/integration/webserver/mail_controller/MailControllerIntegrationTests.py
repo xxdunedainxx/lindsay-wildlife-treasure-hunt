@@ -1,5 +1,6 @@
 from src.Singletons import Singletons
 from src.util.LogFactory import LogFactory
+from src.Configuration import Configuration, CONF_INSTANCE
 import requests
 import json
 
@@ -22,7 +23,7 @@ class MailControllerIntegrationTests(unittest.TestCase):
       # get size before adding email
       q_size = MailQ.q_size()
       dictionary_object = {"email": "zrmmaster92@gmail.com", "username": "Zach"}
-      r = requests.post("http://localhost/mail",
+      r = requests.post(f"http://localhost:{CONF_INSTANCE.FLASK_PORT_BIND}/mail",
           data=json.dumps(dictionary_object),
           headers={ "content-type": "application/json" }
       )
@@ -44,7 +45,7 @@ class MailControllerIntegrationTests(unittest.TestCase):
     def test_integration_sending_email_request_invalid_email(self):
       MailQ = Singletons.mailQ
       dictionary_object = {"email": "badEmail", "username": "Zach"}
-      r = requests.post("http://localhost/mail",
+      r = requests.post(f"http://localhost:{CONF_INSTANCE.FLASK_PORT_BIND}/mail",
           data=json.dumps(dictionary_object),
           headers={ "content-type": "application/json" }
       )
@@ -59,7 +60,7 @@ class MailControllerIntegrationTests(unittest.TestCase):
     def test_integration_sending_email_request_invalid_request(self):
       MailQ = Singletons.mailQ
       dictionary_object = {"email": "zrmmaster92@gmail.com"}
-      r = requests.post("http://localhost/mail",
+      r = requests.post(f"http://localhost:{CONF_INSTANCE.FLASK_PORT_BIND}/mail",
           data=json.dumps(dictionary_object),
           headers={ "content-type": "application/json" }
       )
@@ -74,7 +75,7 @@ class MailControllerIntegrationTests(unittest.TestCase):
     @enabled
     def test_integration_sending_email_request_no_payload(self):
       MailQ = Singletons.mailQ
-      r = requests.post("http://localhost/mail")
+      r = requests.post(f"http://localhost:{CONF_INSTANCE.FLASK_PORT_BIND}/mail")
       LogFactory.MAIN_LOG.info(f"No payload response {r.json()}")
       response_data = r.json()
       LogFactory.MAIN_LOG.info(f"Response ")

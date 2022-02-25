@@ -1,0 +1,33 @@
+name: Backend Integration Testing
+on:  
+  push:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Run Integration Testing
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.8']
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: Install redis
+      run: sudo apt-get install -y redis-tools redis-server
+    - name: Verify that redis is up
+      run: redis-cli ping
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+    - name: Bootstrap and setup environment
+      run: ./setup.sh   
+
+    - name: Execute Tests
+      env: # Or as an environment variable
+        LWE_RAW_CONF_FILE: ${{ secrets.LWE_RAW_CONF_FILE }}
+      run: cd backend && ./test/scripts/integration_tests.sh
+      

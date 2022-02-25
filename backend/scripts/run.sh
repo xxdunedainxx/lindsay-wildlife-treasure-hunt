@@ -1,6 +1,6 @@
 #! /bin/bash
 
-PYTHON_INTERPRETER=($(which python || which python3))
+PYTHON_INTERPRETER=($(which python3 || which python))
 
 echo "running app"
 
