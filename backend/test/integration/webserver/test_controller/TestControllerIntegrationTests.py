@@ -1,9 +1,9 @@
 from src.util.LogFactory import LogFactory
-import requests
-
+from src.Configuration import Configuration, CONF_INSTANCE
 
 from test.util.decorators.Toggle import enabled, disabled
 
+import requests
 import unittest
 
 

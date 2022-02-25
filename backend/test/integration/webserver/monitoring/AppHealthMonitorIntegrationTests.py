@@ -1,4 +1,5 @@
 from src.util.LogFactory import LogFactory
+from src.Configuration import Configuration, CONF_INSTANCE
 import requests
 from src.WebServer.controllers.monitor.AppHealthUtil import AppHealthStatusUtil, AppHealthStatus
 
@@ -18,7 +19,7 @@ class AppHealthMonitoringControllerIntegrationTests(unittest.TestCase):
 
     @enabled
     def test_integration_app_health_controller_test(self):
-      r = requests.get("http://localhost/health",
+      r = requests.get(f"http://localhost:{CONF_INSTANCE.FLASK_PORT_BIND}/health",
                        headers={"content-type": "application/json"}
                        )
       LogFactory.MAIN_LOG.info(f"App Health controller response {r.json()}")
@@ -27,7 +28,7 @@ class AppHealthMonitoringControllerIntegrationTests(unittest.TestCase):
 
     @enabled
     def test_integration_app_health_controller_dependency_test(self):
-      r = requests.get("http://localhost/dependencies",
+      r = requests.get(f"http://localhost:{CONF_INSTANCE.FLASK_PORT_BIND}/dependencies",
                        headers={"content-type": "application/json"}
                        )
       LogFactory.MAIN_LOG.info(f"App Health controller response {r.json()}")
