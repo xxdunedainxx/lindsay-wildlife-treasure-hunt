@@ -50,6 +50,10 @@ export class GameController {
     }
   }
 
+  static setLastGuess(guess){
+    GameController.gameState.lastGuess = guess
+  }
+
   static getRandomElement(arr){
     var random = arr[Math.floor(Math.random()*arr.length)]
     return random
@@ -97,9 +101,10 @@ export class GameController {
   // checks answer and updates session with gameState
   // returns true if correct, false otherwise
   static checkAnswer(answer) {
+    GameController.setLastGuess(answer)
     const correctAnswers = GameController.getAllArtifactNames(GameController.gameState.currentArtifactIdxInSequence);
     for(let i = 0; i < correctAnswers.length; i++) {
-      if(answer == correctAnswers[i].toLowerCase()) {
+      if(answer.toLowerCase() == correctAnswers[i].toLowerCase()) {
         GameController.correctAnswer();
         GameController.saveState();
         return
@@ -111,6 +116,7 @@ export class GameController {
   }
 
   static checkAnswerNumber(answer) {
+    GameController.setLastGuess(answer)
     const correctNumber = this.getArtifactId(GameController.gameState.currentArtifactIdxInSequence);
     if(answer == correctNumber) {
       GameController.correctAnswer()

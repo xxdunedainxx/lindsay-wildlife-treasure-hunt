@@ -1,4 +1,4 @@
-name: Backend Unit Testing
+name: CORE Backend Unit Testing
 on:  
   push:
   pull_request:
