@@ -44,7 +44,8 @@
       "^.+\\.(css|less)$": "babel-jest"
     },
     "moduleNameMapper": {
-      "\\.(css|less|sass|scss|svg|png|jpg|jpeg)$": "identity-obj-proxy"
+      "^.+\\.(jpg|jpeg|gif|png|mp4|mkv|avi|webm|swf|wav|mid)$": "jest-static-stubs/$1",
+      "\\.(css|less)$": "identity-obj-proxy"
     }
   },
   "eslintConfig": {
@@ -68,6 +69,8 @@
     "@babel/preset-env": "^7.15.6",
     "@testing-library/jest-dom": "^5.16.1",
     "jest-fetch-mock": "^3.0.3",
+    "jest-static-stubs": "0.0.1",
+    "jest-transform-stub": "^2.0.0",
     "node-fetch": "^3.0.0"
   }
 }
