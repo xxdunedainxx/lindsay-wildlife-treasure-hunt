@@ -4,4 +4,4 @@ This section of the repo contains smaller pieces of software that are utilized i
 
 ## Current Supported Applets
 
-* [Wallboards](./wallboard/README.md)
+* [Wallboards](./wallboard)
