@@ -145,11 +145,13 @@ export class GameController {
 
   static correctAnswer() {
     GameController.gameState.correctAnswerOnCurrentLevel = true;
+    Logger.info(`[MileStone::CorrectAnswer] Level ${GameController.gameState.currentLevel}`, true)
     alert(GameController.getRandomElement(GameController.correctAnswerMessages))
   }
 
   static wrongAnswer() {
     GameController.gameState.attemptsOnCurrentLevel++;
+    Logger.info(`[Incorrect Answer] at Level ${GameController.gameState.currentLevel}`, true)
     alert(GameController.getRandomElement(GameController.wrongAnswerMessages))
   }
 

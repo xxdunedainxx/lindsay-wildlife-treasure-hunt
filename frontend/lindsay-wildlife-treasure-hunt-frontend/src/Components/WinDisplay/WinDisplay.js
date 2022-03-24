@@ -21,15 +21,22 @@ export class WinDisplay extends React.Component {
     constructor(props) {
         super(props)
         GameController.loadSessionData()
-
+      
         this.state = {
             gameComplete: GameController.gameState.gameComplete,
         }
+        if(this.__gameIsComplete()){
+          Logger.info("[MileStone::GameComplete]", true)
+        }
+    }
+
+    __gameIsComplete(){
+      return this.state.gameComplete || HttpArgParser.DEBUG_MODE == "true"
     }
 
     render(){
-        if(this.state.gameComplete || HttpArgParser.DEBUG_MODE == "true") {
-            return(
+        if(this.__gameIsComplete()) {
+           return(
                 <div className="win-text win-page-container">
                     <h2>You did it!</h2>
                     Congratulations! You found all the correct answers! To collect your prize, go to the front desk and let our Guest Experience team know that you completed the scavenger hunt!
