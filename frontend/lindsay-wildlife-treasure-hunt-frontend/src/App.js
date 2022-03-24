@@ -6,6 +6,8 @@ import {
   Link
 } from "react-router-dom";
 
+import DebugLogger from "react-debug-logging-console"
+
 import {Nav} from './Components/Nav/Nav';
 
 
@@ -15,7 +17,7 @@ import Logger from './src/util/Logger';
 import TestClient from './src/http/clients/TestClient';
 import AppHealthClient from './src/http/clients/AppHealthClient';
 import GameControllerClient from './src/http/clients/GameControllerClient';
-
+import HttpArgParser from './src/util/HttpArgParser';
 
 import {ApplicationRouter} from './Components/ApplicationRouter';
 
@@ -42,6 +44,7 @@ function App() {
         <Router>
           <Nav headers={headers}/>
           <ApplicationRouter />
+          <DebugLogger enabled={HttpArgParser.DEBUG_MODE != "false"}/>
         </Router>
       </header>
     </div>
