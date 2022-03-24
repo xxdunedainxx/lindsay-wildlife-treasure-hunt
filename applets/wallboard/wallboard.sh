@@ -3,7 +3,11 @@
 # LINDSAY WILDLIFE WALLBOARD
 # This script can be used to setup and run a lindsay wallboard
 
-VERSION="1.0.0"
+# CHANGELOG
+## 1.0.0:: Initial implementation, setup, etc
+## 1.0.1:: Automate Orientation for raspbian
+
+VERSION="1.0.1"
 CURRENT_DIR="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
 cd $CURRENT_DIR
@@ -49,6 +53,12 @@ function configureOnStartup(){
   fi
 }
 
+function configureOrientation(){
+  read -p "Please provide the orientation [vertical:horizontal] URL:" ORIENTATION
+  log "${ORIENTATION} provided for orientation"
+  echo $ORIENTATION > wallboard_files/ORIENTATION.txt
+}
+
 function setupWallboardURL(){
   read -p "Please provide the Wallboard's URL:" WALLBOARD_URL
   echo $WALLBOARD_URL > wallboard_files/WALLBOARD_URL.txt
@@ -66,7 +76,7 @@ function setup(){
 
   installChrome
   configureOnStartup
-
+  configureOrientation
   touch .wallboardsetupcomplete
 }
 
@@ -137,10 +147,33 @@ function versionFile(){
   echo $VERSION > ./wallboard_files/VERSION
 }
 
+function orientWallboard(){
+  orientationConfigured=$(cat wallboard_files/ORIENTATION.txt)
+  log "Orienting based on ${orientationConfigured}"
+  if [[ $orientationConfigured == 'vertical' ]];then
+    log "Vertical orientation provided"
+    if [[ $(uname) == 'Darwin' ]];
+    then
+      log "Macos, skipping orientation"
+    else
+      xrandr --output HDMI-1 --rotate normal
+    fi
+  else
+    log "Default to horizontal orientation"
+    if [[ $(uname) == 'Darwin' ]];
+    then
+      log "Macos, skipping orientation"
+    else
+      xrandr --output HDMI-1 --rotate left
+    fi
+  fi
+}
+
 log "Start wallboard.sh"
 log "Running from ${CURRENT_DIR}"
 
 versionFile
+orientWallboard
 
 if [[ $1 == "setup" ]];
 then
