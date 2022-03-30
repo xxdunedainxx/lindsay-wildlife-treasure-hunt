@@ -43,7 +43,19 @@ function buildNginxIngress(){
   cd $HOME
 }
 
+function nodeVersion(){
+  nVersion=$(node --version)
+  echo $nVersion > ./NODE_VERSION
+}
+
+function pythonVersion(){
+  pVersion=$(python3 --version)
+  echo $pVersion > ./PYTHON_VERSION
+}
+
 log "BEGIN BUILDING EVERYTHING"
+nodeVersion
+pythonVersion
 buildBackend
 buildFrontend
 buildRedis
