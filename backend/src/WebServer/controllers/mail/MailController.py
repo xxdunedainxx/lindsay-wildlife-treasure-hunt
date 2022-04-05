@@ -66,7 +66,7 @@ class MailController:
         }, 400
     except Exception as e:
       LogFactory.MAIN_LOG.error(f"Failed POSTING to mail api {errorStackTrace(e)}")
-      if CONF_INSTANCE.PRODUCTION_ENVIRONMENT:
+      if CONF_INSTANCE.PRODUCTION_ENVIRONMENT == False:
         return {
           "response" : f"EMAIL API FAILURE WITH STACK TRACE: {errorStackTrace(e)}"
         }, 500
