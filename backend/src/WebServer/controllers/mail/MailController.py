@@ -34,11 +34,6 @@ class MailController:
           "response" : "ok"
         }, 200
 
-      if request.json == None:
-        return {
-          "response" : "no payload provided"
-        }, 400
-
       LogFactory.MAIN_LOG.info(f"args {request.json}")
       LogFactory.MAIN_LOG.info("mail api")
       if MailController.__valid_post_payload(request=request):
