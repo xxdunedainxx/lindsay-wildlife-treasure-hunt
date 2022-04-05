@@ -34,11 +34,6 @@ class MailController:
           "response" : "ok"
         }, 200
 
-      if request.json == None:
-        return {
-          "response" : "no payload provided"
-        }, 400
-
       LogFactory.MAIN_LOG.info(f"args {request.json}")
       LogFactory.MAIN_LOG.info("mail api")
       if MailController.__valid_post_payload(request=request):
@@ -66,7 +61,7 @@ class MailController:
         }, 400
     except Exception as e:
       LogFactory.MAIN_LOG.error(f"Failed POSTING to mail api {errorStackTrace(e)}")
-      if CONF_INSTANCE.PRODUCTION_ENVIRONMENT:
+      if CONF_INSTANCE.PRODUCTION_ENVIRONMENT == False:
         return {
           "response" : f"EMAIL API FAILURE WITH STACK TRACE: {errorStackTrace(e)}"
         }, 500
