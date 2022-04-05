@@ -75,7 +75,10 @@ class MailControllerIntegrationTests(unittest.TestCase):
     @enabled
     def test_integration_sending_email_request_no_payload(self):
       MailQ = Singletons.mailQ
-      r = requests.post(f"http://localhost:{CONF_INSTANCE.FLASK_PORT_BIND}/mail")
+      r = requests.post(
+        f"http://localhost:{CONF_INSTANCE.FLASK_PORT_BIND}/mail",
+        headers={ "content-type": "application/json" }
+      )
       LogFactory.MAIN_LOG.info(f"No payload response {r.json()}")
       response_data = r.json()
       LogFactory.MAIN_LOG.info(f"Response ")
