@@ -5,6 +5,7 @@ from src.util.ErrorFactory import errorStackTrace
 from src.Singletons import Singletons
 from src.util.validators.EmailValidator import EmailValidator
 from src.Mail.MailFormatter import MailTypes
+from src.Configuration import CONF_INSTANCE
 
 from flask import Flask, request
 
@@ -64,10 +65,15 @@ class MailController:
           "response" : "Invalid Request"
         }, 400
     except Exception as e:
-      LogFactory.MAIN_LOG.error(f"Failed Fetching mail api {errorStackTrace(e)}")
-      return {
-        "response" : "email api failure"
-      }, 500
+      LogFactory.MAIN_LOG.error(f"Failed POSTING to mail api {errorStackTrace(e)}")
+      if CONF_INSTANCE.PRODUCTION_ENVIRONMENT:
+        return {
+          "response" : f"EMAIL API FAILURE WITH STACK TRACE: {errorStackTrace(e)}"
+        }, 500
+      else:
+        return {
+          "response" : "email api failure"
+        }, 500
 
   @staticmethod
   @flask_ref.route('/report', methods=['POST', 'OPTIONS'])
