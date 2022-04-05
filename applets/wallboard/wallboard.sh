@@ -59,6 +59,17 @@ function configureOrientation(){
   echo $ORIENTATION > wallboard_files/ORIENTATION.txt
 }
 
+function disableSleepAndEnergySaver(){
+  if [[ $(uname) == 'Darwin' ]];
+  then
+    log "Macos, skipping energy saver settings"
+  else
+    log "Disabling sleep/energy saver..."
+    xset s 0
+    xset -dpms
+  fi
+}
+
 function setupWallboardURL(){
   read -p "Please provide the Wallboard's URL:" WALLBOARD_URL
   echo $WALLBOARD_URL > wallboard_files/WALLBOARD_URL.txt
@@ -134,6 +145,8 @@ function runWallBoard(){
 
   runPreflightCheck
   reportEndpointStatus
+  orientWallboard
+  disableSleepAndEnergySaver
   runChrome
 }
 
@@ -173,7 +186,6 @@ log "Start wallboard.sh"
 log "Running from ${CURRENT_DIR}"
 
 versionFile
-orientWallboard
 
 if [[ $1 == "setup" ]];
 then
