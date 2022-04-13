@@ -6,8 +6,9 @@
 # CHANGELOG
 ## 1.0.0:: Initial implementation, setup, etc
 ## 1.0.1:: Automate Orientation for raspbian
+## 1.0.2:: Disable sleep and energy saver, setup log output nit
 
-VERSION="1.0.1"
+VERSION="1.0.2"
 CURRENT_DIR="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
 cd $CURRENT_DIR
@@ -54,7 +55,7 @@ function configureOnStartup(){
 }
 
 function configureOrientation(){
-  read -p "Please provide the orientation [vertical:horizontal] URL:" ORIENTATION
+  read -p "Please provide the orientation [vertical:horizontal]:" ORIENTATION
   log "${ORIENTATION} provided for orientation"
   echo $ORIENTATION > wallboard_files/ORIENTATION.txt
 }
