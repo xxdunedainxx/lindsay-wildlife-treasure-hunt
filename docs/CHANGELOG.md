@@ -1,5 +1,36 @@
 # Changelog
 
+## 1.1.0
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/218)
+* Format updates
+* Remove top message from UI and give feedback to user for right/wrong answers in form of Javascript Alert
+* Add Lindsay Wildlife Folks to Email alerting (Erin + Christina). Alerts for feedback and when new app is deployed
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/223)
+* Give user feedback UI when they submit request for their completion email
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/232)
+* Detect if session exists and give more button options (continue/clear progress)
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/236)
+* Milestone logging to gather metrics on user usage of the app
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/229)
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/230)
+
+* CI Testing
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/231)
+* Asset Availability Testing
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/233)
+* (Backend) - ignore certain OS signals for process termination
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/241)
+* Fix Mail Integration Test
+
 ## 1.0.0
 
 * Nav re-sizing
