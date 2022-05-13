@@ -1,6 +1,8 @@
 import os
 from datetime import datetime
 import shutil
+from os import listdir
+from os.path import isfile, join
 
 class FileIO:
 
@@ -88,3 +90,7 @@ class FileIO:
   @staticmethod
   def get_last_modification_time(path: str):
     return datetime.utcfromtimestamp(os.path.getmtime(path))
+
+  @staticmethod
+  def get_files_in_directory(dir: str) -> [str]:
+    return [f for f in listdir(dir) if isfile(join(dir, f))]
