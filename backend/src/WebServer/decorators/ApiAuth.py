@@ -29,7 +29,7 @@ def basicauthenticate(api):
   def auth(*args, **kwargs):
     try:
       data = request.authorization
-      if not Authenticator.basic_user_auth(
+      if data is None or not Authenticator.basic_user_auth(
               data.username,
               data.password
       ):

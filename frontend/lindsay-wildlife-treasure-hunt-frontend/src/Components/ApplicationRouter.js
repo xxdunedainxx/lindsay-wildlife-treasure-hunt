@@ -13,6 +13,7 @@ import {HomePage} from './pages/home/HomePageComponent';
 import {ReportBugPage} from './pages/report/ReportBugPageComponent';
 import {MobileNav} from './Nav/MobileNav';
 import {WinPage} from './pages/win/WinPageComponent';
+import {AdminPage} from './pages/admin/AdminPageComponent';
 
 export class ApplicationRouter extends React.Component {
 
@@ -29,6 +30,7 @@ export class ApplicationRouter extends React.Component {
         <Route path='/ui/report' component={ReportBugPage} />
         <Route path='/ui/mobileNav' component={MobileNav} />
         <Route path='/ui/win' component={WinPage} />
+        <Route path='/ui/admin' component={AdminPage} />
       </div>
     );
   }

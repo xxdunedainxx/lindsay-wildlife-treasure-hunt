@@ -28,6 +28,21 @@ class EndpointManagerController:
     else:
       return ADMIN_DB.WALLBOARD_CONFIGS[endpoint_id], 200
 
+  @staticmethod
+  @flask_ref.route('/endpoint_url/<string:endpoint_id>', methods=['GET'])
+  @http_logger
+  @basicauthenticate
+  def get_endpoint_url(endpoint_id: str):
+    try:
+      LogFactory.MAIN_LOG.info("Attempting to get endpoint url")
+
+      if endpoint_id not in ADMIN_DB.WALLBOARD_CONFIGS.keys():
+        return {"message" : "not found"}, 404
+      else:
+        return ADMIN_DB.WALLBOARD_CONFIGS[endpoint_id]["url"], 200
+    except Exception as e:
+      return {"message" : "oh no"},500
+
   # TODO: report metrics for endpoint
   # @staticmethod
   # @flask_ref.route('/endpoint_state/<string:endpoint_id>/report', methods=['POST'])

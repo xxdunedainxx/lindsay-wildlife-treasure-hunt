@@ -52,6 +52,16 @@ class FileServer:
       return {"message" : "uh oh"}, 500
 
   @staticmethod
+  @flask_ref.route('/files/<path:file_name>', methods=['DELETE'])
+  @http_logger
+  def delete_file(file_name):
+    try:
+      FileIO.delete_file(f"{CONF_INSTANCE.FILE_SERVER_DIR}{os.sep}{file_name}")
+      return {"message" : "ok"},200
+    except FileNotFoundError:
+      return {"message": "File can't be found"}, 404
+
+  @staticmethod
   @flask_ref.route('/files/get_file/<path:file_name>', methods=['GET'])
   @http_logger
   def get_file(file_name):
