@@ -29,6 +29,24 @@ class HttpWallboards extends HttpClient {
     alert("something went wrong while getting wallboard data")  
   }
 
+  failedCreateWallboard(result){
+    alert('failed to create wallboard')
+  }
+
+  successCreateWallboard(result) {
+    alert('created wallboard!')
+    window.location.reload()
+  }
+
+  async createWallboard(wallboardData){
+    return this.post(
+      "wallboards",
+      wallboardData,
+      this.successCreateWallboard,
+      this.failedCreateWallboard
+    )
+  }
+
   async listWallBoards(successfullWallboardMethod){
     this.successfullWallboardMethod = successfullWallboardMethod
     return this.get(

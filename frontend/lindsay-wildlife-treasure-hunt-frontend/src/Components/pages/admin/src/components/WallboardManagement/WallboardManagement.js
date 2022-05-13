@@ -13,11 +13,16 @@ export class WallboardManagement extends React.Component {
   constructor(props) {
     super(props);
     this.state={
-      wallboards : "empty"
+      wallboards : "empty",
+      createWallboardName: "new name",
+      createWallboardDescription: "description",
+      createWallboardURL: "https://google.com"
     }
     this.handleUpdateWallboard = this.handleUpdateWallboard.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.updateWallboardData = this.updateWallboardData.bind(this)
+    this.handleCreateWallboardUpdate = this.handleCreateWallboardUpdate.bind(this)
+    this.handleCreateWallboard = this.handleCreateWallboard.bind(this)
   }
 
   updateWallboardData(nData){
@@ -83,11 +88,78 @@ export class WallboardManagement extends React.Component {
 
   }
 
+  handleCreateWallboardUpdate(event){
+    event.preventDefault()
+    console.log(event)
+    if(event.target.id == "wallboardName"){
+      this.setState(
+        {
+          createWallboardName: event.target.value
+        }
+      )
+    } else if(event.target.id == "wallboardDescription"){
+      this.setState(
+        {
+          createWallboardDescription: event.target.value
+        }
+      )
+    } else {
+      this.setState(
+        {
+          createWallboardURL: event.target.value
+        }
+      )
+    }
+  }
+
+  handleCreateWallboard(event){
+    event.preventDefault()
+    console.log(event)
+    var wallboards = new HttpWallboards(
+      `${Configuration.remoteEndpoint}`
+    );
+    Logger.info("trying to create wallboard data")
+
+    var wallboardData = {
+      description: this.state.createWallboardDescription,
+      url: this.state.createWallboardURL,
+      name: this.state.createWallboardName
+    }
+
+    wallboards.createWallboard(wallboardData);
+  }
+
   render() {
     return (
       <div class="loginFormWrapper" data-testid="test-login-container">
         Wallboards: <br />
         {this.__renderWallboards()}
+        <br />
+        <br />
+        <h3>Create a new wallboard</h3>
+        <form onSubmit={this.handleCreateWallboard}>
+
+          <label for="createwallboardName">
+            Name:
+          </label>
+          <textarea class="createwallboardName" id="wallboardName" value={this.state.createWallboardName} onChange={this.handleCreateWallboardUpdate}/>
+          <br />
+
+          <label for="createwallboardDescription">
+            Description:
+          </label>
+          <textarea class="createwallboardDescription" id="wallboardDescription" value={this.state.createWallboardDescription} onChange={this.handleCreateWallboardUpdate}/>
+          <br />
+
+          <label for="createwallboardURL" class="passwordLabel">
+            URL:
+          </label>
+          <textarea class="wallboardURL" id="loginInfoFormPassword" value={this.state.createWallboardURL} onChange={this.handleCreateWallboardUpdate}/>
+          <br />
+
+          <input class="loginSubmitBtn" type="submit" value="Submit" />
+        </form>
+
       </div>
     );
   }

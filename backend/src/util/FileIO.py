@@ -19,11 +19,13 @@ class FileIO:
     return os.path.isfile(path)
 
   @staticmethod
-  def create_file_if_does_not_exist(path):
+  def create_file_if_does_not_exist(path, content: str = None):
     FileIO.create_directory_if_does_not_exist(os.path.dirname(path))
 
     if FileIO.file_exists(path) is False:
       FileIO.touch_file(path)
+      FileIO.write_string_to_file(path ,content)
+
 
   @staticmethod
   def read_file_content_to_string(path, seperator: str = ''):

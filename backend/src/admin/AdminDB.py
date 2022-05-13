@@ -16,12 +16,11 @@ class AdminDB:
 
 
   def _init_conf(self, conf: str):
-    if 'ADMIN_DB_LOCATION' in os.environ.keys():
-      self.RAW_CONF: str = os.environ.get('ADMIN_DB_LOCATION')
-      self.CONF_FILE_LOCATION: str = os.environ.get('ADMIN_DB_LOCATION')
-    else:
-      self.CONF_FILE_LOCATION: str  = conf
-      self.RAW_CONF: str = open(self.CONF_FILE_LOCATION,"r").read().strip()
+    FileIO.create_file_if_does_not_exist(conf, json.dumps({
+      "WALLBOARD_CONFIGS" : {}
+    }))
+    self.CONF_FILE_LOCATION: str  = conf
+    self.RAW_CONF: str = open(self.CONF_FILE_LOCATION,"r").read().strip()
     print(f"Raw configuration file {self.RAW_CONF}")
     self.CONF: dict = json.loads(self.RAW_CONF)
 
@@ -56,5 +55,7 @@ class AdminDB:
   def rewrite_db(self):
     LogFactory.MAIN_LOG.info("Re-write Admin DB")
     FileIO.replace_file_content(self.CONF_FILE_LOCATION, json.dumps(self.to_json()))
-
-ADMIN_DB = AdminDB()
+if 'ADMIN_DB_LOCATION' in os.environ.keys():
+  ADMIN_DB = AdminDB(os.environ['ADMIN_DB_LOCATION'])
+else:
+  ADMIN_DB = AdminDB()
