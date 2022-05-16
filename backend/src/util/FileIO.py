@@ -24,7 +24,8 @@ class FileIO:
 
     if FileIO.file_exists(path) is False:
       FileIO.touch_file(path)
-      FileIO.write_string_to_file(path ,content)
+      if content is not None:
+        FileIO.write_string_to_file(path ,content)
 
 
   @staticmethod

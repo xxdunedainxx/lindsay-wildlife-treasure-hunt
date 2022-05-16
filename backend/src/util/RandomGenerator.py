@@ -16,6 +16,6 @@ class RandomGenerator:
       if rand_int % 2 == 0:
         r_string_builder += random.choice(string.ascii_uppercase)
       else:
-        r_string_builder += str(random.randint(0,10))
+        r_string_builder += str(random.randint(0,9))
 
     return r_string_builder
