@@ -31,5 +31,6 @@ jobs:
         LWE_RAW_CONF_FILE: ${{ secrets.LWE_RAW_CONF_FILE }}
         REDIS_HOST: localhost
         REDIS_PORT: 6379
+        FLASK_PORT_BIND: 8080
       run: cd backend && ./test/scripts/integration_tests.sh
       
