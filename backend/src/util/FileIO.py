@@ -1,6 +1,8 @@
 import os
 from datetime import datetime
 import shutil
+from os import listdir
+from os.path import isfile, join
 
 class FileIO:
 
@@ -17,11 +19,14 @@ class FileIO:
     return os.path.isfile(path)
 
   @staticmethod
-  def create_file_if_does_not_exist(path):
+  def create_file_if_does_not_exist(path, content: str = None):
     FileIO.create_directory_if_does_not_exist(os.path.dirname(path))
 
     if FileIO.file_exists(path) is False:
       FileIO.touch_file(path)
+      if content is not None:
+        FileIO.write_string_to_file(path ,content)
+
 
   @staticmethod
   def read_file_content_to_string(path, seperator: str = ''):
@@ -88,3 +93,7 @@ class FileIO:
   @staticmethod
   def get_last_modification_time(path: str):
     return datetime.utcfromtimestamp(os.path.getmtime(path))
+
+  @staticmethod
+  def get_files_in_directory(dir: str) -> [str]:
+    return [f for f in listdir(dir) if isfile(join(dir, f))]

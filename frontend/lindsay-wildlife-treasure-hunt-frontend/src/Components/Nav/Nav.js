@@ -8,6 +8,8 @@ import {
 import './Nav.css';
 import {Version} from './Version';
 import lindsayLogo from '../../assets/lwe-logo-background-white.png'
+import {AdminNav} from '../pages/admin/AdminNav'
+import HttpArgParser from '../../src/util/HttpArgParser';
 
 export class Nav extends React.Component {
 
@@ -17,10 +19,21 @@ export class Nav extends React.Component {
     console.log(props)
   }
 
+  __adminNavInfo(){
+    if(HttpArgParser.ADMIN_PAGE != "false"){
+      return (
+        <AdminNav/>
+      )
+    } else {
+      return ('')
+    }
+  }
+
   render(){
     return (
       <div id="nav-container">
         <ul className="nav-list" id="nav">
+        {this.__adminNavInfo()}
           <li id="nav-logo">
             <Link to="/ui/home">
               <div id="lindsay-logo-nav">

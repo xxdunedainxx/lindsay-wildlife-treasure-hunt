@@ -6,4 +6,5 @@ class ServiceNames:
   redis: str = 'redis'
   uiLogger: str = 'ui_logger'
   reactApp: str = 'react_app'
+  mysql: str = 'mysql'
 

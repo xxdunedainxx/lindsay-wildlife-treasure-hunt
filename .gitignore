@@ -21,6 +21,7 @@ backend/PRIMARY.PID
 # Monitoring files
 monitoring.conf.json
 backend/monitoring/images
+backend/files
 
 # Ignore temp directories used for things like qr scans
 **/tmp/

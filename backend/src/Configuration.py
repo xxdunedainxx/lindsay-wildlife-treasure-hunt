@@ -20,7 +20,7 @@ class Configuration:
       ServiceNames.logRotation: True,
       ServiceNames.redis: True,
       ServiceNames.uiLogger: True,
-      ServiceNames.reactApp: True,
+      ServiceNames.reactApp: True
     },
     "REACT_APP" : "http://localhost",
     "PRODUCTION_ENVIRONMENT" : False,
@@ -43,11 +43,12 @@ class Configuration:
         "cschwandt@lindsaywildlife.org"
     ],
     # Static image directory
-    "IMAGE_DIR" : f"{os.getcwd()}{os.sep}assets"
+    "IMAGE_DIR" : f"{os.getcwd()}{os.sep}assets",
+    "FILE_SERVER_DIR": f"{os.getcwd()}{os.sep}files"
   }
 
   def __init__(self, confFile: str = './conf.json'):
-    self.VERSION='1.1.0'
+    self.VERSION='1.2.0'
     self._init_conf(confFile)
     self._init_values()
 
@@ -103,7 +104,10 @@ class Configuration:
 
     # Static images
     self.IMAGE_DIR: str = self._get_value("IMAGE_DIR")
+    self.FILE_SERVER_DIR : str = self._get_value("FILE_SERVER_DIR")
 
+    # Admin user login
+    self.ADMIN_USERS: dict = self._get_value("ADMIN_USERS")
 
   def _get_value(self, key: str):
     # environment variables have highest prio

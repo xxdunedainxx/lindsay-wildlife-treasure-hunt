@@ -3,6 +3,7 @@ import GameController from '../game/Game';
 
 export class Session {
   static sessionKey = 'lindsaySessionData'
+  static jwtSessionKey     = 'jwtData'
 
   static Init(){
     Logger.info('init session object')
@@ -40,6 +41,17 @@ export class Session {
     var sessionsID=(Math.random() + 1).toString(36).replace('.','');
     Logger.info(`Session ID for this session: ${sessionsID}`);
     return sessionsID;
+  }
+
+  static GetJwtToken(){
+    if(localStorage.getItem(Session.jwtSessionKey) == null){
+      Session.SetJwtToken('empty')
+    }
+    return localStorage.getItem(Session.jwtSessionKey)
+  }
+
+  static SetJwtToken(token){
+    localStorage.setItem(Session.jwtSessionKey, token)
   }
 
   static ClearSession(){

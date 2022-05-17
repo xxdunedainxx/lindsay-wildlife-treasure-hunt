@@ -34,6 +34,18 @@ class APIFactory:
         self.ui_logs_controller: UILogsController = UILogsController()
         from src.WebServer.controllers.images.ImageController import ImageController
         self.image_fetcher: ImageController = ImageController()
+        from src.WebServer.controllers.login.LoginController import LoginController
+        self.login_controller: LoginController = LoginController()
+
+        # Admin APIs
+        from src.WebServer.controllers.admin.TestJwtToken import TestJwtToken
+        self.test_jwt_controller: TestJwtToken = TestJwtToken()
+        from src.WebServer.controllers.admin.WallboardManagementController import WallboardManagementController
+        self.wallboard_controller: WallboardManagementController = WallboardManagementController()
+        from src.WebServer.controllers.admin.FileServer import FileServer
+        self.file_server: FileServer = FileServer()
+        from src.WebServer.controllers.admin.EndpointManagement import EndpointManagerController
+        self.endpoint_manager: EndpointManagerController = EndpointManagerController()
 
     def run(self, port: int = CONF_INSTANCE.FLASK_PORT_BIND):
         if self.app_health_only == False:

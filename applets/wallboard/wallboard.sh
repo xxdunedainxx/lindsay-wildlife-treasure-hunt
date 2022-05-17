@@ -7,8 +7,9 @@
 ## 1.0.0:: Initial implementation, setup, etc
 ## 1.0.1:: Automate Orientation for raspbian
 ## 1.0.2:: Disable sleep and energy saver, setup log output nit
+## 1.1.0:: Wallboarding Remote Configuration
 
-VERSION="1.0.2"
+VERSION="1.1.0"
 CURRENT_DIR="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
 cd $CURRENT_DIR
@@ -54,10 +55,30 @@ function configureOnStartup(){
   fi
 }
 
+function configureRemoteHost(){
+  read -p "Is this host remotely managed?[Y:N]:" REMOTE_MANAGED
+  log "${REMOTE_MANAGED} provided for remote management"
+  echo "export REMOTE_MANAGED=${REMOTE_MANAGED}" >> wallboard_files/WALLBOARD_VARS.src
+
+  if [[ $REMOTE_MANAGED == "Y" ]]; then
+    read -p "Please provide the remote host:" REMOTE_HOST
+    log "${REMOTE_HOST} provided for remote HOST"
+    echo "export REMOTE_HOST=${REMOTE_HOST}" >> wallboard_files/WALLBOARD_VARS.src
+
+    read -p "Please provide the remote host basic auth(in the form username:password):" REMOTE_HOST_AUTH
+    log "${REMOTE_HOST_AUTH} provided for remote host auth"
+    echo "export REMOTE_HOST_AUTH=${REMOTE_HOST_AUTH}" >> wallboard_files/WALLBOARD_VARS.src
+  else
+    setupWallboardURL
+  fi
+
+
+}
+
 function configureOrientation(){
   read -p "Please provide the orientation [vertical:horizontal]:" ORIENTATION
   log "${ORIENTATION} provided for orientation"
-  echo $ORIENTATION > wallboard_files/ORIENTATION.txt
+  echo "export ORIENTATION=${ORIENTATION}" >> wallboard_files/WALLBOARD_VARS.src
 }
 
 function disableSleepAndEnergySaver(){
@@ -73,7 +94,7 @@ function disableSleepAndEnergySaver(){
 
 function setupWallboardURL(){
   read -p "Please provide the Wallboard's URL:" WALLBOARD_URL
-  echo $WALLBOARD_URL > wallboard_files/WALLBOARD_URL.txt
+  echo "export WALLBOARD_URL=${WALLBOARD_URL}" > wallboard_files/WALLBOARD_VARS.src
 }
 
 function setup(){
@@ -82,9 +103,10 @@ function setup(){
   log "Setting up file system.."
   rm -rf wallboard_files
   mkdir -p wallboard_files
+  touch wallboard_files/WALLBOARD_VARS.src
 
   log "Setting up required variables"
-  setupWallboardURL
+  configureRemoteHost
 
   installChrome
   configureOnStartup
@@ -109,9 +131,22 @@ function runPreflightCheck(){
 
 function runChrome(){
   log "START CHROME RUNNER"
-
-  WALLBOARD_URL=$(cat ./wallboard_files/WALLBOARD_URL.txt)
+  source 
   WALLBOARD_CMD=""
+
+  if [[ $REMOTE_MANAGED == "Y" ]]; then
+    log "Getting url from remote host ${REMOTE_HOST}"
+    curl $REMOTE_HOST -u $REMOTE_HOST_AUTH
+
+    if [[ $? != 0  ]]; then
+      echo "Remote host not available... Using cache"
+      WALLBOARD_URL=$(cat ./wallboard_files/WALLBOARD_CACHE.txt)
+    else
+      WALLBOARD_URL=$(curl $REMOTE_HOST -u $REMOTE_HOST_AUTH)
+      echo $WALLBOARD_URL > ./wallboard_files/WALLBOARD_CACHE.txt
+    fi
+
+  fi
 
   if [[ $(uname) == 'Darwin' ]];
   then
@@ -144,6 +179,8 @@ function runChrome(){
 function runWallBoard(){
   log "Running wallboard"
 
+  source wallboard_files/WALLBOARD_VARS.src
+
   runPreflightCheck
   reportEndpointStatus
   orientWallboard
@@ -162,7 +199,7 @@ function versionFile(){
 }
 
 function orientWallboard(){
-  orientationConfigured=$(cat wallboard_files/ORIENTATION.txt)
+  orientationConfigured=$ORIENTATION
   log "Orienting based on ${orientationConfigured}"
   if [[ $orientationConfigured == 'vertical' ]];then
     log "Vertical orientation provided"
