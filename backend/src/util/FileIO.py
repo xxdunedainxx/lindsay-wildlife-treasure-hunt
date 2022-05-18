@@ -27,6 +27,13 @@ class FileIO:
       if content is not None:
         FileIO.write_string_to_file(path ,content)
 
+  @staticmethod
+  def strip_relative_path(path: str) -> str:
+    return path.replace('./', '')
+
+  @staticmethod
+  def path_is_absolute(path: str) -> bool:
+    return os.path.isabs(path)
 
   @staticmethod
   def read_file_content_to_string(path, seperator: str = ''):

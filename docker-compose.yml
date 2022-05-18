@@ -14,6 +14,7 @@ services:
     container_name: lindsay_app_backend
     environment:
       - ADMIN_DB_LOCATION=./dbs/admin_db.json
+      - FILE_SERVER_DIR=./files
     # Ports and routes should be handled via ingress
     # ports:
     #   - "0.0.0.0:80:80"
@@ -26,6 +27,7 @@ services:
       - ./logs:/logs
       - ./archive:/archive
       - ./dbs:/dbs
+      - ./files:/files
   static_assets:
     image: lindsay-static-assets
     container_name: lindsay-static-assets

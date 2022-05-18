@@ -15,6 +15,7 @@ deployment/images
 # configs
 prod.conf.json
 conf.json
+files/
 .DS_Store
 backend/PRIMARY.PID
 

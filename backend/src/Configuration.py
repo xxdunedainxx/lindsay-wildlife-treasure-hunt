@@ -2,6 +2,7 @@ import os
 import json
 from src.Services import ServiceNames
 from src.util.LogFactory import LogFactory
+from src.util.FileIO import FileIO
 
 class Configuration:
 
@@ -106,6 +107,10 @@ class Configuration:
     self.IMAGE_DIR: str = self._get_value("IMAGE_DIR")
     self.FILE_SERVER_DIR : str = self._get_value("FILE_SERVER_DIR")
 
+    if not FileIO.path_is_absolute(self.FILE_SERVER_DIR):
+      # Could introduce bug if file server path is not relative
+      self.FILE_SERVER_DIR = f"{os.getcwd()}{os.sep}{FileIO.strip_relative_path(self.FILE_SERVER_DIR)}"
+    print(f"File server DIR used: {self.FILE_SERVER_DIR}")
     # Admin user login
     self.ADMIN_USERS: dict = self._get_value("ADMIN_USERS")
 
