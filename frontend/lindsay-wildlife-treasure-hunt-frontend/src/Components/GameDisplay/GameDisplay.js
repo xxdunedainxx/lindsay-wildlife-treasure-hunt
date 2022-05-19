@@ -103,9 +103,10 @@ export class GameDisplay extends React.Component {
     Logger.info("qrScannerUpdate..")
     if (result) {
       Logger.info("Guessing")
+      let answerText = result.text
       this.setState(
         {
-          currentGuess: result,
+          currentGuess: answerText,
           scannerOpen: false,
         }
       );

@@ -16,7 +16,7 @@ export class Configuration {
     console.log(confFile)
     let confData = confFile["default"][env]
     Configuration.isProd = (env == "prod")
-    Configuration.version = "1.2.0"
+    Configuration.version = "1.2.1"
     Configuration.logLevel = confData.logging.level
     Configuration.conf = confData
     Configuration.headers = confData.headers
