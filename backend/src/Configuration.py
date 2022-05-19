@@ -47,7 +47,7 @@ class Configuration:
   }
 
   def __init__(self, confFile: str = './conf.json'):
-    self.VERSION='1.1.0'
+    self.VERSION='1.1.1'
     self._init_conf(confFile)
     self._init_values()
 
