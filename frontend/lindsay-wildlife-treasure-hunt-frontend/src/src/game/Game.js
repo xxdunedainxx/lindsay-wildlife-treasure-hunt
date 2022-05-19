@@ -101,6 +101,8 @@ export class GameController {
   // checks answer and updates session with gameState
   // returns true if correct, false otherwise
   static checkAnswer(answer) {
+    console.log("checkign answer...")
+    console.log(answer)
     GameController.setLastGuess(answer)
     const correctAnswers = GameController.getAllArtifactNames(GameController.gameState.currentArtifactIdxInSequence);
     for(let i = 0; i < correctAnswers.length; i++) {
