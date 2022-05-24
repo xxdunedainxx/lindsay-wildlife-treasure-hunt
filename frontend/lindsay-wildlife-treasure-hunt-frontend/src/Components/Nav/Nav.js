@@ -9,6 +9,7 @@ import './Nav.css';
 import {Version} from './Version';
 import lindsayLogo from '../../assets/lwe-logo-background-white.png'
 import {AdminNav} from '../pages/admin/AdminNav'
+import {AAANav} from '../pages/aaa/AAANav'
 import HttpArgParser from '../../src/util/HttpArgParser';
 
 export class Nav extends React.Component {
@@ -29,11 +30,22 @@ export class Nav extends React.Component {
     }
   }
 
+  __aaaNav(){
+    if(HttpArgParser.AAA_PAGE != "false"){
+      return (
+        <AAANav/>
+      )
+    } else {
+      return ('')
+    }
+  }
+
   render(){
     return (
       <div id="nav-container">
         <ul className="nav-list" id="nav">
         {this.__adminNavInfo()}
+        {this.__aaaNav()}
           <li id="nav-logo">
             <Link to="/ui/home">
               <div id="lindsay-logo-nav">

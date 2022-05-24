@@ -14,6 +14,7 @@ import {ReportBugPage} from './pages/report/ReportBugPageComponent';
 import {MobileNav} from './Nav/MobileNav';
 import {WinPage} from './pages/win/WinPageComponent';
 import {AdminPage} from './pages/admin/AdminPageComponent';
+import {AAAPage} from './pages/aaa/AAAPageComponent';
 
 export class ApplicationRouter extends React.Component {
 
@@ -31,6 +32,7 @@ export class ApplicationRouter extends React.Component {
         <Route path='/ui/mobileNav' component={MobileNav} />
         <Route path='/ui/win' component={WinPage} />
         <Route path='/ui/admin' component={AdminPage} />
+        <Route path='/ui/aaa' component={AAAPage} />
       </div>
     );
   }

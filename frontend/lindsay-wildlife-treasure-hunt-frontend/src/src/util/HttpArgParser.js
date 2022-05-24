@@ -4,6 +4,7 @@ export class HttpArgParser {
   static DEBUG_MODE = "false"
   static GAME_COMPLETED_PREVIOUSLY = "false"
   static ADMIN_PAGE = "false"
+  static AAA_PAGE = "false"
 
   static Init(){
     try {
@@ -11,6 +12,7 @@ export class HttpArgParser {
       HttpArgParser.ParseDebugMode(selfReferenceURL)
       HttpArgParser.ParseGameCompletedPreviously(selfReferenceURL)
       HttpArgParser.ParseIsAdminPage()
+      HttpArgParser.ParseIsAAAPage()
       HttpArgParser.Print()
     } catch(error) {
       Logger.error(`HttpArgParser failure: ${error}`, true)
@@ -28,6 +30,10 @@ export class HttpArgParser {
     HttpArgParser.ADMIN_PAGE = `${window.location.href.includes('admin')}`
   }
 
+  static ParseIsAAAPage(){
+    HttpArgParser.AAA_PAGE = `${window.location.href.includes('aaa')}`
+  }
+
   static ParseDebugMode(url){
     var debugMode = url.searchParams.get("debug");
     if(debugMode != undefined){
@@ -35,12 +41,11 @@ export class HttpArgParser {
     }
   }
 
-  static P
-
   static Print(){
     Logger.info(`HttpArgParser info:\n
       DebugMode: ${HttpArgParser.DEBUG_MODE}\n
       Admin Page: ${HttpArgParser.ADMIN_PAGE}\n
+      AAA Page: ${HttpArgParser.AAA_PAGE}\n
       GamePrevious Completion: ${HttpArgParser.GAME_COMPLETED_PREVIOUSLY}
     `)
   }
