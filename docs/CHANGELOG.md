@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.2.1
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/249)
+* New authentication layer + admin panel
+* File Server
+* Login Controller
+* Wallboard Controller + UI
+* Login React Form
+* wallboard.sh enhancements (remote state management)
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/commit/4fd61ab6471793077a9ae924465ea8849a2756f9)
+* Nginx Ingress cleanup
+* Mount and persist file server uploads across docker-compose restarts
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/commit/f54252fe268d268c907d1f525bdef3531e08a6ab#diff-c9c94ddc2ec8096cea3dcc60b0fc211e8edc3e104c26977e4a56f87d21ce571fR109)
+* Game display bug with submitting barcode scanner text to GameDisplay guess
+
 ## 1.1.0
 
 [PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/218)
