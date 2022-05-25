@@ -25,6 +25,5 @@ class WebServerInit:
 
   @staticmethod
   def configure_cors():
-
     pass
 

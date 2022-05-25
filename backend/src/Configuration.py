@@ -45,7 +45,11 @@ class Configuration:
     ],
     # Static image directory
     "IMAGE_DIR" : f"{os.getcwd()}{os.sep}assets",
-    "FILE_SERVER_DIR": f"{os.getcwd()}{os.sep}files"
+    "FILE_SERVER_DIR": f"{os.getcwd()}{os.sep}files",
+
+    # Security Policies
+    "JWT_TOKEN_EXP_DAYS" : 1,
+    "JWT_TOKEN_EXP_SECONDS" : 100
   }
 
   def __init__(self, confFile: str = './conf.json'):
@@ -106,6 +110,9 @@ class Configuration:
     # Static images
     self.IMAGE_DIR: str = self._get_value("IMAGE_DIR")
     self.FILE_SERVER_DIR : str = self._get_value("FILE_SERVER_DIR")
+
+    self.JWT_TOKEN_EXP_DAYS : int = self._get_value("JWT_TOKEN_EXP_DAYS")
+    self.JWT_TOKEN_EXP_SECONDS : int = self._get_value("JWT_TOKEN_EXP_SECONDS")
 
     if not FileIO.path_is_absolute(self.FILE_SERVER_DIR):
       # Could introduce bug if file server path is not relative
