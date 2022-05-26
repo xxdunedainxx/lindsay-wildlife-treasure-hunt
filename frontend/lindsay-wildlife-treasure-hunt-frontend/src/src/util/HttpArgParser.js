@@ -4,6 +4,8 @@ export class HttpArgParser {
   static DEBUG_MODE = "false"
   static GAME_COMPLETED_PREVIOUSLY = "false"
   static ADMIN_PAGE = "false"
+  static WALLBOARD = "false"
+  static WALLBOARD_ARG = "none"
 
   static Init(){
     try {
@@ -11,6 +13,8 @@ export class HttpArgParser {
       HttpArgParser.ParseDebugMode(selfReferenceURL)
       HttpArgParser.ParseGameCompletedPreviously(selfReferenceURL)
       HttpArgParser.ParseIsAdminPage()
+      HttpArgParser.ParseIsWallboard()
+      HttpArgParser.ParseWallboardArg(selfReferenceURL)
       HttpArgParser.Print()
     } catch(error) {
       Logger.error(`HttpArgParser failure: ${error}`, true)
@@ -24,8 +28,19 @@ export class HttpArgParser {
     }
   }
 
+  static ParseIsWallboard(){
+    HttpArgParser.WALLBOARD = `${window.location.href.includes('wallboarding')}`
+  }
+
   static ParseIsAdminPage(){
     HttpArgParser.ADMIN_PAGE = `${window.location.href.includes('admin')}`
+  }
+
+  static ParseWallboardArg(url){
+    var wallboardArg = url.searchParams.get("wallboard_url");
+    if(wallboardArg != undefined) {
+      HttpArgParser.WALLBOARD_ARG = wallboardArg
+    } 
   }
 
   static ParseDebugMode(url){
@@ -41,6 +56,8 @@ export class HttpArgParser {
     Logger.info(`HttpArgParser info:\n
       DebugMode: ${HttpArgParser.DEBUG_MODE}\n
       Admin Page: ${HttpArgParser.ADMIN_PAGE}\n
+      Wallboard: ${HttpArgParser.WALLBOARD}\n
+      Wallboard Arg: ${HttpArgParser.WALLBOARD_ARG}\n
       GamePrevious Completion: ${HttpArgParser.GAME_COMPLETED_PREVIOUSLY}
     `)
   }

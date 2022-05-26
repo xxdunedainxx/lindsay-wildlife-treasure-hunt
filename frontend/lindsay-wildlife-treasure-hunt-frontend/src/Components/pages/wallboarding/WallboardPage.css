@@ -1,0 +1,38 @@
+body, html {
+  height: 100% !important;
+  margin: 0 !important;
+}
+
+.App {
+  height: 100% !important;
+}
+
+#root {
+  height: 100% !important;
+}
+
+.bg {
+  /* The image used */
+  /*background-image: url("https://lindsay-wildlife-apps.zee-aws.net/backend/files/get_file/BTS_Monitor_Spring2022.png") !important;*/
+
+  /* Full height */
+  height: 100% !important; 
+
+  /* Center and scale the image nicely */
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  /*background-size: cover;*/
+}
+
+.bg {
+  /*background: url('https://lindsay-wildlife-apps.zee-aws.net/backend/files/get_file/BTS_Monitor_Spring2022.png') no-repeat   center center fixed !important;*/
+  -webkit-background-size: cover !important;
+  -moz-background-size: cover !important;
+  -o-background-size: cover !important;
+  background-size: cover !important;
+}
+
+#appRouter {
+    height: 100% !important;
+  margin: 0 !important;
+}
