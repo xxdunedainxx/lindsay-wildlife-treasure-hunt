@@ -3,9 +3,10 @@ import RemoteLogger from '../http/clients/RemoteLogger';
 
 export class Logger {
   static LEVELS = {
-    "DEBUG" : 0,
-    "INFO"  : 1,
-    "ERROR" : 2
+    "DEBUG"  : 0,
+    "INFO"   : 1,
+    "WARNING": 2,
+    "ERROR"  : 3
   }
 
   static LEVEL
@@ -32,6 +33,10 @@ export class Logger {
         Logger.RemoteLog(`[${Logger.DateInfo()} ${level}]: ${data}`)
       }
     }
+  }
+
+  static warn(data, remote=false){
+    Logger.Log('WARNING', data, remote)
   }
 
   static info(data, remote=false) {

@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 
 import AAAHome from './components/AAAHome/AAAHome';
+import AAAPageApplication from './components/AAAPageApplication/AAAPageApplication';
 
 export class AAARouter extends React.Component {
 
@@ -19,6 +20,7 @@ export class AAARouter extends React.Component {
     return (
       <div id="appRouter">
         <Route path='/ui/aaa/home' component={AAAHome} />
+        <Route path='/ui/aaa/page' component={AAAPageApplication} />
       </div>
     );
   }

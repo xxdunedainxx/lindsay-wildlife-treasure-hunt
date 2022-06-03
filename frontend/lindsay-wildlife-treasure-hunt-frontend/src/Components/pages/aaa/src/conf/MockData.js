@@ -1,0 +1,25 @@
+export class MockAAAData {
+  static data = {
+    "topMessage" : "Welcome!",
+    "aaaConfigs" : [
+      {
+        "name"       : "Houston",
+        "species"    : "Barred Owl",
+        "description": "Houston is the best :)",
+        "photo"      : "data:image/jpeg;base64,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", // Reference to external image 
+        "map"        : "https://www.allaboutbirds.org/guide/assets/photo/360979571-720px.jpg", // Reference to external image
+        // Array of Call configurations 
+        "call": "",
+        "calls"      : [
+          {
+            "description" : "", // Description of call?
+            "source"      : "" // Audio Source 
+          }
+        ], 
+      }
+    ]
+  }
+}
+
+
+export default MockAAAData;

@@ -12,7 +12,7 @@ export class AAAHome extends React.Component {
   render() {
     return (
       <div class="aaaHome">
-       Aviary Home
+       AAA Homepage
       </div>
     );
   }

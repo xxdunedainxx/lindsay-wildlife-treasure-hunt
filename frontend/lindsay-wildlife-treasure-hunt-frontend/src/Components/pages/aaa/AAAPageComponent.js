@@ -20,7 +20,6 @@ export class AAAPage extends React.Component {
   render(){
     return (
       <div className="aaa-page-container">
-       <h1>Aviary Page</h1>
         <AAARouter/>
       </div>
     );
