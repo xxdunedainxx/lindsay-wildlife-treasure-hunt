@@ -54,7 +54,7 @@ class APIFactory:
         WebServerInit.flask.run (
             host=CONF_INSTANCE.FLASK_HOST_BIND,
             port=port,
-            debug=False,
+            debug=False
         )
 
     @staticmethod

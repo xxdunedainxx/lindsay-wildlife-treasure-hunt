@@ -18,6 +18,12 @@ class WallboardManagementController:
   def __init__(self):
     LogFactory.MAIN_LOG.info('Start Wallboard management Controller')
 
+  # @staticmethod
+  # def __validate_wallboard_profile_specifics(payload: dict):
+  #   if "profile" not in payload.keys():
+  #     return False
+  #   elif payload["profile"] == 
+
   @staticmethod
   def __validate_wallboard_payload(payload: dict):
     return "name" in payload.keys() and \

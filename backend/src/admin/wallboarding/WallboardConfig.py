@@ -1,17 +1,25 @@
 import requests
+from enum import Enum
+from typing import Any
 
 class WallboardConfig:
 
-  # TODO Resolution
-  # TODO
+  class WallboardProfile(Enum):
+    image     = "image"
+    slideshow = "slideshow"
+
   def __init__(self,
        name: str,
        description: str,
-       url: str
+       url: Any, # can be str or [str]
+       profile: str,
+       interval: int = 0
     ):
     self.url: str = url
     self.name: str = name
     self.description: str = description
+    self.interval: int = interval
+    self.profile: str = profile
 
   def to_json(self) -> dict:
     return {
