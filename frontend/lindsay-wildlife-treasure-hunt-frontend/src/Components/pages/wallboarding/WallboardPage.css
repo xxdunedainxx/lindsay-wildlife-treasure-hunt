@@ -11,6 +11,11 @@ body, html {
   height: 100% !important;
 }
 
+.errorMsg {
+  color:red;
+  font-weight: bold;
+}
+
 .bg {
   /* The image used */
   /*background-image: url("https://lindsay-wildlife-apps.zee-aws.net/backend/files/get_file/BTS_Monitor_Spring2022.png") !important;*/

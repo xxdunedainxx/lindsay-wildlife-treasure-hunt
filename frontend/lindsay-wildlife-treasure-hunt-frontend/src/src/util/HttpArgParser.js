@@ -40,6 +40,7 @@ export class HttpArgParser {
     var wallboardArg = url.searchParams.get("wallboard_url");
     if(wallboardArg != undefined) {
       HttpArgParser.WALLBOARD_ARG = wallboardArg
+      HttpArgParser.WALLBOARD = "true"
     } 
   }
 

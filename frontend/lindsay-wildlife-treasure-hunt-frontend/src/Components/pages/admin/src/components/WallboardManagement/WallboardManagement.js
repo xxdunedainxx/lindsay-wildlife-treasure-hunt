@@ -9,20 +9,34 @@ import HttpWallboards from '../../http/HttpWallboards';
 
 import WallboardInfo from './WallboardInfo';
 
+export class WallboardProfiles {
+  static IMAGE      = "image"
+  static SLIDE_SHOW = "slideshow"
+  static CHOICES    = [
+    WallboardProfiles.IMAGE,
+    WallboardProfiles.SLIDE_SHOW
+  ]
+}
+
 export class WallboardManagement extends React.Component {
+
   constructor(props) {
     super(props);
     this.state={
       wallboards : "empty",
       createWallboardName: "new name",
       createWallboardDescription: "description",
-      createWallboardURL: "https://google.com"
+      createWallboardURL: "https://google.com",
+      createWallboardURLs: [],
+      createWallboardProfile: WallboardProfiles.IMAGE,
+      createWallboardIntervalMinutes: 5 
     }
     this.handleUpdateWallboard = this.handleUpdateWallboard.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.updateWallboardData = this.updateWallboardData.bind(this)
     this.handleCreateWallboardUpdate = this.handleCreateWallboardUpdate.bind(this)
     this.handleCreateWallboard = this.handleCreateWallboard.bind(this)
+    this.addWallboardUrl = this.addWallboardUrl.bind(this)
   }
 
   updateWallboardData(nData){
@@ -53,6 +67,44 @@ export class WallboardManagement extends React.Component {
       )
       return rBoards
     }
+  }
+
+  addWallboardUrl(){
+    let wallboardURLSCache = this.state.createWallboardURLs
+    wallboardURLSCache.push('url goes here')
+    this.setState(
+      {
+        createWallboardURLs: wallboardURLSCache
+      }
+    )
+  }
+
+  __renderAddWallboardUrlInput(){
+    return(
+      <div>
+        <button onClick={this.addWallboardUrl}>Add a URL</button>
+      </div>
+    )
+  }
+
+  __renderCreateWallboardURLs(){
+      let urlsToIter = Object.entries(this.state.createWallboardURLs)
+      if(urlsToIter.length == 0) {
+        return ('')
+      }
+      let rUrls = urlsToIter.map(
+        (([key, value]) =>
+          <div>
+            <label for={"createWallboardURLList-" + key} class="passwordLabel">
+              URL:
+            </label>
+            <textarea class="wallboardURLList" id={"createWallboardURLList-" + key} value={value} onChange={this.handleCreateWallboardUpdate}/>
+            <br />
+
+          </div>
+        )
+      )
+      return rUrls
   }
 
   handleChange(event) {
@@ -88,6 +140,18 @@ export class WallboardManagement extends React.Component {
 
   }
 
+  __handleWallboardUrlListableUpdate(event){
+    let id = event.target.id.split('-')[1]
+    let wallboardURLsCache = this.state.createWallboardURLs
+    wallboardURLsCache[id] = event.target.value
+
+    this.setState(
+      {
+        createWallboardURLs: wallboardURLsCache
+      }
+    )
+  }
+
   handleCreateWallboardUpdate(event){
     event.preventDefault()
     console.log(event)
@@ -103,6 +167,20 @@ export class WallboardManagement extends React.Component {
           createWallboardDescription: event.target.value
         }
       )
+    } else if(event.target.id == "createwallboardProfilePicker"){
+      this.setState(
+        {
+          createWallboardProfile: event.target.value
+        }
+      )      
+    } else if(event.target.id == "slideshowInterval"){
+      this.setState(
+        {
+          createWallboardIntervalMinutes: event.target.value
+        }
+      )
+    } else if(event.target.className == "wallboardURLList"){
+      this.__handleWallboardUrlListableUpdate(event)
     } else {
       this.setState(
         {
@@ -120,21 +198,66 @@ export class WallboardManagement extends React.Component {
     );
     Logger.info("trying to create wallboard data")
 
+    let urlParamToPass = null
+
+    if(this.state.createWallboardProfile == WallboardProfiles.IMAGE){
+      urlParamToPass = this.state.createWallboardURL 
+    } else {
+      urlParamToPass = this.state.createWallboardURLs
+    }
+
     var wallboardData = {
       description: this.state.createWallboardDescription,
-      url: this.state.createWallboardURL,
-      name: this.state.createWallboardName
+      url: urlParamToPass,
+      name: this.state.createWallboardName,
+      profile: this.state.createWallboardProfile,
+      interval: this.state.createWallboardIntervalMinutes
     }
 
     wallboards.createWallboard(wallboardData);
   }
 
+  __renderWallboardURLUI(){
+    if(this.state.createWallboardProfile == WallboardProfiles.SLIDE_SHOW){
+      return (
+        <div>
+          {this.__renderCreateWallboardURLs()}
+          {this.__renderAddWallboardUrlInput()}
+        </div>
+      )
+    } else {
+      return(
+        <div>
+          <label for="createwallboardURL" class="passwordLabel">
+            URL:
+          </label>
+          <textarea class="wallboardURL" id="createwallboardURL" value={this.state.createWallboardURL} onChange={this.handleCreateWallboardUpdate}/>
+          <br />
+        </div>
+      )
+    }
+  }
+
+  __renderSlideShowExtraFields(){
+    if(this.state.createWallboardProfile == WallboardProfiles.SLIDE_SHOW){
+      return (
+          <div>
+          <label for="slideshowInterval" class="slideshowInterval">
+            Interval (minutes) :
+          </label>
+          <textarea class="slideshowInterval" id="slideshowInterval" value={this.state.createWallboardIntervalMinutes} onChange={this.handleCreateWallboardUpdate}/>
+          <br />
+          </div>
+      )
+    } else {
+      return('')
+    }
+  }
+
   render() {
     return (
       <div class="loginFormWrapper" data-testid="test-login-container">
-        Wallboards: <br />
-        {this.__renderWallboards()}
-        <br />
+        <h3>Wallboard Manager</h3>
         <br />
         <h3>Create a new wallboard</h3>
         <form onSubmit={this.handleCreateWallboard}>
@@ -151,15 +274,22 @@ export class WallboardManagement extends React.Component {
           <textarea class="createwallboardDescription" id="wallboardDescription" value={this.state.createWallboardDescription} onChange={this.handleCreateWallboardUpdate}/>
           <br />
 
-          <label for="createwallboardURL" class="passwordLabel">
-            URL:
+          {this.__renderWallboardURLUI()}
+          
+          <label for="createwallboardProfilePicker" class="passwordLabel">
+            Profile
           </label>
-          <textarea class="wallboardURL" id="loginInfoFormPassword" value={this.state.createWallboardURL} onChange={this.handleCreateWallboardUpdate}/>
-          <br />
+          {this.__renderSlideShowExtraFields()}
+          <select id="createwallboardProfilePicker" class="createwallboardProfilePicker" value={this.state.createWallboardProfile} onChange={this.handleCreateWallboardUpdate}>
+            <option value={WallboardProfiles.IMAGE}>Image</option>
+            <option value={WallboardProfiles.SLIDE_SHOW}>Slide show</option>
+          </select>
 
           <input class="loginSubmitBtn" type="submit" value="Submit" />
         </form>
-
+        <br />
+        Configured Wallboards: <br />
+        {this.__renderWallboards()}
       </div>
     );
   }
