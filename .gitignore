@@ -1,3 +1,6 @@
+# DB Files
+admin_db.json
+
 # Wallboard applet files
 .wallboardsetupcomplete
 applets/wallboard/wallboard_files

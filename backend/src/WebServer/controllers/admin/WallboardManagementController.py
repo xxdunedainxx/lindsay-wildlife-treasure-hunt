@@ -10,6 +10,7 @@ from src.WebServer.WebServerInit import WebServerInit
 from src.WebServer.decorators.HTTPLogger import http_logger
 from src.WebServer.decorators.ApiAuth import httpauthenticate
 from src.admin.AdminDB import ADMIN_DB
+from src.admin.wallboarding.WallboardConfig import WallboardConfig
 
 flask_ref: Flask = WebServerInit.flask
 
@@ -18,17 +19,23 @@ class WallboardManagementController:
   def __init__(self):
     LogFactory.MAIN_LOG.info('Start Wallboard management Controller')
 
-  # @staticmethod
-  # def __validate_wallboard_profile_specifics(payload: dict):
-  #   if "profile" not in payload.keys():
-  #     return False
-  #   elif payload["profile"] == 
+  @staticmethod
+  def __validate_wallboard_profile_specifics(payload: dict):
+    if "profile" not in payload.keys():
+      return False
+    elif payload["profile"] == WallboardConfig.WallboardProfile.image.value:
+      return True
+    elif payload["profile"] == WallboardConfig.WallboardProfile.slideshow.value:
+      return "interval" in payload.keys()
+    else:
+      return False
 
   @staticmethod
   def __validate_wallboard_payload(payload: dict):
     return "name" in payload.keys() and \
            "description" in payload.keys() and \
-           "url" in payload.keys()
+           "url" in payload.keys() and \
+            WallboardManagementController.__validate_wallboard_profile_specifics(payload)
 
   @staticmethod
   @flask_ref.route('/wallboards', methods=['GET'])
@@ -64,7 +71,9 @@ class WallboardManagementController:
       if data["name"] not in ADMIN_DB.WALLBOARD_CONFIGS.keys():
         ADMIN_DB.WALLBOARD_CONFIGS[data["name"]] = {
           "description" : data["description"],
-          "url" : data["url"]
+          "url" : data["url"],
+          "profile" : data["profile"],
+          "interval" : data["interval"] if "interval" in data.keys() else ""
         }
         ADMIN_DB.rewrite_db()
         return {"message" : "ok"}, 200
@@ -105,7 +114,9 @@ class WallboardManagementController:
       if wallboard_id in ADMIN_DB.WALLBOARD_CONFIGS.keys():
         ADMIN_DB.WALLBOARD_CONFIGS[data["name"]] = {
           "description": data["description"],
-          "url": data["url"]
+          "url": data["url"],
+          "profile": data["profile"],
+          "interval": data["interval"] if "interval" in data.keys() else ""
         }
         ADMIN_DB.rewrite_db()
         return {"message" : "ok"}, 200
