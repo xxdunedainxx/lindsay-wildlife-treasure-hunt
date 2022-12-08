@@ -8,8 +8,12 @@
 ## 1.0.1:: Automate Orientation for raspbian
 ## 1.0.2:: Disable sleep and energy saver, setup log output nit
 ## 1.1.0:: Wallboarding Remote Configuration
+## 1.2.0:: Fix vertical orientation flag bug 
+##         * add image cacheing
+##         * add internet ping check
+##         * add flag to disable hardware acceleration
 
-VERSION="1.1.0"
+VERSION="1.2.0"
 CURRENT_DIR="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
 cd $CURRENT_DIR
@@ -129,12 +133,9 @@ function runPreflightCheck(){
   fi
 }
 
-function runChrome(){
-  log "START CHROME RUNNER"
-  source 
-  WALLBOARD_CMD=""
-
-  if [[ $REMOTE_MANAGED == "Y" ]]; then
+function getWallboardUrl(){
+  log "Getting wallboard url.."
+   if [[ $REMOTE_MANAGED == "Y" ]]; then
     log "Getting url from remote host ${REMOTE_HOST}"
     curl $REMOTE_HOST -u $REMOTE_HOST_AUTH
 
@@ -146,6 +147,23 @@ function runChrome(){
       echo $WALLBOARD_URL > ./wallboard_files/WALLBOARD_CACHE.txt
     fi
 
+  fi
+}
+
+function runChrome(){
+  log "START CHROME RUNNER"
+  source
+  WALLBOARD_CMD=""
+
+  log "Ping test.."
+
+  ping -c 3 google.com
+
+  if [[ $? != 0 ]];then
+    log "Ping test failed, fallback to image cache"
+    WALLBOARD_URL=$(pwd)/wallboard_files/cachedWallboardImage.png
+  else
+    log "Ping test passed! Going to the interwebs :)"
   fi
 
   if [[ $(uname) == 'Darwin' ]];
@@ -165,15 +183,21 @@ function runChrome(){
     chromium-browser \
       --start-fullscreen \
       --kiosk \
+      --disable-gpu \
       --start-maximized \
       --private-window \
       "${WALLBOARD_URL}"
-    `    
+    `
   fi
 
   log "Running command ${WALLBOARD_CMD}"
 
   eval $WALLBOARD_CMD
+}
+
+function cacheWallboardImage(){
+  log "Cacheing Image @ ${WALLBOARD_URL}"
+  curl $WALLBOARD_URL --output ./wallboard_files/cachedWallboardImage.png
 }
 
 function runWallBoard(){
@@ -185,6 +209,8 @@ function runWallBoard(){
   reportEndpointStatus
   orientWallboard
   disableSleepAndEnergySaver
+  getWallboardUrl
+  cacheWallboardImage
   runChrome
 }
 
@@ -207,7 +233,7 @@ function orientWallboard(){
     then
       log "Macos, skipping orientation"
     else
-      xrandr --output HDMI-1 --rotate normal
+      xrandr --output HDMI-1 --rotate left
     fi
   else
     log "Default to horizontal orientation"
@@ -215,7 +241,7 @@ function orientWallboard(){
     then
       log "Macos, skipping orientation"
     else
-      xrandr --output HDMI-1 --rotate left
+      xrandr --output HDMI-1 --rotate normal
     fi
   fi
 }
