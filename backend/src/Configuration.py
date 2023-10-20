@@ -40,7 +40,6 @@ class Configuration:
     "BUG_REPORT_EMAIL_LIST" : [
         "zrmmaster92@gmail.com", 
         "roderickjmacleod@gmail.com",
-        "ewoods@lindsaywildlife.org",
         "cschwandt@lindsaywildlife.org"
     ],
     # Static image directory
