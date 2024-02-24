@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.3.0 
+
+[PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/294)
+
+* Bump node and python versions
+* Support multi arch for docker build and deploys (arm vs amd)
+* Remove buckeye from DB
+* dont install pillow anymore in backend (takes to long and we dont use it)
+* disable login integration test)
+* new macos build script
+* fix up docker setup scripts for Amazon EC2
+* redis server docker image load issue (naming issue)
+* Local node development open SSL legacy provider issue
+* FIX session ID bug in report an issue client
+* add unit test for report an issue
+* Add macos.sh setup script for local development
+* Add setup.sh call in test.sh for backend testing
+* Allow react app health check to support 200 and 301 responses
+
 ## 1.2.1
 
 [PR](https://github.com/xxdunedainxx/lindsay-wildlife-treasure-hunt/pull/249)
