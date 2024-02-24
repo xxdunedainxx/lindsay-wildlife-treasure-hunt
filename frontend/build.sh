@@ -34,7 +34,8 @@ cd $HOME
 cp -r lindsay-wildlife-treasure-hunt-frontend/build/ docker/tmp
 
 cd docker 
-docker build . -f Dockerfile.ReactApp -t lindsay-react-app --no-cache
+docker build . -f Dockerfile.ReactApp -t lindsay-react-app \
+--no-cache --platform ${DOCKER_DEFAULT_PLATFORM}
 
 cd $HOME 
 

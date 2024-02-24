@@ -29,6 +29,7 @@ HOME=$(pwd)
 export DEPLOY_ENV="prod"
 # Due to Mac processors, must specify a target arch of amd for docker 
 export DOCKER_DEFAULT_PLATFORM="linux/amd64"
+
 ./deployment/bundle.sh
 
 echo "DEPLOYING"

@@ -11,7 +11,7 @@ function log() {
 function buildBackend(){
   log "build backend"
   cd backend
-  docker build -t lindsay_app_backend .
+  docker build -t lindsay_app_backend --no-cache --platform ${DOCKER_DEFAULT_PLATFORM} . 
   cd $HOME
 }
 
@@ -39,7 +39,7 @@ function buildStaticAssetServices(){
 function buildNginxIngress(){
   log "build ingress"
   cd infrastructure/nginx-ingress
-  docker build . -f Dockerfile.NginxIngress -t lindsay-ingress
+  docker build . -f Dockerfile.NginxIngress --no-cache -t lindsay-ingress --platform ${DOCKER_DEFAULT_PLATFORM}
   cd $HOME
 }
 
@@ -52,7 +52,7 @@ function pythonVersion(){
   pVersion=$(python3 --version)
   echo $pVersion > ./PYTHON_VERSION
 }
-
+echo "DOCKER DEPLOY PLATFORM: '${DOCKER_DEFAULT_PLATFORM}'"
 log "BEGIN BUILDING EVERYTHING"
 nodeVersion
 pythonVersion
