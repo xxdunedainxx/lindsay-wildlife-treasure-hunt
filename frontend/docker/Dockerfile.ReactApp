@@ -1,7 +1,8 @@
 # docker run -p 80:80 lindsay-react-app
 # docker build . -f Dockerfile.ReactApp -t lindsay-react-app
+ARG ARCH=arm64
 
-FROM nginx
+FROM ${ARCH}/nginx
 
 RUN adduser --system --no-create-home --shell /bin/false --group --disabled-login www
 

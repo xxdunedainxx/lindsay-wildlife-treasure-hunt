@@ -11,7 +11,8 @@ function log() {
 function buildBackend(){
   log "build backend"
   cd backend
-  docker build -t lindsay_app_backend --no-cache --platform ${DOCKER_DEFAULT_PLATFORM} . 
+  docker build -t lindsay_app_backend --no-cache --build-arg="ARCH=${DOCKER_ARCH}" --platform ${DOCKER_DEFAULT_PLATFORM} . 
+  echo "Done building backend"
   cd $HOME
 }
 
@@ -20,6 +21,7 @@ function buildFrontend(){
   log "Build front end"
   cd frontend
   ./build.sh
+  echo "Done building frontend"
   cd $HOME
 }
 
@@ -39,7 +41,7 @@ function buildStaticAssetServices(){
 function buildNginxIngress(){
   log "build ingress"
   cd infrastructure/nginx-ingress
-  docker build . -f Dockerfile.NginxIngress --no-cache -t lindsay-ingress --platform ${DOCKER_DEFAULT_PLATFORM}
+  docker build . -f Dockerfile.NginxIngress --no-cache -t lindsay-ingress --build-arg="ARCH=${DOCKER_ARCH}" --platform ${DOCKER_DEFAULT_PLATFORM}
   cd $HOME
 }
 
