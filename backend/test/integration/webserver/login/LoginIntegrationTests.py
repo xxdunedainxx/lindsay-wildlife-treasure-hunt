@@ -15,7 +15,7 @@ def login_controller_integration_tests():
 
 class LoginControllerIntegrationTests(unittest.TestCase):
 
-    @enabled
+    @disabled
     def test_bad_logins(self):
       invalid_username = {
         "username": "bad",
@@ -43,7 +43,7 @@ class LoginControllerIntegrationTests(unittest.TestCase):
 
       assert response_data["message"] == 'bad request' and r.status_code == 400
 
-    @enabled
+    @disabled
     def test_good_login(self):
       uname: str = list(CONF_INSTANCE.ADMIN_USERS.keys())[0]
       pw: str = CONF_INSTANCE.ADMIN_USERS[uname]

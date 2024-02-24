@@ -2,4 +2,4 @@
 
 echo "building the app"
 
-npm run-script build
+NODE_OPTIONS=--openssl-legacy-provider npm run-script build

@@ -1,7 +1,7 @@
 # docker build -t lindsay_app_backend .
 # docker run -e "CONF_FILE=$(cat ./conf.json)" lindsay_app_backend
-
-FROM python:3.8.11-alpine3.13
+ARG ARCH=arm64
+FROM ${ARCH}/python:3.8.11-alpine3.13
 
 RUN apk add bash
 

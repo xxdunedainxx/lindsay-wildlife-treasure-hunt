@@ -50,8 +50,6 @@ export class HttpArgParser {
     }
   }
 
-  static P
-
   static Print(){
     Logger.info(`HttpArgParser info:\n
       DebugMode: ${HttpArgParser.DEBUG_MODE}\n

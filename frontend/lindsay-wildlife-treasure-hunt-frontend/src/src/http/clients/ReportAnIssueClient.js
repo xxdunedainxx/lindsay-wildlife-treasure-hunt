@@ -33,7 +33,7 @@ class ReportAnIssueClient extends HttpClient {
   async report(data){
     var userIssueReport={
       message : `${data}`,
-      sessionID: Session.FetchSessionData().sessionID,
+      sessionID: Session.CheckIfExists() ? Session.FetchSessionData().sessionID : "UNKNOWN-SESSION",
       deviceInfo : ReportAnIssueClient.getDeviceInformation(),
       version:   Configuration.version
     }

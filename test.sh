@@ -28,6 +28,7 @@ function runPythonAppInBackground(){
 
 function runPythonBackendTesting(){
 	cd backend
+  ./scripts/setup.sh
 	python3 test.py
 
 	if [[ $? != 0 ]];

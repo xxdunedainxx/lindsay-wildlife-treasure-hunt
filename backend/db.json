@@ -33,15 +33,6 @@
         "Credit" : "Image created by the DataBase Center for Life Science. Created August, 2010. https://doi.org/10.7875/togopic.2020.08"
       },
       {
-        "ArtifactName" : ["California Buckeye", "Buckeye"],
-        "ArtifactId" : "6",
-        "Clue": "This tree blooms in long sprays of white flowers that are often seen with pollinators like buzzing bees and butterflies.",
-        "AdditionalHint" : "When the seeds of this plant begin to split open their leathery casing, they resemble the eye of a male deer.",
-        "CorrectMessage" : "This California native plant is one of the first to leaf out in the spring and to lose its foliage to avoid the worst of the summer heat. Buckeye seeds contain poisonous compounds that evolved to deter predators from eating them.",
-        "MediaLink" : "get-image/8.png",
-        "Credit" : "Photo by John Morgan. Taken on November 25, 2007. https://commons.wikimedia.org/wiki/File:Aesculus_californica_Mount_Diablo.jpg"
-      },
-      {
         "ArtifactName" : ["California Quail", "Quail"],
         "ArtifactId" : "3",
         "Clue": "This charming creature is the state bird of California!",
