@@ -32,6 +32,7 @@ dbs/
 **/tmp/
 __pycache__
 *.pyc
+Library/
 
 # Ignore service status files
 *.status
