@@ -92,7 +92,7 @@ class AppHealthStatusUtil:
   def check_react_health():
     try:
       req = requests.get(f"{CONF_INSTANCE.REACT_APP}/ui", allow_redirects=False)
-      if req.status_code == 301:
+      if req.status_code == 301 or req.status_code == 200:
         return AppHealthStatus.HEALTHY
       else:
         LogFactory.MAIN_LOG.error(f"React health check failed, returned status code: {req.status_code}")
