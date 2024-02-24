@@ -24,6 +24,10 @@ monitoring.conf.json
 backend/monitoring/images
 backend/files
 
+# MISC
+dump.rdb
+dbs/
+
 # Ignore temp directories used for things like qr scans
 **/tmp/
 __pycache__
