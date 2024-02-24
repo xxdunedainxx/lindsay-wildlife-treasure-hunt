@@ -1,7 +1,8 @@
 #! /bin/bash
 
 function setupDocker(){
-  sudo amazon-linux-extras install docker
+  # Amazon-linux-extras deprecated as of 2023 
+  sudo yum install docker
   sudo service docker start
   sudo usermod -a -G docker ec2-user
   sudo usermod -a -G docker lindsay-wildlife-app

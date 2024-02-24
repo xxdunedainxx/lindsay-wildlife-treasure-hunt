@@ -12,6 +12,9 @@ else
 
   sudo su
   echo "lindsay-wildlife-app ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+  # Add EC2 User to this dir
+  setfacl -R -m u:ec2-user:rwx /home/lindsay-wildlife-app/
+
   exit
 
   sudo groupadd deployers
