@@ -1,5 +1,9 @@
 # Lindsay Wildlife Bio-diversity Treasure Hunt
 
+**NOTICE: AS OF 1/30/26, THIS APP IS NO LONGER IN USE OR IN PRODUCTION.**
+
+## General Info
+
 The Lindsay Wildlife Bio-diversity Treasure Hunt is a game featured in the exhibit halls of Lindsay Wildlife experience. The intention is to provide a more immersive experience for visitors at Lindsay Wildlife, by prodividing a cutting edge technological experience when interfacing with exhibit hall features. 
 
 This particular feature is a "Treasure Hunt", where visitors must match a given clue with an exhibit in the exhibit hall via barcode scans associated with various exhibits around the exhibit hall. 
